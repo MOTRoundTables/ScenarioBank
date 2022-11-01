@@ -5,17 +5,6 @@ library(shinythemes)  # https://rstudio.github.io/shinythemes/
 
 source("main.R")
 
-button_color_css <- "
-#DivCompClear, #FinderClear, #EnterTimes{
-/* Change the background color of the update button
-to blue. */
-background: DodgerBlue;
-
-/* Change the text size to 15 pixels. */
-font-size: 15px;
-}"
-
-
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
@@ -147,7 +136,7 @@ server <- function(input, output, session) {
 
   refreshmap = function() {
     output$appMap <- renderLeaflet({ basemap$mapview@map })
-    output$leaf=renderUI({ leafletOutput("appMap", width = "100%", height = 800) })
+    output$leaf=renderUI({ leafletOutput("appMap", width = "100%", height = cfg$basemap$height) })
   }
 
   # check on Select source input list
@@ -198,7 +187,7 @@ server <- function(input, output, session) {
   
   # prepare map
   output$leaf=renderUI({
-    leafletOutput("appMap", width = "100%", height = 800) 
+    leafletOutput("appMap", width = "100%", height = cfg$basemap$height) 
   })
   
   # Generate a summary of the data ----
@@ -308,3 +297,6 @@ server <- function(input, output, session) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
+
+

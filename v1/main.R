@@ -5,6 +5,7 @@ library(tidyverse)
 library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.html
 
 # setwd("C:\\Users\\marsz\\OneDrive\\temp\\shiny\\scbank\\v1\\v1\\")  # for debug
+
 source("maplib.R")
 source("scnlib.R")
 source("scn_dvlp.R")
@@ -16,10 +17,11 @@ sss <- 0  # test variable
 # - initialize
 initapp <- function() {
   cfg = fromJSON("scbank.json") 
-  #cfg$general$geodir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$geodir, fixed=TRUE)
-  #cfg$general$scndir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$scndir, fixed=TRUE)
-  #cfg$general$rsltdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$rsltdir, fixed=TRUE)
-  
+  cfg$general$geodir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$geodir, fixed=TRUE)
+  cfg$general$scndir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$scndir, fixed=TRUE)
+  cfg$general$rsltdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$rsltdir, fixed=TRUE)
+
+
   cfg$scnkeys = names(cfg$scenarios)                  # vector of scn keys  
   n = length(cfg$scnkeys)
   cfg$scnlist = vector(mode = "list", length = n)
@@ -30,9 +32,10 @@ initapp <- function() {
     cfg$scnlist[i] = cfg$scenarios[[ky]]$name         # scn names
     cfg$scnsources[i] = cfg$scenarios[[ky]]$source
     cfg$scnchoices[as.character(cfg$scnlist[i])] = i
+    cfg$scenarios[[i]]$dir = paste0(cfg$general$scndir, cfg$scenarios[[i]]$dir, "/")
   }
   cfg$scnsources <- unique(cfg$scnsources)
-  
+
   cfg$szkeys = names(cfg$superzones)                  # vector of SZ keys    
   n = length(cfg$szkeys)
   cfg$szlist = vector(mode = "list", length = n)      # for menu
@@ -41,6 +44,8 @@ initapp <- function() {
   for (i in 1:n) {
     ky = cfg$szkeys[i]
     cfg$superzones[[ky]]$name = cfg$superzones[[ky]]$ename # alyr$hname  # set Eng or Heb
+    cfg$superzones[[ky]]$url = gsub("<geodir>", cfg$general$geodir, cfg$superzones[[ky]]$url, fixed=TRUE)
+    
     cfg$szlist[i] = cfg$superzones[[ky]]$lyr  #name
     cfg$sznames[i] = cfg$superzones[[ky]]$hname  # set Heb for menu
     cfg$szchoices[as.character(cfg$sznames[i])] = i

@@ -26,7 +26,7 @@ scnclass <- R6Class("scnclass",
         joinvar = currentscn$scn$files[[1]][[4]][[1]] 
         x <- vector(mode="list", length=n)
         for (i in 1:n) {
-          fl = paste("../Scn_lib/", currentscn$scn$dir, "/", currentscn$scn$files[[i]][[3]], sep="")        
+          fl = paste(currentscn$scn$dir, "/", currentscn$scn$files[[i]][[3]], sep="")        
           # x[[i]] <- fread(fl)  # read_csv(fl) read all vars ...
           tmp <- fread(fl)  # read_csv(fl)            
           vars = currentscn$scn$files[[i]][[4]]
@@ -58,7 +58,7 @@ scnclass <- R6Class("scnclass",
           zname = "NA", 
           file = scn$tazfile,
           group = "forecasts",  # "שכבות תחזיות",
-          url = paste("../Scn_lib/", scn$dir, "/", scn$tazfile, sep=""),
+          url = paste(scn$dir, scn$tazfile, sep=""),
           pane = "other", 
           color = "#FF0000",
           weight = 2,

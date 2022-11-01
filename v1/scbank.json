@@ -1,6 +1,6 @@
 {
     "general": {
-        "sysdir"  : "C:/Users/marsz/OneDrive/job/16/Models/Workgroups/Forecasts/System/",
+		"sysdir"  : "https://raw.githubusercontent.com/MOTRoundTables/ScenarioBank/main/",
         "geodir"  : "<sysdir>geo/",
         "scndir"  : "<sysdir>Scn_lib/",
         "rsltdir" : "<sysdir>results/",
@@ -13,7 +13,7 @@
 	  "initial_zm" : 10,
 	  "minZoom" : 0, 
 	  "maxZoom" : 18,
-	  "height" : 850
+	  "height" : 700
     },
     "superzones": { 
         "napot" : {
@@ -24,7 +24,7 @@
             "zname" : "Nafa",
             "file": "NapotMoaza_2020.geojson",
 			"group": "שכבות אחרות",
-			"url": "../geo/NapotMoaza_2021.geojson",
+			"url": "<geodir>NapotMoaza_2021.geojson",
 			"pane": "front",
 			"color": "#000000",
 			"weight": 5,
@@ -41,7 +41,7 @@
             "zname" : "cityname",
             "file": "largecity.geojson",
 			"group": "שכבות אחרות",
-			"url": "../geo/largecity.geojson",
+			"url": "<geodir>largecity.geojson",
 			"pane": "front",
 			"color": "#800000",
 			"weight": 5,
@@ -58,7 +58,7 @@
             "zname" : "metrosecnam",
             "file": "metropolin_rings_2008.geojson",
 			"group": "שכבות אחרות",
-			"url": "../geo/metropolin_rings_2008.geojson",
+			"url": "<geodir>metropolin_rings_2008.geojson",
 			"pane": "front",
 			"color": "#00008B",
 			"weight": 5,

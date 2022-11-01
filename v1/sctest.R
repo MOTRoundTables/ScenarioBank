@@ -1,11 +1,6 @@
 # View(cfg)
 # Sys.setlocale(locale="hebrew")
-# setwd("C:\\Users\\marsz\\OneDrive\\temp\\shiny\\scbank\\v1\\")  # for debug
-
-
-currentscn$tazdata %>%
-  summary()
-
+setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/v1")  # for debug
 
 source("main.R")
 basemap$mapview
@@ -13,6 +8,9 @@ basemap$mapview@map
 
 source("scnlib.R")
 
+
+currentscn$tazdata %>%
+  summary()
 
 
 
@@ -124,3 +122,16 @@ basemap$lyrsdata[i]@bbox
 
 #setwd("C:\\Users\\marsz\\OneDrive\\temp\\shiny\\scbank\\v1\\")  # for debug
 #source("maplib.R")
+
+
+button_color_css <- "
+#DivCompClear, #FinderClear, #EnterTimes{
+/* Change the background color of the update button
+to blue. */
+background: DodgerBlue;
+
+/* Change the text size to 15 pixels. */
+font-size: 15px;
+}"
+
+

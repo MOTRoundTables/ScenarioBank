@@ -17,12 +17,12 @@
     },
     "superzones": { 
         "napot" : {
-            "lyr" : "NapotMoaza_2020",
+            "lyr" : "NapotMoaza_2021",
             "hname" : "נפות",
             "ename" : "Napot",
             "zvar" : "NafaNum",
             "zname" : "Nafa",
-            "file": "NapotMoaza_2020.geojson",
+            "file": "NapotMoaza_2021.geojson",
 			"group": "שכבות אחרות",
 			"url": "<geodir>NapotMoaza_2021.geojson",
 			"pane": "front",
@@ -50,12 +50,12 @@
 			"popupcontent": "'שכבת נפות<br>'+'מספר נפה:' + feature.properties.NafaNum + ' <br> שם נפה:'+feature.properties.Nafa",
 			"type" : "a"
         },
-        "MetroSectors" : {
+        "MetroSec2008" : {
             "lyr" : "metrorings2008",
             "hname" : "גזרות מטרופולין",
             "ename" : "Metropolitan Rings",
-            "zvar" : "metrosecnum",
-            "zname" : "metrosecnam",
+            "zvar" : "full_code",
+            "zname" : "full_name",
             "file": "metropolin_rings_2008.geojson",
 			"group": "שכבות אחרות",
 			"url": "<geodir>metropolin_rings_2008.geojson",
@@ -68,7 +68,7 @@
 			"type" : "a"
         }
     },
-    "scenarios": { 
+    "scenarios": {
         "TA2016" : {
             "name"    : "תל אביב 2016",
             "source"  : "מודל תל אביב",
@@ -255,5 +255,8 @@
                         ["high_diur", 2050, "moaza2020.csv", [ "NafaCode", "high_diur_2050", "None"] ]                                                
                         ]
         }
-    }        
+    },
+    "messages": {
+        "orgzns" : "גבולות מקור"
+	}
 }    

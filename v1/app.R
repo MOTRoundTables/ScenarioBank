@@ -39,7 +39,7 @@ ui <- fluidPage(
                 ),          
       
                 selectizeInput(
-                  'selectScn', 'אזורי על', choices = cfg$szchoices, 
+                  'selectSz', 'אזורי על', choices = character(0), #cfg$szchoices0, 
                   options = list(
                     placeholder = 'בחר מתוך הרשימה ...',
                     onInitialize = I('function() { this.setValue(""); }')
@@ -164,6 +164,11 @@ server <- function(input, output, session) {
         currentscn <<- setScn(input$selectScn) # set scenario  , session
         currentscn$opentazdata()
         cat(currentscn$name)
+
+        updateSelectInput(session, "selectSz",
+                          choices = cfg$szchoices0
+        )
+
         refreshmap()
         str0 <- paste("set scenario:", currentscn$name, sep = " ")
       }

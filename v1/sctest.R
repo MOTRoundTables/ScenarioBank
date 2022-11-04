@@ -3,6 +3,10 @@
 setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/v1")  # for debug
 
 source("main.R")
+
+
+
+
 basemap$mapview
 basemap$mapview@map
 

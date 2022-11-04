@@ -1,4 +1,4 @@
-#Sys.setlocale(locale="hebrew")
+Sys.setlocale(locale="hebrew")
 
 library(tidyverse)
 #library(tidyjson)
@@ -51,7 +51,10 @@ initapp <- function() {
     cfg$szchoices[as.character(cfg$sznames[i])] = i
     cfg$szlyrs[i] = cfg$superzones[ky]
   }
-  
+  cfg$szchoices0 = vector(mode = "list")  
+  cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
+  cfg$szchoices0 = append (cfg$szchoices0, cfg$szchoices)
+
   cfg$szlyrs = cfg$szlyrs %>% 
     map_df(as_tibble)
   #cfg$szlyrs['name'] <- ""

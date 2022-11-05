@@ -2,6 +2,7 @@
 
 library(shiny)
 library(shinythemes)  # https://rstudio.github.io/shinythemes/
+library(shinyWidgets) # https://dreamrs.github.io/shinyWidgets/index.html
 
 source("main.R")
 
@@ -37,9 +38,15 @@ ui <- fluidPage(
                     onInitialize = I('function() { this.setValue(""); }')
                   )
                 ),          
-      
+
+                radioButtons("zonetype", NULL,
+                             choiceNames = list("גבולות מקור", "אזורי על"),
+                             choiceValues = list(1, 2),
+                             inline = TRUE 
+                ),
+                      
                 selectizeInput(
-                  'selectSz', 'אזורי על', choices = character(0), #cfg$szchoices0, 
+                  'selectSz', 'אזורי על', choices = cfg$szchoices, 
                   options = list(
                     placeholder = 'בחר מתוך הרשימה ...',
                     onInitialize = I('function() { this.setValue(""); }')
@@ -165,9 +172,9 @@ server <- function(input, output, session) {
         currentscn$opentazdata()
         cat(currentscn$name)
 
-        updateSelectInput(session, "selectSz",
-                          choices = cfg$szchoices0
-        )
+        #updateSelectInput(session, "selectSz",
+        #                  choices = cfg$szchoices0
+        #)
 
         refreshmap()
         str0 <- paste("set scenario:", currentscn$name, sep = " ")

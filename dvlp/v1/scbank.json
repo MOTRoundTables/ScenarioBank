@@ -1,0 +1,279 @@
+{
+    "general": {
+		"sysdir"  : "https://raw.githubusercontent.com/MOTRoundTables/ScenarioBank/main/",
+        "geodir"  : "<sysdir>geo/",
+        "scndir"  : "<sysdir>Scn_lib/",
+        "rsltdir" : "<sysdir>results/",
+        "initialsz": 1
+    },
+    "basemap": {
+	  "mapname" : "myMap",
+	  "initial_lon" : 35.0,
+	  "initial_lat" : 31.9,
+	  "initial_zm" : 10,
+	  "minZoom" : 0, 
+	  "maxZoom" : 18,
+	  "height" : 700
+    },
+    "superzones": { 
+        "mahozot" : {
+            "lyr" : "mahozot",
+            "hname" : "מחוזות",
+            "ename" : "districts",
+            "zvar" : "Mahoz",
+            "zname" : "NameMahoz",
+            "file": "Mahozot.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>Mahozot.geojson",
+			"pane": "front",
+			"color": "#000000",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת מחוזות<br>'+'מספר מחוז:' + feature.properties.Mahoz + ' <br> שם מחוז:'+feature.properties.NameMahoz",
+			"type" : "a"
+        },
+        "napot" : {
+            "lyr" : "NapotMoaza_2021",
+            "hname" : "נפות",
+            "ename" : "Napot",
+            "zvar" : "NafaNum",
+            "zname" : "Nafa",
+            "file": "NapotMoaza_2021.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>NapotMoaza_2021.geojson",
+			"pane": "front",
+			"color": "#000000",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר נפה:' + feature.properties.NafaNum + ' <br> שם נפה:'+feature.properties.Nafa",
+			"type" : "a"
+        },
+        "largecity" : {  
+            "lyr" : "largecity",
+            "hname" : "ערים",
+            "ename" : "Cities",
+            "zvar" : "citycode",
+            "zname" : "cityname",
+            "file": "largecity.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>largecity.geojson",
+			"pane": "front",
+			"color": "#800000",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר נפה:' + feature.properties.NafaNum + ' <br> שם נפה:'+feature.properties.Nafa",
+			"type" : "a"
+        },
+        "MetroSec2008" : {
+            "lyr" : "metrorings2008",
+            "hname" : "גזרות מטרופולין",
+            "ename" : "Metropolitan Rings",
+            "zvar" : "full_code",
+            "zname" : "full_name",
+            "file": "metropolin_rings_2008.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>metropolin_rings_2008.geojson",
+			"pane": "front",
+			"color": "#00008B",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר נפה:' + feature.properties.NafaNum + ' <br> שם נפה:'+feature.properties.Nafa",
+			"type" : "a"
+        }
+    },
+    "scenarios": {
+        "TA2016" : {
+            "name"    : "תל אביב 2016",
+            "source"  : "מודל תל אביב",
+            "dir"     : "TA2016",
+            "tazlyr"  : "TAZ_v41",
+            "tazvar"  : "TAZV41",
+            "tazfile" : "geo/TAZ_v41.geojson",
+            "agvars"  : [ "population", "employment" ],
+            "files"   : [ 
+                        ["2017", 2017, "zonal2017v42.csv", [ "taz", "population", "empl_tot" ] ],
+                        ["2025", 2025, "zonal2025v42.csv", [ "taz", "population", "empl_tot" ] ], 
+                        ["2030", 2030, "zonal2030v42.csv", [ "taz", "population", "empl_tot" ] ], 
+                        ["2040", 2040, "zonal2040v42.csv", [ "taz", "population", "empl_tot" ] ]
+                        ]
+        },
+        "TA2021" : {
+            "name"    : "תל אביב מתת 2021",
+            "source"  : "מודל תל אביב",
+            "dir"     : "TA2021",
+            "tazlyr"  : "TAZ_newnumber",
+            "tazvar"  : "TAZ_1300",
+            "tazfile" : "geo/TAZ_new_numbering.geojson",
+            "agvars"  : [ "population", "employment" ],
+            "files"   : [
+                        [ "2018", 2018, "matat21_lvl1.csv", [ "taz1318", "pop18", "emp18" ] ],
+                        [ "2030", 2030, "matat21_lvl1.csv", [ "taz1318", "pop30", "emp30" ] ],
+                        [ "2040", 2040, "matat21_lvl1.csv", [ "taz1318", "pop40", "emp40" ] ],
+                        [ "2050", 2050, "matat21_lvl1.csv", [ "taz1318", "pop50", "emp50" ] ]                  	  	  	  	  			  	  
+                        ]
+        },
+        "TA2022" : {
+            "name"    : "תכנית אסטרטגית תחצ מטר תל אביב 2022",
+            "source"  : "מודל תל אביב",
+            "dir"     : "TA2022",
+            "tazlyr"  : "TAZ_v41",
+            "tazvar"  : "TAZV41",
+            "tazfile" : "geo/TAZ_v41.shp",
+            "agvars"  : [ "population", "employment" ],
+            "files"   : [
+                        [ "conv",   2050, "TelAvivStrategic2022.csv", [ "taz", "pop_conv", "emp_conv" ] ],
+                        [ "trends", 2050, "TelAvivStrategic2022.csv", [ "taz", "pop_trends", "emp_trends" ] ],
+                        [ "focus",  2050, "TelAvivStrategic2022.csv", [ "taz", "pop_focus", "emp_focus" ] ],
+                        [ "tama70", 2050, "TelAvivStrategic2022.csv", [ "taz", "pop_tama70", "emp_tama70" ] ]                  	  	  	  	  			  	  
+                        ]
+        },
+        "YN2019" : {
+            "name"    : "יפה נוף 2019",
+            "source"  : "מודל חיפה",
+            "dir"     : "YN2019",
+            "tazlyr"  : "TAZ_HaifaNorth",
+            "tazvar"  : "TAZ_Number",
+            "tazfile" : "geo/TAZ_North.shp",
+            "agvars"  : [ "population", "employment" ],
+            "files"   : [
+                        [ "base", 2017, "2017.csv",     [ "TAZ", "population", "workplace" ] ],
+                        [ "Max",  2040, "2040_Max.csv", [ "TAZ", "population", "workplace" ] ],
+                        [ "Reg",  2050, "2050_Reg.csv", [ "TAZ", "population", "workplace" ] ],
+                        [ "Max",  2050, "2050_Max.csv", [ "TAZ", "population", "workplace" ] ]                  	  	  	  	  			  	  
+                       ]
+        },
+        "JeruV2" : {
+            "name"    : "צתאל ירושלים 2021",
+            "source"  : "מודל ירולשים",
+            "dir"     : "JeruV2",
+            "tazlyr"  : "TAZ_jer_v2",
+            "tazvar"  : "taz",
+            "tazfile" : "jertaz_model_v2.json",
+            "agvars"  : [ "population", "employment" ],
+            "files"   : [
+                        [ "2015", 2015, "jerforecasts2020.csv", [ "TAZ", "pop15", "emp15" ] ],
+                        [ "2020", 2020, "jerforecasts2020.csv", [ "TAZ", "pop20", "emp20" ] ],
+                        [ "2025", 2025, "jerforecasts2020.csv", [ "TAZ", "pop25", "emp25" ] ],
+                        [ "2030", 2030, "jerforecasts2020.csv", [ "TAZ", "pop30", "emp30" ] ],
+                        [ "2035", 2035, "jerforecasts2020.csv", [ "TAZ", "pop35", "emp35" ] ],
+                        [ "2040", 2040, "jerforecasts2020.csv", [ "TAZ", "pop40", "emp40" ] ]                  	  	  	  	  			  	  
+                       ]
+        },
+        "JeruV32" : {
+            "name"    : "צתאל ירושלים 2022",
+            "source"  : "מודל ירולשים",
+            "dir"     : "jeruV32",
+            "tazlyr"  : "TAZ_jer_v32",
+            "tazvar"  : "taz",
+            "tazfile" : "jer_v32.geoJson",
+            "agvars"  : [ "population", "employment" ],
+            "files"   : [
+                        [ "2020", 2020, "jerforecastsv32.csv", [ "TAZ", "pop20", "emp20" ] ],
+                        [ "2025", 2025, "jerforecastsv32.csv", [ "TAZ", "pop25", "emp25" ] ],
+                        [ "2030", 2030, "jerforecastsv32.csv", [ "TAZ", "pop30", "emp30" ] ],
+                        [ "2035", 2035, "jerforecastsv32.csv", [ "TAZ", "pop35", "emp35" ] ],
+                        [ "2040", 2040, "jerforecastsv32.csv", [ "TAZ", "pop40", "emp40" ] ]                  	  	  	  	  			  	  
+                       ]
+        },
+        "Ash2020" : {
+            "name"    : "תכנית אסטרטגית תחצ נפת אשקלון 2020",
+            "source"  : "תכנית אסטרטגית",
+            "dir"     : "Ash2020",
+            "tazlyr"  : "TAZ_Ash",
+            "tazvar"  : "TAZV41",
+            "tazfile" : "geo/taz_model_v2.shp",
+            "agvars"  : [ "population", "employment" ],
+            "files"   : [ 
+                        ["2040", 2040, "zonal_Bilu_2040.csv", [ "taz", "population", "empl_tot" ] ]
+                        ]
+        },
+        "nathed2022" : {
+            "name"    : "תכנית אסטרטגית תחצ נתניה-חדרה 2022",
+            "source"  : "תכנית אסטרטגית",
+            "dir"     : "nathed2022",
+            "tazlyr"  : "TAZ_NatHed",
+            "tazvar"  : "TAZ_1046",
+            "tazfile" : "arzi_nat_hed.geoJson",
+            "agvars"  : [ "population", "employment" ],
+            "files"   : [ 
+                        ["Megamot", 2050, "nathed2022_forecast2050.csv", [ "NEW_TAZ_1046", "POP_2050_B", "EMP_2050_B" ] ],
+                        ["Mokdit",  2050, "nathed2022_forecast2050.csv", [ "NEW_TAZ_1046", "POP_2050_M", "EMP_2050_M" ] ],
+                        ["Hafrada", 2050, "nathed2022_forecast2050.csv", [ "NEW_TAZ_1046", "POP_2050_H", "EMP_2050_H" ] ]
+                        ]
+        },
+        "arzi2010" : {
+            "name"    : "תכנית אב ארצי 2010",
+            "source"  : "מודל ארצי",
+            "dir"     : "arzi2010",
+            "tazlyr"  : "arzi_585",
+            "tazvar"  : "TAZ_585",
+            "tazfile" : "arzi_585.geoJson",
+            "agvars"  : [ "population", "employment" ],
+            "files"   : [ 
+                        ["2007", 2007, "arzi2010_585.csv", [ "taz", "pop07", "emp07" ] ],
+                        ["2030", 2030, "arzi2010_585.csv", [ "taz", "pop30", "emp30" ] ], 
+                        ["2040", 2040, "arzi2010_585.csv", [ "taz", "pop40", "emp40" ] ]
+                        ]
+        },                        
+        "moaza2021" : {
+            "name"    : "מלל 2021",
+            "source"  : "אחר",
+            "dir"     : "moaza2021",
+            "tazlyr"  : "moaza",
+            "tazvar"  : "NafaCode",
+            "tazfile" : "NapotMoaza_2020.geoJson",
+            "agvars"  : [ "population", "employment" ],
+            "files"   : [
+                        ["low_trnd", 2020, "moaza2020.csv", [ "NafaCode", "low_trnd_2020", "None"] ],
+                        ["low_trnd", 2025, "moaza2020.csv", [ "NafaCode", "low_trnd_2025", "None"] ],
+                        ["low_trnd", 2030, "moaza2020.csv", [ "NafaCode", "low_trnd_2030", "None"] ],
+                        ["low_trnd", 2035, "moaza2020.csv", [ "NafaCode", "low_trnd_2035", "None"] ],
+                        ["low_trnd", 2040, "moaza2020.csv", [ "NafaCode", "low_trnd_2040", "None"] ],
+                        ["low_trnd", 2045, "moaza2020.csv", [ "NafaCode", "low_trnd_2045", "None"] ],
+                        ["low_trnd", 2050, "moaza2020.csv", [ "NafaCode", "low_trnd_2050", "None"] ],
+                        ["low_diur", 2020, "moaza2020.csv", [ "NafaCode", "low_diur_2020", "None"] ],
+                        ["low_diur", 2025, "moaza2020.csv", [ "NafaCode", "low_diur_2025", "None"] ],
+                        ["low_diur", 2030, "moaza2020.csv", [ "NafaCode", "low_diur_2030", "None"] ],
+                        ["low_diur", 2035, "moaza2020.csv", [ "NafaCode", "low_diur_2035", "None"] ],
+                        ["low_diur", 2040, "moaza2020.csv", [ "NafaCode", "low_diur_2040", "None"] ],
+                        ["low_diur", 2045, "moaza2020.csv", [ "NafaCode", "low_diur_2045", "None"] ],
+                        ["low_diur", 2050, "moaza2020.csv", [ "NafaCode", "low_diur_2050", "None"] ],
+                        ["medium_trnd", 2020, "moaza2020.csv", [ "NafaCode", "medium_trnd_2020", "None"] ],
+                        ["medium_trnd", 2025, "moaza2020.csv", [ "NafaCode", "medium_trnd_2025", "None"] ],
+                        ["medium_trnd", 2030, "moaza2020.csv", [ "NafaCode", "medium_trnd_2030", "None"] ],
+                        ["medium_trnd", 2035, "moaza2020.csv", [ "NafaCode", "medium_trnd_2035", "None"] ],
+                        ["medium_trnd", 2040, "moaza2020.csv", [ "NafaCode", "medium_trnd_2040", "None"] ],
+                        ["medium_trnd", 2045, "moaza2020.csv", [ "NafaCode", "medium_trnd_2045", "None"] ],
+                        ["medium_trnd", 2050, "moaza2020.csv", [ "NafaCode", "medium_trnd_2050", "None"] ],
+                        ["medium_diur", 2020, "moaza2020.csv", [ "NafaCode", "medium_diur_2020", "None"] ],
+                        ["medium_diur", 2025, "moaza2020.csv", [ "NafaCode", "medium_diur_2025", "None"] ],
+                        ["medium_diur", 2030, "moaza2020.csv", [ "NafaCode", "medium_diur_2030", "None"] ],
+                        ["medium_diur", 2035, "moaza2020.csv", [ "NafaCode", "medium_diur_2035", "None"] ],
+                        ["medium_diur", 2040, "moaza2020.csv", [ "NafaCode", "medium_diur_2040", "None"] ],
+                        ["medium_diur", 2045, "moaza2020.csv", [ "NafaCode", "medium_diur_2045", "None"] ],
+                        ["medium_diur", 2050, "moaza2020.csv", [ "NafaCode", "medium_diur_2050", "None"] ],
+                        ["high_trnd", 2020, "moaza2020.csv", [ "NafaCode", "high_trnd_2020", "None"] ],
+                        ["high_trnd", 2025, "moaza2020.csv", [ "NafaCode", "high_trnd_2025", "None"] ],
+                        ["high_trnd", 2030, "moaza2020.csv", [ "NafaCode", "high_trnd_2030", "None"] ],
+                        ["high_trnd", 2035, "moaza2020.csv", [ "NafaCode", "high_trnd_2035", "None"] ],
+                        ["high_trnd", 2040, "moaza2020.csv", [ "NafaCode", "high_trnd_2040", "None"] ],
+                        ["high_trnd", 2045, "moaza2020.csv", [ "NafaCode", "high_trnd_2045", "None"] ],
+                        ["high_trnd", 2050, "moaza2020.csv", [ "NafaCode", "high_trnd_2050", "None"] ],
+                        ["high_diur", 2020, "moaza2020.csv", [ "NafaCode", "high_diur_2020", "None"] ],
+                        ["high_diur", 2025, "moaza2020.csv", [ "NafaCode", "high_diur_2025", "None"] ],
+                        ["high_diur", 2030, "moaza2020.csv", [ "NafaCode", "high_diur_2030", "None"] ],
+                        ["high_diur", 2035, "moaza2020.csv", [ "NafaCode", "high_diur_2035", "None"] ],
+                        ["high_diur", 2040, "moaza2020.csv", [ "NafaCode", "high_diur_2040", "None"] ],
+                        ["high_diur", 2045, "moaza2020.csv", [ "NafaCode", "high_diur_2045", "None"] ],
+                        ["high_diur", 2050, "moaza2020.csv", [ "NafaCode", "high_diur_2050", "None"] ]                                                
+                        ]
+        }
+    },
+    "messages": {
+        "orgzns" : "גבולות מקור"
+	}
+}    

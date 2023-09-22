@@ -140,7 +140,7 @@
             "dir"     : "Ash2020",
             "tazlyr"  : "TAZ_Ash",
             "tazvar"  : "TAZV41",
-            "tazfile" : "geo/taz_model_v2.shp",
+            "tazfile" : "geo/taz_model_v2.shp"
         },
         "nathed2022" : {
             "name"    : "תכנית אסטרטגית תחצ נתניה-חדרה 2022",

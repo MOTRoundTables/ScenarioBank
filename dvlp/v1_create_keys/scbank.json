@@ -133,7 +133,7 @@
 			"dir"     : "jeru23v09",
 			"tazlyr"  : "TAZ_jer_2023",
 			"tazvar"  : "TAZ_NUM",
-			"tazfile" : "H_TAZ_V4_230518.json"
+			"tazfile" : "H_TAZ_V4_230518.geoJson"
 		},		
         "Ash2020" : {
             "name"    : "תכנית אסטרטגית תחצ נפת אשקלון 2020",

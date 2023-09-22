@@ -299,11 +299,11 @@
                         ["high_diur", 2035, "moaza2021.csv", [ "NafaCode", "high_diur_2035", "None"] ],
                         ["high_diur", 2040, "moaza2021.csv", [ "NafaCode", "high_diur_2040", "None"] ],
                         ["high_diur", 2045, "moaza2021.csv", [ "NafaCode", "high_diur_2045", "None"] ],
-                        ["high_diur", 2050, "moaza2021.csv", [ "NafaCode", "high_diur_2050", "None"] ]                                                
+                        ["high_diur", 2050, "moaza2021.csv", [ "NafaCode", "high_diur_2050", "None"] ]
                         ]
-		},
-	},	
+		}
+	},
     "messages": {
         "orgzns" : "גבולות מקור"
 	}
-}    
+}

@@ -1,0 +1,15 @@
+{	"code": "TA2022",
+	"name"    : "תכנית אסטרטגית תחצ מטר תל אביב 2022",
+	"source"  : "מודל תל אביב",
+	"dir"     : "TA2022",
+	"tazlyr"  : "TAZ_v41",
+	"tazvar"  : "TAZV41",
+	"tazfile" : "geo/TAZ_v41.shp",
+	"agvars"  : [ "population", "employment" ],
+	"files"   : [
+				[ "conv",   2050, "TelAvivStrategic2022.csv", [ "taz", "pop_conv", "emp_conv" ] ],
+				[ "trends", 2050, "TelAvivStrategic2022.csv", [ "taz", "pop_trends", "emp_trends" ] ],
+				[ "focus",  2050, "TelAvivStrategic2022.csv", [ "taz", "pop_focus", "emp_focus" ] ],
+				[ "tama70", 2050, "TelAvivStrategic2022.csv", [ "taz", "pop_tama70", "emp_tama70" ] ]                  	  	  	  	  			  	  
+				]
+}

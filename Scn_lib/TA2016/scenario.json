@@ -1,0 +1,15 @@
+{ 	"code": "TA2016",
+	"name"    : "תל אביב 2016",
+	"source"  : "מודל תל אביב",
+	"dir"     : "TA2016",
+	"tazlyr"  : "TAZ_v41",
+	"tazvar"  : "TAZV41",
+	"tazfile" : "geo/TAZ_v41.geojson",
+	"agvars"  : [ "population", "employment" ],
+	"files"   : [ 
+			["2017", 2017, "zonal2017v42.csv", [ "taz", "population", "empl_tot" ] ],
+			["2025", 2025, "zonal2025v42.csv", [ "taz", "population", "empl_tot" ] ], 
+			["2030", 2030, "zonal2030v42.csv", [ "taz", "population", "empl_tot" ] ], 
+			["2040", 2040, "zonal2040v42.csv", [ "taz", "population", "empl_tot" ] ]
+			]
+}

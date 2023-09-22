@@ -1,0 +1,15 @@
+{	"code"    : "TA2021",
+	"name"    : "תל אביב מתת 2021",
+	"source"  : "מודל תל אביב",
+	"dir"     : "TA2021",
+	"tazlyr"  : "TAZ_newnumber",
+	"tazvar"  : "TAZ_1300",
+	"tazfile" : "geo/TAZ_new_numbering.geojson",
+	"agvars"  : [ "population", "employment" ],
+	"files"   : [
+			[ "2018", 2018, "matat21_lvl1.csv", [ "taz1318", "pop18", "emp18" ] ],
+			[ "2030", 2030, "matat21_lvl1.csv", [ "taz1318", "pop30", "emp30" ] ],
+			[ "2040", 2040, "matat21_lvl1.csv", [ "taz1318", "pop40", "emp40" ] ],
+			[ "2050", 2050, "matat21_lvl1.csv", [ "taz1318", "pop50", "emp50" ] ]                  	  	  	  	  			  	  
+			]
+}

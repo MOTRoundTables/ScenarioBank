@@ -217,12 +217,15 @@ class scb_procedures:
             category = QgsRendererCategory(value, symbol, str(value))
             categories.append(category)
             
+            
         myStyle = QgsStyle().defaultStyle()
+        # https://gis.stackexchange.com/questions/342352/apply-a-color-ramp-to-vector-layer-using-pyqgis3
         ramp = myStyle.colorRamp('Spectral') # pass any color ramp name e.g. 'Spectral'
             
         renderer = QgsCategorizedSymbolRenderer(self.szvar, categories)
         renderer.updateColorRamp(ramp)
         layer.setRenderer(renderer)
+        layer.setOpacity(0.6)
         layer.triggerRepaint()
 
     def makeAg(self):

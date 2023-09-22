@@ -1,0 +1,12 @@
+{	"code": "Ash2020",
+	"name"    : "תכנית אסטרטגית תחצ נפת אשקלון 2020",
+	"source"  : "תכנית אסטרטגית",
+	"dir"     : "Ash2020",
+	"tazlyr"  : "TAZ_Ash",
+	"tazvar"  : "TAZV41",
+	"tazfile" : "geo/taz_model_v2.shp",
+	"agvars"  : [ "population", "employment" ],
+	"files"   : [ 
+				["2040", 2040, "zonal_Bilu_2040.csv", [ "taz", "population", "empl_tot" ] ]
+				]
+}

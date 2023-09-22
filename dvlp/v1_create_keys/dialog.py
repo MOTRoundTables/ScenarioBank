@@ -145,7 +145,7 @@ class mainwindow(QWidget):
 
         pushButton = QPushButton(verticalLayoutWidget)
         pushButton.setObjectName(QStringLiteral("pushButton"))
-        pushButton.setText("Create empty key")
+        pushButton.setText("Create key")  # "Create empty key"
         pushButton.clicked.connect(self.b1)
         verticalLayout.addWidget(pushButton)
 

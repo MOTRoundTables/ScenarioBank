@@ -11,8 +11,8 @@ basedr = os.path.dirname(script_path) + "/"
 """
 
 basedr = "C://Users/marsz/Documents/GitHub/ScenarioBank/"
-dvlpdr = basedr + "v1_create_keys/" 
-jsondr = basedr + "v1/"
+dvlpdr = basedr + "dvlp/v1_create_keys/"
+jsondr = basedr + "dvlp/v1/"
 
 #print(basedr)
 

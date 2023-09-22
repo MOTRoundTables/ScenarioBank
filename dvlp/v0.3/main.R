@@ -8,7 +8,8 @@ library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.htm
 
 source("maplib.R")
 source("scnlib.R")
-source("scn_dvlp.R")
+#source("scn_dvlp.R")
+
 
 currentsrc <- ""
 currentscn <- NULL #list(name = "not selected")
@@ -21,20 +22,32 @@ initapp <- function() {
   cfg$general$scndir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$scndir, fixed=TRUE)
   cfg$general$rsltdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$rsltdir, fixed=TRUE)
 
-
-  cfg$scnkeys = names(cfg$scenarios)                  # vector of scn keys  
+  # load scenario dicts
+  n = length(cfg$scenariolist)
+  cfg$scenarios = list() 
+  cfg$scnsources = list()
+  cfg$scnkeys = vector()  
+  for (i in 1:n) {
+    cfg$scnsources = append(cfg$scnsources, cfg$scenariolist[[i]][[1]])
+    n2 = length(cfg$scenariolist[[i]][[2]])
+    for (j in 1:n2) {
+      cfg$scnkeys = append(cfg$scnkeys, cfg$scenariolist[[i]][[2]][[j]])
+      x = fromJSON(paste(cfg$general$scndir, cfg$scenariolist[[i]][[2]][[j]], "/scenario.json", sep = ""))
+      y = list()
+      y[[cfg$scenariolist[[i]][[2]][[j]]]] = x
+      cfg$scenarios = append(cfg$scenarios, y)
+    }
+  }
+  
   n = length(cfg$scnkeys)
   cfg$scnlist = vector(mode = "list", length = n)
-  cfg$scnsources = vector(mode = "list", length = n)  # for menu
   cfg$scnchoices = vector(mode = "list")              # for menu
   for (i in 1:n) {
     ky = cfg$scnkeys[i]
     cfg$scnlist[i] = cfg$scenarios[[ky]]$name         # scn names
-    cfg$scnsources[i] = cfg$scenarios[[ky]]$source
     cfg$scnchoices[as.character(cfg$scnlist[i])] = i
     cfg$scenarios[[i]]$dir = paste0(cfg$general$scndir, cfg$scenarios[[i]]$dir, "/")
   }
-  cfg$scnsources <- unique(cfg$scnsources)
 
   cfg$szkeys = names(cfg$superzones)                  # vector of SZ keys    
   n = length(cfg$szkeys)

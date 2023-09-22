@@ -33,7 +33,7 @@ from myutils import *
 
 # load cfg
 cfgfile  = "scbank.json" 
-with open(jsondr+cfgfile, 'r') as f:
+with open(dvlpdr+cfgfile, 'r') as f:
   cfg = json.load(f)
 
 #cfg['basedr'] = basedr

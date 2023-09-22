@@ -1,4 +1,21 @@
 
+source("main.R")
+
+
+n = length(cfg$scnkeys)
+cfg$scnlist = vector(mode = "list", length = n)
+cfg$scnchoices = vector(mode = "list")              # for menu
+for (i in 1:n) {
+  ky = cfg$scnkeys[i]
+  cfg$scnlist[i] = cfg$scenarios[[ky]]$name         # scn names
+  cfg$scnchoices[as.character(cfg$scnlist[i])] = i
+  cfg$scenarios[[i]]$dir = paste0(cfg$general$scndir, cfg$scenarios[[i]]$dir, "/")
+}
+
+
+
+
+
 library(tidyverse)
 #library(tidyjson)
 library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.html
@@ -19,34 +36,13 @@ for (i in 1:n) {
   cfg$scnkeys = append(cfg$scnkeys, cfg$scenariolist[[i]][[2]])
   n2 = length(cfg$scenariolist[[i]][[2]])
   for (j in 1:n2) {
+    #browser()
+    x = fromJSON(paste(cfg$general$scndir, cfg$scenariolist[[i]][[2]][[j]], "/scenario.json", sep = ""))
+    y = list()
+    y[[cfg$scenariolist[[i]][[2]][[j]]]] = x
+    cfg$scenarios = append(cfg$scenarios, y)
   }
 }
-
-
-i = 1
-n2 = length(cfg$scenariolist[[i]][[2]])
-j = 1
-y = fromJSON(paste(cfg$general$scndir, cfg$scenariolist[[i]][[2]][[j]], "/scenario.json", sep = ""))
-cfg$scenarios = append(cfg$scenarios, list(list(cfg$scenariolist[[i]][[2]][[j]], y)))
-
-
-j = 2
-y = fromJSON(paste(cfg$general$scndir, cfg$scenariolist[[i]][[2]][[j]], "/scenario.json", sep = ""))
-cfg$scenarios = append(cfg$scenarios, list(list(cfg$scenariolist[[i]][[2]][[j]], y)))
-
-
-i = 1
-n2 = length(cfg$scenariolist[[i]][[2]])
-for (j in 1:n2) {
-  y = fromJSON(paste(cfg$general$scndir, cfg$scnkeys[[i]][[j]], "/scenario.json", sep = ""))
-  
-}
-
-
-a = list()
-x = "aa"
-
-
 
 
 

@@ -1,0 +1,170 @@
+{
+    "general": {
+		"sysdir"  : "https://raw.githubusercontent.com/MOTRoundTables/ScenarioBank/main/",
+        "geodir"  : "<sysdir>geo/",
+        "scndir"  : "<sysdir>Scn_lib/",
+        "rsltdir" : "<sysdir>results/",
+        "initialsz": 1
+    },
+    "basemap": {
+	  "mapname" : "myMap",
+	  "initial_lon" : 35.0,
+	  "initial_lat" : 31.9,
+	  "initial_zm" : 10,
+	  "minZoom" : 0, 
+	  "maxZoom" : 18,
+	  "height" : 700
+    },
+    "superzones": { 
+        "mahozot" : {
+            "lyr" : "mahozot",
+            "hname" : "מחוזות",
+            "ename" : "districts",
+            "zvar" : "MahozNum",
+            "zname" : "NameMahoz",
+            "file": "Mahozot.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>Mahozot.geojson",
+			"pane": "front",
+			"color": "#000000",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת מחוזות<br>'+'מספר מחוז:' + feature.properties.Mahoz + ' <br> שם מחוז:'+feature.properties.NameMahoz",
+			"type" : "a"
+        },
+        "napot" : {
+            "lyr" : "NapotMoaza_2021",
+            "hname" : "נפות",
+            "ename" : "Napot",
+            "zvar" : "NafaNum",
+            "zname" : "Nafa",
+            "file": "NapotMoaza_2021.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>NapotMoaza_2021.geojson",
+			"pane": "front",
+			"color": "#000000",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר נפה:' + feature.properties.NafaNum + ' <br> שם נפה:'+feature.properties.Nafa",
+			"type" : "a"
+        },
+        "largecity" : {  
+            "lyr" : "largecity",
+            "hname" : "ערים",
+            "ename" : "Cities",
+            "zvar" : "citycode",
+            "zname" : "cityname",
+            "file": "largecity.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>largecity.geojson",
+			"pane": "front",
+			"color": "#800000",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר נפה:' + feature.properties.NafaNum + ' <br> שם נפה:'+feature.properties.Nafa",
+			"type" : "a"
+        },
+        "MetroSec2008" : {
+            "lyr" : "metrorings2008",
+            "hname" : "גזרות מטרופולין",
+            "ename" : "Metropolitan Rings",
+            "zvar" : "full_code",
+            "zname" : "full_name",
+            "file": "metropolin_rings_2008.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>metropolin_rings_2008.geojson",
+			"pane": "front",
+			"color": "#00008B",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר נפה:' + feature.properties.NafaNum + ' <br> שם נפה:'+feature.properties.Nafa",
+			"type" : "a"
+        }
+    },
+    "scenarios": {
+        "TA2016" : {
+            "name"    : "תל אביב 2016",
+            "dir"     : "TA2016",
+            "tazlyr"  : "TAZ_v41",
+            "tazvar"  : "TAZV41",
+            "tazfile" : "geo/TAZ_v41.geojson"
+        },
+        "TA2021" : {
+            "name"    : "תל אביב מתת 2021",
+            "dir"     : "TA2021",
+            "tazlyr"  : "TAZ_newnumber",
+            "tazvar"  : "TAZ_1300",
+            "tazfile" : "geo/TAZ_new_numbering.geojson"
+        },
+        "TA2022" : {
+            "name"    : "תכנית אסטרטגית תחצ מטר תל אביב 2022",
+            "dir"     : "TA2022",
+            "tazlyr"  : "TAZ_v41",
+            "tazvar"  : "TAZV41",
+            "tazfile" : "geo/TAZ_v41.shp"
+        },
+        "YN2019" : {
+            "name"    : "יפה נוף 2019",
+            "dir"     : "YN2019",
+            "tazlyr"  : "TAZ_HaifaNorth",
+            "tazvar"  : "TAZ_Number",
+            "tazfile" : "geo/TAZ_North.shp"
+        },
+        "JeruV2" : {
+            "name"    : "צתאל ירושלים 2021",
+            "dir"     : "JeruV2",
+            "tazlyr"  : "TAZ_jer_v2",
+            "tazvar"  : "taz",
+            "tazfile" : "jertaz_model_v2.json"
+        },
+        "JeruV32" : {
+            "name"    : "צתאל ירושלים 2022",
+            "dir"     : "jeruV32",
+            "tazlyr"  : "TAZ_jer_v32",
+            "tazvar"  : "taz",
+            "tazfile" : "jer_v32.geoJson"
+        },
+		"jeru23v09": {
+			"name"    : "צתאל ירושלים 2023-09",
+			"dir"     : "jeru23v09",
+			"tazlyr"  : "TAZ_jer_2023",
+			"tazvar"  : "TAZ_NUM",
+			"tazfile" : "H_TAZ_V4_230518.json"
+		},		
+        "Ash2020" : {
+            "name"    : "תכנית אסטרטגית תחצ נפת אשקלון 2020",
+            "dir"     : "Ash2020",
+            "tazlyr"  : "TAZ_Ash",
+            "tazvar"  : "TAZV41",
+            "tazfile" : "geo/taz_model_v2.shp",
+        },
+        "nathed2022" : {
+            "name"    : "תכנית אסטרטגית תחצ נתניה-חדרה 2022",
+            "dir"     : "nathed2022",
+            "tazlyr"  : "TAZ_NatHed",
+            "tazvar"  : "TAZ_1046",
+            "tazfile" : "arzi_nat_hed.geoJson"
+        },
+        "arzi2010" : {
+            "name"    : "תכנית אב ארצי 2010",
+            "dir"     : "arzi2010",
+            "tazlyr"  : "arzi_585",
+            "tazvar"  : "TAZ_585",
+            "tazfile" : "arzi_585.geoJson"
+        },                        
+        "moaza2021" : {
+            "name"    : "מלל 2021",
+            "dir"     : "moaza2021",
+            "tazlyr"  : "moaza",
+            "tazvar"  : "NafaCode",
+            "tazfile" : "NapotMoaza_2021.geoJson"
+        }
+    },
+    "messages": {
+        "orgzns" : "גבולות מקור"
+	}
+}    

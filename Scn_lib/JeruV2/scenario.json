@@ -1,0 +1,17 @@
+{ 	"code"    : "JeruV2", 
+	"name"    : "צתאל ירושלים 2021",
+	"source"  : "מודל ירולשים",
+	"dir"     : "JeruV2",
+	"tazlyr"  : "TAZ_jer_v2",
+	"tazvar"  : "taz",
+	"tazfile" : "jertaz_model_v2.json",
+	"agvars"  : [ "population", "employment" ],
+	"files"   : [
+				[ "2015", 2015, "jerforecasts2020.csv", [ "TAZ", "pop15", "emp15" ] ],
+				[ "2020", 2020, "jerforecasts2020.csv", [ "TAZ", "pop20", "emp20" ] ],
+				[ "2025", 2025, "jerforecasts2020.csv", [ "TAZ", "pop25", "emp25" ] ],
+				[ "2030", 2030, "jerforecasts2020.csv", [ "TAZ", "pop30", "emp30" ] ],
+				[ "2035", 2035, "jerforecasts2020.csv", [ "TAZ", "pop35", "emp35" ] ],
+				[ "2040", 2040, "jerforecasts2020.csv", [ "TAZ", "pop40", "emp40" ] ]                  	  	  	  	  			  	  
+			   ]
+}

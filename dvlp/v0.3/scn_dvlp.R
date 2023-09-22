@@ -14,18 +14,38 @@ cfg$scnsources = list()
 cfg$scnkeys = list()
 cfg$scenarios = list() 
 
-
 for (i in 1:n) {
   cfg$scnsources = append(cfg$scnsources, cfg$scenariolist[[i]][[1]])
   cfg$scnkeys = append(cfg$scnkeys, cfg$scenariolist[[i]][[2]])
+  n2 = length(cfg$scenariolist[[i]][[2]])
+  for (j in 1:n2) {
+  }
 }
 
+
 i = 1
-n2 = cfg$scenariolist[[i]][[2]]
+n2 = length(cfg$scenariolist[[i]][[2]])
+j = 1
+y = fromJSON(paste(cfg$general$scndir, cfg$scenariolist[[i]][[2]][[j]], "/scenario.json", sep = ""))
+cfg$scenarios = append(cfg$scenarios, list(list(cfg$scenariolist[[i]][[2]][[j]], y)))
+
+
+j = 2
+y = fromJSON(paste(cfg$general$scndir, cfg$scenariolist[[i]][[2]][[j]], "/scenario.json", sep = ""))
+cfg$scenarios = append(cfg$scenarios, list(list(cfg$scenariolist[[i]][[2]][[j]], y)))
+
+
+i = 1
+n2 = length(cfg$scenariolist[[i]][[2]])
 for (j in 1:n2) {
-  x = paste(cfg$general$scndir, cfg$scenariolist[[i]][[j]], "/scenario.json")
-  x = fromJSON(paste(cfg$general$scndir, cfg$scenariolist[[i]][[j]], "/scenario.json"))
+  y = fromJSON(paste(cfg$general$scndir, cfg$scnkeys[[i]][[j]], "/scenario.json", sep = ""))
+  
 }
+
+
+a = list()
+x = "aa"
+
 
 
 

@@ -4,7 +4,7 @@
 	"dir"     : "YN2019",
 	"tazlyr"  : "TAZ_HaifaNorth",
 	"tazvar"  : "TAZ_Number",
-	"tazfile" : "geo/TAZ_North.shp",
+	"tazfile" : "TAZ_North.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [
 				[ "base", 2017, "2017.csv",     [ "TAZ", "population", "workplace" ] ],

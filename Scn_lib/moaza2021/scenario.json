@@ -4,7 +4,7 @@
 	"dir"     : "moaza2021",
 	"tazlyr"  : "moaza",
 	"tazvar"  : "NafaCode",
-	"tazfile" : "NapotMoaza_2020.geojson",
+	"tazfile" : "NapotMoaza_2021.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [
 				["low_trnd", 2020, "moaza2020.csv", [ "NafaCode", "low_trnd_2020", "None"] ],

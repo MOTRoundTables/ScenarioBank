@@ -75,7 +75,7 @@ mymap <- R6Class("mymapclass",
             loadlyr = function(alyr) {  # alyr is a DF of lyr attributes
               #browser()
               
-              cat(paste(alyr$lyr, "\n"))
+              cat(paste(alyr$lyr, "\n", alyr$url, "\n", sep=""))
 
               l1 <- geojson_read(alyr$url, what = "sp")   # at this stage only support geojson
               m = mapview(l1, layer.name = alyr$lyr, legend = FALSE,

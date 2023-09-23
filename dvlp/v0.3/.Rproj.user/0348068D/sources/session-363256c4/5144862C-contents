@@ -155,8 +155,10 @@ server <- function(input, output, session) {
                         #label = paste("Select input label", length(x)),
                         #selected = tail(x, 1)
       )
+
+      if ((currentsrc!="") & (currentsrc!=input$selectSrc)) { HideCurrentSc() }
       currentsrc <- input$selectSrc
-      #showmessage(currentsrc) # debug
+      # showmessage(currentsrc) # debug
     }
   })
   

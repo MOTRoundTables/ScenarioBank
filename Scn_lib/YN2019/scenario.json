@@ -8,8 +8,8 @@
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [
 				[ "base", 2017, "2017.csv",     [ "TAZ", "population", "workplace" ] ],
-				[ "Max",  2040, "2040_Max.csv", [ "TAZ", "population", "workplace" ] ],
-				[ "Reg",  2050, "2050_Reg.csv", [ "TAZ", "population", "workplace" ] ],
-				[ "Max",  2050, "2050_Max.csv", [ "TAZ", "population", "workplace" ] ]                  	  	  	  	  			  	  
+				[ "Max",  2040, "2040_max.csv", [ "TAZ", "population", "workplace" ] ],
+				[ "Reg",  2050, "2050_reg.csv", [ "TAZ", "population", "workplace" ] ],
+				[ "Max",  2050, "2050_max.csv", [ "TAZ", "population", "workplace" ] ]                  	  	  	  	  			  	  
 			   ]
 }

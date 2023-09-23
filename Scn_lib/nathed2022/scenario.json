@@ -4,7 +4,7 @@
 	"dir"     : "nathed2022",
 	"tazlyr"  : "TAZ_NatHed",
 	"tazvar"  : "TAZ_1046",
-	"tazfile" : "arzi_nat_hed.geoJson",
+	"tazfile" : "arzi_nat_hed.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [ 
 				["Megamot", 2050, "nathed2022_forecast2050.csv", [ "NEW_TAZ_1046", "POP_2050_B", "EMP_2050_B" ] ],

@@ -4,7 +4,7 @@
 	"dir"     : "jeruV32",
 	"tazlyr"  : "TAZ_jer_v32",
 	"tazvar"  : "taz",
-	"tazfile" : "jer_v32.geoJson",
+	"tazfile" : "jer_v32.geojon",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [
 				[ "2020", 2020, "jerforecastsv32.csv", [ "TAZ", "pop20", "emp20" ] ],

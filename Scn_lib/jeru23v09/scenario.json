@@ -4,7 +4,7 @@
 	"dir"     : "jeru23v09",
 	"tazlyr"  : "TAZ_jer_2023",
 	"tazvar"  : "TAZ_NUM",
-	"tazfile" : "H_TAZ_V4_230518.geoJson",
+	"tazfile" : "H_TAZ_V4_230518.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [
 				[ "2020", 2020, "forecast_2020_230720_BASE_YEAR.csv",    [ "TAZ_NUM", "pop", "emp_tot" ] ],

@@ -238,8 +238,8 @@ class scb_procedures:
         f = open(filename, 'w', newline='')
         writer = csv.writer(f)
         kheader = self.scn["agvars"].copy()
-        kheader.insert(0, "year")
-        kheader.insert(1, "code")
+        kheader.insert(0, "code")
+        kheader.insert(1, "year")
         kheader.insert(2, self.szvar)
         writer.writerow(kheader)
 

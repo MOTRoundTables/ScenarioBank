@@ -1,0 +1,28 @@
+{
+    "id": "CF83FF76",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1695475995245.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "id": "eec7bb0b95dd4b75aa4fb82deea51e91",
+        "name": "scn1",
+        "title": "scn1",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1695385069,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1695475995245,
+    "read_only": false,
+    "read_only_alternatives": []
+}

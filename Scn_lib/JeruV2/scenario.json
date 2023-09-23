@@ -4,7 +4,7 @@
 	"dir"     : "JeruV2",
 	"tazlyr"  : "TAZ_jer_v2",
 	"tazvar"  : "taz",
-	"tazfile" : "jertaz_model_v2.json",
+	"tazfile" : "jertaz_model_v2.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [
 				[ "2015", 2015, "jerforecasts2020.csv", [ "TAZ", "pop15", "emp15" ] ],

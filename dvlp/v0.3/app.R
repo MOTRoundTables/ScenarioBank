@@ -146,40 +146,44 @@ server <- function(input, output, session) {
     output$leaf=renderUI({ leafletOutput("appMap", width = "100%", height = cfg$basemap$height) })
   }
 
-  # check on Select source input list
-  observe({
-    if (input$selectSrc!="") {
-      getsrcscn(input$selectSrc) 
-      updateSelectInput(session, "selectScn",
-                        choices = cfg$scnchoices #,
-                        #label = paste("Select input label", length(x)),
-                        #selected = tail(x, 1)
-      )
-
-      if ((currentsrc!="") & (currentsrc!=input$selectSrc)) { HideCurrentSc() }
-      currentsrc <- input$selectSrc
-      # showmessage(currentsrc) # debug
-    }
-  })
-  
-  # check on Select scenario input list, subject to selectSrc is selected
+  # check on Select source & Select scenario 
   str0 = " "
   observe({
     if (input$selectSrc!="") {
-      if (input$selectScn>0) {
-        showmessage(input$selectScn) # debug
-        #browser()  ######## NEED CHANGE TO PREVIOUS SCN ....
-        if (!is.null(currentscn)) { HideCurrentSc() }  # { HideSc(input$selectScn) }
-        currentscn <<- setScn(input$selectScn) # set scenario  , session
+       if (currentsrc!=input$selectSrc) { 
+         if (currentscnnum>0) { 
+           HideCurrentSc() 
+           currentscn <<- NULL
+           currentscnnum <<- 0
+           refreshmap()
+         }
+         getsrcscn(input$selectSrc) 
+         updateSelectInput(session, "selectScn",
+                           choices = cfg$scnchoices,
+                           selected = character(0)
+         )
+         currentsrc <<- input$selectSrc
+         cat(paste("new SRC: ", currentsrc, "\n")) # debug
+       }
+    }  
+  })
+  
+  observe({
+    if (input$selectScn>0) {
+      if (currentscnnum!=input$selectScn) { # scenario changed
+        if (currentscnnum>0) {  
+          HideCurrentSc() 
+        } # close current sc
+        currentscnnum <<- input$selectScn
+        currentscn <<- setScn(input$selectScn) # set scenario, session
         currentscn$opentazdata()
-        cat(currentscn$name)
-
-        #updateSelectInput(session, "selectSz",
-        #                  choices = cfg$szchoices0
-        #)
-
+        cat(paste("set scn: ", currentscn$name, "\n"))
+        updateSelectInput(session, "selectSz",
+                         choices = cfg$szchoices0,
+                         selected = character(0)
+        )
         refreshmap()
-        str0 <- paste("set scenario:", currentscn$name, sep = " ")
+        str0 <- paste("current scenario:", currentscn$name, sep = " ")
       }
     }
   })
@@ -312,5 +316,6 @@ server <- function(input, output, session) {
 # Run the application 
 shinyApp(ui = ui, server = server)
 
+#      showmessage(input$selectScn) # debug
 
 

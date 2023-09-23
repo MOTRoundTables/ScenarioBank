@@ -8,6 +8,7 @@ scnclass <- R6Class("scnclass",
     public = list(
         ky = NULL,
         name = NULL,
+        num = NULL,
         scn = NULL,
         tazdata = NULL,
         tazdataSSS = NULL,
@@ -16,6 +17,7 @@ scnclass <- R6Class("scnclass",
         self$ky = cfg$scnkeys[as.integer(scnnum)]
         self$scn = cfg$scenarios[[self$ky]]
         self$name = self$scn$name
+        self$num = self$scn$num
       },
       
       opentazdata = function() {

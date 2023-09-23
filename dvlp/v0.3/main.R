@@ -12,7 +12,8 @@ source("scnlib.R")
 
 
 currentsrc <- ""
-currentscn <- NULL #list(name = "not selected")
+currentscnnum <- 0
+currentscn <- NULL
 sss <- 0  # test variable
 
 # - initialize
@@ -44,6 +45,7 @@ initapp <- function() {
   cfg$scnchoices = vector(mode = "list")              # for menu
   for (i in 1:n) {
     ky = cfg$scnkeys[i]
+    cfg$scenarios[[ky]]$num = i                       # save as internal ID
     cfg$scnlist[i] = cfg$scenarios[[ky]]$name         # scn names
     cfg$scnchoices[as.character(cfg$scnlist[i])] = i
     cfg$scenarios[[i]]$dir = paste0(cfg$general$scndir, cfg$scenarios[[i]]$dir, "/")

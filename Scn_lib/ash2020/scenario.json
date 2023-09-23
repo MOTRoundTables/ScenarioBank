@@ -4,7 +4,7 @@
 	"dir"     : "Ash2020",
 	"tazlyr"  : "TAZ_Ash",
 	"tazvar"  : "TAZV41",
-	"tazfile" : "geo/taz_model_v2.shp",
+	"tazfile" : "taz_20200608.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [ 
 				["2040", 2040, "zonal_Bilu_2040.csv", [ "taz", "population", "empl_tot" ] ]

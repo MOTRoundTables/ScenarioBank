@@ -4,7 +4,7 @@
 	"dir"     : "TA2022",
 	"tazlyr"  : "TAZ_v41",
 	"tazvar"  : "TAZV41",
-	"tazfile" : "geo/TAZ_v41.shp",
+	"tazfile" : "TAZ_v41.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [
 				[ "conv",   2050, "TelAvivStrategic2022.csv", [ "taz", "pop_conv", "emp_conv" ] ],

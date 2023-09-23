@@ -4,7 +4,7 @@
 	"dir"     : "TA2016",
 	"tazlyr"  : "TAZ_v41",
 	"tazvar"  : "TAZV41",
-	"tazfile" : "geo/TAZ_v41.geojson",
+	"tazfile" : "TAZ_v41.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [ 
 			["2017", 2017, "zonal2017v42.csv", [ "taz", "population", "empl_tot" ] ],

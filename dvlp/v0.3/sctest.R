@@ -1,56 +1,109 @@
 # View(cfg)
 # Sys.setlocale(locale="hebrew")
-setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/v1")  # for debug
+setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/v0.3")  # for debug
 
 source("main.R")
+source("maplib.R")
+source("scnlib.R")
 
+currentscnnum <<- "7"  # new jer
+currentscn <<- setScn(currentscnnum) # set scenario, session
+currentscn$opentazdata()
+
+alyr = currentscn$getscnlyr()
+i = basemap$lyrnum(alyr)
+lyrdata = basemap$lyrsdata[[i]]
+
+clrs <- sf.colors
+m = mapview(lyrdata, zcol = "DISTRICT", col.regions = clrs, legend = TRUE )
+#m = mapview(lyrdata, zcol = "DISTRICT", col.regions = clrs, burst=TRUE, legend = FALSE)
+m
+
+colors <- mapviewColors(x=lyrdata,
+                        zcol = "DISTRICT", 
+                        colors = c("Red", "Green", "Blue"),
+                        at = c("1","7", "4"))
+m = mapview(lyrdata, zcol = "DISTRICT",col.regions = colors)
+m
+view(lyrdata)
+
+
+basemap$mapview = basemap$mapview + m
+
+basemap$mapview
 
 
 
 basemap$mapview
 basemap$mapview@map
+basemap$displaymap()
 
-source("scnlib.R")
+
+class(basemap$mapview)
 
 
+basemap$mapview(breweries) 
+
+m = basemap$mapview + breweries
+
+
+
+m = basemap$mapview() %>%
+  basemap$mapview(alyr, zcol = "ISPALE")
+
+m = basemap$mapview(alyr, zcol = "ISPALE")
+basemap$mapview <- basemap$mapview + m
+
+myfun <- function(map){
+  addCircles(map,12.5,42,radius=500) %>% addMarkers(12,42,popup="Rome")
+}
+
+mapview()
+
+mymap() %>% myfun() %>% setView(lng = (lngRng[1]+lngRng[2])/2, lat = (latRng[1]+latRng[2])/2, zoom = input$map_zoom)
+
+i = basemap$lyrnum(alyr)
+b = basemap$lyrsdata[[i]]@bbox  # bbox(basemap$lyrsdata[[i]])
+basemap$mapview@map <- basemap$mapview@map %>% 
+  fitBounds(b[1], b[2], b[3], b[4])
+
+mapview(breweries)
+
+basemap$mapview@map(franconia)
+
+mapview(franconia)
+
+breweries  
+  
+  basemap$mapview@map(layer.name = alyr, zcol = "ISPALE")
+
+lyr
+
+lyr %>%
+  basemap$mapview(zcol = "ISPALE")
+
+  basemap$mapview(breweries, zcol = "founded") 
+
+basemap$mapview(layer.name =lyr, zcol = "ISPALE")
+
+basemap$mapview
+
+m = mapview(l1, layer.name = alyr$lyr, legend = FALSE,
+            color = alyr$color, alpha.regions = alyr$fillOpacity,lwd = alyr$weight)
+
+
+
+currentscn$tazdata
 currentscn$tazdata %>%
   summary()
 
 
+# -------------------------------------------
 
-
-currentscn <- setScn(1)
 HideSc(1)
-
-currentscn$opentazdata()
-
-currentscn$tazdata
 
 x = currentscn$tazdata[1]
 view(currentscn$tazdata[2])
-
-n = length(currentscn$scn$files)
-x <- vector(mode="list", length=n)
-#for (i in 1:n) {
-i = 1
-
-  fl = paste("Scn_lib/", currentscn$scn$dir, "/", currentscn$scn$files[[i]][[3]], sep="")        
-  tmp <- fread(fl)  # read_csv(fl)            
-  vars = currentscn$scn$files[[i]][[4]]
-  tmp %>% 
-    select(all_of(vars))
-#}
-
-rm(x)
-view(tmp)
-
-
-  
-  
-rm(x,y)
-x = list(df1, df2, df3,df4)
-y = x %>% reduce(left_join, by='team')
-
 
 
 df1 = currentscn$tazdata[[1]]
@@ -80,7 +133,7 @@ typeof(df1)
 
 
 
-%>%  left_join(df3, by='Q1')
+#%>%  left_join(df3, by='Q1')
 
 
 
@@ -137,5 +190,27 @@ background: DodgerBlue;
 /* Change the text size to 15 pixels. */
 font-size: 15px;
 }"
+
+
+# --------------------------------
+
+n = length(currentscn$scn$files)
+x <- vector(mode="list", length=n)
+#for (i in 1:n) {
+i = 1
+
+fl = paste("Scn_lib/", currentscn$scn$dir, "/", currentscn$scn$files[[i]][[3]], sep="")        
+tmp <- fread(fl)  # read_csv(fl)            
+vars = currentscn$scn$files[[i]][[4]]
+tmp %>% 
+  select(all_of(vars))
+#}
+
+rm(x)
+view(tmp)
+
+rm(x,y)
+x = list(df1, df2, df3,df4)
+y = x %>% reduce(left_join, by='team')
 
 

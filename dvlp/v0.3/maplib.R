@@ -67,7 +67,7 @@ mymap <- R6Class("mymapclass",
 
             setlayerscale = function(alyr) {
               i = self$lyrnum(alyr)
-              b = basemap$lyrsdata[[i]]@bbox  # bbox(basemap$lyrsdata[[i]])
+              b = self$lyrsdata[[i]]@bbox  # bbox(basemap$lyrsdata[[i]])
               self$mapview@map <- self$mapview@map %>% 
                 fitBounds(b[1], b[2], b[3], b[4])
             },

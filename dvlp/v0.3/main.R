@@ -8,7 +8,7 @@ library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.htm
 
 source("maplib.R")
 source("scnlib.R")
-#source("scn_dvlp.R")
+source("scn_dvlp.R")
 
 
 currentsrc <- ""

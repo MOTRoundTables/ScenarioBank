@@ -4,7 +4,7 @@
 	"dir"     : "arzi2010",
 	"tazlyr"  : "arzi_585",
 	"tazvar"  : "TAZ_585",
-	"tazfile" : "arzi_585.geoJson",
+	"tazfile" : "arzi_585.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [ 
 				["2007", 2007, "arzi2010_585.csv", [ "taz", "pop07", "emp07" ] ],

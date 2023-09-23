@@ -32,6 +32,7 @@ scnclass <- R6Class("scnclass",
           # x[[i]] <- fread(fl)  # read_csv(fl) read all vars ...
           tmp <- fread(fl)  # read_csv(fl)            
           vars = currentscn$scn$files[[i]][[4]]
+          vars = vars[ !vars == "None"]
           tmp = tmp %>%   # keep only vars
             select(all_of(vars))
           x[[i]] = tmp %>% rename_all( ~ paste0(currentscn$scn$files[[i]][[1]], "_", .x))

@@ -15,6 +15,21 @@
                 "type": 0,
                 "is_package_breakpoint": false,
                 "package_name": ""
+            },
+            {
+                "id": 6,
+                "path": "~/GitHub/ScenarioBank/dvlp/v0.3/scnlib.R",
+                "line_number": 25,
+                "function_steps": "",
+                "function_name": "opentazdata",
+                "state": 2,
+                "editor_state": 2,
+                "editor_line_number": 25,
+                "is_pending_debug_completion": false,
+                "needs_updated_steps": false,
+                "type": 0,
+                "is_package_breakpoint": false,
+                "package_name": ""
             }
         ]
     }

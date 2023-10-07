@@ -208,14 +208,30 @@
 						[ "2045_JTMT",  2045, "230720_forecast_2045_JTMT.csv",   [ "TAZ_NUM", "pop", "emp_tot" ] ],
 						[ "2050_JTMT",  2050, "230720_forecast_2050_JTMT.csv",   [ "TAZ_NUM", "pop", "emp_tot" ] ]
 					   ]
-			   },		
+			},
+		"BS_v09" : {
+			"name"    : "מודל בארשבע 2023",
+			"source"  : "מודל באר שבע",
+			"dir"     : "BS_v09",
+			"tazlyr"  : "TAZ_BSMA",
+			"tazvar"  : "TAZ_BSMA",
+			"tazfile" : "TAZ_BSMA.geojson",
+			"agvars"  : [ "population", "employment" ],
+			"files"   : [
+						[ "2020", 2020, "BS_V09_230919.csv", [ "TAZ_BSMA_N", "Pop", "Emp" ] ],
+						[ "2025", 2025, "BS_V09_230919.csv", [ "TAZ_BSMA_N", "Pop", "Emp" ] ],
+						[ "2030", 2030, "BS_V09_230919.csv", [ "TAZ_BSMA_N", "Pop", "Emp" ] ],
+						[ "2035", 2035, "BS_V09_230919.csv", [ "TAZ_BSMA_N", "Pop", "Emp" ] ],
+						[ "2040", 2040, "BS_V09_230919.csv", [ "TAZ_BSMA_N", "Pop", "Emp" ] ]                  	  	  	  	  			  	  
+					   ]
+			},
         "Ash2020" : {
             "name"    : "תכנית אסטרטגית תחצ נפת אשקלון 2020",
             "source"  : "תכנית אסטרטגית",
             "dir"     : "Ash2020",
             "tazlyr"  : "TAZ_Ash",
             "tazvar"  : "TAZV41",
-            "tazfile" : "geo/taz_model_v2.shp",
+            "tazfile" : "taz_20200608.geojson",
             "agvars"  : [ "population", "employment" ],
             "files"   : [ 
                         ["2040", 2040, "zonal_Bilu_2040.csv", [ "taz", "population", "empl_tot" ] ]

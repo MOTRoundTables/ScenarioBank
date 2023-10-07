@@ -25,17 +25,21 @@ scnclass <- R6Class("scnclass",
         files = self$scn$files
         n = length(currentscn$scn$files)
 
+        flnew = ""
         joinvar = currentscn$scn$files[[1]][[4]][[1]] 
         x <- vector(mode="list", length=n)
         for (i in 1:n) {
           fl = paste(currentscn$scn$dir, "/", currentscn$scn$files[[i]][[3]], sep="")        
           # x[[i]] <- fread(fl)  # read_csv(fl) read all vars ...
-          tmp <- fread(fl)  # read_csv(fl)            
+          if (fl!=flnew) {
+            tmp <- fread(fl)  # read_csv(fl)            
+            flnew = fl
+          }
           vars = currentscn$scn$files[[i]][[4]]
           vars = vars[ !vars == "None"]
-          tmp = tmp %>%   # keep only vars
+          tmp1 = tmp %>%   # keep only vars
             select(all_of(vars))
-          x[[i]] = tmp %>% rename_all( ~ paste0(currentscn$scn$files[[i]][[1]], "_", .x))
+          x[[i]] = tmp1 %>% rename_all( ~ paste0(currentscn$scn$files[[i]][[1]], "_", .x))
           colnames(x[[i]])[1] <- joinvar
         }
         self$tazdata = x %>% reduce(left_join, by=joinvar)

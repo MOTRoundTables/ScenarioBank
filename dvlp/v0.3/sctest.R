@@ -1,12 +1,13 @@
 # View(cfg)
 # Sys.setlocale(locale="hebrew")
-setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/v0.3")  # for debug
+setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/dvlp/v0.3")  # for debug
 
 source("main.R")
 source("maplib.R")
 source("scnlib.R")
 
-currentscnnum <<- "7"  # new jer
+#currentscnnum <<- "7"  # new jer
+currentscnnum <<- "8"  # BS
 currentscn <<- setScn(currentscnnum) # set scenario, session
 currentscn$opentazdata()
 

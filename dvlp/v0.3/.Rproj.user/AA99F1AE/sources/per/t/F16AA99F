@@ -3,7 +3,7 @@
     "path": "~/GitHub/ScenarioBank/dvlp/v0.3/app.R",
     "project_path": "app.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "1116219763",
     "contents": "",
     "dirty": false,
     "created": 1695546263507.0,
@@ -12,8 +12,8 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "164,32",
-        "scrollLine": "154"
+        "cursorPosition": "163,12",
+        "scrollLine": "150"
     },
     "folds": "",
     "lastKnownWriteTime": 1696660146,

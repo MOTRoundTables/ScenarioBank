@@ -10,6 +10,7 @@ scnclass <- R6Class("scnclass",
         name = NULL,
         num = NULL,
         scn = NULL,
+        geolyr = NULL,
         tazdata = NULL,
         tazdataSSS = NULL,
       
@@ -20,11 +21,54 @@ scnclass <- R6Class("scnclass",
         self$num = self$scn$num
       },
       
+      getscnlyr = function() {
+        return(self$scn$tazlyr)
+      },
+
+      getagvars = function() {
+        return(self$scn$agvars)
+      },
+
+      getgeolyr = function() {
+        if (is.null(self$geolyr)) {
+          url = paste(scn$dir, scn$tazfile, sep="")
+          self$geolyr <- geojson_read(url, what = "sp")   # at this stage only support geojson
+        }
+        return(self$self$geolyr)
+      },
+      
+      scn2lyr = function() {
+        scn = self$scn # cfg$scenarios[[self$ky]]
+        if (is.null(scn$tazname)) { scn$tazname = scn$tazlyr }  # can define optional tazname
+
+        scnlyr <- list(
+          lyr = self$getscnlyr(),        # the code of the layer
+          name = scn$tazname,  
+          zvar = scn$tazvar, 
+          zname = "NA", 
+          #file = scn$tazfile,
+          group = "forecasts",  # "שכבות תחזיות",
+          pane = "other", 
+          color = "#FF0000",
+          weight = 2,
+          fillOpacity = 0,
+          popupcontent = "NA", #"'שכבת נפות<br>'+'מספר נפה =' + feature.properties.NafaNum + ' <br> שם נפה ='+feature.properties.Nafa",
+          type  = "a", 
+          initialstatus = 1,  # display
+          status = 0
+        )
+        
+        temp = list(scnlyr)
+        temp = temp %>% 
+          map_df(as_tibble)
+        return(temp)
+      },
+      
       opentazdata = function() {
         #browser()
         files = self$scn$files
         n = length(currentscn$scn$files)
-
+        
         flnew = ""
         joinvar = currentscn$scn$files[[1]][[4]][[1]] 
         x <- vector(mode="list", length=n)
@@ -44,44 +88,7 @@ scnclass <- R6Class("scnclass",
         }
         self$tazdata = x %>% reduce(left_join, by=joinvar)
         self$tazdataSSS = x 
-      },
-
-      getscnlyr = function() {
-        return(self$scn$tazlyr)
-      },
-
-      getagvars = function() {
-        return(self$scn$agvars)
-      },
-      
-      scn2lyr = function() {
-        scn = self$scn # cfg$scenarios[[self$ky]]
-        if (is.null(scn$tazname)) { scn$tazname = scn$tazlyr }  # can define optional tazname
-        
-        scnlyr <- list(
-          lyr = self$getscnlyr(),        # the code of the layer
-          name = scn$tazname,  
-          zvar = scn$tazvar, 
-          zname = "NA", 
-          file = scn$tazfile,
-          group = "forecasts",  # "שכבות תחזיות",
-          url = paste(scn$dir, scn$tazfile, sep=""),
-          pane = "other", 
-          color = "#FF0000",
-          weight = 2,
-          fillOpacity = 0,
-          popupcontent = "NA", #"'שכבת נפות<br>'+'מספר נפה =' + feature.properties.NafaNum + ' <br> שם נפה ='+feature.properties.Nafa",
-          type  = "a", 
-          initialstatus = 1,  # display
-          status = 0
-        )
-        
-        temp = list(scnlyr)
-        temp = temp %>% 
-          map_df(as_tibble)
-        return(temp)
       }
-      
       
   )
 ) # end mymap class

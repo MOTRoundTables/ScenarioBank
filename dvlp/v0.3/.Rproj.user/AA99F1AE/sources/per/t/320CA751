@@ -1,0 +1,28 @@
+{
+    "id": "320CA751",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1696673035731.0,
+    "source_on_save": false,
+    "relative_order": 13,
+    "properties": {
+        "id": "2594badb52274d079c254aae0a96253d",
+        "name": "basemap",
+        "title": "basemap",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 7018404057511386417,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1696673035731,
+    "read_only": false,
+    "read_only_alternatives": []
+}

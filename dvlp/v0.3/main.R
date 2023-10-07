@@ -118,9 +118,11 @@ setScn <- function(scnnum) {   # , session
   # browser()
   # ky = cfg$scnkeys[as.integer(scnnum)]
   
-  temp = scn1$scn2lyr()   # scn2lyr(cfg$scenarios[[ky]])
-  basemap$addlayers(temp)  #, session
-  basemap$setlayerscale(temp$lyr)
+  basemap$addscn(scn1)  #, session
+  
+  #temp = scn1$scn2lyr()   # scn2lyr(cfg$scenarios[[ky]])
+  #basemap$addlayer(temp)  #, session
+  #basemap$setlayerscale(temp$lyr)
   return(scn1)  # cfg$scenarios[[scn1$ky]])
   }
 ############  basemap$lyrs <<- bind_rows(basemap$lyrs, temp) # view(basemap$lyrs)

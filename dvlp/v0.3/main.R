@@ -1,5 +1,6 @@
 #Sys.setlocale(locale="hebrew")
 
+
 library(tidyverse)
 #library(tidyjson)
 library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.html
@@ -8,6 +9,7 @@ library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.htm
 
 source("maplib.R")
 source("scnlib.R")
+source("utillib.R")
 source("scn_dvlp.R")
 
 
@@ -15,6 +17,8 @@ currentsrc <- ""
 currentscnnum <- 0
 currentscn <- NULL
 sss <- 0  # test variable
+
+scnsummary <- NULL
 
 # - initialize
 initapp <- function() {
@@ -75,7 +79,6 @@ initapp <- function() {
   #cfg$szlyrs['name'] <- ""
   cfg$szlyrs['status'] <- 0                        # lyrs %>% add_column(status = 0)  # NA
 
-
   cfg$szchoices0 = vector(mode = "list")  
   cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
   
@@ -87,7 +90,7 @@ initapp <- function() {
 cfg <- initapp()
 basemap = mymap$new()
 basemap$createmap(cfg$basemap)
-basemap$addlayers(cfg$szlyrs)
+#basemap$addlayers(cfg$szlyrs)
 basemap$resetmapview(cfg$basemap)
 
 # basemap$mapview

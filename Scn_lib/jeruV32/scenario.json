@@ -3,14 +3,14 @@
 	"source"  : "מודל ירושלים",
 	"dir"     : "jeruV32",
 	"tazlyr"  : "TAZ_jer_v32",
-	"tazvar"  : "taz",
+	"tazvar"  : "TAZ",
 	"tazfile" : "jer_v32.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [
-				[ "2020", 2020, "jerforecastsv32.csv", [ "TAZ", "pop20", "emp20" ] ],
-				[ "2025", 2025, "jerforecastsv32.csv", [ "TAZ", "pop25", "emp25" ] ],
-				[ "2030", 2030, "jerforecastsv32.csv", [ "TAZ", "pop30", "emp30" ] ],
-				[ "2035", 2035, "jerforecastsv32.csv", [ "TAZ", "pop35", "emp35" ] ],
-				[ "2040", 2040, "jerforecastsv32.csv", [ "TAZ", "pop40", "emp40" ] ]                  	  	  	  	  			  	  
+				[ "2020", 2020, "jerforecastsv32.csv", [ "taz", "pop20", "emp20" ] ],
+				[ "2025", 2025, "jerforecastsv32.csv", [ "taz", "pop25", "emp25" ] ],
+				[ "2030", 2030, "jerforecastsv32.csv", [ "taz", "pop30", "emp30" ] ],
+				[ "2035", 2035, "jerforecastsv32.csv", [ "taz", "pop35", "emp35" ] ],
+				[ "2040", 2040, "jerforecastsv32.csv", [ "taz", "pop40", "emp40" ] ]                  	  	  	  	  			  	  
 			   ]
 }

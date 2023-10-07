@@ -1,3 +1,6 @@
+
+
+
 # View(cfg)
 # Sys.setlocale(locale="hebrew")
 setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/v0.3")  # for debug
@@ -14,6 +17,18 @@ alyr = currentscn$getscnlyr()
 i = basemap$lyrnum(alyr)
 lyrdata = basemap$lyrsdata[[i]]
 
+yourDF <- as.data.frame(lyrdata)
+
+m = mapview(lyrdata, zcol = "DISTRICT", col.regions = clrs, legend = TRUE )
+m
+
+lyrdata %>%
+  mutate(dist = as.character("DISTRICT")) %>%
+  mapview(zcol = "dist", legend = TRUE)
+
+class(lyrdata)
+
+
 clrs <- sf.colors
 m = mapview(lyrdata, zcol = "DISTRICT", col.regions = clrs, legend = TRUE )
 #m = mapview(lyrdata, zcol = "DISTRICT", col.regions = clrs, burst=TRUE, legend = FALSE)
@@ -26,6 +41,7 @@ colors <- mapviewColors(x=lyrdata,
 m = mapview(lyrdata, zcol = "DISTRICT",col.regions = colors)
 m
 view(lyrdata)
+
 
 
 basemap$mapview = basemap$mapview + m

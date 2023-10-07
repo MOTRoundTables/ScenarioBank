@@ -11,140 +11,140 @@ library(geojson)
 library(geojsonio)
 
 mymap <- R6Class("mymapclass",
-        public = list(
-            name = NULL,
-            mapview = NULL,
-            lyrs = NULL,         # a dataframe of the layers in the map "lyr" is the layer name
-            lyrsdata = NULL,
-            loadedlayers = 0,
-                 
-            # - creates map with mapview()
-            createmap = function(mapproperties) {
-                #browser()
+    public = list(
+        name = NULL,
+        mapview = NULL,
+        lyrs = NULL,     # a dataframe of the layers in the map "lyr" is the layer name
+        lyrsdata = NULL,
+        loadedlayers = 0,
+             
+        # - creates map with mapview()
+        createmap = function(mapproperties) {
+            #browser()
 
-                self$name = mapproperties$mapname
-                mapviewOptions(basemaps = c("CartoDB.Positron", "CartoDB.Voyager"))
+            self$name = mapproperties$mapname
+            mapviewOptions(basemaps = c("CartoDB.Positron", "CartoDB.Voyager"))
 
-                self$mapview = mapview()
-                
-                #self$mapview@map <- self$mapview@map %>% 
-                #   setView(lng = mapproperties$initial_lon, lat = mapproperties$initial_lat, zoom = mapproperties$initial_zm)   
-                   
-                self$mapview@map <- self$mapview@map %>%
-                   addMapPane("back", zIndex = 500) %>%
-                   addMapPane("other", zIndex = 1000) %>%
-                   addMapPane("front", zIndex = 1500)
-                   
-                #self$mapview@map <- self$mapview@map %>% addLayersControl(
-                #    baseGroups = c("CartoDB.Positron", "CartoDB.Voyager"),
-                #    options = layersControlOptions(collapsed = FALSE)
-                #)
-            },
+            self$mapview = mapview()
             
-            resetmapview = function(mapproperties) {
-              self$mapview@map <- self$mapview@map %>% 
-                setView(lng = mapproperties$initial_lon, lat = mapproperties$initial_lat, zoom = mapproperties$initial_zm)   
-            },
+            #self$mapview@map <- self$mapview@map %>% 
+            #   setView(lng = mapproperties$initial_lon, lat = mapproperties$initial_lat, zoom = mapproperties$initial_zm)   
+               
+            self$mapview@map <- self$mapview@map  %>%
+               addMapPane("back",  zIndex = 500 ) %>%
+               addMapPane("other", zIndex = 1000) %>%
+               addMapPane("front", zIndex = 1500)
+               
+            #self$mapview@map <- self$mapview@map %>% addLayersControl(
+            #    baseGroups = c("CartoDB.Positron", "CartoDB.Voyager"),
+            #    options = layersControlOptions(collapsed = FALSE)
+            #)
+        },
+        
+        resetmapview = function(mapproperties) { # set initial view
+          self$mapview@map <- self$mapview@map %>% 
+            setView(lng = mapproperties$initial_lon, lat = mapproperties$initial_lat, zoom = mapproperties$initial_zm)   
+        },
 
-            getnumloadedlayers = function() {
-              print(self$loadedlayers)
-            },
+        getnumloadedlayers = function() {
+          print(self$loadedlayers)
+        },
+        
+        displaymap = function() {
+          #m <- self$mapview@map
+          return(self$mapview@map)
+        },
+
+        # - layer functions
+        
+        lyrnum = function(alyr) {  
+          i <- which(self$lyrs$lyr == alyr)
+          if (length(i)==0) {  # showmessage("bad layer code")
+            i = 0 
+          }
+          return(i)
+        },
+
+        setlayerscale = function(alyr) {
+          i = self$lyrnum(alyr)
+          b = self$lyrsdata[[i]]@bbox  # bbox(basemap$lyrsdata[[i]])
+          self$mapview@map <- self$mapview@map %>% 
+            fitBounds(b[1], b[2], b[3], b[4])
+        },
+
+        loadlyr = function(alyr) {  # alyr is a DF of lyr attributes
+          #browser()
+          
+          cat(paste(alyr$lyr, "\n", alyr$url, "\n", sep=""))
+
+          l1 <- geojson_read(alyr$url, what = "sp")   # at this stage only support geojson
+          m = mapview(l1, layer.name = alyr$lyr, legend = FALSE,
+                      color = alyr$color, alpha.regions = alyr$fillOpacity,lwd = alyr$weight)
+          
+          if (self$loadedlayers == 0) {
+            self$mapview <- m
+          } else {
+            self$mapview <- self$mapview + m
+          }
+          self$loadedlayers = self$loadedlayers + 1
+          return(list("name" = alyr$lyr, "data" = l1))
+        },
+
+        hidelyr = function(alyr) { 
+          self$mapview@map <- self$mapview@map %>% hideGroup(alyr)
+        },
+
+        showlyr = function(alyr) { 
+          self$mapview@map <- self$mapview@map %>% showGroup(alyr)
+        },
+
+        # ------------------------------------------------------------
+        # add layers - set a lyrs is a df with initialstatus : 0 do not load, 1 load&display, 2 load&no display
+        # status 1 = loaded
+        addlayers = function(lyrs) { # view(basemap$lyrs)
+          #browser()
+
+          if (is.null(self$lyrs)) {
+            self$lyrs <- lyrs
+            self$lyrsdata <- vector(mode = "list", length = nrow(lyrs))
+            nstrt = 1
+            nend = nrow(self$lyrs)
+            load = 1
+          } else {  
+            i = self$lyrnum(lyrs[1,]$lyr) # assume one at a time ...
+            if (i==0) { # new layer
+              self$lyrs <<- bind_rows(self$lyrs, lyrs) # append
+              nstrt = nrow(self$lyrs)
+              nend = nrow(self$lyrs)
+              load = 1
+            } else {
+              load = 0
+            }
             
-            displaymap = function() {
-              #m <- self$mapview@map
-              return(self$mapview@map)
-            },
-
-            # - layer functions
-            
-            lyrnum = function(alyr) {  
-              i <- which(self$lyrs$lyr == alyr)
-              if (length(i)==0) {  # showmessage("bad layer code")
-                i = 0 
-              }
-              return(i)
-            },
-
-            setlayerscale = function(alyr) {
-              i = self$lyrnum(alyr)
-              b = self$lyrsdata[[i]]@bbox  # bbox(basemap$lyrsdata[[i]])
-              self$mapview@map <- self$mapview@map %>% 
-                fitBounds(b[1], b[2], b[3], b[4])
-            },
-
-            loadlyr = function(alyr) {  # alyr is a DF of lyr attributes
-              #browser()
-              
-              cat(paste(alyr$lyr, "\n", alyr$url, "\n", sep=""))
-
-              l1 <- geojson_read(alyr$url, what = "sp")   # at this stage only support geojson
-              m = mapview(l1, layer.name = alyr$lyr, legend = FALSE,
-                          color = alyr$color, alpha.regions = alyr$fillOpacity,lwd = alyr$weight)
-              
-              if (self$loadedlayers == 0) {
-                self$mapview <- m
-              } else {
-                self$mapview <- self$mapview + m
-              }
-              self$loadedlayers = self$loadedlayers + 1
-              return(list("name" = alyr$lyr, "data" = l1))
-            },
-
-            hidelyr = function(alyr) { 
-              self$mapview@map <- self$mapview@map %>% hideGroup(alyr)
-            },
-
-            showlyr = function(alyr) { 
-              self$mapview@map <- self$mapview@map %>% showGroup(alyr)
-            },
-
-            # ------------------------------------------------------------
-            # add layers - set a lyrs is a df with initialstatus : 0 do not load, 1 load&display, 2 load&no display
-            # status 1 = loaded
-            addlayers = function(lyrs) { # view(basemap$lyrs)
-              #browser()
-
-              if (is.null(self$lyrs)) {
-                self$lyrs <- lyrs
-                self$lyrsdata <- vector(mode = "list", length = nrow(lyrs))
-                nstrt = 1
-                nend = nrow(self$lyrs)
-                load = 1
-              } else {  
-                i = self$lyrnum(lyrs[1,]$lyr) # assume one at a time ...
-                if (i==0) { # new layer
-                  self$lyrs <<- bind_rows(self$lyrs, lyrs) # append
-                  nstrt = nrow(self$lyrs)
-                  nend = nrow(self$lyrs)
-                  load = 1
-                } else {
-                  load = 0
-                }
-                
-              }
-              
-              # add layers
-              if (load) {
-                for (i in nstrt:nend) {       # for-loop over rows
-                  if (self$lyrs$initialstatus[i]>0) {
-                    result = self$loadlyr(self$lyrs[i,])  #  Load the layer to the map
-                    #self$lyrs$name[i] = result$name
-                    self$lyrs$status[i] = 1
-                    self$lyrsdata[[i]] = result$data
-                    if (self$lyrs$initialstatus[i] == 2) { self$hidelyr(self$lyrs$lyr[i]) }
-                  }
-                }
-              } else  {  # display existing layer
-                self$showlyr(self$lyrs[i,]$lyr)
+          }
+          
+          # add layers
+          if (load) {
+            for (i in nstrt:nend) {       # for-loop over rows
+              if (self$lyrs$initialstatus[i]>0) {
+                result = self$loadlyr(self$lyrs[i,])  #  Load the layer to the map
+                #self$lyrs$name[i] = result$name
                 self$lyrs$status[i] = 1
+                self$lyrsdata[[i]] = result$data
+                if (self$lyrs$initialstatus[i] == 2) { self$hidelyr(self$lyrs$lyr[i]) }
               }
+            }
+          } else  {  # display existing layer
+            self$showlyr(self$lyrs[i,]$lyr)
+            self$lyrs$status[i] = 1
+          }
 
-            },
-            
-            addlayersfromurl = function(url) {
-              lyrs = fromJSON(url) %>% as.data.frame      # View(basemap$lyrs)
-              #addlayers(map, lyrs) 
-            }  
+        },
+        
+        addlayersfromurl = function(url) {
+          lyrs = fromJSON(url) %>% as.data.frame      # View(basemap$lyrs)
+          #addlayers(map, lyrs) 
+        }  
             
       ) # end public
 ) # end mymap class
@@ -185,24 +185,6 @@ test3 <- function(amap, session) {
     addMarkers(lng=34.5, lat=31.4, popup="<b>Hello</b>")      
   m %>%
     addMarkers(lng=34.5, lat=32.4, popup="<b>Hello1</b>")      
-}
-
-
-
-# = dialog functions =========================================
-
-showmessage <- function(msg) {
-  showNotification(
-    msg,
-    duration = NA,   # or set seconds
-    closeButton = TRUE,
-    type = "message"  # "default", "message", "warning", "error", NULL
-  )
-}  
-
-showmodalmessage <- function(ttl, msg) {
-  showModal(modalDialog(
-  title = ttl, msg ))
 }
 
 

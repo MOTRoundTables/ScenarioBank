@@ -7,9 +7,9 @@
 	"tazfile" : "TAZ_North.geojson",
 	"agvars"  : [ "population", "employment" ],
 	"files"   : [
-				[ "base", 2017, "2017.csv",     [ "TAZ", "population", "workplace" ] ],
-				[ "Max",  2040, "2040_max.csv", [ "TAZ", "population", "workplace" ] ],
-				[ "Reg",  2050, "2050_reg.csv", [ "TAZ", "population", "workplace" ] ],
-				[ "Max",  2050, "2050_max.csv", [ "TAZ", "population", "workplace" ] ]                  	  	  	  	  			  	  
+				[ "base", 2017, "YN2019.csv", [ "TAZ", "population", "workplace" ] ],
+				[ "Max",  2040, "YN2019.csv", [ "TAZ", "population", "workplace" ] ],
+				[ "Reg",  2050, "YN2019.csv", [ "TAZ", "population", "workplace" ] ],
+				[ "Max",  2050, "YN2019.csv", [ "TAZ", "population", "workplace" ] ]                  	  	  	  	  			  	  
 			   ]
 }

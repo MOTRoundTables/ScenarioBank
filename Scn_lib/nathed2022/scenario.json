@@ -5,10 +5,10 @@
 	"tazlyr"  : "TAZ_NatHed",
 	"tazvar"  : "TAZ_1046",
 	"tazfile" : "arzi_nat_hed.geojson",
-	"agvars"  : [ "population", "employment" ],
-	"files"   : [ 
-				["Megamot", 2050, "nathed2022_forecast2050.csv", [ "NEW_TAZ_1046", "POP_2050_B", "EMP_2050_B" ] ],
-				["Mokdit",  2050, "nathed2022_forecast2050.csv", [ "NEW_TAZ_1046", "POP_2050_M", "EMP_2050_M" ] ],
-				["Hafrada", 2050, "nathed2022_forecast2050.csv", [ "NEW_TAZ_1046", "POP_2050_H", "EMP_2050_H" ] ]
-				]
+	"file"    : "nathed2022_forecast2050.csv",
+	"dict"    : {
+				"taz"       : "NEW_TAZ_1046",
+				"population": "pop",
+				"employment": "emp"
+				}
 }

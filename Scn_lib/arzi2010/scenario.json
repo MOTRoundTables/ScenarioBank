@@ -5,10 +5,10 @@
 	"tazlyr"  : "arzi_585",
 	"tazvar"  : "TAZ_585",
 	"tazfile" : "arzi_585.geojson",
-	"agvars"  : [ "population", "employment" ],
-	"files"   : [ 
-				["2007", 2007, "arzi2010_585.csv", [ "taz", "pop07", "emp07" ] ],
-				["2030", 2030, "arzi2010_585.csv", [ "taz", "pop30", "emp30" ] ], 
-				["2040", 2040, "arzi2010_585.csv", [ "taz", "pop40", "emp40" ] ]
-				]
+	"file"    : "arzi2010_585.csv",
+	"dict"    : {
+				"taz"       : "taz",
+				"population": "pop",
+				"employment": "emp"
+				}	
 }

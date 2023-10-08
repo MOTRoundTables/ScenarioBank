@@ -4,9 +4,10 @@
 	"dir"     : "ash2020",
 	"tazlyr"  : "TAZ_Ash",
 	"tazvar"  : "TAZV41",
-	"tazfile" : "taz_20200608.geojson",
-	"agvars"  : [ "population", "employment" ],
-	"files"   : [ 
-				["2040", 2040, "zonal_Bilu_2040.csv", [ "taz", "population", "empl_tot" ] ]
-				]
+	"file"    : "zonal_Bilu_2040.csv",
+	"dict"    : {
+				"taz"       : "taz",
+				"population": "population",
+				"employment": "empl_tot"
+				}	
 }

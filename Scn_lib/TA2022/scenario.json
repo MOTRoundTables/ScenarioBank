@@ -5,11 +5,12 @@
 	"tazlyr"  : "TAZ_v41",
 	"tazvar"  : "TAZV41",
 	"tazfile" : "TAZ_v41.geojson",
-	"agvars"  : [ "population", "employment" ],
-	"files"   : [
-				[ "conv",   2050, "TelAvivStrategic2022.csv", [ "taz", "pop_conv", "emp_conv" ] ],
-				[ "trends", 2050, "TelAvivStrategic2022.csv", [ "taz", "pop_trends", "emp_trends" ] ],
-				[ "focus",  2050, "TelAvivStrategic2022.csv", [ "taz", "pop_focus", "emp_focus" ] ],
-				[ "tama70", 2050, "TelAvivStrategic2022.csv", [ "taz", "pop_tama70", "emp_tama70" ] ]                  	  	  	  	  			  	  
-				]
+	"file"    : "TelAvivStrategic2022_lvl1.csv",
+	"dict"    : {
+				"taz"       : "taz",
+				"population": "pop",
+				"employment": "emp"
+				}	
 }
+
+

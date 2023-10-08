@@ -4,17 +4,27 @@ dfEmp
 dfEmpAdr <- data.frame(EmployeeID = c(3, 2, 4),  Company = c("Monmax", "Heilig-Meyers", "MegaSolutions"))  
 dfEmpAdr
 
-d1 = merge(x = dfEmp, y = dfEmpAdr,   
-      by.x = "EmpId", by.y = "EmployeeID", all = FALSE) 
-d1
-
-
-
 d2 =  dfEmp %>% left_join(dfEmpAdr, by = c('EmpId' = 'EmployeeID'))
 d2
 
 a = "EmpId"
 b = "EmployeeID"
+d3 = dfEmp %>% left_join(dfEmpAdr, by = setNames(b,a))
+d3
+setNames(b,a)
+
+d3 =  dfEmpAdr %>% left_join(dfEmp,by = setNames(a,b))
+d3
+
+
+d3 = dfEmp %>% left_join(dfEmpAdr,by = setNames(a,b))
+
+
+
+d1 = merge(x = dfEmp, y = dfEmpAdr,   
+           by.x = "EmpId", by.y = "EmployeeID", all.x=TRUE) 
+d1
+
 d4  = left_join(dfEmp, dfEmpAdr, by = c("{{a}}=={{b}}"))
 {{a}}
  x = {{a}}+"=="+{{b}}

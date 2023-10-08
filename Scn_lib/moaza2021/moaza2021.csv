@@ -1,17 +1,673 @@
-NafaCode,NafaName,low_trnd_2020,low_trnd_2025,low_trnd_2030,low_trnd_2035,low_trnd_2040,low_trnd_2045,low_trnd_2050,low_diur_2020,low_diur_2025,low_diur_2030,low_diur_2035,low_diur_2040,low_diur_2045,low_diur_2050,medium_trnd_2020,medium_trnd_2025,medium_trnd_2030,medium_trnd_2035,medium_trnd_2040,medium_trnd_2045,medium_trnd_2050,medium_diur_2020,medium_diur_2025,medium_diur_2030,medium_diur_2035,medium_diur_2040,medium_diur_2045,medium_diur_2050,high_trnd_2020,high_trnd_2025,high_trnd_2030,high_trnd_2035,high_trnd_2040,high_trnd_2045,high_trnd_2050,high_diur_2020,high_diur_2025,high_diur_2030,high_diur_2035,high_diur_2040,high_diur_2045,high_diur_2050
-5,Acco Nafa,661824.684,701230.8469,738867.2506,770809.1296,797902.1031,821529.6026,839578.7427,661824.684,708126.4786,758226.8453,794971.619,840516.7329,888347.9015,938271.7914,661824.684,708904.1898,756634.2681,800698.7882,842081.0237,882729.4899,921056.3229,661824.684,714213.8691,773460.1631,820985.9901,880994.2397,943378.9104,1012271.292,661824.684,716332.5692,773852.6534,829833.6325,885352.0705,943320.4752,1002919.01,661824.684,720781.4018,789082.4641,847380.8358,921081.6655,1001609.298,1094384.457
-12,Ashkelon Nafa,572732.2345,618510.0015,669384.5191,718879.3117,773314.3424,831729.7898,889181.5393,572732.2345,629136.7903,697167.2326,764836.0272,837028.9641,912079.8337,979473.175,572732.2345,627494.4137,690779.6326,756696.3858,832853.7294,920459.2588,1017922.658,572732.2345,638577.2724,720179.062,806362.3503,902933.8421,1013374.337,1128241.974,572732.2345,636341.127,711887.4439,793516.0356,891202.0632,1009631.495,1150408.216,572732.2345,647543.2968,742430.835,846268.3601,967242.9456,1112870.495,1276882.922
-13,Beer Sheva Nafa,790578.4623,876157.9736,968711.1218,1061478.667,1158137.565,1258430.1,1357836.616,790578.4623,889041.1627,1012069.536,1109639.286,1201570.087,1300707.857,1389582.073,790578.4623,889491.8224,1000697.907,1117917.622,1247034.619,1391528.381,1550799.141,790578.4623,902663.021,1046329.942,1170377.203,1296892.624,1436026.547,1578925.659,790578.4623,902625.9261,1032403.707,1173850.67,1335476.527,1526327.029,1750403.208,790578.4623,916354.9264,1080637.351,1231131.723,1392433.858,1579050.407,1786326.724
-6,Golan Nafa,52994.82367,55350.32237,57414.9251,59241.71118,60874.34183,62371.1735,63490.63935,52994.82367,55651.12308,58562.04656,61244.20666,65335.60686,70176.23921,75284.12803,52994.82367,55892.35797,58698.09983,61439.61331,64151.54596,66891.25599,69430.90459,52994.82367,56193.53721,59813.96462,63378.55324,68643.70732,75037.13242,82020.79121,52994.82367,56419.71174,59946.36629,63585.31064,67370.28815,71380.3039,75413.96274,52994.82367,56723.97513,61043.94708,65481.36633,71895.85547,79838.35576,88932.32038
-8,Hadera Nafa,479320.5491,522326.8664,564617.126,603970.0176,642879.6564,681891.3536,718329.03,479320.5491,518850.4667,561450.4557,623515.2672,689280.7571,761284.2571,830635.2305,479320.5491,528328.9402,579130.7375,629649.7308,682888.8306,740174.7291,800219.6645,479320.5491,524692.5812,575459.0628,649043.5029,730853.2436,823708.3177,920347.2604,479320.5491,534188.1249,593341.7991,654767.9923,722217.6685,798411.9112,883615.585,479320.5491,530706.3736,589716.5147,674846.8593,772548.3328,889020.1838,1017751.357
-7,Haifa Nafa,596285.0461,623135.4757,656004.1869,685690.6656,719675.0068,756503.2588,791850.0795,596285.0461,631883.311,676506.8071,716661.9231,764999.5626,809183.2051,848299.219,596285.0461,631225.6539,674435.4696,716890.8791,767196.828,825430.5622,889422.7056,596285.0461,638041.0194,691813.9362,744319.2896,809775.3354,878947.5269,950945.8444,596285.0461,639049.2308,692328.9037,747045.6239,813537.8395,894147.1385,988809.3411,596285.0461,644007.1688,706558.5606,770591.6997,852653.8201,946218.2822,1052754.203
-4,Izrael Nafa,539292.144,574629.0844,609869.9216,641320.012,670890.2843,699729.3888,725683.7026,539292.144,574287.9572,611573.3368,644003.3012,680048.4617,721595.7237,762121.6181,539292.144,581519.2259,626075.1343,669134.3767,713151.9859,760315.2634,809709.5946,539292.144,580240.0247,626132.3338,669203.1148,719485.8843,777018.3059,839255.3391,539292.144,588230.1333,641890.9161,696305.0059,754664.0191,820801.7986,895257.0852,539292.144,586636.0942,641132.859,694779.7443,758812.8199,835311.6672,923325.9799
-2,Jerusalem District,1186916.524,1312830.415,1445694.494,1576863.261,1709749.64,1840794.041,1960764.948,1186916.524,1300488.557,1407192.759,1505505.053,1586603.323,1675695.507,1752598.23,1186916.524,1335557.03,1499727.795,1672305.264,1858599.683,2059338.341,2271876.502,1186916.524,1324743.052,1463643.512,1603335.898,1735442.408,1880266.527,2034429.581,1186916.524,1358186.298,1553546.559,1766197.967,2005696.788,2280485.612,2593845.422,1186916.524,1348627.716,1519615.017,1699448.549,1882275.168,2088407.911,2324213.106
-3,Kinneret Nafa,114584.6512,125932.0886,138556.8239,151396.2162,165244.1131,180286.8964,195706.5015,114584.6512,124079.9496,137429.0494,157311.4129,176818.7301,200890.093,222485.607,114584.6512,127641.974,142850.6063,159332.8185,178247.021,200478.082,226156.2366,114584.6512,125785.8825,141682.4565,165510.0455,190676.4889,222854.7443,255647.7026,114584.6512,129321.0124,147078.0465,167080.0264,191022.9126,220817.1784,257605.4766,114584.6512,127453.6831,145885.2136,173578.1244,204392.1707,245133.2437,290076.8134
-14,Petah Tikvah Nafa,791483.9739,867950.0572,946742.2136,1020346.06,1100459.999,1187340.296,1271513.169,791483.9739,849140.2381,912381.2229,973967.8703,1036649.909,1095139.412,1147804.816,791483.9739,880060.5813,975902.1455,1071789.735,1180694.997,1305007.077,1438473.678,791483.9739,861709.023,941228.4503,1023890.625,1112919.519,1209577.313,1312792.225,791483.9739,891940.1737,1004579.403,1121863.282,1259338.942,1422987.436,1609513.873,791483.9739,873675.2093,969203.8585,1071988.17,1187344.26,1322374.977,1477538.677
-10,Ramleh Nafa,364456.0454,388419.5021,413344.1136,437252.2416,463182.2831,490828.5701,516600.8858,364456.0454,377346.7157,391434.2824,406905.3783,426488.5059,447660.7024,468135.5523,364456.0454,393011.5189,424365.2981,456621.9916,493118.7842,534040.887,576719.5435,364456.0454,382334.8356,402725.3773,426007.2095,455070.4571,489707.952,527193.7707,364456.0454,397513.9673,435202.396,475520.1838,522503.0264,577274.5868,638082.0776,364456.0454,387138.1161,413756.6012,444657.6079,483355.3595,532136.0846,588618.1038
-11,Rehovot Nafa,632419.6596,667782.6188,704569.2156,735391.7405,768644.913,804844.1411,839178.6753,632419.6596,665591.8307,707310.2745,748601.166,793804.0329,838076.9659,880646.3193,632419.6596,675698.6183,722959.0493,766534.1227,815294.3621,870497.1234,928232.9605,632419.6596,673291.3079,724501.1936,777656.3266,837680.9513,905512.6705,977179.7629,632419.6596,683386.9696,740877.5445,796684.4021,860830.912,935803.5094,1018489.354,632419.6596,680990.3896,741395.387,805694.0172,880321.4034,969871.6543,1071025.158
-9,Sharon Nafa,495372.2709,531690.0579,569102.543,602626.1124,637122.1055,671916.3659,702461.6515,495372.2709,529427.4027,549760.8318,568709.099,590066.8039,612620.9673,635260.6364,495372.2709,538250.3792,584499.588,628994.9648,677015.2293,728515.1444,779832.3243,495372.2709,535530.4454,563897.2112,592385.3993,625171.2869,663702.6651,706606.8313,495372.2709,544629.7103,599516.8107,654610.1273,716013.4493,784814.8157,858219.7309,495372.2709,541770.8075,578063.2216,615856.0417,660042.5634,715906.1913,781851.2758
-15,Tel Aviv District,1474427.783,1541133.651,1614590.088,1679651.89,1749198.514,1814146.582,1863544.71,1474427.783,1576522.774,1671605.465,1759355.839,1859018.716,1942540.512,2029357.496,1474427.783,1562289.779,1660888.399,1755227.41,1859353.365,1966336.765,2069700.17,1474427.783,1596761.901,1717551.507,1836704.629,1974494.379,2112617.087,2265919.966,1474427.783,1583015.926,1706306.566,1828574.347,1967038.931,2118299.452,2279451.084,1474427.783,1615964.495,1761566.826,1910170.807,2085858.209,2275875.758,2497812.884
-1,Tzfat Nafa,124281.8319,134070.791,145126.1636,156237.8763,168349.1722,181213.5531,193846.5931,124281.8319,133699.2898,146184.6967,158619.8859,171099.9888,183518.3503,193807.9721,124281.8319,136098.1358,150020.6861,164983.569,182211.7785,202128.9065,224629.7257,124281.8319,135924.5477,151523.3696,168162.7803,186106.7302,205783.6342,225906.9461,124281.8319,138104.4284,154868.0109,173523.1831,195831.2901,223226.2037,256455.1808,124281.8319,138045.1823,156724.4818,177401.244,200820.4582,227720.8781,257507.6473
-16,Yehuda and Shomron,459109.1535,529608.0104,605520.4065,684531.7057,768210.4963,853550.5613,934502.9778,459109.1535,507483.7159,549260.2703,591839.2836,634504.3554,677588.1466,710306.5964,459109.1535,539589.6178,631084.2497,732752.7241,846733.0147,972690.8406,1109323.618,459109.1535,520351.9178,578807.5244,643647.0788,713485.6995,789048.4375,865820.803,459109.1535,549647.9843,656813.9595,780277.2496,924518.2952,1094032.105,1291868.827,459109.1535,532514.4573,607627.9488,693959.8896,791536.132,900415.6624,1021355.805
+year,scenario,NafaNum,nafa,proj,housing_adjusted,Total
+2020,high_housing,1,Tzfat Nafa,high,housing,124281.8319
+2020,high_housing,2,Jerusalem District,high,housing,1186916.524
+2020,high_housing,3,Kinneret Nafa,high,housing,114584.6512
+2020,high_housing,4,Izrael Nafa,high,housing,539292.144
+2020,high_housing,5,Acco Nafa,high,housing,661824.684
+2020,high_housing,6,Golan Nafa,high,housing,52994.82367
+2020,high_housing,7,Haifa Nafa,high,housing,596285.0461
+2020,high_housing,8,Hadera Nafa,high,housing,479320.5491
+2020,high_housing,9,Sharon Nafa,high,housing,495372.2709
+2020,high_housing,10,Ramleh Nafa,high,housing,364456.0454
+2020,high_housing,11,Rehovot Nafa,high,housing,632419.6596
+2020,high_housing,12,Ashkelon Nafa,high,housing,572732.2345
+2020,high_housing,13,Beer Sheva Nafa,high,housing,790578.4623
+2020,high_housing,14,Petah Tikvah Nafa,high,housing,791483.9739
+2020,high_housing,15,Tel Aviv District,high,housing,1474427.783
+2020,high_housing,16,Yehuda and Shomron,high,housing,459109.1535
+2020,high_trends,1,Tzfat Nafa,high,trends,124281.8319
+2020,high_trends,2,Jerusalem District,high,trends,1186916.524
+2020,high_trends,3,Kinneret Nafa,high,trends,114584.6512
+2020,high_trends,4,Izrael Nafa,high,trends,539292.144
+2020,high_trends,5,Acco Nafa,high,trends,661824.684
+2020,high_trends,6,Golan Nafa,high,trends,52994.82367
+2020,high_trends,7,Haifa Nafa,high,trends,596285.0461
+2020,high_trends,8,Hadera Nafa,high,trends,479320.5491
+2020,high_trends,9,Sharon Nafa,high,trends,495372.2709
+2020,high_trends,10,Ramleh Nafa,high,trends,364456.0454
+2020,high_trends,11,Rehovot Nafa,high,trends,632419.6596
+2020,high_trends,12,Ashkelon Nafa,high,trends,572732.2345
+2020,high_trends,13,Beer Sheva Nafa,high,trends,790578.4623
+2020,high_trends,14,Petah Tikvah Nafa,high,trends,791483.9739
+2020,high_trends,15,Tel Aviv District,high,trends,1474427.783
+2020,high_trends,16,Yehuda and Shomron,high,trends,459109.1535
+2020,low_housing,1,Tzfat Nafa,low,housing,124281.8319
+2020,low_housing,2,Jerusalem District,low,housing,1186916.524
+2020,low_housing,3,Kinneret Nafa,low,housing,114584.6512
+2020,low_housing,4,Izrael Nafa,low,housing,539292.144
+2020,low_housing,5,Acco Nafa,low,housing,661824.684
+2020,low_housing,6,Golan Nafa,low,housing,52994.82367
+2020,low_housing,7,Haifa Nafa,low,housing,596285.0461
+2020,low_housing,8,Hadera Nafa,low,housing,479320.5491
+2020,low_housing,9,Sharon Nafa,low,housing,495372.2709
+2020,low_housing,10,Ramleh Nafa,low,housing,364456.0454
+2020,low_housing,11,Rehovot Nafa,low,housing,632419.6596
+2020,low_housing,12,Ashkelon Nafa,low,housing,572732.2345
+2020,low_housing,13,Beer Sheva Nafa,low,housing,790578.4623
+2020,low_housing,14,Petah Tikvah Nafa,low,housing,791483.9739
+2020,low_housing,15,Tel Aviv District,low,housing,1474427.783
+2020,low_housing,16,Yehuda and Shomron,low,housing,459109.1535
+2020,low_trends,1,Tzfat Nafa,low,trends,124281.8319
+2020,low_trends,2,Jerusalem District,low,trends,1186916.524
+2020,low_trends,3,Kinneret Nafa,low,trends,114584.6512
+2020,low_trends,4,Izrael Nafa,low,trends,539292.144
+2020,low_trends,5,Acco Nafa,low,trends,661824.684
+2020,low_trends,6,Golan Nafa,low,trends,52994.82367
+2020,low_trends,7,Haifa Nafa,low,trends,596285.0461
+2020,low_trends,8,Hadera Nafa,low,trends,479320.5491
+2020,low_trends,9,Sharon Nafa,low,trends,495372.2709
+2020,low_trends,10,Ramleh Nafa,low,trends,364456.0454
+2020,low_trends,11,Rehovot Nafa,low,trends,632419.6596
+2020,low_trends,12,Ashkelon Nafa,low,trends,572732.2345
+2020,low_trends,13,Beer Sheva Nafa,low,trends,790578.4623
+2020,low_trends,14,Petah Tikvah Nafa,low,trends,791483.9739
+2020,low_trends,15,Tel Aviv District,low,trends,1474427.783
+2020,low_trends,16,Yehuda and Shomron,low,trends,459109.1535
+2020,medium_housing,1,Tzfat Nafa,medium,housing,124281.8319
+2020,medium_housing,2,Jerusalem District,medium,housing,1186916.524
+2020,medium_housing,3,Kinneret Nafa,medium,housing,114584.6512
+2020,medium_housing,4,Izrael Nafa,medium,housing,539292.144
+2020,medium_housing,5,Acco Nafa,medium,housing,661824.684
+2020,medium_housing,6,Golan Nafa,medium,housing,52994.82367
+2020,medium_housing,7,Haifa Nafa,medium,housing,596285.0461
+2020,medium_housing,8,Hadera Nafa,medium,housing,479320.5491
+2020,medium_housing,9,Sharon Nafa,medium,housing,495372.2709
+2020,medium_housing,10,Ramleh Nafa,medium,housing,364456.0454
+2020,medium_housing,11,Rehovot Nafa,medium,housing,632419.6596
+2020,medium_housing,12,Ashkelon Nafa,medium,housing,572732.2345
+2020,medium_housing,13,Beer Sheva Nafa,medium,housing,790578.4623
+2020,medium_housing,14,Petah Tikvah Nafa,medium,housing,791483.9739
+2020,medium_housing,15,Tel Aviv District,medium,housing,1474427.783
+2020,medium_housing,16,Yehuda and Shomron,medium,housing,459109.1535
+2020,medium_trends,1,Tzfat Nafa,medium,trends,124281.8319
+2020,medium_trends,2,Jerusalem District,medium,trends,1186916.524
+2020,medium_trends,3,Kinneret Nafa,medium,trends,114584.6512
+2020,medium_trends,4,Izrael Nafa,medium,trends,539292.144
+2020,medium_trends,5,Acco Nafa,medium,trends,661824.684
+2020,medium_trends,6,Golan Nafa,medium,trends,52994.82367
+2020,medium_trends,7,Haifa Nafa,medium,trends,596285.0461
+2020,medium_trends,8,Hadera Nafa,medium,trends,479320.5491
+2020,medium_trends,9,Sharon Nafa,medium,trends,495372.2709
+2020,medium_trends,10,Ramleh Nafa,medium,trends,364456.0454
+2020,medium_trends,11,Rehovot Nafa,medium,trends,632419.6596
+2020,medium_trends,12,Ashkelon Nafa,medium,trends,572732.2345
+2020,medium_trends,13,Beer Sheva Nafa,medium,trends,790578.4623
+2020,medium_trends,14,Petah Tikvah Nafa,medium,trends,791483.9739
+2020,medium_trends,15,Tel Aviv District,medium,trends,1474427.783
+2020,medium_trends,16,Yehuda and Shomron,medium,trends,459109.1535
+2025,high_housing,1,Tzfat Nafa,high,housing,138045.1823
+2025,high_housing,2,Jerusalem District,high,housing,1348627.716
+2025,high_housing,3,Kinneret Nafa,high,housing,127453.6831
+2025,high_housing,4,Izrael Nafa,high,housing,586636.0942
+2025,high_housing,5,Acco Nafa,high,housing,720781.4018
+2025,high_housing,6,Golan Nafa,high,housing,56723.97513
+2025,high_housing,7,Haifa Nafa,high,housing,644007.1688
+2025,high_housing,8,Hadera Nafa,high,housing,530706.3736
+2025,high_housing,9,Sharon Nafa,high,housing,541770.8075
+2025,high_housing,10,Ramleh Nafa,high,housing,387138.1161
+2025,high_housing,11,Rehovot Nafa,high,housing,680990.3896
+2025,high_housing,12,Ashkelon Nafa,high,housing,647543.2968
+2025,high_housing,13,Beer Sheva Nafa,high,housing,916354.9264
+2025,high_housing,14,Petah Tikvah Nafa,high,housing,873675.2093
+2025,high_housing,15,Tel Aviv District,high,housing,1615964.495
+2025,high_housing,16,Yehuda and Shomron,high,housing,532514.4573
+2025,high_trends,1,Tzfat Nafa,high,trends,138104.4284
+2025,high_trends,2,Jerusalem District,high,trends,1358186.298
+2025,high_trends,3,Kinneret Nafa,high,trends,129321.0124
+2025,high_trends,4,Izrael Nafa,high,trends,588230.1333
+2025,high_trends,5,Acco Nafa,high,trends,716332.5692
+2025,high_trends,6,Golan Nafa,high,trends,56419.71174
+2025,high_trends,7,Haifa Nafa,high,trends,639049.2308
+2025,high_trends,8,Hadera Nafa,high,trends,534188.1249
+2025,high_trends,9,Sharon Nafa,high,trends,544629.7103
+2025,high_trends,10,Ramleh Nafa,high,trends,397513.9673
+2025,high_trends,11,Rehovot Nafa,high,trends,683386.9696
+2025,high_trends,12,Ashkelon Nafa,high,trends,636341.127
+2025,high_trends,13,Beer Sheva Nafa,high,trends,902625.9261
+2025,high_trends,14,Petah Tikvah Nafa,high,trends,891940.1737
+2025,high_trends,15,Tel Aviv District,high,trends,1583015.926
+2025,high_trends,16,Yehuda and Shomron,high,trends,549647.9843
+2025,low_housing,1,Tzfat Nafa,low,housing,133699.2898
+2025,low_housing,2,Jerusalem District,low,housing,1300488.557
+2025,low_housing,3,Kinneret Nafa,low,housing,124079.9496
+2025,low_housing,4,Izrael Nafa,low,housing,574287.9572
+2025,low_housing,5,Acco Nafa,low,housing,708126.4786
+2025,low_housing,6,Golan Nafa,low,housing,55651.12308
+2025,low_housing,7,Haifa Nafa,low,housing,631883.311
+2025,low_housing,8,Hadera Nafa,low,housing,518850.4667
+2025,low_housing,9,Sharon Nafa,low,housing,529427.4027
+2025,low_housing,10,Ramleh Nafa,low,housing,377346.7157
+2025,low_housing,11,Rehovot Nafa,low,housing,665591.8307
+2025,low_housing,12,Ashkelon Nafa,low,housing,629136.7903
+2025,low_housing,13,Beer Sheva Nafa,low,housing,889041.1627
+2025,low_housing,14,Petah Tikvah Nafa,low,housing,849140.2381
+2025,low_housing,15,Tel Aviv District,low,housing,1576522.774
+2025,low_housing,16,Yehuda and Shomron,low,housing,507483.7159
+2025,low_trends,1,Tzfat Nafa,low,trends,134070.791
+2025,low_trends,2,Jerusalem District,low,trends,1312830.415
+2025,low_trends,3,Kinneret Nafa,low,trends,125932.0886
+2025,low_trends,4,Izrael Nafa,low,trends,574629.0844
+2025,low_trends,5,Acco Nafa,low,trends,701230.8469
+2025,low_trends,6,Golan Nafa,low,trends,55350.32237
+2025,low_trends,7,Haifa Nafa,low,trends,623135.4757
+2025,low_trends,8,Hadera Nafa,low,trends,522326.8664
+2025,low_trends,9,Sharon Nafa,low,trends,531690.0579
+2025,low_trends,10,Ramleh Nafa,low,trends,388419.5021
+2025,low_trends,11,Rehovot Nafa,low,trends,667782.6188
+2025,low_trends,12,Ashkelon Nafa,low,trends,618510.0015
+2025,low_trends,13,Beer Sheva Nafa,low,trends,876157.9736
+2025,low_trends,14,Petah Tikvah Nafa,low,trends,867950.0572
+2025,low_trends,15,Tel Aviv District,low,trends,1541133.651
+2025,low_trends,16,Yehuda and Shomron,low,trends,529608.0104
+2025,medium_housing,1,Tzfat Nafa,medium,housing,135924.5477
+2025,medium_housing,2,Jerusalem District,medium,housing,1324743.052
+2025,medium_housing,3,Kinneret Nafa,medium,housing,125785.8825
+2025,medium_housing,4,Izrael Nafa,medium,housing,580240.0247
+2025,medium_housing,5,Acco Nafa,medium,housing,714213.8691
+2025,medium_housing,6,Golan Nafa,medium,housing,56193.53721
+2025,medium_housing,7,Haifa Nafa,medium,housing,638041.0194
+2025,medium_housing,8,Hadera Nafa,medium,housing,524692.5812
+2025,medium_housing,9,Sharon Nafa,medium,housing,535530.4454
+2025,medium_housing,10,Ramleh Nafa,medium,housing,382334.8356
+2025,medium_housing,11,Rehovot Nafa,medium,housing,673291.3079
+2025,medium_housing,12,Ashkelon Nafa,medium,housing,638577.2724
+2025,medium_housing,13,Beer Sheva Nafa,medium,housing,902663.021
+2025,medium_housing,14,Petah Tikvah Nafa,medium,housing,861709.023
+2025,medium_housing,15,Tel Aviv District,medium,housing,1596761.901
+2025,medium_housing,16,Yehuda and Shomron,medium,housing,520351.9178
+2025,medium_trends,1,Tzfat Nafa,medium,trends,136098.1358
+2025,medium_trends,2,Jerusalem District,medium,trends,1335557.03
+2025,medium_trends,3,Kinneret Nafa,medium,trends,127641.974
+2025,medium_trends,4,Izrael Nafa,medium,trends,581519.2259
+2025,medium_trends,5,Acco Nafa,medium,trends,708904.1898
+2025,medium_trends,6,Golan Nafa,medium,trends,55892.35797
+2025,medium_trends,7,Haifa Nafa,medium,trends,631225.6539
+2025,medium_trends,8,Hadera Nafa,medium,trends,528328.9402
+2025,medium_trends,9,Sharon Nafa,medium,trends,538250.3792
+2025,medium_trends,10,Ramleh Nafa,medium,trends,393011.5189
+2025,medium_trends,11,Rehovot Nafa,medium,trends,675698.6183
+2025,medium_trends,12,Ashkelon Nafa,medium,trends,627494.4137
+2025,medium_trends,13,Beer Sheva Nafa,medium,trends,889491.8224
+2025,medium_trends,14,Petah Tikvah Nafa,medium,trends,880060.5813
+2025,medium_trends,15,Tel Aviv District,medium,trends,1562289.779
+2025,medium_trends,16,Yehuda and Shomron,medium,trends,539589.6178
+2030,high_housing,1,Tzfat Nafa,high,housing,156724.4818
+2030,high_housing,2,Jerusalem District,high,housing,1519615.017
+2030,high_housing,3,Kinneret Nafa,high,housing,145885.2136
+2030,high_housing,4,Izrael Nafa,high,housing,641132.859
+2030,high_housing,5,Acco Nafa,high,housing,789082.4641
+2030,high_housing,6,Golan Nafa,high,housing,61043.94708
+2030,high_housing,7,Haifa Nafa,high,housing,706558.5606
+2030,high_housing,8,Hadera Nafa,high,housing,589716.5147
+2030,high_housing,9,Sharon Nafa,high,housing,578063.2216
+2030,high_housing,10,Ramleh Nafa,high,housing,413756.6012
+2030,high_housing,11,Rehovot Nafa,high,housing,741395.387
+2030,high_housing,12,Ashkelon Nafa,high,housing,742430.835
+2030,high_housing,13,Beer Sheva Nafa,high,housing,1080637.351
+2030,high_housing,14,Petah Tikvah Nafa,high,housing,969203.8585
+2030,high_housing,15,Tel Aviv District,high,housing,1761566.826
+2030,high_housing,16,Yehuda and Shomron,high,housing,607627.9488
+2030,high_trends,1,Tzfat Nafa,high,trends,154868.0109
+2030,high_trends,2,Jerusalem District,high,trends,1553546.559
+2030,high_trends,3,Kinneret Nafa,high,trends,147078.0465
+2030,high_trends,4,Izrael Nafa,high,trends,641890.9161
+2030,high_trends,5,Acco Nafa,high,trends,773852.6534
+2030,high_trends,6,Golan Nafa,high,trends,59946.36629
+2030,high_trends,7,Haifa Nafa,high,trends,692328.9037
+2030,high_trends,8,Hadera Nafa,high,trends,593341.7991
+2030,high_trends,9,Sharon Nafa,high,trends,599516.8107
+2030,high_trends,10,Ramleh Nafa,high,trends,435202.396
+2030,high_trends,11,Rehovot Nafa,high,trends,740877.5445
+2030,high_trends,12,Ashkelon Nafa,high,trends,711887.4439
+2030,high_trends,13,Beer Sheva Nafa,high,trends,1032403.707
+2030,high_trends,14,Petah Tikvah Nafa,high,trends,1004579.403
+2030,high_trends,15,Tel Aviv District,high,trends,1706306.566
+2030,high_trends,16,Yehuda and Shomron,high,trends,656813.9595
+2030,low_housing,1,Tzfat Nafa,low,housing,146184.6967
+2030,low_housing,2,Jerusalem District,low,housing,1407192.759
+2030,low_housing,3,Kinneret Nafa,low,housing,137429.0494
+2030,low_housing,4,Izrael Nafa,low,housing,611573.3368
+2030,low_housing,5,Acco Nafa,low,housing,758226.8453
+2030,low_housing,6,Golan Nafa,low,housing,58562.04656
+2030,low_housing,7,Haifa Nafa,low,housing,676506.8071
+2030,low_housing,8,Hadera Nafa,low,housing,561450.4557
+2030,low_housing,9,Sharon Nafa,low,housing,549760.8318
+2030,low_housing,10,Ramleh Nafa,low,housing,391434.2824
+2030,low_housing,11,Rehovot Nafa,low,housing,707310.2745
+2030,low_housing,12,Ashkelon Nafa,low,housing,697167.2326
+2030,low_housing,13,Beer Sheva Nafa,low,housing,1012069.536
+2030,low_housing,14,Petah Tikvah Nafa,low,housing,912381.2229
+2030,low_housing,15,Tel Aviv District,low,housing,1671605.465
+2030,low_housing,16,Yehuda and Shomron,low,housing,549260.2703
+2030,low_trends,1,Tzfat Nafa,low,trends,145126.1636
+2030,low_trends,2,Jerusalem District,low,trends,1445694.494
+2030,low_trends,3,Kinneret Nafa,low,trends,138556.8239
+2030,low_trends,4,Izrael Nafa,low,trends,609869.9216
+2030,low_trends,5,Acco Nafa,low,trends,738867.2506
+2030,low_trends,6,Golan Nafa,low,trends,57414.9251
+2030,low_trends,7,Haifa Nafa,low,trends,656004.1869
+2030,low_trends,8,Hadera Nafa,low,trends,564617.126
+2030,low_trends,9,Sharon Nafa,low,trends,569102.543
+2030,low_trends,10,Ramleh Nafa,low,trends,413344.1136
+2030,low_trends,11,Rehovot Nafa,low,trends,704569.2156
+2030,low_trends,12,Ashkelon Nafa,low,trends,669384.5191
+2030,low_trends,13,Beer Sheva Nafa,low,trends,968711.1218
+2030,low_trends,14,Petah Tikvah Nafa,low,trends,946742.2136
+2030,low_trends,15,Tel Aviv District,low,trends,1614590.088
+2030,low_trends,16,Yehuda and Shomron,low,trends,605520.4065
+2030,medium_housing,1,Tzfat Nafa,medium,housing,151523.3696
+2030,medium_housing,2,Jerusalem District,medium,housing,1463643.512
+2030,medium_housing,3,Kinneret Nafa,medium,housing,141682.4565
+2030,medium_housing,4,Izrael Nafa,medium,housing,626132.3338
+2030,medium_housing,5,Acco Nafa,medium,housing,773460.1631
+2030,medium_housing,6,Golan Nafa,medium,housing,59813.96462
+2030,medium_housing,7,Haifa Nafa,medium,housing,691813.9362
+2030,medium_housing,8,Hadera Nafa,medium,housing,575459.0628
+2030,medium_housing,9,Sharon Nafa,medium,housing,563897.2112
+2030,medium_housing,10,Ramleh Nafa,medium,housing,402725.3773
+2030,medium_housing,11,Rehovot Nafa,medium,housing,724501.1936
+2030,medium_housing,12,Ashkelon Nafa,medium,housing,720179.062
+2030,medium_housing,13,Beer Sheva Nafa,medium,housing,1046329.942
+2030,medium_housing,14,Petah Tikvah Nafa,medium,housing,941228.4503
+2030,medium_housing,15,Tel Aviv District,medium,housing,1717551.507
+2030,medium_housing,16,Yehuda and Shomron,medium,housing,578807.5244
+2030,medium_trends,1,Tzfat Nafa,medium,trends,150020.6861
+2030,medium_trends,2,Jerusalem District,medium,trends,1499727.795
+2030,medium_trends,3,Kinneret Nafa,medium,trends,142850.6063
+2030,medium_trends,4,Izrael Nafa,medium,trends,626075.1343
+2030,medium_trends,5,Acco Nafa,medium,trends,756634.2681
+2030,medium_trends,6,Golan Nafa,medium,trends,58698.09983
+2030,medium_trends,7,Haifa Nafa,medium,trends,674435.4696
+2030,medium_trends,8,Hadera Nafa,medium,trends,579130.7375
+2030,medium_trends,9,Sharon Nafa,medium,trends,584499.588
+2030,medium_trends,10,Ramleh Nafa,medium,trends,424365.2981
+2030,medium_trends,11,Rehovot Nafa,medium,trends,722959.0493
+2030,medium_trends,12,Ashkelon Nafa,medium,trends,690779.6326
+2030,medium_trends,13,Beer Sheva Nafa,medium,trends,1000697.907
+2030,medium_trends,14,Petah Tikvah Nafa,medium,trends,975902.1455
+2030,medium_trends,15,Tel Aviv District,medium,trends,1660888.399
+2030,medium_trends,16,Yehuda and Shomron,medium,trends,631084.2497
+2035,high_housing,1,Tzfat Nafa,high,housing,177401.244
+2035,high_housing,2,Jerusalem District,high,housing,1699448.549
+2035,high_housing,3,Kinneret Nafa,high,housing,173578.1244
+2035,high_housing,4,Izrael Nafa,high,housing,694779.7443
+2035,high_housing,5,Acco Nafa,high,housing,847380.8358
+2035,high_housing,6,Golan Nafa,high,housing,65481.36633
+2035,high_housing,7,Haifa Nafa,high,housing,770591.6997
+2035,high_housing,8,Hadera Nafa,high,housing,674846.8593
+2035,high_housing,9,Sharon Nafa,high,housing,615856.0417
+2035,high_housing,10,Ramleh Nafa,high,housing,444657.6079
+2035,high_housing,11,Rehovot Nafa,high,housing,805694.0172
+2035,high_housing,12,Ashkelon Nafa,high,housing,846268.3601
+2035,high_housing,13,Beer Sheva Nafa,high,housing,1231131.723
+2035,high_housing,14,Petah Tikvah Nafa,high,housing,1071988.17
+2035,high_housing,15,Tel Aviv District,high,housing,1910170.807
+2035,high_housing,16,Yehuda and Shomron,high,housing,693959.8896
+2035,high_trends,1,Tzfat Nafa,high,trends,173523.1831
+2035,high_trends,2,Jerusalem District,high,trends,1766197.967
+2035,high_trends,3,Kinneret Nafa,high,trends,167080.0264
+2035,high_trends,4,Izrael Nafa,high,trends,696305.0059
+2035,high_trends,5,Acco Nafa,high,trends,829833.6325
+2035,high_trends,6,Golan Nafa,high,trends,63585.31064
+2035,high_trends,7,Haifa Nafa,high,trends,747045.6239
+2035,high_trends,8,Hadera Nafa,high,trends,654767.9923
+2035,high_trends,9,Sharon Nafa,high,trends,654610.1273
+2035,high_trends,10,Ramleh Nafa,high,trends,475520.1838
+2035,high_trends,11,Rehovot Nafa,high,trends,796684.4021
+2035,high_trends,12,Ashkelon Nafa,high,trends,793516.0356
+2035,high_trends,13,Beer Sheva Nafa,high,trends,1173850.67
+2035,high_trends,14,Petah Tikvah Nafa,high,trends,1121863.282
+2035,high_trends,15,Tel Aviv District,high,trends,1828574.347
+2035,high_trends,16,Yehuda and Shomron,high,trends,780277.2496
+2035,low_housing,1,Tzfat Nafa,low,housing,158619.8859
+2035,low_housing,2,Jerusalem District,low,housing,1505505.053
+2035,low_housing,3,Kinneret Nafa,low,housing,157311.4129
+2035,low_housing,4,Izrael Nafa,low,housing,644003.3012
+2035,low_housing,5,Acco Nafa,low,housing,794971.619
+2035,low_housing,6,Golan Nafa,low,housing,61244.20666
+2035,low_housing,7,Haifa Nafa,low,housing,716661.9231
+2035,low_housing,8,Hadera Nafa,low,housing,623515.2672
+2035,low_housing,9,Sharon Nafa,low,housing,568709.099
+2035,low_housing,10,Ramleh Nafa,low,housing,406905.3783
+2035,low_housing,11,Rehovot Nafa,low,housing,748601.166
+2035,low_housing,12,Ashkelon Nafa,low,housing,764836.0272
+2035,low_housing,13,Beer Sheva Nafa,low,housing,1109639.286
+2035,low_housing,14,Petah Tikvah Nafa,low,housing,973967.8703
+2035,low_housing,15,Tel Aviv District,low,housing,1759355.839
+2035,low_housing,16,Yehuda and Shomron,low,housing,591839.2836
+2035,low_trends,1,Tzfat Nafa,low,trends,156237.8763
+2035,low_trends,2,Jerusalem District,low,trends,1576863.261
+2035,low_trends,3,Kinneret Nafa,low,trends,151396.2162
+2035,low_trends,4,Izrael Nafa,low,trends,641320.012
+2035,low_trends,5,Acco Nafa,low,trends,770809.1296
+2035,low_trends,6,Golan Nafa,low,trends,59241.71118
+2035,low_trends,7,Haifa Nafa,low,trends,685690.6656
+2035,low_trends,8,Hadera Nafa,low,trends,603970.0176
+2035,low_trends,9,Sharon Nafa,low,trends,602626.1124
+2035,low_trends,10,Ramleh Nafa,low,trends,437252.2416
+2035,low_trends,11,Rehovot Nafa,low,trends,735391.7405
+2035,low_trends,12,Ashkelon Nafa,low,trends,718879.3117
+2035,low_trends,13,Beer Sheva Nafa,low,trends,1061478.667
+2035,low_trends,14,Petah Tikvah Nafa,low,trends,1020346.06
+2035,low_trends,15,Tel Aviv District,low,trends,1679651.89
+2035,low_trends,16,Yehuda and Shomron,low,trends,684531.7057
+2035,medium_housing,1,Tzfat Nafa,medium,housing,168162.7803
+2035,medium_housing,2,Jerusalem District,medium,housing,1603335.898
+2035,medium_housing,3,Kinneret Nafa,medium,housing,165510.0455
+2035,medium_housing,4,Izrael Nafa,medium,housing,669203.1148
+2035,medium_housing,5,Acco Nafa,medium,housing,820985.9901
+2035,medium_housing,6,Golan Nafa,medium,housing,63378.55324
+2035,medium_housing,7,Haifa Nafa,medium,housing,744319.2896
+2035,medium_housing,8,Hadera Nafa,medium,housing,649043.5029
+2035,medium_housing,9,Sharon Nafa,medium,housing,592385.3993
+2035,medium_housing,10,Ramleh Nafa,medium,housing,426007.2095
+2035,medium_housing,11,Rehovot Nafa,medium,housing,777656.3266
+2035,medium_housing,12,Ashkelon Nafa,medium,housing,806362.3503
+2035,medium_housing,13,Beer Sheva Nafa,medium,housing,1170377.203
+2035,medium_housing,14,Petah Tikvah Nafa,medium,housing,1023890.625
+2035,medium_housing,15,Tel Aviv District,medium,housing,1836704.629
+2035,medium_housing,16,Yehuda and Shomron,medium,housing,643647.0788
+2035,medium_trends,1,Tzfat Nafa,medium,trends,164983.569
+2035,medium_trends,2,Jerusalem District,medium,trends,1672305.264
+2035,medium_trends,3,Kinneret Nafa,medium,trends,159332.8185
+2035,medium_trends,4,Izrael Nafa,medium,trends,669134.3767
+2035,medium_trends,5,Acco Nafa,medium,trends,800698.7882
+2035,medium_trends,6,Golan Nafa,medium,trends,61439.61331
+2035,medium_trends,7,Haifa Nafa,medium,trends,716890.8791
+2035,medium_trends,8,Hadera Nafa,medium,trends,629649.7308
+2035,medium_trends,9,Sharon Nafa,medium,trends,628994.9648
+2035,medium_trends,10,Ramleh Nafa,medium,trends,456621.9916
+2035,medium_trends,11,Rehovot Nafa,medium,trends,766534.1227
+2035,medium_trends,12,Ashkelon Nafa,medium,trends,756696.3858
+2035,medium_trends,13,Beer Sheva Nafa,medium,trends,1117917.622
+2035,medium_trends,14,Petah Tikvah Nafa,medium,trends,1071789.735
+2035,medium_trends,15,Tel Aviv District,medium,trends,1755227.41
+2035,medium_trends,16,Yehuda and Shomron,medium,trends,732752.7241
+2040,high_housing,1,Tzfat Nafa,high,housing,200820.4582
+2040,high_housing,2,Jerusalem District,high,housing,1882275.168
+2040,high_housing,3,Kinneret Nafa,high,housing,204392.1707
+2040,high_housing,4,Izrael Nafa,high,housing,758812.8199
+2040,high_housing,5,Acco Nafa,high,housing,921081.6655
+2040,high_housing,6,Golan Nafa,high,housing,71895.85547
+2040,high_housing,7,Haifa Nafa,high,housing,852653.8201
+2040,high_housing,8,Hadera Nafa,high,housing,772548.3328
+2040,high_housing,9,Sharon Nafa,high,housing,660042.5634
+2040,high_housing,10,Ramleh Nafa,high,housing,483355.3595
+2040,high_housing,11,Rehovot Nafa,high,housing,880321.4034
+2040,high_housing,12,Ashkelon Nafa,high,housing,967242.9456
+2040,high_housing,13,Beer Sheva Nafa,high,housing,1392433.858
+2040,high_housing,14,Petah Tikvah Nafa,high,housing,1187344.26
+2040,high_housing,15,Tel Aviv District,high,housing,2085858.209
+2040,high_housing,16,Yehuda and Shomron,high,housing,791536.132
+2040,high_trends,1,Tzfat Nafa,high,trends,195831.2901
+2040,high_trends,2,Jerusalem District,high,trends,2005696.788
+2040,high_trends,3,Kinneret Nafa,high,trends,191022.9126
+2040,high_trends,4,Izrael Nafa,high,trends,754664.0191
+2040,high_trends,5,Acco Nafa,high,trends,885352.0705
+2040,high_trends,6,Golan Nafa,high,trends,67370.28815
+2040,high_trends,7,Haifa Nafa,high,trends,813537.8395
+2040,high_trends,8,Hadera Nafa,high,trends,722217.6685
+2040,high_trends,9,Sharon Nafa,high,trends,716013.4493
+2040,high_trends,10,Ramleh Nafa,high,trends,522503.0264
+2040,high_trends,11,Rehovot Nafa,high,trends,860830.912
+2040,high_trends,12,Ashkelon Nafa,high,trends,891202.0632
+2040,high_trends,13,Beer Sheva Nafa,high,trends,1335476.527
+2040,high_trends,14,Petah Tikvah Nafa,high,trends,1259338.942
+2040,high_trends,15,Tel Aviv District,high,trends,1967038.931
+2040,high_trends,16,Yehuda and Shomron,high,trends,924518.2952
+2040,low_housing,1,Tzfat Nafa,low,housing,171099.9888
+2040,low_housing,2,Jerusalem District,low,housing,1586603.323
+2040,low_housing,3,Kinneret Nafa,low,housing,176818.7301
+2040,low_housing,4,Izrael Nafa,low,housing,680048.4617
+2040,low_housing,5,Acco Nafa,low,housing,840516.7329
+2040,low_housing,6,Golan Nafa,low,housing,65335.60686
+2040,low_housing,7,Haifa Nafa,low,housing,764999.5626
+2040,low_housing,8,Hadera Nafa,low,housing,689280.7571
+2040,low_housing,9,Sharon Nafa,low,housing,590066.8039
+2040,low_housing,10,Ramleh Nafa,low,housing,426488.5059
+2040,low_housing,11,Rehovot Nafa,low,housing,793804.0329
+2040,low_housing,12,Ashkelon Nafa,low,housing,837028.9641
+2040,low_housing,13,Beer Sheva Nafa,low,housing,1201570.087
+2040,low_housing,14,Petah Tikvah Nafa,low,housing,1036649.909
+2040,low_housing,15,Tel Aviv District,low,housing,1859018.716
+2040,low_housing,16,Yehuda and Shomron,low,housing,634504.3554
+2040,low_trends,1,Tzfat Nafa,low,trends,168349.1722
+2040,low_trends,2,Jerusalem District,low,trends,1709749.64
+2040,low_trends,3,Kinneret Nafa,low,trends,165244.1131
+2040,low_trends,4,Izrael Nafa,low,trends,670890.2843
+2040,low_trends,5,Acco Nafa,low,trends,797902.1031
+2040,low_trends,6,Golan Nafa,low,trends,60874.34183
+2040,low_trends,7,Haifa Nafa,low,trends,719675.0068
+2040,low_trends,8,Hadera Nafa,low,trends,642879.6564
+2040,low_trends,9,Sharon Nafa,low,trends,637122.1055
+2040,low_trends,10,Ramleh Nafa,low,trends,463182.2831
+2040,low_trends,11,Rehovot Nafa,low,trends,768644.913
+2040,low_trends,12,Ashkelon Nafa,low,trends,773314.3424
+2040,low_trends,13,Beer Sheva Nafa,low,trends,1158137.565
+2040,low_trends,14,Petah Tikvah Nafa,low,trends,1100459.999
+2040,low_trends,15,Tel Aviv District,low,trends,1749198.514
+2040,low_trends,16,Yehuda and Shomron,low,trends,768210.4963
+2040,medium_housing,1,Tzfat Nafa,medium,housing,186106.7302
+2040,medium_housing,2,Jerusalem District,medium,housing,1735442.408
+2040,medium_housing,3,Kinneret Nafa,medium,housing,190676.4889
+2040,medium_housing,4,Izrael Nafa,medium,housing,719485.8843
+2040,medium_housing,5,Acco Nafa,medium,housing,880994.2397
+2040,medium_housing,6,Golan Nafa,medium,housing,68643.70732
+2040,medium_housing,7,Haifa Nafa,medium,housing,809775.3354
+2040,medium_housing,8,Hadera Nafa,medium,housing,730853.2436
+2040,medium_housing,9,Sharon Nafa,medium,housing,625171.2869
+2040,medium_housing,10,Ramleh Nafa,medium,housing,455070.4571
+2040,medium_housing,11,Rehovot Nafa,medium,housing,837680.9513
+2040,medium_housing,12,Ashkelon Nafa,medium,housing,902933.8421
+2040,medium_housing,13,Beer Sheva Nafa,medium,housing,1296892.624
+2040,medium_housing,14,Petah Tikvah Nafa,medium,housing,1112919.519
+2040,medium_housing,15,Tel Aviv District,medium,housing,1974494.379
+2040,medium_housing,16,Yehuda and Shomron,medium,housing,713485.6995
+2040,medium_trends,1,Tzfat Nafa,medium,trends,182211.7785
+2040,medium_trends,2,Jerusalem District,medium,trends,1858599.683
+2040,medium_trends,3,Kinneret Nafa,medium,trends,178247.021
+2040,medium_trends,4,Izrael Nafa,medium,trends,713151.9859
+2040,medium_trends,5,Acco Nafa,medium,trends,842081.0237
+2040,medium_trends,6,Golan Nafa,medium,trends,64151.54596
+2040,medium_trends,7,Haifa Nafa,medium,trends,767196.828
+2040,medium_trends,8,Hadera Nafa,medium,trends,682888.8306
+2040,medium_trends,9,Sharon Nafa,medium,trends,677015.2293
+2040,medium_trends,10,Ramleh Nafa,medium,trends,493118.7842
+2040,medium_trends,11,Rehovot Nafa,medium,trends,815294.3621
+2040,medium_trends,12,Ashkelon Nafa,medium,trends,832853.7294
+2040,medium_trends,13,Beer Sheva Nafa,medium,trends,1247034.619
+2040,medium_trends,14,Petah Tikvah Nafa,medium,trends,1180694.997
+2040,medium_trends,15,Tel Aviv District,medium,trends,1859353.365
+2040,medium_trends,16,Yehuda and Shomron,medium,trends,846733.0147
+2045,high_housing,1,Tzfat Nafa,high,housing,227720.8781
+2045,high_housing,2,Jerusalem District,high,housing,2088407.911
+2045,high_housing,3,Kinneret Nafa,high,housing,245133.2437
+2045,high_housing,4,Izrael Nafa,high,housing,835311.6672
+2045,high_housing,5,Acco Nafa,high,housing,1001609.298
+2045,high_housing,6,Golan Nafa,high,housing,79838.35576
+2045,high_housing,7,Haifa Nafa,high,housing,946218.2822
+2045,high_housing,8,Hadera Nafa,high,housing,889020.1838
+2045,high_housing,9,Sharon Nafa,high,housing,715906.1913
+2045,high_housing,10,Ramleh Nafa,high,housing,532136.0846
+2045,high_housing,11,Rehovot Nafa,high,housing,969871.6543
+2045,high_housing,12,Ashkelon Nafa,high,housing,1112870.495
+2045,high_housing,13,Beer Sheva Nafa,high,housing,1579050.407
+2045,high_housing,14,Petah Tikvah Nafa,high,housing,1322374.977
+2045,high_housing,15,Tel Aviv District,high,housing,2275875.758
+2045,high_housing,16,Yehuda and Shomron,high,housing,900415.6624
+2045,high_trends,1,Tzfat Nafa,high,trends,223226.2037
+2045,high_trends,2,Jerusalem District,high,trends,2280485.612
+2045,high_trends,3,Kinneret Nafa,high,trends,220817.1784
+2045,high_trends,4,Izrael Nafa,high,trends,820801.7986
+2045,high_trends,5,Acco Nafa,high,trends,943320.4752
+2045,high_trends,6,Golan Nafa,high,trends,71380.3039
+2045,high_trends,7,Haifa Nafa,high,trends,894147.1385
+2045,high_trends,8,Hadera Nafa,high,trends,798411.9112
+2045,high_trends,9,Sharon Nafa,high,trends,784814.8157
+2045,high_trends,10,Ramleh Nafa,high,trends,577274.5868
+2045,high_trends,11,Rehovot Nafa,high,trends,935803.5094
+2045,high_trends,12,Ashkelon Nafa,high,trends,1009631.495
+2045,high_trends,13,Beer Sheva Nafa,high,trends,1526327.029
+2045,high_trends,14,Petah Tikvah Nafa,high,trends,1422987.436
+2045,high_trends,15,Tel Aviv District,high,trends,2118299.452
+2045,high_trends,16,Yehuda and Shomron,high,trends,1094032.105
+2045,low_housing,1,Tzfat Nafa,low,housing,183518.3503
+2045,low_housing,2,Jerusalem District,low,housing,1675695.507
+2045,low_housing,3,Kinneret Nafa,low,housing,200890.093
+2045,low_housing,4,Izrael Nafa,low,housing,721595.7237
+2045,low_housing,5,Acco Nafa,low,housing,888347.9015
+2045,low_housing,6,Golan Nafa,low,housing,70176.23921
+2045,low_housing,7,Haifa Nafa,low,housing,809183.2051
+2045,low_housing,8,Hadera Nafa,low,housing,761284.2571
+2045,low_housing,9,Sharon Nafa,low,housing,612620.9673
+2045,low_housing,10,Ramleh Nafa,low,housing,447660.7024
+2045,low_housing,11,Rehovot Nafa,low,housing,838076.9659
+2045,low_housing,12,Ashkelon Nafa,low,housing,912079.8337
+2045,low_housing,13,Beer Sheva Nafa,low,housing,1300707.857
+2045,low_housing,14,Petah Tikvah Nafa,low,housing,1095139.412
+2045,low_housing,15,Tel Aviv District,low,housing,1942540.512
+2045,low_housing,16,Yehuda and Shomron,low,housing,677588.1466
+2045,low_trends,1,Tzfat Nafa,low,trends,181213.5531
+2045,low_trends,2,Jerusalem District,low,trends,1840794.041
+2045,low_trends,3,Kinneret Nafa,low,trends,180286.8964
+2045,low_trends,4,Izrael Nafa,low,trends,699729.3888
+2045,low_trends,5,Acco Nafa,low,trends,821529.6026
+2045,low_trends,6,Golan Nafa,low,trends,62371.1735
+2045,low_trends,7,Haifa Nafa,low,trends,756503.2588
+2045,low_trends,8,Hadera Nafa,low,trends,681891.3536
+2045,low_trends,9,Sharon Nafa,low,trends,671916.3659
+2045,low_trends,10,Ramleh Nafa,low,trends,490828.5701
+2045,low_trends,11,Rehovot Nafa,low,trends,804844.1411
+2045,low_trends,12,Ashkelon Nafa,low,trends,831729.7898
+2045,low_trends,13,Beer Sheva Nafa,low,trends,1258430.1
+2045,low_trends,14,Petah Tikvah Nafa,low,trends,1187340.296
+2045,low_trends,15,Tel Aviv District,low,trends,1814146.582
+2045,low_trends,16,Yehuda and Shomron,low,trends,853550.5613
+2045,medium_housing,1,Tzfat Nafa,medium,housing,205783.6342
+2045,medium_housing,2,Jerusalem District,medium,housing,1880266.527
+2045,medium_housing,3,Kinneret Nafa,medium,housing,222854.7443
+2045,medium_housing,4,Izrael Nafa,medium,housing,777018.3059
+2045,medium_housing,5,Acco Nafa,medium,housing,943378.9104
+2045,medium_housing,6,Golan Nafa,medium,housing,75037.13242
+2045,medium_housing,7,Haifa Nafa,medium,housing,878947.5269
+2045,medium_housing,8,Hadera Nafa,medium,housing,823708.3177
+2045,medium_housing,9,Sharon Nafa,medium,housing,663702.6651
+2045,medium_housing,10,Ramleh Nafa,medium,housing,489707.952
+2045,medium_housing,11,Rehovot Nafa,medium,housing,905512.6705
+2045,medium_housing,12,Ashkelon Nafa,medium,housing,1013374.337
+2045,medium_housing,13,Beer Sheva Nafa,medium,housing,1436026.547
+2045,medium_housing,14,Petah Tikvah Nafa,medium,housing,1209577.313
+2045,medium_housing,15,Tel Aviv District,medium,housing,2112617.087
+2045,medium_housing,16,Yehuda and Shomron,medium,housing,789048.4375
+2045,medium_trends,1,Tzfat Nafa,medium,trends,202128.9065
+2045,medium_trends,2,Jerusalem District,medium,trends,2059338.341
+2045,medium_trends,3,Kinneret Nafa,medium,trends,200478.082
+2045,medium_trends,4,Izrael Nafa,medium,trends,760315.2634
+2045,medium_trends,5,Acco Nafa,medium,trends,882729.4899
+2045,medium_trends,6,Golan Nafa,medium,trends,66891.25599
+2045,medium_trends,7,Haifa Nafa,medium,trends,825430.5622
+2045,medium_trends,8,Hadera Nafa,medium,trends,740174.7291
+2045,medium_trends,9,Sharon Nafa,medium,trends,728515.1444
+2045,medium_trends,10,Ramleh Nafa,medium,trends,534040.887
+2045,medium_trends,11,Rehovot Nafa,medium,trends,870497.1234
+2045,medium_trends,12,Ashkelon Nafa,medium,trends,920459.2588
+2045,medium_trends,13,Beer Sheva Nafa,medium,trends,1391528.381
+2045,medium_trends,14,Petah Tikvah Nafa,medium,trends,1305007.077
+2045,medium_trends,15,Tel Aviv District,medium,trends,1966336.765
+2045,medium_trends,16,Yehuda and Shomron,medium,trends,972690.8406
+2050,high_housing,1,Tzfat Nafa,high,housing,257507.6473
+2050,high_housing,2,Jerusalem District,high,housing,2324213.106
+2050,high_housing,3,Kinneret Nafa,high,housing,290076.8134
+2050,high_housing,4,Izrael Nafa,high,housing,923325.9799
+2050,high_housing,5,Acco Nafa,high,housing,1094384.457
+2050,high_housing,6,Golan Nafa,high,housing,88932.32038
+2050,high_housing,7,Haifa Nafa,high,housing,1052754.203
+2050,high_housing,8,Hadera Nafa,high,housing,1017751.357
+2050,high_housing,9,Sharon Nafa,high,housing,781851.2758
+2050,high_housing,10,Ramleh Nafa,high,housing,588618.1038
+2050,high_housing,11,Rehovot Nafa,high,housing,1071025.158
+2050,high_housing,12,Ashkelon Nafa,high,housing,1276882.922
+2050,high_housing,13,Beer Sheva Nafa,high,housing,1786326.724
+2050,high_housing,14,Petah Tikvah Nafa,high,housing,1477538.677
+2050,high_housing,15,Tel Aviv District,high,housing,2497812.884
+2050,high_housing,16,Yehuda and Shomron,high,housing,1021355.805
+2050,high_trends,1,Tzfat Nafa,high,trends,256455.1808
+2050,high_trends,2,Jerusalem District,high,trends,2593845.422
+2050,high_trends,3,Kinneret Nafa,high,trends,257605.4766
+2050,high_trends,4,Izrael Nafa,high,trends,895257.0852
+2050,high_trends,5,Acco Nafa,high,trends,1002919.01
+2050,high_trends,6,Golan Nafa,high,trends,75413.96274
+2050,high_trends,7,Haifa Nafa,high,trends,988809.3411
+2050,high_trends,8,Hadera Nafa,high,trends,883615.585
+2050,high_trends,9,Sharon Nafa,high,trends,858219.7309
+2050,high_trends,10,Ramleh Nafa,high,trends,638082.0776
+2050,high_trends,11,Rehovot Nafa,high,trends,1018489.354
+2050,high_trends,12,Ashkelon Nafa,high,trends,1150408.216
+2050,high_trends,13,Beer Sheva Nafa,high,trends,1750403.208
+2050,high_trends,14,Petah Tikvah Nafa,high,trends,1609513.873
+2050,high_trends,15,Tel Aviv District,high,trends,2279451.084
+2050,high_trends,16,Yehuda and Shomron,high,trends,1291868.827
+2050,low_housing,1,Tzfat Nafa,low,housing,193807.9721
+2050,low_housing,2,Jerusalem District,low,housing,1752598.23
+2050,low_housing,3,Kinneret Nafa,low,housing,222485.607
+2050,low_housing,4,Izrael Nafa,low,housing,762121.6181
+2050,low_housing,5,Acco Nafa,low,housing,938271.7914
+2050,low_housing,6,Golan Nafa,low,housing,75284.12803
+2050,low_housing,7,Haifa Nafa,low,housing,848299.219
+2050,low_housing,8,Hadera Nafa,low,housing,830635.2305
+2050,low_housing,9,Sharon Nafa,low,housing,635260.6364
+2050,low_housing,10,Ramleh Nafa,low,housing,468135.5523
+2050,low_housing,11,Rehovot Nafa,low,housing,880646.3193
+2050,low_housing,12,Ashkelon Nafa,low,housing,979473.175
+2050,low_housing,13,Beer Sheva Nafa,low,housing,1389582.073
+2050,low_housing,14,Petah Tikvah Nafa,low,housing,1147804.816
+2050,low_housing,15,Tel Aviv District,low,housing,2029357.496
+2050,low_housing,16,Yehuda and Shomron,low,housing,710306.5964
+2050,low_trends,1,Tzfat Nafa,low,trends,193846.5931
+2050,low_trends,2,Jerusalem District,low,trends,1960764.948
+2050,low_trends,3,Kinneret Nafa,low,trends,195706.5015
+2050,low_trends,4,Izrael Nafa,low,trends,725683.7026
+2050,low_trends,5,Acco Nafa,low,trends,839578.7427
+2050,low_trends,6,Golan Nafa,low,trends,63490.63935
+2050,low_trends,7,Haifa Nafa,low,trends,791850.0795
+2050,low_trends,8,Hadera Nafa,low,trends,718329.03
+2050,low_trends,9,Sharon Nafa,low,trends,702461.6515
+2050,low_trends,10,Ramleh Nafa,low,trends,516600.8858
+2050,low_trends,11,Rehovot Nafa,low,trends,839178.6753
+2050,low_trends,12,Ashkelon Nafa,low,trends,889181.5393
+2050,low_trends,13,Beer Sheva Nafa,low,trends,1357836.616
+2050,low_trends,14,Petah Tikvah Nafa,low,trends,1271513.169
+2050,low_trends,15,Tel Aviv District,low,trends,1863544.71
+2050,low_trends,16,Yehuda and Shomron,low,trends,934502.9778
+2050,medium_housing,1,Tzfat Nafa,medium,housing,225906.9461
+2050,medium_housing,2,Jerusalem District,medium,housing,2034429.581
+2050,medium_housing,3,Kinneret Nafa,medium,housing,255647.7026
+2050,medium_housing,4,Izrael Nafa,medium,housing,839255.3391
+2050,medium_housing,5,Acco Nafa,medium,housing,1012271.292
+2050,medium_housing,6,Golan Nafa,medium,housing,82020.79121
+2050,medium_housing,7,Haifa Nafa,medium,housing,950945.8444
+2050,medium_housing,8,Hadera Nafa,medium,housing,920347.2604
+2050,medium_housing,9,Sharon Nafa,medium,housing,706606.8313
+2050,medium_housing,10,Ramleh Nafa,medium,housing,527193.7707
+2050,medium_housing,11,Rehovot Nafa,medium,housing,977179.7629
+2050,medium_housing,12,Ashkelon Nafa,medium,housing,1128241.974
+2050,medium_housing,13,Beer Sheva Nafa,medium,housing,1578925.659
+2050,medium_housing,14,Petah Tikvah Nafa,medium,housing,1312792.225
+2050,medium_housing,15,Tel Aviv District,medium,housing,2265919.966
+2050,medium_housing,16,Yehuda and Shomron,medium,housing,865820.803
+2050,medium_trends,1,Tzfat Nafa,medium,trends,224629.7257
+2050,medium_trends,2,Jerusalem District,medium,trends,2271876.502
+2050,medium_trends,3,Kinneret Nafa,medium,trends,226156.2366
+2050,medium_trends,4,Izrael Nafa,medium,trends,809709.5946
+2050,medium_trends,5,Acco Nafa,medium,trends,921056.3229
+2050,medium_trends,6,Golan Nafa,medium,trends,69430.90459
+2050,medium_trends,7,Haifa Nafa,medium,trends,889422.7056
+2050,medium_trends,8,Hadera Nafa,medium,trends,800219.6645
+2050,medium_trends,9,Sharon Nafa,medium,trends,779832.3243
+2050,medium_trends,10,Ramleh Nafa,medium,trends,576719.5435
+2050,medium_trends,11,Rehovot Nafa,medium,trends,928232.9605
+2050,medium_trends,12,Ashkelon Nafa,medium,trends,1017922.658
+2050,medium_trends,13,Beer Sheva Nafa,medium,trends,1550799.141
+2050,medium_trends,14,Petah Tikvah Nafa,medium,trends,1438473.678
+2050,medium_trends,15,Tel Aviv District,medium,trends,2069700.17
+2050,medium_trends,16,Yehuda and Shomron,medium,trends,1109323.618

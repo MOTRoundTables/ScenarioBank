@@ -1,14 +1,13 @@
-{ 	"code": "TA2016",
+{ 	"code"    : "TA2016",
 	"name"    : "תל אביב 2016",
 	"source"  : "מודל תל אביב",
 	"dir"     : "TA2016",
 	"tazlyr"  : "TAZ_v41",
 	"tazvar"  : "TAZV41",
 	"tazfile" : "TAZ_v41.geojson",
-	"agvars"  : [ "population", "employment" ],
 	"file"    : "TA2016.csv",
 	"dict"    : {
-				"taz": "taz",
+				"taz"       : "taz",
 				"population": "population",
 				"employment": "empl_tot"
 				}

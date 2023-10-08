@@ -1,0 +1,26 @@
+{
+    "id": "D281BF26",
+    "path": "~/GitHub/ScenarioBank/dvlp/v0.3/TestApp.R",
+    "project_path": "TestApp.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1696078456164.0,
+    "source_on_save": false,
+    "relative_order": 8,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "61,25",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1696618982,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1696618982196,
+    "read_only": false,
+    "read_only_alternatives": []
+}

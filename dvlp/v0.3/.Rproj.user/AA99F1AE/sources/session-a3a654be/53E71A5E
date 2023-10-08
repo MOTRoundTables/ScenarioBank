@@ -1,0 +1,28 @@
+{
+    "id": "53E71A5E",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1696769614726.0,
+    "source_on_save": false,
+    "relative_order": 11,
+    "properties": {
+        "id": "efd36582971240eead8e74f434e3573b",
+        "name": "currentscn",
+        "title": "currentscn",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 7307491043415436322,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1696769614726,
+    "read_only": false,
+    "read_only_alternatives": []
+}

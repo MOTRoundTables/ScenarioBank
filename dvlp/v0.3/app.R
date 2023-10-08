@@ -4,7 +4,7 @@ library(shiny)
 library(shinythemes)  # https://rstudio.github.io/shinythemes/
 library(shinyWidgets) # https://dreamrs.github.io/shinyWidgets/index.html
 
-source("main.R")
+source("dvlp/v0.3/main.R")
 
 
 # Define UI for application that draws a histogram

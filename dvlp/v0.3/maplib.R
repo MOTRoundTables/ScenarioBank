@@ -5,17 +5,19 @@
 library(R6)
 library(leaflet)
 library(mapview)
-#library(sp)
 library(sf)
-library(geojson)
-library(geojsonio)
+library(geojsonsf) # https://cran.r-project.org/web/packages/geojsonsf/readme/README.html
+
+#library(sp)
+#library(geojson)
+#library(geojsonio)
 
 mymap <- R6Class("mymapclass",
     public = list(
         name = NULL,
+        #basemap = NULL,
         mapview = NULL,
         lyrs = NULL,     # a dataframe of the layers in the map "lyr" is the layer name
-        #lyrsdata = NULL,
         loadedlayers = 0,
              
         # - creates map with mapview()
@@ -65,10 +67,12 @@ mymap <- R6Class("mymapclass",
           return(i)
         },
 
-        setlayerscale = function(alyr) {
-          i = self$lyrnum(alyr)
+        setlayerscale = function(geolyr) {
+          #i = self$lyrnum(geolyr)
           #b = self$lyrsdata[[i]]@bbox  # bbox(basemap$lyrsdata[[i]])
-          b = self$lyrs[[i]]$geolyr@bbox  # bbox(basemap$lyrsdata[[i]])
+          #b = self$lyrs[[i]]$geolyr@bbox  # bbox(basemap$lyrsdata[[i]])
+          
+          b = geolyr@bbox  
           self$mapview@map <- self$mapview@map %>% 
             fitBounds(b[1], b[2], b[3], b[4])
         },
@@ -81,28 +85,47 @@ mymap <- R6Class("mymapclass",
           self$mapview@map <- self$mapview@map %>% showGroup(alyr)
         },
 
-        # add scn - set a lyrs is a df with initialstatus : 0 do not load, 1 load&display, 2 load&no display
-        addscn = function(scn) { # view(basemap$lyrs)
-          alyr = scn$scn2lyr()
-          i = self$addlyr(alyr)
-          
-          m = mapview(alyr$geolyr, layer.name = alyr$lyr, legend = FALSE,
-                      color = alyr$color, alpha.regions = alyr$fillOpacity,lwd = alyr$weight)
-          self$mapview <- self$mapview + m
-          
-          self$lyrs$status[i] = 1
+        # set a map layer (1st)
+        setlyr = function(lyr, geolyr) { 
+          #self$lyrs <- lyr
+          m = mapview(geolyr, layer.name = lyr$lyr, legend = FALSE,
+                      color = lyr$color, alpha.regions = lyr$fillOpacity,lwd = lyr$weight)
+          self$mapview <- m
+          #self$mapview <- self$mapview + m
+          #i = nrow(self$lyrs)
+          #self$lyrs$status[i] = 1
+          #return(i)
         },
 
+        # add scn 
+        addscn = function(scn) { # view(basemap$lyrs)
+          alyr = scn$scn2lyr()
+          scn$getgeolyr()
+          #i = self$addlyr(alyr, scn$geolyr)
+          #i = self$setlyr(alyr, scn$geolyr)
+          self$setlyr(alyr, scn$geolyr)
+          #self$setlayerscale(scn$geolyr)
+          #return(i)
+        },
+        
+        
         # add layer - set a lyrs is a df with initialstatus : 0 do not load, 1 load&display, 2 load&no display
-        addlayer = function(lyr) { # view(basemap$lyrs)
+        addlyr = function(lyr, geolyr) { # view(basemap$lyrs)
           if (is.null(self$lyrs)) {
             self$lyrs <- lyr
           } else {  
-            self$lyrs <<- bind_rows(self$lyrs, lyrs) # append
+            self$lyrs <<- bind_rows(self$lyrs, lyr) # append
           }
-          return(nrow(self$lyrs))
+          
+          m = mapview(geolyr, layer.name = lyr$lyr, legend = FALSE,
+                      color = lyr$color, alpha.regions = lyr$fillOpacity,lwd = lyr$weight)
+          self$mapview <- self$mapview + m
+          i = nrow(self$lyrs)
+          self$lyrs$status[i] = 1
+          return(i)
         },
         
+
 
         #loadlyr = function(alyr) {  # alyr is a DF of lyr attributes
         #  #browser()

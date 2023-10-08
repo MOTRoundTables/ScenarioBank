@@ -10,6 +10,24 @@ currentscnnum <<- "7"  # new jer
 currentscn <<- setScn(currentscnnum) # set scenario, session
 currentscn$opentazdata()
 
+View(basemap)
+view(basemap$lyrs)
+
+
+basemap$mapview
+basemap$mapview@map
+basemap$displaymap()
+class(basemap$mapview@map)
+
+x = currentscn$scn$tazlyr
+basemap$mapview@map <- basemap$mapview@map %>% hideGroup(x)
+basemap$mapview
+
+
+basemap$hidelyr(temp$lyr)
+
+
+
 alyr = currentscn$getscnlyr()
 i = basemap$lyrnum(alyr)
 lyrdata = basemap$lyrsdata[[i]]
@@ -41,18 +59,18 @@ view(lyrdata)
 
 
 
+alyr = currentscn$scn2lyr()
+#i = self$addlyr(alyr)
+
+currentscn$getgeolyr()
+m = mapview(currentscn$geolyr, layer.name = alyr$lyr, legend = FALSE,
+            color = alyr$color, alpha.regions = alyr$fillOpacity,lwd = alyr$weight)
+self$mapview <- self$mapview + m
+
+
+
+
 basemap$mapview = basemap$mapview + m
-
-basemap$mapview
-
-
-
-basemap$mapview
-basemap$mapview@map
-basemap$displaymap()
-
-
-class(basemap$mapview)
 
 
 basemap$mapview(breweries) 

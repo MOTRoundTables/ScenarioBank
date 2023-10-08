@@ -2,6 +2,7 @@
 
 
 library(tidyverse)
+library(dplyr)
 #library(tidyjson)
 library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.html
 
@@ -114,21 +115,14 @@ getsrcscn <- function(asrc) {    #   asrc = "מודל תל אביב"
 setScn <- function(scnnum) {   # , session
   #browser()
   scn1 = scnclass$new(scnnum)
-  
-  # browser()
-  # ky = cfg$scnkeys[as.integer(scnnum)]
-  
   basemap$addscn(scn1)  #, session
-  
-  #temp = scn1$scn2lyr()   # scn2lyr(cfg$scenarios[[ky]])
-  #basemap$addlayer(temp)  #, session
-  #basemap$setlayerscale(temp$lyr)
   return(scn1)  # cfg$scenarios[[scn1$ky]])
-  }
-############  basemap$lyrs <<- bind_rows(basemap$lyrs, temp) # view(basemap$lyrs)
-#ky = "metrorings2008"  # to test
-# amap = leafletProxy(map, session)
-# addlyrtoLLmap(amap, ky)  #, session
+}
+
+  ############  basemap$lyrs <<- bind_rows(basemap$lyrs, temp) # view(basemap$lyrs)
+  # ky = "metrorings2008"  # to test
+  # amap = leafletProxy(map, session)
+  # addlyrtoLLmap(amap, ky)  #, session
 
 HideCurrentSc <- function() {   # , session
   lyr = currentscn$getscnlyr()

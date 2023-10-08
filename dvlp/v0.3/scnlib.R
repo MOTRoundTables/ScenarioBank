@@ -31,8 +31,9 @@ scnclass <- R6Class("scnclass",
 
       getgeolyr = function() {
         if (is.null(self$geolyr)) {
-          url = paste(scn$dir, scn$tazfile, sep="")
-          self$geolyr <- geojson_read(url, what = "sp")   # at this stage only support geojson
+          url = paste(self$scn$dir, self$scn$tazfile, sep="")
+          #self$geolyr <- geojson_read(url, what = "sp")   # at this stage only support geojson
+          self$geolyr <- geojson_sf(url)
         }
         return(self$self$geolyr)
       },
@@ -65,6 +66,11 @@ scnclass <- R6Class("scnclass",
       },
       
       opentazdata = function() {
+        fl = paste(self$scn$dir, "/", self$scn$file, sep="")        
+        self$tazdata = fread(fl)  # read_csv(fl)            
+      },
+
+      createpopemp = function() {
         #browser()
         files = self$scn$files
         n = length(currentscn$scn$files)
@@ -90,10 +96,41 @@ scnclass <- R6Class("scnclass",
         self$tazdataSSS = x 
       }
       
+            
   )
 ) # end mymap class
 
 
 
 # = end ===========================================
+
+#opentazdata = function() {
+#  #browser()
+#  files = self$scn$files
+#  n = length(currentscn$scn$files)
+#  
+#  flnew = ""
+#  joinvar = currentscn$scn$files[[1]][[4]][[1]] 
+#  x <- vector(mode="list", length=n)
+#  for (i in 1:n) {
+#    fl = paste(currentscn$scn$dir, "/", currentscn$scn$files[[i]][[3]], sep="")        
+#    # x[[i]] <- fread(fl)  # read_csv(fl) read all vars ...
+#    if (fl!=flnew) {
+#      tmp <- fread(fl)  # read_csv(fl)            
+#      flnew = fl
+#    }
+#    vars = currentscn$scn$files[[i]][[4]]
+#    vars = vars[ !vars == "None"]
+#    tmp1 = tmp %>%   # keep only vars
+#      select(all_of(vars))
+#    x[[i]] = tmp1 %>% rename_all( ~ paste0(currentscn$scn$files[[i]][[1]], "_", .x))
+#    colnames(x[[i]])[1] <- joinvar
+#  }
+#  self$tazdata = x %>% reduce(left_join, by=joinvar)
+#  self$tazdataSSS = x 
+#},
+#
+
+
+
 

@@ -1,2 +1,0 @@
-cfg = list()
-cfg$scnsources = c ("A", "B", "C")

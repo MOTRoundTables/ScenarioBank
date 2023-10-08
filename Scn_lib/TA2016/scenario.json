@@ -6,10 +6,10 @@
 	"tazvar"  : "TAZV41",
 	"tazfile" : "TAZ_v41.geojson",
 	"agvars"  : [ "population", "employment" ],
-	"files"   : [ 
-			["2017", 2017, "TA2016.csv", [ "taz", "population", "empl_tot" ] ],
-			["2025", 2025, "TA2016.csv", [ "taz", "population", "empl_tot" ] ], 
-			["2030", 2030, "TA2016.csv", [ "taz", "population", "empl_tot" ] ], 
-			["2040", 2040, "TA2016.csv", [ "taz", "population", "empl_tot" ] ]
-			]
+	"file"    : "TA2016.csv",
+	"dict"    : {
+				"taz": "taz",
+				"population": "population",
+				"employment": "empl_tot"
+				}
 }

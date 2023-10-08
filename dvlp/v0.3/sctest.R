@@ -11,16 +11,45 @@ currentscnnum <<- "8"  # BS
 currentscn <<- setScn(currentscnnum) # set scenario, session
 currentscn$opentazdata()
 
-alyr = currentscn$getscnlyr()
-i = basemap$lyrnum(alyr)
-lyrdata = basemap$lyrsdata[[i]]
+currentscn$scn$tazvar
+
+currentscn$geolyr
+class(currentscn$geolyr)
 
 currentscn$tazdata
+view(currentscn$tazdata)
+class(currentscn$tazdata)
 currentscn$tazdata %>%
   summary()
 
 
+
+
+x = currentscn$scn$tazvar
+view(currentscn$geolyr)
+
+currentscn$scn$tazvar
+
+df <- merge(currentscn$geolyr, currentscn$tazdata, by.x = currentscn$scn$tazvar, by.y = "taz", all.x=TRUE)
+view(df)
+
+
+#df <- left_join(currentscn$geolyr, currentscn$tazdata, by = c( {currentscn$geolyr[[x]]} = "taz" ) ) # currentscn$scn$tazvar
+#df <- left_join(currentscn$geolyr, currentscn$tazdata, by = c( 'TAZV41' = 'taz' ) )
+#df3 <- left_join(currentscn$geolyr, currentscn$tazdata, join_by = c(id == x, taz == 'taz'))
+
+
+
+
+
+
 # -------------------------------------------
+
+
+alyr = currentscn$getscnlyr()
+i = basemap$lyrnum(alyr)
+lyrdata = basemap$lyrsdata[[i]]
+
 
 HideSc(1)
 

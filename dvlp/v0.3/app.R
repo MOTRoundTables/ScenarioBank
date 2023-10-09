@@ -22,19 +22,21 @@ ui <- fluidPage(
 
           titlePanel("בנק"),
           
-          selectizeInput('selectSrc', 'מקור תחזית', choices = cfg$scnsources,
+          selectizeInput('selectSrc', 'מקור תחזית', choices = cfg$Frcstsources,
             options = list(
               placeholder = 'בחר מתוך הרשימה ...',
               onInitialize = I('function() { this.setValue(""); }')
             )
           ),
           
-          selectizeInput('selectScn', 'תרחיש', choices = character(0), #cfg$scnchoices,
+          selectizeInput('selectFrcst', 'תחזית', choices = character(0), #cfg$Frcstchoices,
             options = list(
               placeholder = 'בחר מתוך הרשימה ...',
               onInitialize = I('function() { this.setValue(""); }')
             )
-          ),          
+          ),
+          
+          selectInput('selectScn', 'תרחיש', state.name, multiple=FALSE, selectize=FALSE)          
 
           #radioButtons("zonetype", NULL,
           #             choiceNames = list("גבולות מקור", "אזורי על"),
@@ -50,15 +52,9 @@ ui <- fluidPage(
           #  )
           #),          
           
-          #selectInput("selectSz", label = "אזורי על",   # h3("Super zones"), 
-          #            choices = cfg$szchoices, 
-          #            selected = 0),
-
-          #htmlOutput("selectedscn"),        # display selection  #verbatimTextOutput("selected")
-          
+          #htmlOutput("selectedFrcst"),        # display selection  
           #br(),
           #actionButton("testbutton", "test", style='width:100%'),
-
           #br(),br(),br(),br(),
           #actionButton("testbutton2", "test2", style='width:100%')
           
@@ -69,9 +65,9 @@ ui <- fluidPage(
 
           tabsetPanel(id = "tabs1", type = "tabs",
               tabPanel("map", br(), uiOutput("leaf") ),
-              tabPanel("Summary", verbatimTextOutput("scnsummary") ),
+              tabPanel("Summary", verbatimTextOutput("Frcstsummary") ),
               tabPanel("chart"),
-              tabPanel("Table", tableOutput("scntable") )
+              tabPanel("Table", tableOutput("Frcsttable") )
           )
           
         )
@@ -96,15 +92,17 @@ server <- function(input, output, session) {
     #showmessage("test") 
     if (input$selectSrc!="") {
       if (currentsrc!=input$selectSrc) {
-        if (currentscnnum>0) {
+        if (currentFrcstky!="") {  ## clear Frcst and map
           #HideCurrentSc()
-          currentscn <<- NULL
-          currentscnnum <<- 0
+          currentFrcstky <<- ""
+          currentFrcst <<- NULL
+          basemap$createmap(cfg$basemap)  # reset to initial map 
+          basemap$resetmapview(cfg$basemap)
           refreshmap()
         }
-        getsrcscn(input$selectSrc)  # --> main
-        updateSelectInput(session, "selectScn",
-                          choices = cfg$scnchoices,
+        getsrcFrcst(input$selectSrc)  # --> main
+        updateSelectInput(session, "selectFrcst",
+                          choices = cfg$Frcstchoices,
                           selected = character(0)
         )
         currentsrc <<- input$selectSrc
@@ -113,47 +111,47 @@ server <- function(input, output, session) {
     }  
   })
 
-  observeEvent(input$selectScn, { 
-    if (input$selectScn>0) {
-      if (currentscnnum!=input$selectScn) { # scenario changed
-        #if (currentscnnum>0) {  
+  observeEvent(input$selectFrcst, { 
+    if (input$selectFrcst!="") {
+      if (currentFrcstky!=input$selectFrcst) { # scenario changed
+        #if (currentFrcstky>0) {  
         #  HideCurrentSc() 
-        #} # close current sc
-        currentscnnum <<- input$selectScn
-        currentscn <<- setScn(input$selectScn) # set scenario  --> main
-        currentscn$opentazdata()# --> scnlib
-        cat(paste("set scn: ", currentscn$name, "\n"))
-        updateSelectInput(session, "selectSz",
-                         choices = cfg$szchoices0,
-                         selected = character(0)
-        )
+        #} # close current sc lyr
+        currentFrcstky <<- input$selectFrcst
+        currentFrcst <<- setFrcst(input$selectFrcst) # set scenario  --> main
+        currentFrcst$opentazdata()# --> Frcstlib
+        cat(paste("set Frcst: ", currentFrcst$name, "\n"))
+        #updateSelectInput(session, "selectSz",
+        #                 choices = cfg$szchoices0,
+        #                 selected = character(0)
+        #)
         refreshmap()
-        str0 <- paste("current scenario:", currentscn$name, sep = " ")
+        #str0 <- paste("current scenario:", currentFrcst$name, sep = " ")
       }
     }
-  })  
+  })
   
   refreshmap = function() {
     output$appMap <- renderLeaflet({ basemap$mapview@map })
     output$leaf = renderUI({ leafletOutput("appMap", width = "100%", height = cfg$basemap$height) })
     
-    if (currentscnnum>0) {
-      scnsummary <<- currentscn$tazdata %>%
+    if (currentFrcstky!="") {
+      Frcstsummary <<- currentFrcst$tazdata %>%
           summary()
-      output$scnsummary <- renderPrint({ scnsummary })
+      output$Frcstsummary <- renderPrint({ Frcstsummary })
       
-      #output$scntable <- renderTable({ currentscn$tazdata })
+      #output$Frcsttable <- renderTable({ currentFrcst$tazdata })
       
-    } else { scnsummary <<- NULL }
+    } else { Frcstsummary <<- NULL }
   }
   
   refreshmap()
   
   # --------------------------------------
 
-  #    output$selectedscn = renderPrint({
-  #    #str0 = paste("set scenario:", currentscn$name, sep = " ")
-  #    str1 = paste("scenario:", input$selectScn, sep = " ")
+  #    output$selectedFrcst = renderPrint({
+  #    #str0 = paste("set scenario:", currentFrcst$name, sep = " ")
+  #    str1 = paste("scenario:", input$selectFrcst, sep = " ")
   #    str2 = paste("super zone:", input$selectSz, sep = " ")
   #    HTML(paste(str0, str1, str2, sep = '<br/>'))
   #  })
@@ -168,12 +166,12 @@ server <- function(input, output, session) {
   #  leafletOutput("appMap", width = "100%", height = cfg$basemap$height) })
   
   # Generate a summary of the data ----
-  #output$scnsummary <- renderPrint({
-  #  scnsummary })
+  #output$Frcstsummary <- renderPrint({
+  #  Frcstsummary })
   
   ## Generate an HTML table view of the data ----
-  #output$scntable <- renderTable({
-  #  currentscn$tazdata })
+  #output$Frcsttable <- renderTable({
+  #  currentFrcst$tazdata })
 
     
   # ---------------------------------------------------------
@@ -187,11 +185,11 @@ server <- function(input, output, session) {
     #else {
     #  showmessage(input$selectSrc)
     #} 
-    #if (input$selectScn=="") {
-    #  showmessage("no scn")
+    #if (input$selectFrcst=="") {
+    #  showmessage("no Frcst")
     #}
     #else {
-    #  showmessage(input$selectScn)
+    #  showmessage(input$selectFrcst)
     #} 
 
     #showmessage("testbutton")

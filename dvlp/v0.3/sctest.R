@@ -6,43 +6,58 @@ source("main.R")
 
 sc = "BS_v09"
 
-scnum = which(cfg$scnkeys==sc)
+# create scenario
+aFrcst <<- setFrcst(sc) 
+basemap$mapview
+aFrcst$opentazdata()
+view(aFrcst$tazdata)
+
+# 1 generate a summary of population by scenario
+years <- aFrcst$tazdata %>% distinct(Year) %>% pull(Year)
+scens <- aFrcst$tazdata %>% distinct(Scenario)%>% pull(Scenario)
+popsummary = aFrcst$tazdata %>% 
+  group_by(Scenario) %>% 
+  summarise(population = sum(population))
+
+# 2 create map op population for one scenario
+filtered <- aFrcst$tazdatatazdata %>% filter(Scenario == scens[1])
+with_geoms <- filtered %>% left_join(aFrcst$geolyr,by = setNames("TAZV41","taz")) %>% st_sf()
+
+# 3 mapview population of scenario
+basemap$mapview %>% 
+  mapview(zcol = "population")
+basemap$mapview
 
 
-
-#currentscnnum <<- "7"  # new jer
-currentscnnum <<- "8"  # BS
-currentscn <<- setScn(currentscnnum) # set scenario, session
-currentscn$opentazdata()
+# - - - - - - - - - - - - - - - - - -  
 
 
+currentFrcst$Frcst$tazvar
 
-currentscn$scn$tazvar
+currentFrcst$geolyr
+class(currentFrcst$geolyr)
 
-currentscn$geolyr
-class(currentscn$geolyr)
-
-currentscn$tazdata
-view(currentscn$tazdata)
-class(currentscn$tazdata)
-currentscn$tazdata %>%
+currentFrcst$tazdata
+view(currentFrcst$tazdata)
+class(currentFrcst$tazdata)
+currentFrcst$tazdata %>%
   summary()
 
 
 
 
-x = currentscn$scn$tazvar
-view(currentscn$geolyr)
+x = currentFrcst$Frcst$tazvar
+view(currentFrcst$geolyr)
 
-currentscn$scn$tazvar
+currentFrcst$Frcst$tazvar
 
-df <- merge(currentscn$geolyr, currentscn$tazdata, by.x = currentscn$scn$tazvar, by.y = "taz", all.x=TRUE)
+df <- merge(currentFrcst$geolyr, currentFrcst$tazdata, by.x = currentFrcst$Frcst$tazvar, by.y = "taz", all.x=TRUE)
 view(df)
 
 
-#df <- left_join(currentscn$geolyr, currentscn$tazdata, by = c( {currentscn$geolyr[[x]]} = "taz" ) ) # currentscn$scn$tazvar
-#df <- left_join(currentscn$geolyr, currentscn$tazdata, by = c( 'TAZV41' = 'taz' ) )
-#df3 <- left_join(currentscn$geolyr, currentscn$tazdata, join_by = c(id == x, taz == 'taz'))
+#df <- left_join(currentFrcst$geolyr, currentFrcst$tazdata, by = c( {currentFrcst$geolyr[[x]]} = "taz" ) ) # currentFrcst$Frcst$tazvar
+#df <- left_join(currentFrcst$geolyr, currentFrcst$tazdata, by = c( 'TAZV41' = 'taz' ) )
+#df3 <- left_join(currentFrcst$geolyr, currentFrcst$tazdata, join_by = c(id == x, taz == 'taz'))
 
 
 
@@ -52,35 +67,35 @@ view(df)
 # -------------------------------------------
 
 
-alyr = currentscn$getscnlyr()
+alyr = currentFrcst$getFrcstlyr()
 i = basemap$lyrnum(alyr)
 lyrdata = basemap$lyrsdata[[i]]
 
 
 HideSc(1)
 
-x = currentscn$tazdata[1]
-view(currentscn$tazdata[2])
+x = currentFrcst$tazdata[1]
+view(currentFrcst$tazdata[2])
 
 
-df1 = currentscn$tazdata[[1]]
+df1 = currentFrcst$tazdata[[1]]
 view(df1)
 colnames(df1)
 df2 = df1 %>%
-  left_join(currentscn$tazdata[[2]], by='taz') 
+  left_join(currentFrcst$tazdata[[2]], by='taz') 
 view(df2)
 colnames(df2)
 df3 = df2 %>%
-  left_join(currentscn$tazdata[[3]], by='taz') 
+  left_join(currentFrcst$tazdata[[3]], by='taz') 
 view(df3)
 colnames(df3)
 df4 = df3 %>%
-  left_join(currentscn$tazdata[[4]], by='taz') 
+  left_join(currentFrcst$tazdata[[4]], by='taz') 
 view(df4)
 colnames(df4)
 
 
-xx = currentscn$tazdata
+xx = currentFrcst$tazdata
 
 yy = xx %>% reduce(left_join, by='taz')
 
@@ -94,8 +109,8 @@ typeof(df1)
 
 
 
-files = currentscn$scn$files
-fl = paste("Scn_lib/", currentscn$scn$dir, "/", currentscn$scn$files[[1]][[3]], sep="")
+files = currentFrcst$Frcst$files
+fl = paste("Frcst_lib/", currentFrcst$Frcst$dir, "/", currentFrcst$Frcst$files[[1]][[3]], sep="")
 data3 <- fread(fl)
 
 
@@ -107,7 +122,7 @@ library(readr)
 data1 <- read_csv(fl) 
 library(data.table)
       
-fl = "C:\\Users\\marsz\\OneDrive\\temp\\shiny\\scbank\\v1\\Scn_lib\\TA2016\\geo\\TAZ_v41.geojson"
+fl = "C:\\Users\\marsz\\OneDrive\\temp\\shiny\\scbank\\v1\\Frcst_lib\\TA2016\\geo\\TAZ_v41.geojson"
 l1 <- geojson_read(fl, what = "sp")   # at this stage only support geojson
 class(l1)
 b = bbox(l1)
@@ -151,14 +166,14 @@ font-size: 15px;
 
 # --------------------------------
 
-n = length(currentscn$scn$files)
+n = length(currentFrcst$Frcst$files)
 x <- vector(mode="list", length=n)
 #for (i in 1:n) {
 i = 1
 
-fl = paste("Scn_lib/", currentscn$scn$dir, "/", currentscn$scn$files[[i]][[3]], sep="")        
+fl = paste("Frcst_lib/", currentFrcst$Frcst$dir, "/", currentFrcst$Frcst$files[[i]][[3]], sep="")        
 tmp <- fread(fl)  # read_csv(fl)            
-vars = currentscn$scn$files[[i]][[4]]
+vars = currentFrcst$Frcst$files[[i]][[4]]
 tmp %>% 
   select(all_of(vars))
 #}

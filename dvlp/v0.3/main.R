@@ -1,6 +1,5 @@
 #Sys.setlocale(locale="hebrew")
 
-
 library(tidyverse)
 library(dplyr)
 #library(tidyjson)
@@ -15,53 +14,48 @@ source("scn_dvlp.R")
 
 # - initialize
 initapp <- function() {
+  browser()
   cfg = fromJSON("scbank.json") 
   cfg$general$geodir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$geodir, fixed=TRUE)
-  cfg$general$scndir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$scndir, fixed=TRUE)
+  cfg$general$Frcstdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$frcstdir, fixed=TRUE)
   cfg$general$rsltdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$rsltdir, fixed=TRUE)
 
-  # -- load scenario dicts
-  n = length(cfg$scenariolist)
-  cfg$scenarios = list() 
-  cfg$scnsources = list()
-  cfg$scnkeys = vector()  
+  # -- load scenario dict
+  n = length(cfg$forecastslist)
+  cfg$forecasts = list() 
+  cfg$Frcstsources = list()
+  cfg$Frcstkeys = vector()  
   for (i in 1:n) {
-    cfg$scnsources = append(cfg$scnsources, cfg$scenariolist[[i]][[1]])
-    n2 = length(cfg$scenariolist[[i]][[2]])
+    cfg$Frcstsources = append(cfg$Frcstsources, cfg$forecastslist[[i]][[1]])
+    n2 = length(cfg$forecastslist[[i]][[2]])
     for (j in 1:n2) {
-      cat(cfg$scenariolist[[i]][[2]][[j]])
-      cfg$scnkeys = append(cfg$scnkeys, cfg$scenariolist[[i]][[2]][[j]])
-      x = fromJSON(paste(cfg$general$scndir, cfg$scenariolist[[i]][[2]][[j]], "/scenario.json", sep = ""))
+      cat(cfg$forecastslist[[i]][[2]][[j]])
+      cfg$Frcstkeys = append(cfg$Frcstkeys, cfg$forecastslist[[i]][[2]][[j]])
+      x = fromJSON(paste(cfg$general$Frcstdir, cfg$forecastslist[[i]][[2]][[j]], "/scenario.json", sep = ""))
       y = list()
-      y[[cfg$scenariolist[[i]][[2]][[j]]]] = x
-      cfg$scenarios = append(cfg$scenarios, y)
+      y[[cfg$forecastslist[[i]][[2]][[j]]]] = x
+      cfg$forecasts = append(cfg$forecasts, y)
     }
   }
   
-  # -- build scnchoices
-  n = length(cfg$scnkeys)
-  cfg$scnlist = vector(mode = "list", length = n)
-  cfg$scnchoices = vector(mode = "list")              # for menu
+  # -- build Frcstchoices
+  n = length(cfg$Frcstkeys)
+  cfg$Frcstlist = vector(mode = "list", length = n)
+  cfg$Frcstchoices = vector(mode = "list")              # for menu
   for (i in 1:n) {
-    ky = cfg$scnkeys[i]
-    cfg$scenarios[[ky]]$num = i                       # save as internal ID
-    cfg$scnlist[i] = cfg$scenarios[[ky]]$name         # scn names
-    cfg$scnchoices[as.character(cfg$scnlist[i])] = i
-    cfg$scenarios[[i]]$dir = paste0(cfg$general$scndir, cfg$scenarios[[i]]$dir, "/")
+    ky = cfg$Frcstkeys[i]
+    cfg$forecasts[[ky]]$num = i                       # save as internal ID
+    cfg$Frcstlist[i] = cfg$forecasts[[ky]]$name         # Frcst names
+    #cfg$Frcstchoices[as.character(cfg$Frcstlist[i])] = i # Frcst numb
+    cfg$allFrcstchoices[as.character(cfg$Frcstlist[i])] = ky # Frcst ky
+    cfg$forecasts[[i]]$dir = paste0(cfg$general$Frcstdir, cfg$forecasts[[i]]$dir, "/")
   }
 
-  # -- load superzones dicts
-  cfg$szlyrs = fromJSON(paste(cfg$general$geodir, "szlyrs.json", sep=""))
-  cfg$szlyrs = cfg$szlyrs %>% 
-    map_df(as_tibble)
-  cfg$szlyrs['name'] <- ""
-  cfg$szlyrs['status'] <- 0                        # lyrs %>% add_column(status = 0)  # NA
-  
-  # cfg$szchoices0 = vector(mode = "list")  
-  # cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
-  # list("Choice 1" = 1, "Choice 2" = 2)  
-  
-  # -- process scenarios
+  # -- load super-zones dict
+  tmp = fromJSON(paste(cfg$general$geodir, "szlyrs.json", sep=""))
+  cfg$superzones = tmp$superzones
+
+  # -- process forecasts
   cfg$szkeys = names(cfg$superzones)                  # vector of SZ keys    
   n = length(cfg$szkeys)
   cfg$szlist = vector(mode = "list", length = n)      # for menu
@@ -77,10 +71,17 @@ initapp <- function() {
     cfg$szchoices[as.character(cfg$sznames[i])] = i
     cfg$szlyrs[i] = cfg$superzones[ky]
   }
-  #cfg$szchoices0 = vector(mode = "list")  
-  #cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
-  #cfg$szchoices0 = append (cfg$szchoices0, cfg$szchoices)
 
+  # -- process super-zones
+  cfg$szlyrs = cfg$szlyrs %>% 
+    map_df(as_tibble)
+  #cfg$szlyrs['name'] <- ""
+  cfg$szlyrs['status'] <- 0                        # lyrs %>% add_column(status = 0)  # NA
+  
+  cfg$szchoices0 = vector(mode = "list")  
+  cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
+  # cfg$szchoices0 = append (cfg$szchoices0, cfg$szchoices)
+  list("Choice 1" = 1, "Choice 2" = 2)  
   
   return(cfg)
 }  
@@ -90,10 +91,10 @@ initapp <- function() {
 cfg <- initapp()
 
 currentsrc <- ""
-currentscnnum <- 0
-currentscn <- NULL
+currentFrcstky <- ""
+currentFrcst <- NULL
 
-#scnsummary <- NULL
+#Frcstsummary <- NULL
 
 
 # start map
@@ -108,24 +109,25 @@ basemap$resetmapview(cfg$basemap)
 # - main functions --------------------------------------------
 
 # returns a list of scenarions for a selected source
-getsrcscn <- function(asrc) {    #   asrc = "מודל תל אביב"
-  n = length(cfg$scenarios)
-  cfg$scnchoices <<- vector(mode = "list")  # view(cfg$scnchoices)
+getsrcFrcst <- function(asrc) {    #   asrc = "מודל תל אביב"
+  n = length(cfg$forecasts)
+  cfg$Frcstchoices <<- vector(mode = "list")  # view(cfg$Frcstchoices)
   for (i in 1:n) {
-    ky = cfg$scnkeys[i]
-    if (cfg$scenarios[[ky]]$source==asrc) {
-      cfg$scnchoices[as.character(cfg$scnlist[i])] <<- i
+    ky = cfg$Frcstkeys[i]
+    if (cfg$forecasts[[ky]]$source==asrc) {
+#      cfg$Frcstchoices[as.character(cfg$Frcstlist[i])] <<- i
+      cfg$Frcstchoices[as.character(cfg$Frcstlist[i])] <<- ky
     }
   }
-  #return()
+  return()
 }  
 
-setScn <- function(scnnum) {   # , session
-  cat(scnnum)
+setFrcst <- function(Frcstky) {   # , session
+  cat(Frcstky)
   #browser()
-  scn1 = scnclass$new(scnnum)
-  basemap$addscn(scn1)  #, session
-  return(scn1)  # cfg$scenarios[[scn1$ky]])
+  Frcst1 = Frcstclass$new(Frcstky)
+  basemap$addFrcst(Frcst1)  #, session
+  return(Frcst1)  # cfg$forecasts[[Frcst1$ky]])
 }
 
   ############  basemap$lyrs <<- bind_rows(basemap$lyrs, temp) # view(basemap$lyrs)
@@ -134,31 +136,31 @@ setScn <- function(scnnum) {   # , session
   # addlyrtoLLmap(amap, ky)  #, session
 
 HideCurrentSc <- function() {   # , session
-  lyr = currentscn$getscnlyr()
+  lyr = currentFrcst$getFrcstlyr()
   basemap$hidelyr(lyr)
 }
 
-HideSc <- function(scnnum) {   # , session
+HideSc <- function(Frcstnum) {   # , session
   # browser()
-  ky = cfg$scnkeys[as.integer(scnnum)]
-  temp = scn2lyr(cfg$scenarios[[ky]])
+  ky = cfg$Frcstkeys[as.integer(Frcstnum)]
+  temp = Frcst2lyr(cfg$forecasts[[ky]])
   basemap$hidelyr(temp$lyr)
-  #return(cfg$scenarios[[ky]])
+  #return(cfg$forecasts[[ky]])
 }
 
-getScnFiles <- function(scnnum) {
-  scnnum = 1 # to test
-  ky = cfg$scnkeys[as.integer(scnnum)]
-  scn = cfg$scenarios[[ky]]
-  files = scn$files
+getFrcstFiles <- function(Frcstnum) {
+  Frcstnum = 1 # to test
+  ky = cfg$Frcstkeys[as.integer(Frcstnum)]
+  Frcst = cfg$forecasts[[ky]]
+  files = Frcst$files
   n = length(files)
   
-  scnfiles = list()
-  scnfiles$name = vector(mode = "list", length = n)
+  Frcstfiles = list()
+  Frcstfiles$name = vector(mode = "list", length = n)
   for (i in 1:n) {
-    scnfiles$name[i] = files[[i]][[1]]
+    Frcstfiles$name[i] = files[[i]][[1]]
   }
-  return(scnfiles)
+  return(Frcstfiles)
 }
 
 

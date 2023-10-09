@@ -97,14 +97,14 @@ mymap <- R6Class("mymapclass",
           #return(i)
         },
 
-        # add scn 
-        addscn = function(scn) { # view(basemap$lyrs)
-          alyr = scn$scn2lyr()
-          scn$getgeolyr()
-          #i = self$addlyr(alyr, scn$geolyr)
-          #i = self$setlyr(alyr, scn$geolyr)
-          self$setlyr(alyr, scn$geolyr)
-          #self$setlayerscale(scn$geolyr)
+        # add Frcst 
+        addFrcst = function(Frcst) { # view(basemap$lyrs)
+          alyr = Frcst$Frcst2lyr()
+          Frcst$getgeolyr()
+          #i = self$addlyr(alyr, Frcst$geolyr)
+          #i = self$setlyr(alyr, Frcst$geolyr)
+          self$setlyr(alyr, Frcst$geolyr)
+          #self$setlayerscale(Frcst$geolyr)
           #return(i)
         },
         
@@ -126,7 +126,6 @@ mymap <- R6Class("mymapclass",
         },
         
 
-        
         addlayersfromurl = function(url) {
           lyrs = fromJSON(url) %>% as.data.frame      # View(basemap$lyrs)
           #addlayers(map, lyrs) 

@@ -1,5 +1,21 @@
 {
     "debugBreakpointsState": {
-        "breakpoints": []
+        "breakpoints": [
+            {
+                "id": 5,
+                "path": "~/GitHub/ScenarioBank/dvlp/v0.3/maplib.R",
+                "line_number": 102,
+                "function_steps": "",
+                "function_name": "addscn",
+                "state": 2,
+                "editor_state": 2,
+                "editor_line_number": 102,
+                "is_pending_debug_completion": false,
+                "needs_updated_steps": false,
+                "type": 0,
+                "is_package_breakpoint": false,
+                "package_name": ""
+            }
+        ]
     }
 }

@@ -126,67 +126,6 @@ mymap <- R6Class("mymapclass",
         },
         
 
-
-        #loadlyr = function(alyr) {  # alyr is a DF of lyr attributes
-        #  #browser()
-        #  
-        #  cat(paste(alyr$lyr, "\n", alyr$url, "\n", sep=""))
-        #
-        #  #l1 <- geojson_read(alyr$url, what = "sp")   # at this stage only support geojson
-        #  m = mapview(alyr$geolyr, layer.name = alyr$lyr, legend = FALSE,
-        #              color = alyr$color, alpha.regions = alyr$fillOpacity,lwd = alyr$weight)
-        #  
-        #  if (self$loadedlayers == 0) {
-        #    self$mapview <- m
-        #  } else {
-        #    self$mapview <- self$mapview + m
-        #  }
-        #  self$loadedlayers = self$loadedlayers + 1
-        #  return(list("name" = alyr$lyr))  #, "data" = l1
-        #},
-        
-                        
-        # ------------------------------------------------------------
-        # add layers - set a lyrs is a df with initialstatus : 0 do not load, 1 load&display, 2 load&no display
-        # status 1 = loaded
-        # addlayers = function(lyrs) { # view(basemap$lyrs)
-        #  #browser()
-        #
-        #  if (is.null(self$lyrs)) {
-        #    self$lyrs <- lyrs
-        #    self$lyrsdata <- vector(mode = "list", length = nrow(lyrs))
-        #    nstrt = 1
-        #    nend = nrow(self$lyrs)
-        #    load = 1
-        #  } else {  
-        #    i = self$lyrnum(lyrs[1,]$lyr) # assume one at a time ...
-        #    if (i==0) { # new layer
-        #      self$lyrs <<- bind_rows(self$lyrs, lyrs) # append
-        #      nstrt = nrow(self$lyrs)
-        #      nend = nrow(self$lyrs)
-        #      load = 1
-        #    } else {
-        #      load = 0
-        #    }
-        #  }
-        #  
-        #  # add layers
-        #  if (load) {
-        #    for (i in nstrt:nend) {       # for-loop over rows
-        #      if (self$lyrs$initialstatus[i]>0) {
-        #        result = self$loadlyr(self$lyrs[i,])  #  Load the layer to the map
-        #        #self$lyrs$name[i] = result$name
-        #        self$lyrs$status[i] = 1
-        #        #self$lyrsdata[[i]] = result$data
-        #        if (self$lyrs$initialstatus[i] == 2) { self$hidelyr(self$lyrs$lyr[i]) }
-        #      }
-        #    }
-        #  } else  {  # display existing layer
-        #    self$showlyr(self$lyrs[i,]$lyr)
-        #    self$lyrs$status[i] = 1
-        #  }
-        #
-        #},
         
         addlayersfromurl = function(url) {
           lyrs = fromJSON(url) %>% as.data.frame      # View(basemap$lyrs)
@@ -195,17 +134,6 @@ mymap <- R6Class("mymapclass",
             
       ) # end public
 ) # end mymap class
-
-
-# OLD CODE ------------------------------------------
-
-#lyrs$status[i] = 1
-#if (lyrs$initialstatus[i] == 2) { self$hidelyr(lyrs$name[i]) }
-
-
-# test add lyr
-# addlyr("metrorings2008")
-# basemap$map
 
 
 
@@ -273,7 +201,6 @@ test3 <- function(amap, session) {
 #  }
 #}
 
-
 # geojson : 
 # https://cran.r-project.org/web/packages/geojsonR/vignettes/the_geojsonR_package.html
 # https://www.rdocumentation.org/packages/geojsonio/versions/0.7.0/topics/geojson_r
@@ -312,7 +239,7 @@ test3 <- function(amap, session) {
 #    ) 
 #  #return(list("map" = map, "data" = l1))
   
-  #basemap$map <<- result$map
+#  basemap$map <<- result$map
 #  basemap$lyrs$status[i] <<- 1
 #  basemap$lyrsdata[[i]] <<- l1 # result$data
   
@@ -351,3 +278,64 @@ test3 <- function(amap, session) {
 #    overlayGroups = loadedlayers$name,   # c("back", "other"),
 #    options = layersControlOptions(collapsed = FALSE)
 #  )
+
+#loadlyr = function(alyr) {  # alyr is a DF of lyr attributes
+#  #browser()
+#  
+#  cat(paste(alyr$lyr, "\n", alyr$url, "\n", sep=""))
+#
+#  #l1 <- geojson_read(alyr$url, what = "sp")   # at this stage only support geojson
+#  m = mapview(alyr$geolyr, layer.name = alyr$lyr, legend = FALSE,
+#              color = alyr$color, alpha.regions = alyr$fillOpacity,lwd = alyr$weight)
+#  
+#  if (self$loadedlayers == 0) {
+#    self$mapview <- m
+#  } else {
+#    self$mapview <- self$mapview + m
+#  }
+#  self$loadedlayers = self$loadedlayers + 1
+#  return(list("name" = alyr$lyr))  #, "data" = l1
+#},
+
+
+# ------------------------------------------------------------
+# add layers - set a lyrs is a df with initialstatus : 0 do not load, 1 load&display, 2 load&no display
+# status 1 = loaded
+# addlayers = function(lyrs) { # view(basemap$lyrs)
+#  #browser()
+#
+#  if (is.null(self$lyrs)) {
+#    self$lyrs <- lyrs
+#    self$lyrsdata <- vector(mode = "list", length = nrow(lyrs))
+#    nstrt = 1
+#    nend = nrow(self$lyrs)
+#    load = 1
+#  } else {  
+#    i = self$lyrnum(lyrs[1,]$lyr) # assume one at a time ...
+#    if (i==0) { # new layer
+#      self$lyrs <<- bind_rows(self$lyrs, lyrs) # append
+#      nstrt = nrow(self$lyrs)
+#      nend = nrow(self$lyrs)
+#      load = 1
+#    } else {
+#      load = 0
+#    }
+#  }
+#  
+#  # add layers
+#  if (load) {
+#    for (i in nstrt:nend) {       # for-loop over rows
+#      if (self$lyrs$initialstatus[i]>0) {
+#        result = self$loadlyr(self$lyrs[i,])  #  Load the layer to the map
+#        #self$lyrs$name[i] = result$name
+#        self$lyrs$status[i] = 1
+#        #self$lyrsdata[[i]] = result$data
+#        if (self$lyrs$initialstatus[i] == 2) { self$hidelyr(self$lyrs$lyr[i]) }
+#      }
+#    }
+#  } else  {  # display existing layer
+#    self$showlyr(self$lyrs[i,]$lyr)
+#    self$lyrs$status[i] = 1
+#  }
+#
+#}

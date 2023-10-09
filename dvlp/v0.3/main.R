@@ -37,6 +37,7 @@ initapp <- function() {
     cfg$scnsources = append(cfg$scnsources, cfg$scenariolist[[i]][[1]])
     n2 = length(cfg$scenariolist[[i]][[2]])
     for (j in 1:n2) {
+      cat(cfg$scenariolist[[i]][[2]][[j]])
       cfg$scnkeys = append(cfg$scnkeys, cfg$scenariolist[[i]][[2]][[j]])
       x = fromJSON(paste(cfg$general$scndir, cfg$scenariolist[[i]][[2]][[j]], "/scenario.json", sep = ""))
       y = list()
@@ -153,17 +154,9 @@ getScnFiles <- function(scnnum) {
 }
 
 
-# - tests ------------------------- 
-
-# add a layer from the array that was not loaded
-#lyrcode = "ta2019"
-#addlyr(lyrcode)
-
 
 # = end =================================================
 
 # rm(list=ls())
 
-#basemap$map %>%
-#  addMarkers(lng=35.0, lat=31.4, popup="<b>Hello</b>")
 

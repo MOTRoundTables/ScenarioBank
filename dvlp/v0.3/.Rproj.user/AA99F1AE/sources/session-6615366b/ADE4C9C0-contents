@@ -3,13 +3,19 @@
 setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/dvlp/v0.3")  # for debug
 
 source("main.R")
-source("maplib.R")
-source("scnlib.R")
+
+sc = "BS_v09"
+
+scnum = which(cfg$scnkeys==sc)
+
+
 
 #currentscnnum <<- "7"  # new jer
 currentscnnum <<- "8"  # BS
 currentscn <<- setScn(currentscnnum) # set scenario, session
 currentscn$opentazdata()
+
+
 
 currentscn$scn$tazvar
 

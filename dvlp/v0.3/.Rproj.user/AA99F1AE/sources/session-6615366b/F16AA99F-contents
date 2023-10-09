@@ -102,7 +102,7 @@ server <- function(input, output, session) {
           currentscnnum <<- 0
           refreshmap()
         }
-        getsrcscn(input$selectSrc)
+        getsrcscn(input$selectSrc)  # --> main
         updateSelectInput(session, "selectScn",
                           choices = cfg$scnchoices,
                           selected = character(0)
@@ -116,12 +116,12 @@ server <- function(input, output, session) {
   observeEvent(input$selectScn, { 
     if (input$selectScn>0) {
       if (currentscnnum!=input$selectScn) { # scenario changed
-        if (currentscnnum>0) {  
-          HideCurrentSc() 
-        } # close current sc
+        #if (currentscnnum>0) {  
+        #  HideCurrentSc() 
+        #} # close current sc
         currentscnnum <<- input$selectScn
-        currentscn <<- setScn(input$selectScn) # set scenario, session
-        currentscn$opentazdata()
+        currentscn <<- setScn(input$selectScn) # set scenario  --> main
+        currentscn$opentazdata()# --> scnlib
         cat(paste("set scn: ", currentscn$name, "\n"))
         updateSelectInput(session, "selectSz",
                          choices = cfg$szchoices0,

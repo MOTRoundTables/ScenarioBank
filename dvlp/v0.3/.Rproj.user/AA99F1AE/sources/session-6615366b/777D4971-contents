@@ -13,14 +13,6 @@ source("scnlib.R")
 source("utillib.R")
 source("scn_dvlp.R")
 
-
-currentsrc <- ""
-currentscnnum <- 0
-currentscn <- NULL
-sss <- 0  # test variable
-
-scnsummary <- NULL
-
 # - initialize
 initapp <- function() {
   cfg = fromJSON("scbank.json") 
@@ -28,7 +20,7 @@ initapp <- function() {
   cfg$general$scndir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$scndir, fixed=TRUE)
   cfg$general$rsltdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$rsltdir, fixed=TRUE)
 
-  # load scenario dicts
+  # -- load scenario dicts
   n = length(cfg$scenariolist)
   cfg$scenarios = list() 
   cfg$scnsources = list()
@@ -46,6 +38,7 @@ initapp <- function() {
     }
   }
   
+  # -- build scnchoices
   n = length(cfg$scnkeys)
   cfg$scnlist = vector(mode = "list", length = n)
   cfg$scnchoices = vector(mode = "list")              # for menu
@@ -57,6 +50,18 @@ initapp <- function() {
     cfg$scenarios[[i]]$dir = paste0(cfg$general$scndir, cfg$scenarios[[i]]$dir, "/")
   }
 
+  # -- load superzones dicts
+  cfg$szlyrs = fromJSON(paste(cfg$general$geodir, "szlyrs.json", sep=""))
+  cfg$szlyrs = cfg$szlyrs %>% 
+    map_df(as_tibble)
+  cfg$szlyrs['name'] <- ""
+  cfg$szlyrs['status'] <- 0                        # lyrs %>% add_column(status = 0)  # NA
+  
+  # cfg$szchoices0 = vector(mode = "list")  
+  # cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
+  # list("Choice 1" = 1, "Choice 2" = 2)  
+  
+  # -- process scenarios
   cfg$szkeys = names(cfg$superzones)                  # vector of SZ keys    
   n = length(cfg$szkeys)
   cfg$szlist = vector(mode = "list", length = n)      # for menu
@@ -76,20 +81,22 @@ initapp <- function() {
   #cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
   #cfg$szchoices0 = append (cfg$szchoices0, cfg$szchoices)
 
-  cfg$szlyrs = cfg$szlyrs %>% 
-    map_df(as_tibble)
-  #cfg$szlyrs['name'] <- ""
-  cfg$szlyrs['status'] <- 0                        # lyrs %>% add_column(status = 0)  # NA
-
-  cfg$szchoices0 = vector(mode = "list")  
-  cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
-  
-  list("Choice 1" = 1, "Choice 2" = 2)  
   
   return(cfg)
 }  
 
+# define global vars
+
 cfg <- initapp()
+
+currentsrc <- ""
+currentscnnum <- 0
+currentscn <- NULL
+
+#scnsummary <- NULL
+
+
+# start map
 basemap = mymap$new()
 basemap$createmap(cfg$basemap)
 #basemap$addlayers(cfg$szlyrs)
@@ -114,6 +121,7 @@ getsrcscn <- function(asrc) {    #   asrc = "מודל תל אביב"
 }  
 
 setScn <- function(scnnum) {   # , session
+  cat(scnnum)
   #browser()
   scn1 = scnclass$new(scnnum)
   basemap$addscn(scn1)  #, session

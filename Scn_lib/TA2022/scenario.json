@@ -6,6 +6,21 @@
 	"tazvar"  : "TAZV41",
 	"tazfile" : "TAZ_v41.geojson",
 	"file"    : "TelAvivStrategic2022_lvl1.csv",
+	"notes"   : "תחזיות ברמה 1"
+	"scenarios" : {
+		"trends": {
+			"desc": "המשך מגמות",
+			"years": [ 2050 ] },
+		"conv": {
+			"desc": "מתכנס",
+			"years": [ 2050 ] },
+		"focus": {
+			"desc": "ממוקד",
+			"years": [ 2050 ] },
+		"tama70": {
+			"desc": "תמא 70",
+			"years": [ 2050 ] }
+	},
 	"dict"    : {
 				"taz"       : "taz",
 				"population": "pop",

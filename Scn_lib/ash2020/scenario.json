@@ -5,6 +5,11 @@
 	"tazlyr"  : "TAZ_Ash",
 	"tazvar"  : "TAZV41",
 	"file"    : "zonal_Bilu_2040.csv",
+	"scenarios" : {
+		"base": {
+			"desc": "תרחיש בסיס",
+			"years": [ 2040 ] }
+	},
 	"dict"    : {
 				"taz"       : "taz",
 				"population": "population",

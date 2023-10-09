@@ -6,6 +6,14 @@
 	"tazvar"  : "TAZ_BSMA",
 	"tazfile" : "TAZ_BSMA.geojson",
 	"file"    : "BS_V09_230919.csv",
+	"scenarios"   : {
+		"BAU": {
+			"desc": "המשך מגמות תואם מועצה",
+			"years":  [ 2019, 2030, 2040, 2050 ] },
+		"IPLAN": {
+			"desc": "אסטרטגיה דיור תואם מועצה",
+			"years":  [ 2019, 2030, 2040, 2050 ] }
+		},
 	"dict"    : {
 				"taz"       : "TAZ_BSMA_N",
 				"population": "Pop",

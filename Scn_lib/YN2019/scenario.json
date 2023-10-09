@@ -6,12 +6,17 @@
 	"tazvar"  : "TAZ_Number",
 	"tazfile" : "TAZ_North.geojson",
 	"file"    : "YN2019.csv",
-	"scenarios" : [
-		[ "base", 2017 ],
-		[ "Max",  2040 ],
-		[ "Reg",  2050 ],
-		[ "Max",  2050 ]                  	  	  	  	  			  	  
-	   ]
+	"scenarios" : {
+		"base": {
+			"desc": "שנת בסיס",
+			"years": [ 2050 ] },
+		"Reg": {
+			"desc": "המשך מגמות",
+			"years": [ 2050 ] },
+		"Max": {
+			"desc": "פיתוח מואץ",
+			"years": [ 2050 ] }
+	},
 	"dict"    : {
 				"taz"       : "TAZ",
 				"population": "population",

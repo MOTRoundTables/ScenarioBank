@@ -6,7 +6,7 @@
 	"tazvar"  : "TAZV41",
 	"tazfile" : "TAZ_v41.geojson",
 	"file"    : "TelAvivStrategic2022_lvl1.csv",
-	"notes"   : "תחזיות ברמה 1"
+	"notes"   : "תחזיות ברמה 1",
 	"scenarios" : {
 		"trends": {
 			"desc": "המשך מגמות",

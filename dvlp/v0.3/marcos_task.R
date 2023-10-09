@@ -4,6 +4,7 @@ library(sf)
 library(geojsonsf) 
 library(jsonlite)
 library(tidyverse)
+options(scipen = 10)
 cfg = fromJSON("dvlp/v0.3/scbank.json") 
 cfg$general$geodir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$geodir, fixed=TRUE)
 cfg$general$scndir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$scndir, fixed=TRUE)
@@ -39,11 +40,24 @@ tazdata = read_csv(fl)
 # 3 find a list of years in tazdata
 years <- tazdata %>% distinct(Year) %>% pull(Year)
 # 4 find a list of scenarios in tazdata
-scens <- tazdata %>% distinct(Scenario)%>% pull(Scenario)
+scens <- tazdata %>% distinct(Scenario) %>% pull(Scenario)
+# 4.1 scenrio + year
+combined <- tazdata %>% distinct(Scenario,Year)
 # 5 generate a summary of population by scenario
-tazdata %>% 
+summr <- tazdata %>% 
   group_by(Scenario) %>% 
   summarise(population = sum(population))
+
+summr %>% 
+  ggplot(aes(x=as.integer(Scenario),y=population)) + 
+  geom_line() + 
+  geom_point(size = 5) + 
+  coord_cartesian(ylim = c(0,6000000))+
+  scale_x_continuous()
+
+
+  
+
 # 6 filter 1 scenario
 filtered <- tazdata %>% filter(Scenario == scens[1])
 # 7 leftjoin geolyr with tazdata

@@ -36,8 +36,10 @@ ui <- fluidPage(
             )
           ),
           
-          selectInput('selectScn', 'תרחיש', state.name, multiple=FALSE, selectize=FALSE)          
+          selectInput('selectScn', 'תרחיש', "", multiple=FALSE, selectize=FALSE),
 
+          selectInput('selectYr', 'שנה', "", multiple=FALSE, selectize=FALSE)          
+          
           #radioButtons("zonetype", NULL,
           #             choiceNames = list("גבולות מקור", "אזורי על"),
           #             choiceValues = list(1, 2),
@@ -121,6 +123,10 @@ server <- function(input, output, session) {
         currentFrcst <<- setFrcst(input$selectFrcst) # set scenario  --> main
         currentFrcst$opentazdata()# --> Frcstlib
         cat(paste("set Frcst: ", currentFrcst$name, "\n"))
+        updateSelectInput(session, "selectScn",
+                         choices = currentFrcst$Frcst$scnlist,
+                         selected = character(0)
+        )
         #updateSelectInput(session, "selectSz",
         #                 choices = cfg$szchoices0,
         #                 selected = character(0)
@@ -130,7 +136,17 @@ server <- function(input, output, session) {
       }
     }
   })
+
+  observeEvent(input$selectScn, {
+    if (input$selectScn!="") {
+      updateSelectInput(session, "selectYr",
+                        choices = currentFrcst$Frcst$scenarios[[input$selectScn]]$years,
+                        selected = character(0)
+     )
+    }  
+  })
   
+    
   refreshmap = function() {
     output$appMap <- renderLeaflet({ basemap$mapview@map })
     output$leaf = renderUI({ leafletOutput("appMap", width = "100%", height = cfg$basemap$height) })

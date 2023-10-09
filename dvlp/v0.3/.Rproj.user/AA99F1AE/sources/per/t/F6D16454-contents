@@ -40,7 +40,7 @@ tazdata = read_csv(fl)
 # 3 find a list of years in tazdata
 years <- tazdata %>% distinct(Year) %>% pull(Year)
 # 4 find a list of scenarios in tazdata
-scens <- tazdata %>% distinct(Scenario)%>% pull(Scenario)
+scens <- tazdaty = a %>% distinct(Scenario)%>% pull(Scenario)
 
 # 5 generate a summary of population by scenario
 tazdata %>% 

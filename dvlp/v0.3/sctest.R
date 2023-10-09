@@ -13,8 +13,11 @@ aFrcst$opentazdata()
 view(aFrcst$tazdata)
 
 # 1 generate a summary of population by scenario
-years <- aFrcst$tazdata %>% distinct(Year) %>% pull(Year)
-scens <- aFrcst$tazdata %>% distinct(Scenario)%>% pull(Scenario)
+scens = aFrcst$Frcst$scnlist   # the available scenarios
+aFrcst$Frcst$scnnames
+afrcst = 1 
+years = aFrcst$Frcst$scenarios[[scens[afrcst]]]$years  # the available years for 1st scenario
+
 popsummary = aFrcst$tazdata %>% 
   group_by(Scenario) %>% 
   summarise(population = sum(population))

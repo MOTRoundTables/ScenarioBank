@@ -14,7 +14,6 @@ source("scn_dvlp.R")
 
 # - initialize
 initapp <- function() {
-  browser()
   cfg = fromJSON("scbank.json") 
   cfg$general$geodir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$geodir, fixed=TRUE)
   cfg$general$Frcstdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$frcstdir, fixed=TRUE)
@@ -32,6 +31,12 @@ initapp <- function() {
       cat(cfg$forecastslist[[i]][[2]][[j]])
       cfg$Frcstkeys = append(cfg$Frcstkeys, cfg$forecastslist[[i]][[2]][[j]])
       x = fromJSON(paste(cfg$general$Frcstdir, cfg$forecastslist[[i]][[2]][[j]], "/scenario.json", sep = ""))
+      x$scnlist = names(x$scenarios)
+      x$scnnames = list()
+      for (k in 1:length(x$scnlist)) {
+        y = x$scenarios[[x$scnlist[k]]]
+        x$scnnames = append(x$scnnames, y$desc) 
+      }
       y = list()
       y[[cfg$forecastslist[[i]][[2]][[j]]]] = x
       cfg$forecasts = append(cfg$forecasts, y)

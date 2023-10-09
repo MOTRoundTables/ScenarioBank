@@ -6,6 +6,11 @@
 	"tazvar"  : "taz",
 	"tazfile" : "jertaz_model_v2.geojson",
 	"file"    : "jerforecasts2020.csv",
+	"scenarios" : {
+		"base": {
+			"desc": "תרחיש בסיס",
+			"years": [ 2015, 2020, 2025, 2030, 2035, 2040 ] }
+	},
 	"dict"    : {
 				"taz"       : "Taz",
 				"population": "Pop_Forecast",

@@ -6,6 +6,17 @@
 	"tazvar"  : "TAZ_1046",
 	"tazfile" : "arzi_nat_hed.geojson",
 	"file"    : "nathed2022_forecast2050.csv",
+	"scenarios" : {
+		"Megamot": {
+			"desc": "המשך מגמות",
+			"years": [ 2050 ] },
+		"Mokdit": {
+			"desc": "פיתוח מוקדי",
+			"years": [ 2050 ] },
+		"Hafrada": {
+			"desc": "הפרדה מטרופולינית",
+			"years": [ 2050 ] }
+	},
 	"dict"    : {
 				"taz"       : "NEW_TAZ_1046",
 				"population": "pop",

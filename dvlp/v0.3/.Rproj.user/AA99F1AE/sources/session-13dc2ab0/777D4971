@@ -1,0 +1,26 @@
+{
+    "id": "777D4971",
+    "path": "~/GitHub/ScenarioBank/dvlp/v0.3/main.R",
+    "project_path": "main.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1695546264914.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "23,30",
+        "scrollLine": "12"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1696861056,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1696861056300,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -4,11 +4,11 @@ setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/v0.3")  # for debug
 
 source("main.R")
 source("maplib.R")
-source("scnlib.R")
+source("Frcstlib.R")
 
-currentscnnum <<- "7"  # new jer
-currentscn <<- setScn(currentscnnum) # set scenario, session
-currentscn$opentazdata()
+currentFrcstnum <<- "7"  # new jer
+currentFrcst <<- setFrcst(currentFrcstnum) # set scenario, session
+currentFrcst$opentazdata()
 
 View(basemap)
 view(basemap$lyrs)
@@ -19,7 +19,7 @@ basemap$mapview@map
 basemap$displaymap()
 class(basemap$mapview@map)
 
-x = currentscn$scn$tazlyr
+x = currentFrcst$Frcst$tazlyr
 basemap$mapview@map <- basemap$mapview@map %>% hideGroup(x)
 basemap$mapview
 
@@ -28,7 +28,7 @@ basemap$hidelyr(temp$lyr)
 
 
 
-alyr = currentscn$getscnlyr()
+alyr = currentFrcst$getFrcstlyr()
 i = basemap$lyrnum(alyr)
 lyrdata = basemap$lyrsdata[[i]]
 
@@ -59,11 +59,11 @@ view(lyrdata)
 
 
 
-alyr = currentscn$scn2lyr()
+alyr = currentFrcst$Frcst2lyr()
 #i = self$addlyr(alyr)
 
-currentscn$getgeolyr()
-m = mapview(currentscn$geolyr, layer.name = alyr$lyr, legend = FALSE,
+currentFrcst$getgeolyr()
+m = mapview(currentFrcst$geolyr, layer.name = alyr$lyr, legend = FALSE,
             color = alyr$color, alpha.regions = alyr$fillOpacity,lwd = alyr$weight)
 self$mapview <- self$mapview + m
 
@@ -124,8 +124,8 @@ m = mapview(l1, layer.name = alyr$lyr, legend = FALSE,
 
 
 
-currentscn$tazdata
-currentscn$tazdata %>%
+currentFrcst$tazdata
+currentFrcst$tazdata %>%
   summary()
 
 

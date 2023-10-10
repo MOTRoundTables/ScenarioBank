@@ -1,8 +1,8 @@
 # View(cfg)
 # Sys.setlocale(locale="hebrew")
-setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/dvlp/v0.3")  # for debug
+# setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/dvlp/v0.3")  # for debug
 
-source("main.R")
+source("dvlp/v0.3/main.R")
 
 sc = "BS_v09"
 
@@ -10,25 +10,29 @@ sc = "BS_v09"
 aFrcst <<- setFrcst(sc) 
 basemap$mapview
 aFrcst$opentazdata()
-view(aFrcst$tazdata)
-
+# view(aFrcst$tazdata)
+x_join <- aFrcst$Frcst$dict$taz
+y_join <- aFrcst$Frcst2lyr()$zvar
 # 1 generate a summary of population by scenario
 scens = aFrcst$Frcst$scnlist   # the available scenarios
+pop_col_name <- aFrcst$Frcst$dict$population
 aFrcst$Frcst$scnnames
 afrcst = 1 
-years = aFrcst$Frcst$scenarios[[scens[afrcst]]]$years  # the available years for 1st scenario
 
+years = aFrcst$Frcst$scenarios[[scens[afrcst]]]$years  # the available years for 1st scenario
 popsummary = aFrcst$tazdata %>% 
-  group_by(Scenario) %>% 
-  summarise(population = sum(population))
+  group_by(Scenario,Year) %>% 
+  summarise(population = sum(!!sym(pop_col_name))) %>% 
+  spread(Year,population) 
 
 # 2 create map op population for one scenario
-filtered <- aFrcst$tazdatatazdata %>% filter(Scenario == scens[1])
-with_geoms <- filtered %>% left_join(aFrcst$geolyr,by = setNames("TAZV41","taz")) %>% st_sf()
+yearvar = years[4]
+filtered <- aFrcst$tazdata %>% as_tibble() %>% filter(Scenario == scens[afrcst],Year == yearvar)
+with_geoms <- filtered %>% left_join(aFrcst$geolyr,by = setNames(y_join,x_join)) %>% st_sf()
 
 # 3 mapview population of scenario
-basemap$mapview %>% 
-  mapview(zcol = "population")
+basemap$mapview +
+  mapview(with_geoms,zcol = pop_col_name)
 basemap$mapview
 
 

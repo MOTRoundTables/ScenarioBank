@@ -7,14 +7,21 @@ library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.htm
 
 # setwd("C:\\Users\\marsz\\OneDrive\\temp\\shiny\\scbank\\v1\\v1\\")  # for debug
 
-source("dvlp/v0.3/maplib.R")
-source("dvlp/v0.3/scnlib.R")
-source("dvlp/v0.3/utillib.R")
-source("dvlp/v0.3/scn_dvlp.R")
+
+idoenv = "dvlp/v0.3/"
+source(paste0(idoenv,"maplib.R"))
+source(paste0(idoenv,"scnlib.R"))
+source(paste0(idoenv,"utillib.R"))
+# source(paste0(idoenv,"scn_dvlp.R"))
+source(paste0(idoenv,"proc-tbl.R"))
+source(paste0(idoenv,"proc-chrt.R"))
+source(paste0(idoenv,"proc-map.R"))
+
+
 
 # - initialize
 initapp <- function() {
-  cfg = fromJSON("dvlp/v0.3/scbank.json") 
+  cfg = fromJSON(paste0(idoenv,"scbank.json")) 
   cfg$general$geodir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$geodir, fixed=TRUE)
   cfg$general$Frcstdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$frcstdir, fixed=TRUE)
   cfg$general$rsltdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$rsltdir, fixed=TRUE)

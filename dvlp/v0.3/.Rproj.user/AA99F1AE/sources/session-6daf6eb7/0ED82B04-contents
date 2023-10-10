@@ -2,52 +2,52 @@
 
 library(data.table)
 
-# = scn class  =========================================
+# = Frcst class  =========================================
 
-scnclass <- R6Class("scnclass",
+Frcstclass <- R6Class("Frcstclass",
     public = list(
         ky = NULL,
         name = NULL,
         num = NULL,
-        scn = NULL,
+        Frcst = NULL,
         geolyr = NULL,
         tazdata = NULL,
         tazdataSSS = NULL,
       
-      initialize = function(scnky) {
-        self$ky = scnky
-        self$scn = cfg$scenarios[[self$ky]]
-        self$num = self$scn$num
-        self$name = self$scn$name
+      initialize = function(Frcstky) {
+        self$ky = Frcstky
+        self$Frcst = cfg$forecasts[[self$ky]]
+        self$num = self$Frcst$num
+        self$name = self$Frcst$name
       },
       
-      getscnlyr = function() {
-        return(self$scn$tazlyr)
+      getFrcstlyr = function() {
+        return(self$Frcst$tazlyr)
       },
 
       getagvars = function() {
-        return(self$scn$agvars)
+        return(self$Frcst$agvars)
       },
 
       getgeolyr = function() {
         if (is.null(self$geolyr)) {
-          url = paste(self$scn$dir, self$scn$tazfile, sep="")
+          url = paste(self$Frcst$dir, self$Frcst$tazfile, sep="")
           #self$geolyr <- geojson_read(url, what = "sp")   # at this stage only support geojson
           self$geolyr <- geojson_sf(url)
         }
         #return(self$geolyr)
       },
       
-      scn2lyr = function() {
-        scn = self$scn # cfg$scenarios[[self$ky]]
-        if (is.null(scn$tazname)) { scn$tazname = scn$tazlyr }  # can define optional tazname
+      Frcst2lyr = function() {
+        Frcst = self$Frcst # cfg$forecasts[[self$ky]]
+        if (is.null(Frcst$tazname)) { Frcst$tazname = Frcst$tazlyr }  # can define optional tazname
 
-        scnlyr <- list(
-          lyr = self$getscnlyr(),        # the code of the layer
-          name = scn$tazname,  
-          zvar = scn$tazvar, 
+        Frcstlyr <- list(
+          lyr = self$getFrcstlyr(),        # the code of the layer
+          name = Frcst$tazname,  
+          zvar = Frcst$tazvar, 
           zname = "NA", 
-          #file = scn$tazfile,
+          #file = Frcst$tazfile,
           group = "forecasts",  # "שכבות תחזיות",
           pane = "other", 
           color = "#FF0000",
@@ -59,14 +59,14 @@ scnclass <- R6Class("scnclass",
           status = 0
         )
         
-        temp = list(scnlyr)
+        temp = list(Frcstlyr)
         temp = temp %>% 
           map_df(as_tibble)
         return(temp)
       },
       
       opentazdata = function() {
-        fl = paste(self$scn$dir, "/", self$scn$file, sep="")        
+        fl = paste(self$Frcst$dir, "/", self$Frcst$file, sep="")        
         self$tazdata = fread(fl)  # read_csv(fl)            
       }
 
@@ -81,24 +81,24 @@ scnclass <- R6Class("scnclass",
 # old code
 #opentazdata = function() {
 #  #browser()
-#  files = self$scn$files
-#  n = length(currentscn$scn$files)
+#  files = self$Frcst$files
+#  n = length(currentFrcst$Frcst$files)
 #  
 #  flnew = ""
-#  joinvar = currentscn$scn$files[[1]][[4]][[1]] 
+#  joinvar = currentFrcst$Frcst$files[[1]][[4]][[1]] 
 #  x <- vector(mode="list", length=n)
 #  for (i in 1:n) {
-#    fl = paste(currentscn$scn$dir, "/", currentscn$scn$files[[i]][[3]], sep="")        
+#    fl = paste(currentFrcst$Frcst$dir, "/", currentFrcst$Frcst$files[[i]][[3]], sep="")        
 #    # x[[i]] <- fread(fl)  # read_csv(fl) read all vars ...
 #    if (fl!=flnew) {
 #      tmp <- fread(fl)  # read_csv(fl)            
 #      flnew = fl
 #    }
-#    vars = currentscn$scn$files[[i]][[4]]
+#    vars = currentFrcst$Frcst$files[[i]][[4]]
 #    vars = vars[ !vars == "None"]
 #    tmp1 = tmp %>%   # keep only vars
 #      select(all_of(vars))
-#    x[[i]] = tmp1 %>% rename_all( ~ paste0(currentscn$scn$files[[i]][[1]], "_", .x))
+#    x[[i]] = tmp1 %>% rename_all( ~ paste0(currentFrcst$Frcst$files[[i]][[1]], "_", .x))
 #    colnames(x[[i]])[1] <- joinvar
 #  }
 #  self$tazdata = x %>% reduce(left_join, by=joinvar)

@@ -2,6 +2,11 @@
 # Sys.setlocale(locale="hebrew")
 # setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/dvlp/v0.3")  # for debug
 
+
+
+
+
+#source("main.R")
 source("dvlp/v0.3/main.R")
 
 sc = "BS_v09"

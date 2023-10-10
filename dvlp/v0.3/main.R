@@ -2,6 +2,8 @@
 
 library(tidyverse)
 library(dplyr)
+library(gt)
+library(plotly)
 #library(tidyjson)
 library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.html
 

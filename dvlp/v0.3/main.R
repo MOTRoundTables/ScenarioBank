@@ -7,10 +7,15 @@ library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.htm
 
 # setwd("C:\\Users\\marsz\\OneDrive\\temp\\shiny\\scbank\\v1\\v1\\")  # for debug
 
-source("maplib.R")
-source("scnlib.R")
-source("utillib.R")
-source("scn_dvlp.R")
+idoenv = ""
+source(paste0(idoenv,"maplib.R"))
+source(paste0(idoenv,"scnlib.R"))
+source(paste0(idoenv,"utillib.R"))
+
+source(paste0(idoenv,"proc-tbl.R"))
+source(paste0(idoenv,"proc-chrt.R"))
+source(paste0(idoenv,"proc-map.R"))
+
 
 # - initialize
 initapp <- function() {

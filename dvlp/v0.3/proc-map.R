@@ -23,7 +23,7 @@ createSimpleMap <- function(aFrcst, aScn = NA, aYr=NA, aVar = NA) {
   x_join <- aFrcst$data$dict$taz
   y_join <- aFrcst$data$tazvar
   
-  filtered <- aFrcst$tazdata %>% as_tibble() %>% filter(Scenario == aScn, Year == aYr)
+  filtered <- aFrcst$tazdata %>% as_tibble() %>% filter(scenario == aScn, year == aYr)
   with_geoms <- filtered %>% left_join(aFrcst$geolyr, by = setNames(y_join,x_join)) %>% st_sf()
   
   # update basemap 

@@ -19,7 +19,7 @@ ui <- fluidPage(
              
       sidebarLayout(position = "right",
                     
-        sidebarPanel( width = 3,
+        sidebarPanel( width = 4,
 
           titlePanel("בנק"),
           
@@ -101,25 +101,15 @@ server <- function(input, output, session) {
 
   # --------- tabPanel "צפייה"
   
-  resetfrcstinputs = function () {
-    updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
-  }
-
-  resetscninputs = function () {
-    updateSelectInput(session, "selectyr", choices = "", selected = character(0) )
-    updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
-    #updateSelectInput(session, "selectanalysis", selected = character(0) )  # choices = "",
-  }
-
-  
   observeEvent(input$selectsrc, {  
     if (setnewsource(input$selectsrc)) {
       updateSelectInput(session, "selectfrcst",
                         choices = cfg$frcstchoices,
                         selected = character(0) )  
       refreshmap()
-      resetfrcstinputs()
-      resetscninputs()
+      updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
+      updateSelectInput(session, "selectyr", choices = "", selected = character(0) )
+      updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
     }
   })
 
@@ -134,8 +124,8 @@ server <- function(input, output, session) {
       updateSelectInput(session, "selectvar",
                         choices = currentfrcst$getfrcstvars(),
                         selected = character(0) )
+      updateSelectInput(session, "selectyr", choices = "", selected = character(0) )
       refreshmap()
-      #resetscninputs()
     }
   })
   
@@ -146,7 +136,6 @@ server <- function(input, output, session) {
                         choices = currentfrcst$getscnyears(currentscn),
                         selected = character(0) )
       }
-      #resetscninputs()
     }
   })
 

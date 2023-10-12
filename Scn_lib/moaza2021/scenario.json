@@ -28,6 +28,6 @@
 	},
 	"dict"    : {
 				"taz"       : "NafaNum",
-				"population": "Total"
+				"population": "total"
 				}
 }

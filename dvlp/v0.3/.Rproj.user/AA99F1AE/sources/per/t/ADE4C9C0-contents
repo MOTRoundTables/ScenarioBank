@@ -6,6 +6,7 @@
 currentfrcst$data$tazvar
 view(currentfrcst$geolyr)
 
+currentfrcst$data$dict$taz
 view(currentfrcst$tazdata)
 currentfrcst$tazdata %>%
   summary()

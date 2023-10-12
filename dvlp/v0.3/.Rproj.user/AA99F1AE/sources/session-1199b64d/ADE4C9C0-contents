@@ -14,7 +14,7 @@ currentfrcst$tazdata %>%
 # for debug
 aFrcst = currentfrcst
 aScn = currentscn
-aYr = 2017
+aYr = 2007
 aVar = 'population'
 
 createSimpleMap(aFrcst, aScn = currentscn, 

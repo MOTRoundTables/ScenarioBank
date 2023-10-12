@@ -3,7 +3,7 @@
     "path": "~/GitHub/ScenarioBank/dvlp/v0.3/sctest.R",
     "project_path": "sctest.R",
     "type": "r_source",
-    "hash": "4187970103",
+    "hash": "2701866018",
     "contents": "",
     "dirty": false,
     "created": 1695546272435.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "23,17",
-        "scrollLine": "0"
+        "cursorPosition": "21,15",
+        "scrollLine": "8"
     },
     "folds": "",
-    "lastKnownWriteTime": 1697124678,
+    "lastKnownWriteTime": 1697125869,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1697124678164,
+    "last_content_update": 1697125869117,
     "read_only": false,
     "read_only_alternatives": []
 }

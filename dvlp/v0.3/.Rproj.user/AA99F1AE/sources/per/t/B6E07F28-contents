@@ -10,7 +10,8 @@ createSimpleMap <- function(aFrcst, aScn = NA, aYr=NA, aVar = NA) {
   #if(is.na(aVar)){
   #  aVar =  aFrcst$data$dict$population
   #}
-
+  browser()
+  
   dataVar =  aFrcst$data$dict[[aVar]]
 
   cat(aFrcst$name, aScn, aYr, dataVar)  

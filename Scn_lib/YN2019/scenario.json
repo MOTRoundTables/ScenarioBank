@@ -9,13 +9,13 @@
 	"scenarios" : {
 		"base": {
 			"desc": "שנת בסיס",
-			"years": [ 2050 ] },
-		"Reg": {
+			"years": [ 2017 ] },
+		"reg": {
 			"desc": "המשך מגמות",
-			"years": [ 2050 ] },
-		"Max": {
+			"years": [ 2040 ] },
+		"max": {
 			"desc": "פיתוח מואץ",
-			"years": [ 2050 ] }
+			"years": [ 2040, 2050 ] }
 	},
 	"dict"    : {
 				"taz"       : "TAZ",

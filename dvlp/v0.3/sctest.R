@@ -12,14 +12,14 @@ currentfrcst$tazdata %>%
   summary()
 
 # for debug
-# aFrcst = currentfrcst
-# aScn = currentscn
-# aYr=2030
-# aVar = 'population'
+aFrcst = currentfrcst
+aScn = currentscn
+aYr = 2017
+aVar = 'population'
 
-createSimpleMap(currentfrcst, aScn = currentscn, 
-                aYr=2017, aVar = 'population') 
-
+createSimpleMap(aFrcst, aScn = currentscn, 
+                aYr=aYr, aVar = aVar) 
+basemap$mapview
 
 #source("main.R")
 source("dvlp/v0.3/main.R")

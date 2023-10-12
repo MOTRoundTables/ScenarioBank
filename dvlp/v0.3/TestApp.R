@@ -22,14 +22,14 @@ ui <- fluidPage(
                       
             titlePanel("בנק"),
                       
-            selectizeInput('selectSrc', 'מקור תחזית', choices = cfg$frcstsources,
+            selectizeInput('selectsrc', 'מקור תחזית', choices = cfg$frcstsources,
               options = list(
                 placeholder = 'בחר מתוך הרשימה ...',
                 onInitialize = I('function() { this.setValue(""); }')
               )
             ),
                       
-            selectizeInput('selectFrcst', 'תרחיש', choices = character(0), #cfg$frcstchoices,
+            selectizeInput('selectfrcst', 'תרחיש', choices = character(0), #cfg$frcstchoices,
               options = list(
                 placeholder = 'בחר מתוך הרשימה ...',
                 onInitialize = I('function() { this.setValue(""); }')
@@ -130,33 +130,33 @@ server <- function(input, output, session) {
   # check on Select source & Select scenario 
   # str0 = " "
   # observe({
-  #   if (input$selectSrc!="") {
-  #     if (currentsrc!=input$selectSrc) { 
+  #   if (input$selectsrc!="") {
+  #     if (currentsrc!=input$selectsrc) { 
   #       if (currentfrcstnum>0) { 
   #         HideCurrentSc() 
   #         currentfrcst <<- NULL
   #         currentfrcstnum <<- 0
   #         refreshmap()
   #       }
-  #       getsrcFrcst(input$selectSrc) 
-  #       updateSelectInput(session, "selectFrcst",
+  #       getsrcFrcst(input$selectsrc) 
+  #       updateSelectInput(session, "selectfrcst",
   #                         choices = cfg$frcstchoices,
   #                         selected = character(0)
   #       )
-  #       currentsrc <<- input$selectSrc
+  #       currentsrc <<- input$selectsrc
   #       cat(paste("new SRC: ", currentsrc, "\n")) # debug
   #     }
   #   }  
   # })
   # 
   # observe({
-  #   if (input$selectFrcst>0) {
-  #     if (currentfrcstnum!=input$selectFrcst) { # scenario changed
+  #   if (input$selectfrcst>0) {
+  #     if (currentfrcstnum!=input$selectfrcst) { # scenario changed
   #       if (currentfrcstnum>0) {  
   #         HideCurrentSc() 
   #       } # close current sc
-  #       currentfrcstnum <<- input$selectFrcst
-  #       currentfrcst <<- setFrcst(input$selectFrcst) # set scenario, session
+  #       currentfrcstnum <<- input$selectfrcst
+  #       currentfrcst <<- setFrcst(input$selectfrcst) # set scenario, session
   #       currentfrcst$opentazdata()
   #       cat(paste("set Frcst: ", currentfrcst$name, "\n"))
   #       updateSelectInput(session, "selectSz",
@@ -173,7 +173,7 @@ server <- function(input, output, session) {
   
   #    output$selectedFrcst = renderPrint({
   #    #str0 = paste("set scenario:", currentfrcst$name, sep = " ")
-  #    str1 = paste("scenario:", input$selectFrcst, sep = " ")
+  #    str1 = paste("scenario:", input$selectfrcst, sep = " ")
   #    str2 = paste("super zone:", input$selectSz, sep = " ")
   #    HTML(paste(str0, str1, str2, sep = '<br/>'))
   #  })
@@ -205,17 +205,17 @@ server <- function(input, output, session) {
   # test button 
   #observeEvent(input$testbutton, {
   #  test1()
-  #if (input$selectSrc=="") {
+  #if (input$selectsrc=="") {
   #  showmessage("no scr")
   #}
   #else {
-  #  showmessage(input$selectSrc)
+  #  showmessage(input$selectsrc)
   #} 
-  #if (input$selectFrcst=="") {
+  #if (input$selectfrcst=="") {
   #  showmessage("no Frcst")
   #}
   #else {
-  #  showmessage(input$selectFrcst)
+  #  showmessage(input$selectfrcst)
   #} 
   
   #showmessage("testbutton")
@@ -292,6 +292,6 @@ server <- function(input, output, session) {
 # Run the application 
 shinyApp(ui = ui, server = server)
 
-#      showmessage(input$selectFrcst) # debug
+#      showmessage(input$selectfrcst) # debug
 
 

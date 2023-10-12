@@ -94,6 +94,9 @@ currentfrcstky <- ""
 currentfrcst <- NULL
 currentscn <- ""
 
+analisystype = list("ערכים", "צפיפות")
+
+
 # start map
 basemap = mymap$new()
 basemap$createmap(cfg$basemap)
@@ -110,7 +113,7 @@ getfrcstnum <- function(frcstky) {    #   asrc = "מודל תל אביב"
   return(cfg$frcstnums$frcstky)
 }  
 
-setnewSource <- function(asrc) {    #   asrc = "מודל תל אביב"
+setnewsource <- function(asrc) {    #   asrc = "מודל תל אביב"
   changed = 0
   if (asrc!="") {
     if (currentsrc!=asrc) {
@@ -122,7 +125,7 @@ setnewSource <- function(asrc) {    #   asrc = "מודל תל אביב"
         basemap$resetmapview(cfg$basemap)
         #refreshmap()
       }
-      getsrcFrcsts(asrc)  # --> main
+      getsrcfrcsts(asrc)  # --> main
       currentsrc <<- asrc
       cat(paste("new SRC: ", currentsrc, "\n")) # debug
       changed = 1
@@ -132,7 +135,7 @@ setnewSource <- function(asrc) {    #   asrc = "מודל תל אביב"
 }
   
 # returns a list of forecasts for a selected source
-getsrcFrcsts <- function(asrc) {    #  asrc = "מודל תל אביב"
+getsrcfrcsts <- function(asrc) {    #  asrc = "מודל תל אביב"
   i = which(cfg$frcstsources == asrc)
   frcsts = cfg$forecastslist[[i]][[2]]
   
@@ -145,7 +148,7 @@ getsrcFrcsts <- function(asrc) {    #  asrc = "מודל תל אביב"
   return()
 }  
 
-setnewFrcst <- function(frcstky) {
+setnewfrcst <- function(frcstky) {
   changed = 0
   if (frcstky!="") {
     if (currentfrcstky!=frcstky) { # scenario changed
@@ -154,7 +157,7 @@ setnewFrcst <- function(frcstky) {
       currentfrcst <<- cfg$forecasts[[frcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
       currentfrcst$getgeolyr()
       currentfrcst$opentazdata()  
-      basemap$addFrcst(currentfrcst)
+      basemap$addfrcst(currentfrcst)
       
       cat(paste("set Frcst: ", currentfrcst$name, "\n"))
       changed = 1
@@ -163,11 +166,13 @@ setnewFrcst <- function(frcstky) {
   return(changed)
 }
 
-setnewScn <- function(aScn) {
+setnewscn <- function(aScn) {
   changed = 0
   if (aScn!="") {
     if (currentscn!=aScn) { # scenario changed
-      currentscn = aScn
+      currentscn <<- aScn
+      cat(paste("set scn: ", currentscn, "\n"))
+      changed = 1
     }
   }    
   return(changed)
@@ -185,14 +190,14 @@ setnewScn <- function(aScn) {
 # addlyrtoLLmap(amap, ky)  #, session
 
 # HideCurrentSc <- function() {   # , session
-#   lyr = currentfrcst$getFrcstlyr()
+#   lyr = currentfrcst$getfrcstlyr()
 #   basemap$hidelyr(lyr)
 # }
 # 
 # HideSc <- function(Frcstnum) {   # , session
 #   # browser()
 #   ky = cfg$frcstkeys[as.integer(Frcstnum)]
-#   temp = Frcst2lyr(cfg$forecasts[[ky]])
+#   temp = frcst2lyr(cfg$forecasts[[ky]])
 #   basemap$hidelyr(temp$lyr)
 #   #return(cfg$forecasts[[ky]])
 # }

@@ -28,7 +28,7 @@ basemap$hidelyr(temp$lyr)
 
 
 
-alyr = currentfrcst$getFrcstlyr()
+alyr = currentfrcst$getfrcstlyr()
 i = basemap$lyrnum(alyr)
 lyrdata = basemap$lyrsdata[[i]]
 
@@ -59,7 +59,7 @@ view(lyrdata)
 
 
 
-alyr = currentfrcst$Frcst2lyr()
+alyr = currentfrcst$frcst2lyr()
 #i = self$addlyr(alyr)
 
 currentfrcst$getgeolyr()

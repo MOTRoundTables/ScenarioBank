@@ -14,7 +14,7 @@ basemap$mapview
 aFrcst$opentazdata()
 # view(aFrcst$tazdata)
 x_join <- aFrcst$Frcst$dict$taz
-y_join <- aFrcst$Frcst2lyr()$zvar
+y_join <- aFrcst$frcst2lyr()$zvar
 # 1 generate a summary of population by scenario
 scens = aFrcst$Frcst$scnlist   # the available scenarios
 pop_col_name <- aFrcst$Frcst$dict$population
@@ -71,7 +71,7 @@ view(df)
 # -------------------------------------------
 
 
-alyr = currentfrcst$getFrcstlyr()
+alyr = currentfrcst$getfrcstlyr()
 i = basemap$lyrnum(alyr)
 lyrdata = basemap$lyrsdata[[i]]
 

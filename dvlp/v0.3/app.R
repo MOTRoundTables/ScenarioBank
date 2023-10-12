@@ -3,13 +3,14 @@
 library(shiny)
 library(shinythemes)  # https://rstudio.github.io/shinythemes/
 library(shinyWidgets) # https://dreamrs.github.io/shinyWidgets/index.html
+library(waiter) # https://waiter.john-coene.com/#/  #https://shiny.john-coene.com/waiter/
 
 source("main.R")
 
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-
+  waiter::use_waiter(),
   titlePanel("בנק תחזיות"),
   
   navbarPage(" ", theme = shinytheme("united"),  # lumen
@@ -22,25 +23,29 @@ ui <- fluidPage(
 
           titlePanel("בנק"),
           
-          selectizeInput('selectSrc', 'מקור תחזית', choices = cfg$frcstsources,
+          selectizeInput('selectsrc', 'מקור תחזית', choices = cfg$frcstsources,
             options = list(
               placeholder = 'בחר מתוך הרשימה ...',
               onInitialize = I('function() { this.setValue(""); }') ) ),
           
-          selectizeInput('selectFrcst', 'תחזית', choices = character(0), 
+          selectizeInput('selectfrcst', 'תחזית', choices = character(0), 
             options = list(
               placeholder = 'בחר מתוך הרשימה ...',
               onInitialize = I('function() { this.setValue(""); }') ) ),
           
-          selectInput('selectScn', 'תרחיש', "", multiple=FALSE, selectize=FALSE),
+          hr(), 
+          selectInput('selectscn', 'תרחיש', "", multiple=FALSE, selectize=FALSE),
 
-          selectInput('selectYr', 'שנה', "", multiple=FALSE, selectize=FALSE),
+          selectInput('selectyr', 'שנה', "", multiple=FALSE, selectize=FALSE),
 
           hr(), 
-          
-          selectInput('selectVar', 'משתנה', "", multiple=FALSE, selectize=FALSE),
+          selectInput('selectvar', 'משתנה', "", multiple=FALSE, selectize=FALSE),
 
-          selectInput('selectAnalysis', 'עיבוד', "", multiple=FALSE, selectize=FALSE)
+          selectInput('selectanalysis', 'עיבוד', choices = analisystype, 
+                    selected = 1, multiple=FALSE, selectize=FALSE),
+
+          hr(),
+          actionButton("doanalisys", "apply", style='width:100%'),
 
           # --------------------------------------          
 
@@ -68,7 +73,9 @@ ui <- fluidPage(
     mainPanel(
 
           tabsetPanel(id = "tabs1", type = "tabs",
-              tabPanel("map", br(), uiOutput("leaf") ),
+              tabPanel("map", br(), 
+                       uiOutput("leaf")
+              ),
               tabPanel("Summary", verbatimTextOutput("Frcstsummary") ),
               tabPanel("chart"),
               tabPanel("Table", tableOutput("Frcsttable") )
@@ -94,45 +101,66 @@ server <- function(input, output, session) {
 
   # --------- tabPanel "צפייה"
   
-  resetInputs = function () {
-    updateSelectInput(session, "selectYr", choices = "", selected = character(0) )
-    updateSelectInput(session, "selectVar", choices = "", selected = character(0) )
-    updateSelectInput(session, "selectAnalysis", choices = "", selected = character(0) )
+  resetfrcstinputs = function () {
+    updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
   }
+
+  resetscninputs = function () {
+    updateSelectInput(session, "selectyr", choices = "", selected = character(0) )
+    updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
+    #updateSelectInput(session, "selectanalysis", selected = character(0) )  # choices = "",
+  }
+
   
-  observeEvent(input$selectSrc, {  
-    if (setnewSource(input$selectSrc)) {
-      updateSelectInput(session, "selectFrcst",
+  observeEvent(input$selectsrc, {  
+    if (setnewsource(input$selectsrc)) {
+      updateSelectInput(session, "selectfrcst",
                         choices = cfg$frcstchoices,
                         selected = character(0) )  
       refreshmap()
-      resetInputs()
+      resetfrcstinputs()
+      resetscninputs()
     }
   })
 
-  observeEvent(input$selectFrcst, { 
-    if (setnewFrcst(input$selectFrcst)) {
-      updateSelectInput(session, "selectScn",
+  observeEvent(input$selectfrcst, { 
+    waiter <- waiter::Waiter$new( html = spin_3(), color = transparent(.5)) 
+    waiter$show()
+    on.exit(waiter$hide())    
+    if (setnewfrcst(input$selectfrcst)) {
+      updateSelectInput(session, "selectscn",
                         choices = currentfrcst$scnchoices,
                         selected = character(0) )
+      updateSelectInput(session, "selectvar",
+                        choices = currentfrcst$getfrcstvars(),
+                        selected = character(0) )
       refreshmap()
-      resetInputs()
+      #resetscninputs()
     }
   })
   
-  observeEvent(input$selectScn, {
-    if (input$selectScn!="") {
-      if (setnewScn(input$selectScn)) {
-        updateSelectInput(session, "selectYr",
-                        choices = currentfrcst$Frcst$scenarios[[currentscn]]$years,
+  observeEvent(input$selectscn, {
+    if (input$selectscn!="") {
+      if (setnewscn(input$selectscn)) {
+        updateSelectInput(session, "selectyr",
+                        choices = currentfrcst$getscnyears(currentscn),
                         selected = character(0) )
       }
-    }  
+      #resetscninputs()
+    }
   })
 
+  observeEvent(input$doanalisys, {
+    showmessage("pressed button")
+    createSimpleMap(currentfrcst, aScn = currentscn, 
+                    aYr=input$selectyr, aVar = input$selectvar)  
+    refreshmap()
+  })  
+  
   # -------------------------------------
   
   refreshmap = function() {
+    
     output$appMap <- renderLeaflet({ basemap$mapview@map })
     output$leaf = renderUI({ leafletOutput("appMap", width = "100%", height = cfg$basemap$height) })
     
@@ -156,20 +184,14 @@ shinyApp(ui = ui, server = server)
 
 # = end ==============================================
 
-#htmlOutput("selectedFrcst"),        # display selection  
-#br(),
-#actionButton("testbutton", "test", style='width:100%'),
-#br(),br(),br(),br(),
-#actionButton("testbutton2", "test2", style='width:100%')
-
-
 # servet tests
 
-# --------------------------------------
+#htmlOutput("selectedFrcst"),        # display selection  
+#br()
 
 #    output$selectedFrcst = renderPrint({
 #    #str0 = paste("set scenario:", currentfrcst$name, sep = " ")
-#    str1 = paste("scenario:", input$selectFrcst, sep = " ")
+#    str1 = paste("scenario:", input$selectfrcst, sep = " ")
 #    str2 = paste("super zone:", input$selectSz, sep = " ")
 #    HTML(paste(str0, str1, str2, sep = '<br/>'))
 #  })
@@ -197,17 +219,17 @@ shinyApp(ui = ui, server = server)
 # test button 
 #observeEvent(input$testbutton, {
 #  test1()
-#if (input$selectSrc=="") {
+#if (input$selectsrc=="") {
 #  showmessage("no scr")
 #}
 #else {
-#  showmessage(input$selectSrc)
+#  showmessage(input$selectsrc)
 #} 
-#if (input$selectFrcst=="") {
+#if (input$selectfrcst=="") {
 #  showmessage("no Frcst")
 #}
 #else {
-#  showmessage(input$selectFrcst)
+#  showmessage(input$selectfrcst)
 #} 
 
 #showmessage("testbutton")

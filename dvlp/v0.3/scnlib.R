@@ -11,9 +11,10 @@ frcstclass <- R6Class("Frcstclass",
       name = NULL,
       dir = NULL,
       
+      data = NULL, 
+      
       # scenarios
       scnlist = NULL, 
-      scenarios = NULL,
       scnnames = NULL, 
       scnchoices = NULL, 
 
@@ -32,14 +33,9 @@ frcstclass <- R6Class("Frcstclass",
         x = fromJSON(paste0(frcstdir, frcstky, "/scenario.json"))
         self$name = x$name
         self$dir = paste0(frcstdir, x$dir, "/")
+        self$data = x
         
         self$scnlist = names(x$scenarios)
-        self$scenarios = x$scenarios
-        #self$scenarios = list()
-        #for (i in 1:self$scnlist.length) {
-        #  self$scenarios = append(self$scenarios, x$scenarios[i])
-        #}
-        
         self$scnnames = list()
         self$scnchoices = vector(mode = "list") 
         for (i in 1:length(self$scnlist)) {
@@ -49,39 +45,33 @@ frcstclass <- R6Class("Frcstclass",
         }
         
         self$vars = names(x$dict)
-        self$dict = x$dict
-        # self$dict = list()
-        # for (i in 1:self$vars) {
-        #   self$dict = append(self$dict, x$dict[i])
-        # }
       },
       
 
       # - forecast layer -------------------------------------      
       
-      getFrcstlyr = function() {
-        return(self$Frcst$tazlyr)
+      getfrcstlyr = function() {
+        return(self$data$tazlyr)
       },
 
       getgeolyr = function() {
         if (is.null(self$geolyr)) {
-          url = paste(self$dir, self$Frcst$tazfile, sep="")
+          url = paste(self$dir, self$data$tazfile, sep="")
           #self$geolyr <- geojson_read(url, what = "sp")   # at this stage only support geojson
           self$geolyr <- geojson_sf(url)
         }
         #return(self$geolyr)
       },
       
-      Frcst2lyr = function() {
-        Frcst = self$Frcst # cfg$forecasts[[self$ky]]
-        if (is.null(Frcst$tazname)) { Frcst$tazname = Frcst$tazlyr }  # can define optional tazname
+      frcst2lyr = function() {
+        if (is.null(self$data$tazname)) { self$data$tazname = self$data$tazlyr }  # can define optional tazname
 
-        Frcstlyr <- list(
-          lyr = self$getFrcstlyr(),        # the code of the layer
-          name = Frcst$tazname,  
-          zvar = Frcst$tazvar, 
+        frcstlyr <- list(
+          lyr = self$getfrcstlyr(),        # the code of the layer
+          name = self$data$tazname,  
+          zvar = self$data$tazvar, 
           zname = "NA", 
-          #file = Frcst$tazfile,
+          #file = self$data$tazfile,
           group = "forecasts",  # "שכבות תחזיות",
           pane = "other", 
           color = "#FF0000",
@@ -93,7 +83,7 @@ frcstclass <- R6Class("Frcstclass",
           status = 0
         )
         
-        temp = list(Frcstlyr)
+        temp = list(frcstlyr)
         temp = temp %>% 
           map_df(as_tibble)
         return(temp)
@@ -102,15 +92,24 @@ frcstclass <- R6Class("Frcstclass",
       # - forecast data  -------------------------------------      
       
       opentazdata = function() {
-        fl = paste(self$Frcst$dir, "/", self$Frcst$file, sep="")        
+        fl = paste(self$dir, "/", self$data$file, sep="")        
         self$tazdata = fread(fl)  # read_csv(fl)            
       },
 
+      getfrcstvars = function() {
+        return(self$vars)      
+      },
 
       # - aggregation data  -------------------------------------      
       
       getagvars = function() {
-        return(self$Frcst$agvars)
+        return(self$data$agvars)
+      },
+      
+      # - scenario functions  -------------------------------------      
+      
+      getscnyears = function(ascn) {
+        return(self$data$scenarios[[ascn]]$years)
       }
       
   )

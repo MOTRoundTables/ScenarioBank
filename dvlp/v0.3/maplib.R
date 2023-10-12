@@ -98,8 +98,8 @@ mymap <- R6Class("mymapclass",
         },
 
         # add Frcst 
-        addFrcst = function(frcst) { # view(basemap$lyrs)
-          alyr = frcst$Frcst2lyr()
+        addfrcst = function(frcst) { # view(basemap$lyrs)
+          alyr = frcst$frcst2lyr()
           #i = self$addlyr(alyr, frcst$geolyr)
           #i = self$setlyr(alyr, frcst$geolyr)
           self$setlyr(alyr, frcst$geolyr)

@@ -1,9 +1,0 @@
-# -- build frcstchoices for menu
-n = length(cfg$frcstkeys)
-cfg$frcstlist = vector(mode = "list", length = n)
-cfg$frcstchoices = vector(mode = "list")              # for menu
-for (i in 1:n) {
-  ky = cfg$frcstkeys[i]
-  cfg$frcstlist[i] = cfg$forecasts[[ky]]$name           # Frcst names
-  cfg$allfrcstchoices[as.character(cfg$frcstlist[i])] = ky # Frcst ky
-}

@@ -3,7 +3,7 @@
 	"source"  : "מודל חיפה",
 	"dir"     : "YN2019",
 	"tazlyr"  : "TAZ_HaifaNorth",
-	"tazvar"  : "TAZ_Number",
+	"tazvar"  : "TAZ_NUMBER",
 	"tazfile" : "TAZ_North.geojson",
 	"file"    : "YN2019.csv",
 	"scenarios" : {

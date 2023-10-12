@@ -48,6 +48,11 @@ mymap <- R6Class("mymapclass",
             setView(lng = mapproperties$initial_lon, lat = mapproperties$initial_lat, zoom = mapproperties$initial_zm)   
         },
 
+        resetmap = function(mapproperties) {  # start a fresh map
+          self$createmap(mapproperties)
+          self$resetmapview(mapproperties)
+        },
+
         getnumloadedlayers = function() {
           print(self$loadedlayers)
         },

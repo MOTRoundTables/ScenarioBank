@@ -99,9 +99,8 @@ analisystype = list("ערכים", "צפיפות")
 
 # start map
 basemap = mymap$new()
-basemap$createmap(cfg$basemap)
+basemap$resetmap(cfg$basemap)
 #basemap$addlayers(cfg$szlyrs)
-basemap$resetmapview(cfg$basemap)
 
 # basemap$mapview
 # basemap$map

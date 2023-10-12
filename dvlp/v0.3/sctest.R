@@ -3,8 +3,27 @@
 # setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/dvlp/v0.3")  # for debug
 
 
+currentfrcst$data$tazvar
+view(currentfrcst$geolyr)
+
+view(currentfrcst$tazdata)
+currentfrcst$tazdata %>%
+  summary()
+
+# for debug
+# aFrcst = currentfrcst
+# aScn = currentscn
+# aYr=2030
+# aVar = 'population'
+
+createSimpleMap(currentfrcst, aScn = currentscn, 
+                aYr=2017, aVar = 'population') 
+
+
 #source("main.R")
 source("dvlp/v0.3/main.R")
+
+
 cfg$forecastslist
 sc = "BS_v09"
 
@@ -35,25 +54,6 @@ createChronologicalGraph(aFrcst,pop_col_name)
 createSummaryTable(aFrcst,pop_col_name)
 # - - - - - - - - - - - - - - - - - -  
 
-
-currentfrcst$Frcst$tazvar
-
-currentfrcst$geolyr
-class(currentfrcst$geolyr)
-
-currentfrcst$tazdata
-view(currentfrcst$tazdata)
-class(currentfrcst$tazdata)
-currentfrcst$tazdata %>%
-  summary()
-
-
-
-
-x = currentfrcst$Frcst$tazvar
-view(currentfrcst$geolyr)
-
-currentfrcst$Frcst$tazvar
 
 df <- merge(currentfrcst$geolyr, currentfrcst$tazdata, by.x = currentfrcst$Frcst$tazvar, by.y = "taz", all.x=TRUE)
 view(df)

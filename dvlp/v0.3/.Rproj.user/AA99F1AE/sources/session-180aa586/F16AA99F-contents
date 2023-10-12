@@ -19,7 +19,7 @@ ui <- fluidPage(
              
       sidebarLayout(position = "right",
                     
-        sidebarPanel(
+        sidebarPanel( width = 3,
 
           titlePanel("בנק"),
           
@@ -151,7 +151,7 @@ server <- function(input, output, session) {
   })
 
   observeEvent(input$doanalisys, {
-    showmessage("pressed button")
+    #showmessage("pressed button")
     createSimpleMap(currentfrcst, aScn = currentscn, 
                     aYr=input$selectyr, aVar = input$selectvar)  
     refreshmap()

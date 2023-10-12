@@ -4,34 +4,68 @@ library(data.table)
 
 # = Frcst class  =========================================
 
-Frcstclass <- R6Class("Frcstclass",
+frcstclass <- R6Class("Frcstclass",
     public = list(
-        ky = NULL,
-        name = NULL,
-        num = NULL,
-        Frcst = NULL,
-        geolyr = NULL,
-        tazdata = NULL,
-        tazdataSSS = NULL,
+      num = NULL,
+      ky = NULL,
+      name = NULL,
+      dir = NULL,
       
-      initialize = function(Frcstky) {
-        self$ky = Frcstky
-        self$Frcst = cfg$forecasts[[self$ky]]
-        self$num = self$Frcst$num
-        self$name = self$Frcst$name
+      # scenarios
+      scnlist = NULL, 
+      scenarios = NULL,
+      scnnames = NULL, 
+      scnchoices = NULL, 
+
+      # vars
+      vars = NULL, 
+      dict = NULL, 
+
+      # data
+      geolyr = NULL,
+      tazdata = NULL,
+
+      initialize = function(num, frcstky, frcstdir) {
+        self$num = num
+        self$ky = frcstky
+        
+        x = fromJSON(paste0(frcstdir, frcstky, "/scenario.json"))
+        self$name = x$name
+        self$dir = paste0(frcstdir, x$dir, "/")
+        
+        self$scnlist = names(x$scenarios)
+        self$scenarios = x$scenarios
+        #self$scenarios = list()
+        #for (i in 1:self$scnlist.length) {
+        #  self$scenarios = append(self$scenarios, x$scenarios[i])
+        #}
+        
+        self$scnnames = list()
+        self$scnchoices = vector(mode = "list") 
+        for (i in 1:length(self$scnlist)) {
+          y = x$scenarios[[self$scnlist[i]]]
+          self$scnnames = append(self$scnnames, y$desc)
+          self$scnchoices[y$desc] = self$scnlist[i]
+        }
+        
+        self$vars = names(x$dict)
+        self$dict = x$dict
+        # self$dict = list()
+        # for (i in 1:self$vars) {
+        #   self$dict = append(self$dict, x$dict[i])
+        # }
       },
+      
+
+      # - forecast layer -------------------------------------      
       
       getFrcstlyr = function() {
         return(self$Frcst$tazlyr)
       },
 
-      getagvars = function() {
-        return(self$Frcst$agvars)
-      },
-
       getgeolyr = function() {
         if (is.null(self$geolyr)) {
-          url = paste(self$Frcst$dir, self$Frcst$tazfile, sep="")
+          url = paste(self$dir, self$Frcst$tazfile, sep="")
           #self$geolyr <- geojson_read(url, what = "sp")   # at this stage only support geojson
           self$geolyr <- geojson_sf(url)
         }
@@ -65,12 +99,20 @@ Frcstclass <- R6Class("Frcstclass",
         return(temp)
       },
       
+      # - forecast data  -------------------------------------      
+      
       opentazdata = function() {
         fl = paste(self$Frcst$dir, "/", self$Frcst$file, sep="")        
         self$tazdata = fread(fl)  # read_csv(fl)            
-      }
+      },
 
-            
+
+      # - aggregation data  -------------------------------------      
+      
+      getagvars = function() {
+        return(self$Frcst$agvars)
+      }
+      
   )
 ) # end mymap class
 
@@ -82,23 +124,23 @@ Frcstclass <- R6Class("Frcstclass",
 #opentazdata = function() {
 #  #browser()
 #  files = self$Frcst$files
-#  n = length(currentFrcst$Frcst$files)
+#  n = length(currentfrcst$Frcst$files)
 #  
 #  flnew = ""
-#  joinvar = currentFrcst$Frcst$files[[1]][[4]][[1]] 
+#  joinvar = currentfrcst$Frcst$files[[1]][[4]][[1]] 
 #  x <- vector(mode="list", length=n)
 #  for (i in 1:n) {
-#    fl = paste(currentFrcst$Frcst$dir, "/", currentFrcst$Frcst$files[[i]][[3]], sep="")        
+#    fl = paste(currentfrcst$Frcst$dir, "/", currentfrcst$Frcst$files[[i]][[3]], sep="")        
 #    # x[[i]] <- fread(fl)  # read_csv(fl) read all vars ...
 #    if (fl!=flnew) {
 #      tmp <- fread(fl)  # read_csv(fl)            
 #      flnew = fl
 #    }
-#    vars = currentFrcst$Frcst$files[[i]][[4]]
+#    vars = currentfrcst$Frcst$files[[i]][[4]]
 #    vars = vars[ !vars == "None"]
 #    tmp1 = tmp %>%   # keep only vars
 #      select(all_of(vars))
-#    x[[i]] = tmp1 %>% rename_all( ~ paste0(currentFrcst$Frcst$files[[i]][[1]], "_", .x))
+#    x[[i]] = tmp1 %>% rename_all( ~ paste0(currentfrcst$Frcst$files[[i]][[1]], "_", .x))
 #    colnames(x[[i]])[1] <- joinvar
 #  }
 #  self$tazdata = x %>% reduce(left_join, by=joinvar)

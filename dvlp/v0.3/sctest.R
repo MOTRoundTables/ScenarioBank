@@ -3,9 +3,6 @@
 # setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/dvlp/v0.3")  # for debug
 
 
-
-
-
 #source("main.R")
 source("dvlp/v0.3/main.R")
 cfg$forecastslist
@@ -39,32 +36,32 @@ createSummaryTable(aFrcst,pop_col_name)
 # - - - - - - - - - - - - - - - - - -  
 
 
-currentFrcst$Frcst$tazvar
+currentfrcst$Frcst$tazvar
 
-currentFrcst$geolyr
-class(currentFrcst$geolyr)
+currentfrcst$geolyr
+class(currentfrcst$geolyr)
 
-currentFrcst$tazdata
-view(currentFrcst$tazdata)
-class(currentFrcst$tazdata)
-currentFrcst$tazdata %>%
+currentfrcst$tazdata
+view(currentfrcst$tazdata)
+class(currentfrcst$tazdata)
+currentfrcst$tazdata %>%
   summary()
 
 
 
 
-x = currentFrcst$Frcst$tazvar
-view(currentFrcst$geolyr)
+x = currentfrcst$Frcst$tazvar
+view(currentfrcst$geolyr)
 
-currentFrcst$Frcst$tazvar
+currentfrcst$Frcst$tazvar
 
-df <- merge(currentFrcst$geolyr, currentFrcst$tazdata, by.x = currentFrcst$Frcst$tazvar, by.y = "taz", all.x=TRUE)
+df <- merge(currentfrcst$geolyr, currentfrcst$tazdata, by.x = currentfrcst$Frcst$tazvar, by.y = "taz", all.x=TRUE)
 view(df)
 
 
-#df <- left_join(currentFrcst$geolyr, currentFrcst$tazdata, by = c( {currentFrcst$geolyr[[x]]} = "taz" ) ) # currentFrcst$Frcst$tazvar
-#df <- left_join(currentFrcst$geolyr, currentFrcst$tazdata, by = c( 'TAZV41' = 'taz' ) )
-#df3 <- left_join(currentFrcst$geolyr, currentFrcst$tazdata, join_by = c(id == x, taz == 'taz'))
+#df <- left_join(currentfrcst$geolyr, currentfrcst$tazdata, by = c( {currentfrcst$geolyr[[x]]} = "taz" ) ) # currentfrcst$Frcst$tazvar
+#df <- left_join(currentfrcst$geolyr, currentfrcst$tazdata, by = c( 'TAZV41' = 'taz' ) )
+#df3 <- left_join(currentfrcst$geolyr, currentfrcst$tazdata, join_by = c(id == x, taz == 'taz'))
 
 
 
@@ -74,35 +71,35 @@ view(df)
 # -------------------------------------------
 
 
-alyr = currentFrcst$getFrcstlyr()
+alyr = currentfrcst$getFrcstlyr()
 i = basemap$lyrnum(alyr)
 lyrdata = basemap$lyrsdata[[i]]
 
 
 HideSc(1)
 
-x = currentFrcst$tazdata[1]
-view(currentFrcst$tazdata[2])
+x = currentfrcst$tazdata[1]
+view(currentfrcst$tazdata[2])
 
 
-df1 = currentFrcst$tazdata[[1]]
+df1 = currentfrcst$tazdata[[1]]
 view(df1)
 colnames(df1)
 df2 = df1 %>%
-  left_join(currentFrcst$tazdata[[2]], by='taz') 
+  left_join(currentfrcst$tazdata[[2]], by='taz') 
 view(df2)
 colnames(df2)
 df3 = df2 %>%
-  left_join(currentFrcst$tazdata[[3]], by='taz') 
+  left_join(currentfrcst$tazdata[[3]], by='taz') 
 view(df3)
 colnames(df3)
 df4 = df3 %>%
-  left_join(currentFrcst$tazdata[[4]], by='taz') 
+  left_join(currentfrcst$tazdata[[4]], by='taz') 
 view(df4)
 colnames(df4)
 
 
-xx = currentFrcst$tazdata
+xx = currentfrcst$tazdata
 
 yy = xx %>% reduce(left_join, by='taz')
 
@@ -116,8 +113,8 @@ typeof(df1)
 
 
 
-files = currentFrcst$Frcst$files
-fl = paste("Frcst_lib/", currentFrcst$Frcst$dir, "/", currentFrcst$Frcst$files[[1]][[3]], sep="")
+files = currentfrcst$Frcst$files
+fl = paste("Frcst_lib/", currentfrcst$Frcst$dir, "/", currentfrcst$Frcst$files[[1]][[3]], sep="")
 data3 <- fread(fl)
 
 
@@ -173,14 +170,14 @@ font-size: 15px;
 
 # --------------------------------
 
-n = length(currentFrcst$Frcst$files)
+n = length(currentfrcst$Frcst$files)
 x <- vector(mode="list", length=n)
 #for (i in 1:n) {
 i = 1
 
-fl = paste("Frcst_lib/", currentFrcst$Frcst$dir, "/", currentFrcst$Frcst$files[[i]][[3]], sep="")        
+fl = paste("Frcst_lib/", currentfrcst$Frcst$dir, "/", currentfrcst$Frcst$files[[i]][[3]], sep="")        
 tmp <- fread(fl)  # read_csv(fl)            
-vars = currentFrcst$Frcst$files[[i]][[4]]
+vars = currentfrcst$Frcst$files[[i]][[4]]
 tmp %>% 
   select(all_of(vars))
 #}

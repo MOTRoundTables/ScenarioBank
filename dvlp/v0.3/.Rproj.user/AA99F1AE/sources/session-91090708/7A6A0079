@@ -1,0 +1,28 @@
+{
+    "id": "7A6A0079",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1697091765598.0,
+    "source_on_save": false,
+    "relative_order": 13,
+    "properties": {
+        "id": "4af5defe61f3478dbde23c8d2903b825",
+        "name": "currentfrcst",
+        "title": "currentfrcst",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1574686472736,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697091765598,
+    "read_only": false,
+    "read_only_alternatives": []
+}

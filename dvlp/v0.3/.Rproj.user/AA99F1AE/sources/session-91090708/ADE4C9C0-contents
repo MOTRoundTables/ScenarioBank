@@ -1,9 +1,11 @@
 # View(cfg)
 # Sys.setlocale(locale="hebrew")
-setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/dvlp/v0.3")  # for debug
+# setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/dvlp/v0.3")  # for debug
+
 
 #source("main.R")
 source("dvlp/v0.3/main.R")
+cfg$forecastslist
 sc = "BS_v09"
 
 # create scenario
@@ -20,22 +22,17 @@ aFrcst$Frcst$scnnames
 afrcst = 1 
 
 years = aFrcst$Frcst$scenarios[[scens[afrcst]]]$years  # the available years for 1st scenario
-popsummary = aFrcst$tazdata %>% 
-  group_by(Scenario,Year) %>% 
-  summarise(population = sum(!!sym(pop_col_name))) %>% 
-  spread(Year,population) 
 
 # 2 create map op population for one scenario
 yearvar = years[4]
-filtered <- aFrcst$tazdata %>% as_tibble() %>% filter(Scenario == scens[afrcst],Year == yearvar)
-with_geoms <- filtered %>% left_join(aFrcst$geolyr,by = setNames(y_join,x_join)) %>% st_sf()
+
 
 # 3 mapview population of scenario
-basemap$mapview +
-  mapview(with_geoms,zcol = pop_col_name)
-basemap$mapview
-
-
+createSimpleMap(aFrcst,scens[1],yearvar,pop_col_name)
+# 4 chart of pop
+createChronologicalGraph(aFrcst,pop_col_name)
+# 5 table of pop
+createSummaryTable(aFrcst,pop_col_name)
 # - - - - - - - - - - - - - - - - - -  
 
 

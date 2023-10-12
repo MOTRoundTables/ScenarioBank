@@ -22,40 +22,56 @@ source(paste0(idoenv,"proc-map.R"))
 
 # - initialize
 initapp <- function() {
-  #browser()
   cfg = fromJSON(paste0(idoenv,"scbank.json")) 
   cfg$general$geodir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$geodir, fixed=TRUE)
   cfg$general$frcstdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$frcstdir, fixed=TRUE)
   cfg$general$rsltdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$rsltdir, fixed=TRUE)
-
-  # -- load forecasts dictionaries and create a list of frcst objects
+  
+  # -- load forecasts dictionaries
   n = length(cfg$forecastslist)
-  cfg$frcstsources = list()
   cfg$forecasts = list() 
-  cfg$frcstkeys = vector()
-  cfg$frcstnums = list() 
-  cfg$frcstlist = list()
-  k = 0
+  cfg$frcstsources = list()
+  cfg$frcstkeys = vector()  
   for (i in 1:n) {
     cfg$frcstsources = append(cfg$frcstsources, cfg$forecastslist[[i]][[1]])
-
     n2 = length(cfg$forecastslist[[i]][[2]])
     for (j in 1:n2) {
-      k = k + 1
-      frcstky = cfg$forecastslist[[i]][[2]][[j]]
-      cat(frcstky)
-      frcst1 = frcstclass$new(k, frcstky, cfg$general$frcstdir) # create object
-      cfg$forecasts = append(cfg$forecasts, frcst1)   # list of objects
-      cfg$frcstkeys = append(cfg$frcstkeys, frcstky)
-      cfg$frcstnums[frcstky] = k
-      cfg$frcstlist[frcstky] = frcst1$name
+      cat(cfg$forecastslist[[i]][[2]][[j]])
+      cfg$frcstkeys = append(cfg$frcstkeys, cfg$forecastslist[[i]][[2]][[j]])
+      x = fromJSON(paste(cfg$general$frcstdir, cfg$forecastslist[[i]][[2]][[j]], "/scenario.json", sep = ""))
+      x$scnlist = names(x$scenarios)
+      x$vars = names(x$dict)
+      x$scnnames = list()
+      x$scnchoices = vector(mode = "list") 
+      for (k in 1:length(x$scnlist)) {
+        y = x$scenarios[[x$scnlist[k]]]
+        x$scnnames = append(x$scnnames, y$desc)
+        x$scnchoices[y$desc] = x$scnlist[k]
+      }
+      y = list()
+      y[[cfg$forecastslist[[i]][[2]][[j]]]] = x
+      cfg$forecasts = append(cfg$forecasts, y)
     }
   }
 
-  # -- load & process super-zones dict
+  # -- build Frcstchoices
+  n = length(cfg$frcstkeys)
+  cfg$Frcstlist = vector(mode = "list", length = n)
+  cfg$Frcstchoices = vector(mode = "list")              # for menu
+  for (i in 1:n) {
+    ky = cfg$frcstkeys[i]
+    cfg$forecasts[[ky]]$num = i                       # save as internal ID
+    cfg$Frcstlist[i] = cfg$forecasts[[ky]]$name         # Frcst names
+    #cfg$Frcstchoices[as.character(cfg$Frcstlist[i])] = i # Frcst numb
+    cfg$allFrcstchoices[as.character(cfg$Frcstlist[i])] = ky # Frcst ky
+    cfg$forecasts[[i]]$dir = paste0(cfg$general$frcstdir, cfg$forecasts[[i]]$dir, "/")
+  }
+
+  # -- load super-zones dict
   tmp = fromJSON(paste(cfg$general$geodir, "szlyrs.json", sep=""))
   cfg$superzones = tmp$superzones
 
+  # -- process forecasts
   cfg$szkeys = names(cfg$superzones)                  # vector of SZ keys    
   n = length(cfg$szkeys)
   cfg$szlist = vector(mode = "list", length = n)      # for menu
@@ -72,15 +88,16 @@ initapp <- function() {
     cfg$szlyrs[i] = cfg$superzones[ky]
   }
 
+  # -- process super-zones
   cfg$szlyrs = cfg$szlyrs %>% 
     map_df(as_tibble)
   #cfg$szlyrs['name'] <- ""
   cfg$szlyrs['status'] <- 0                        # lyrs %>% add_column(status = 0)  # NA
   
-  #cfg$szchoices0 = vector(mode = "list")  
-  #cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
+  cfg$szchoices0 = vector(mode = "list")  
+  cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
   # cfg$szchoices0 = append (cfg$szchoices0, cfg$szchoices)
-  #list("Choice 1" = 1, "Choice 2" = 2)  
+  list("Choice 1" = 1, "Choice 2" = 2)  
   
   return(cfg)
 }  
@@ -90,9 +107,10 @@ initapp <- function() {
 cfg <- initapp()
 
 currentsrc <- ""
-currentfrcstky <- ""
-currentfrcst <- NULL
-currentscn <- ""
+currentFrcstky <- ""
+currentFrcst <- NULL
+currentScn <- ""
+
 
 # start map
 basemap = mymap$new()
@@ -105,19 +123,14 @@ basemap$resetmapview(cfg$basemap)
 
 # - ui functions --------------------------------------------
 
-getfrcstnum <- function(frcstky) {    #   asrc = "מודל תל אביב"
-# return(which(cfg$frcstkeys == frcstky))
-  return(cfg$frcstnums$frcstky)
-}  
-
 setnewSource <- function(asrc) {    #   asrc = "מודל תל אביב"
   changed = 0
   if (asrc!="") {
     if (currentsrc!=asrc) {
-      if (currentfrcstky!="") {  ## clear Frcst and map
+      if (currentFrcstky!="") {  ## clear Frcst and map
         #HideCurrentSc()
-        currentfrcstky <<- ""
-        currentfrcst <<- NULL
+        currentFrcstky <<- ""
+        currentFrcst <<- NULL
         basemap$createmap(cfg$basemap)  # reset to initial map 
         basemap$resetmapview(cfg$basemap)
         #refreshmap()
@@ -132,42 +145,49 @@ setnewSource <- function(asrc) {    #   asrc = "מודל תל אביב"
 }
   
 # returns a list of forecasts for a selected source
-getsrcFrcsts <- function(asrc) {    #  asrc = "מודל תל אביב"
-  i = which(cfg$frcstsources == asrc)
-  frcsts = cfg$forecastslist[[i]][[2]]
-  
-  n = length(frcsts)
-  cfg$frcstchoices <<- vector(mode = "list")  
+getsrcFrcsts <- function(asrc) {    #   asrc = "מודל תל אביב"
+  n = length(cfg$forecasts)
+  cfg$Frcstchoices <<- vector(mode = "list")  # view(cfg$Frcstchoices)
   for (i in 1:n) {
-    ky = frcsts[i]
-    cfg$frcstchoices[as.character(cfg$frcstlist[ky])] <<- ky
+    ky = cfg$frcstkeys[i]
+    if (cfg$forecasts[[ky]]$source==asrc) {
+      cfg$Frcstchoices[as.character(cfg$Frcstlist[i])] <<- ky
+    }
   }
   return()
 }  
 
-setnewFrcst <- function(frcstky) {
+setnewFrcst <- function(aFrcst) {
   changed = 0
-  if (frcstky!="") {
-    if (currentfrcstky!=frcstky) { # scenario changed
-      currentfrcstky <<- frcstky
-      frcstnum <- cfg$frcstnums[[frcstky]]  # getfrcstnum(currentfrcstky)
-      currentfrcst <<- cfg$forecasts[[frcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
-      currentfrcst$getgeolyr()
-      currentfrcst$opentazdata()  
-      basemap$addFrcst(currentfrcst)
+  if (aFrcst!="") {
+    if (currentFrcstky!=aFrcst) { # scenario changed
+      currentFrcstky <<- aFrcst
+      currentFrcst <<- setFrcst(aFrcst) # set scenario  --> main
+      currentFrcst$opentazdata()# --> Frcstlib
       
-      cat(paste("set Frcst: ", currentfrcst$name, "\n"))
+      
+      
+      
+      cat(paste("set Frcst: ", currentFrcst$name, "\n"))
       changed = 1
     }
   }
   return(changed)
 }
 
+setFrcst <- function(Frcstky) {   
+  cat(Frcstky)
+  #browser()
+  Frcst1 = Frcstclass$new(Frcstky)
+  basemap$addFrcst(Frcst1)  #, session
+  return(Frcst1)  # cfg$forecasts[[Frcst1$ky]])
+}
+
 setnewScn <- function(aScn) {
   changed = 0
   if (aScn!="") {
-    if (currentscn!=aScn) { # scenario changed
-      currentscn = aScn
+    if (currentScn!=aScn) { # scenario changed
+      currentScn = aScn
     }
   }    
   return(changed)
@@ -185,7 +205,7 @@ setnewScn <- function(aScn) {
 # addlyrtoLLmap(amap, ky)  #, session
 
 # HideCurrentSc <- function() {   # , session
-#   lyr = currentfrcst$getFrcstlyr()
+#   lyr = currentFrcst$getFrcstlyr()
 #   basemap$hidelyr(lyr)
 # }
 # 

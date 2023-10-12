@@ -98,13 +98,12 @@ mymap <- R6Class("mymapclass",
         },
 
         # add Frcst 
-        addFrcst = function(Frcst) { # view(basemap$lyrs)
-          alyr = Frcst$Frcst2lyr()
-          Frcst$getgeolyr()
-          #i = self$addlyr(alyr, Frcst$geolyr)
-          #i = self$setlyr(alyr, Frcst$geolyr)
-          self$setlyr(alyr, Frcst$geolyr)
-          #self$setlayerscale(Frcst$geolyr)
+        addFrcst = function(frcst) { # view(basemap$lyrs)
+          alyr = frcst$Frcst2lyr()
+          #i = self$addlyr(alyr, frcst$geolyr)
+          #i = self$setlyr(alyr, frcst$geolyr)
+          self$setlyr(alyr, frcst$geolyr)
+          #self$setlayerscale(frcst$geolyr)
           #return(i)
         },
         
@@ -138,28 +137,6 @@ mymap <- R6Class("mymapclass",
 
 # ------------------------------------------------------
 
-test1 <- function(amap, session) {
-  sss <<- leafletProxy(amap, session) %>%
-   addMarkers(lng=35.0, lat=31.4, popup="<b>Hello</b>")      
-  sss <<- leafletProxy(amap, session) %>%
-    addMarkers(lng=35.0, lat=32.4, popup="<b>Hello1</b>")      
-}
-
-test2 <- function(amap, session) {
-  m = leafletProxy(amap, session) 
-  m %>%
-    addMarkers(lng=35.0, lat=31.4, popup="<b>Hello</b>")      
-  m %>%
-    addMarkers(lng=35.0, lat=32.4, popup="<b>Hello1</b>")      
-}
-
-test3 <- function(amap, session) {
-  m = leafletProxy(amap, session) 
-  m %>%
-    addMarkers(lng=34.5, lat=31.4, popup="<b>Hello</b>")      
-  m %>%
-    addMarkers(lng=34.5, lat=32.4, popup="<b>Hello1</b>")      
-}
 
 
 # = leaflet =========================================

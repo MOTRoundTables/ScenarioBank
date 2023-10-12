@@ -6,9 +6,9 @@ source("main.R")
 source("maplib.R")
 source("Frcstlib.R")
 
-currentFrcstnum <<- "7"  # new jer
-currentFrcst <<- setFrcst(currentFrcstnum) # set scenario, session
-currentFrcst$opentazdata()
+currentfrcstnum <<- "7"  # new jer
+currentfrcst <<- setFrcst(currentfrcstnum) # set scenario, session
+currentfrcst$opentazdata()
 
 View(basemap)
 view(basemap$lyrs)
@@ -19,7 +19,7 @@ basemap$mapview@map
 basemap$displaymap()
 class(basemap$mapview@map)
 
-x = currentFrcst$Frcst$tazlyr
+x = currentfrcst$Frcst$tazlyr
 basemap$mapview@map <- basemap$mapview@map %>% hideGroup(x)
 basemap$mapview
 
@@ -28,7 +28,7 @@ basemap$hidelyr(temp$lyr)
 
 
 
-alyr = currentFrcst$getFrcstlyr()
+alyr = currentfrcst$getFrcstlyr()
 i = basemap$lyrnum(alyr)
 lyrdata = basemap$lyrsdata[[i]]
 
@@ -59,11 +59,11 @@ view(lyrdata)
 
 
 
-alyr = currentFrcst$Frcst2lyr()
+alyr = currentfrcst$Frcst2lyr()
 #i = self$addlyr(alyr)
 
-currentFrcst$getgeolyr()
-m = mapview(currentFrcst$geolyr, layer.name = alyr$lyr, legend = FALSE,
+currentfrcst$getgeolyr()
+m = mapview(currentfrcst$geolyr, layer.name = alyr$lyr, legend = FALSE,
             color = alyr$color, alpha.regions = alyr$fillOpacity,lwd = alyr$weight)
 self$mapview <- self$mapview + m
 
@@ -124,11 +124,35 @@ m = mapview(l1, layer.name = alyr$lyr, legend = FALSE,
 
 
 
-currentFrcst$tazdata
-currentFrcst$tazdata %>%
+currentfrcst$tazdata
+currentfrcst$tazdata %>%
   summary()
 
 
+
+
+test1 <- function(amap, session) {
+  sss <<- leafletProxy(amap, session) %>%
+    addMarkers(lng=35.0, lat=31.4, popup="<b>Hello</b>")      
+  sss <<- leafletProxy(amap, session) %>%
+    addMarkers(lng=35.0, lat=32.4, popup="<b>Hello1</b>")      
+}
+
+test2 <- function(amap, session) {
+  m = leafletProxy(amap, session) 
+  m %>%
+    addMarkers(lng=35.0, lat=31.4, popup="<b>Hello</b>")      
+  m %>%
+    addMarkers(lng=35.0, lat=32.4, popup="<b>Hello1</b>")      
+}
+
+test3 <- function(amap, session) {
+  m = leafletProxy(amap, session) 
+  m %>%
+    addMarkers(lng=34.5, lat=31.4, popup="<b>Hello</b>")      
+  m %>%
+    addMarkers(lng=34.5, lat=32.4, popup="<b>Hello1</b>")      
+}
 
 
 

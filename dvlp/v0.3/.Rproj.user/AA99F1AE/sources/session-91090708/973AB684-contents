@@ -1,0 +1,216 @@
+#Sys.setlocale(locale="hebrew")
+
+library(tidyverse)
+library(dplyr)
+library(gt)
+library(plotly)
+#library(tidyjson)
+library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.html
+
+# setwd("C:\\Users\\marsz\\OneDrive\\temp\\shiny\\scbank\\v1\\v1\\")  # for debug
+
+#idoenv = "dvlp/v0.3/"
+idoenv = ""
+source(paste0(idoenv,"maplib.R"))
+source(paste0(idoenv,"scnlib.R"))
+source(paste0(idoenv,"utillib.R"))
+
+source(paste0(idoenv,"proc-tbl.R"))
+source(paste0(idoenv,"proc-chrt.R"))
+source(paste0(idoenv,"proc-map.R"))
+
+
+# - initialize
+initapp <- function() {
+  #browser()
+  cfg = fromJSON(paste0(idoenv,"scbank.json")) 
+  cfg$general$geodir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$geodir, fixed=TRUE)
+  cfg$general$frcstdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$frcstdir, fixed=TRUE)
+  cfg$general$rsltdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$rsltdir, fixed=TRUE)
+
+  # -- load forecasts dictionaries and create a list of frcst objects
+  n = length(cfg$forecastslist)
+  cfg$frcstsources = list()
+  cfg$forecasts = list() 
+  cfg$frcstkeys = vector()
+  cfg$frcstnums = list() 
+  cfg$frcstlist = list()
+  k = 0
+  for (i in 1:n) {
+    cfg$frcstsources = append(cfg$frcstsources, cfg$forecastslist[[i]][[1]])
+
+    n2 = length(cfg$forecastslist[[i]][[2]])
+    for (j in 1:n2) {
+      k = k + 1
+      frcstky = cfg$forecastslist[[i]][[2]][[j]]
+      cat(frcstky)
+      frcst1 = frcstclass$new(k, frcstky, cfg$general$frcstdir) # create object
+      cfg$forecasts = append(cfg$forecasts, frcst1)   # list of objects
+      cfg$frcstkeys = append(cfg$frcstkeys, frcstky)
+      cfg$frcstnums[frcstky] = k
+      cfg$frcstlist[frcstky] = frcst1$name
+    }
+  }
+
+  # -- load & process super-zones dict
+  tmp = fromJSON(paste(cfg$general$geodir, "szlyrs.json", sep=""))
+  cfg$superzones = tmp$superzones
+
+  cfg$szkeys = names(cfg$superzones)                  # vector of SZ keys    
+  n = length(cfg$szkeys)
+  cfg$szlist = vector(mode = "list", length = n)      # for menu
+  cfg$szchoices = vector(mode = "list")               # for menu 
+  cfg$szlyrs = vector(mode = "list", length = n)      # for menu
+  for (i in 1:n) {
+    ky = cfg$szkeys[i]
+    cfg$superzones[[ky]]$name = cfg$superzones[[ky]]$ename # alyr$hname  # set Eng or Heb
+    cfg$superzones[[ky]]$url = gsub("<geodir>", cfg$general$geodir, cfg$superzones[[ky]]$url, fixed=TRUE)
+    
+    cfg$szlist[i] = cfg$superzones[[ky]]$lyr  #name
+    cfg$sznames[i] = cfg$superzones[[ky]]$hname  # set Heb for menu
+    cfg$szchoices[as.character(cfg$sznames[i])] = i
+    cfg$szlyrs[i] = cfg$superzones[ky]
+  }
+
+  cfg$szlyrs = cfg$szlyrs %>% 
+    map_df(as_tibble)
+  #cfg$szlyrs['name'] <- ""
+  cfg$szlyrs['status'] <- 0                        # lyrs %>% add_column(status = 0)  # NA
+  
+  #cfg$szchoices0 = vector(mode = "list")  
+  #cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
+  # cfg$szchoices0 = append (cfg$szchoices0, cfg$szchoices)
+  #list("Choice 1" = 1, "Choice 2" = 2)  
+  
+  return(cfg)
+}  
+
+# define global vars
+
+cfg <- initapp()
+
+currentsrc <- ""
+currentfrcstky <- ""
+currentfrcst <- NULL
+currentscn <- ""
+
+# start map
+basemap = mymap$new()
+basemap$createmap(cfg$basemap)
+#basemap$addlayers(cfg$szlyrs)
+basemap$resetmapview(cfg$basemap)
+
+# basemap$mapview
+# basemap$map
+
+# - ui functions --------------------------------------------
+
+getfrcstnum <- function(frcstky) {    #   asrc = "מודל תל אביב"
+# return(which(cfg$frcstkeys == frcstky))
+  return(cfg$frcstnums$frcstky)
+}  
+
+setnewSource <- function(asrc) {    #   asrc = "מודל תל אביב"
+  changed = 0
+  if (asrc!="") {
+    if (currentsrc!=asrc) {
+      if (currentfrcstky!="") {  ## clear Frcst and map
+        #HideCurrentSc()
+        currentfrcstky <<- ""
+        currentfrcst <<- NULL
+        basemap$createmap(cfg$basemap)  # reset to initial map 
+        basemap$resetmapview(cfg$basemap)
+        #refreshmap()
+      }
+      getsrcFrcsts(asrc)  # --> main
+      currentsrc <<- asrc
+      cat(paste("new SRC: ", currentsrc, "\n")) # debug
+      changed = 1
+    }
+  }
+  return(changed)
+}
+  
+# returns a list of forecasts for a selected source
+getsrcFrcsts <- function(asrc) {    #  asrc = "מודל תל אביב"
+  i = which(cfg$frcstsources == asrc)
+  frcsts = cfg$forecastslist[[i]][[2]]
+  
+  n = length(frcsts)
+  cfg$frcstchoices <<- vector(mode = "list")  
+  for (i in 1:n) {
+    ky = frcsts[i]
+    cfg$frcstchoices[as.character(cfg$frcstlist[ky])] <<- ky
+  }
+  return()
+}  
+
+setnewFrcst <- function(frcstky) {
+  changed = 0
+  if (frcstky!="") {
+    if (currentfrcstky!=frcstky) { # scenario changed
+      currentfrcstky <<- frcstky
+      frcstnum <- cfg$frcstnums[[frcstky]]  # getfrcstnum(currentfrcstky)
+      currentfrcst <<- cfg$forecasts[[frcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
+      currentfrcst$getgeolyr()
+      currentfrcst$opentazdata()  
+      basemap$addFrcst(currentfrcst)
+      
+      cat(paste("set Frcst: ", currentfrcst$name, "\n"))
+      changed = 1
+    }
+  }
+  return(changed)
+}
+
+setnewScn <- function(aScn) {
+  changed = 0
+  if (aScn!="") {
+    if (currentscn!=aScn) { # scenario changed
+      currentscn = aScn
+    }
+  }    
+  return(changed)
+}
+
+
+
+# = end =================================================
+
+# rm(list=ls())
+
+############  basemap$lyrs <<- bind_rows(basemap$lyrs, temp) # view(basemap$lyrs)
+# ky = "metrorings2008"  # to test
+# amap = leafletProxy(map, session)
+# addlyrtoLLmap(amap, ky)  #, session
+
+# HideCurrentSc <- function() {   # , session
+#   lyr = currentfrcst$getFrcstlyr()
+#   basemap$hidelyr(lyr)
+# }
+# 
+# HideSc <- function(Frcstnum) {   # , session
+#   # browser()
+#   ky = cfg$frcstkeys[as.integer(Frcstnum)]
+#   temp = Frcst2lyr(cfg$forecasts[[ky]])
+#   basemap$hidelyr(temp$lyr)
+#   #return(cfg$forecasts[[ky]])
+# }
+# 
+# getFrcstFiles <- function(Frcstnum) {
+#   Frcstnum = 1 # to test
+#   ky = cfg$frcstkeys[as.integer(Frcstnum)]
+#   Frcst = cfg$forecasts[[ky]]
+#   files = Frcst$files
+#   n = length(files)
+#   
+#   Frcstfiles = list()
+#   Frcstfiles$name = vector(mode = "list", length = n)
+#   for (i in 1:n) {
+#     Frcstfiles$name[i] = files[[i]][[1]]
+#   }
+#   return(Frcstfiles)
+# }
+
+
+

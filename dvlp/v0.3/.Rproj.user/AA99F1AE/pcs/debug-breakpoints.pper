@@ -2,17 +2,32 @@
     "debugBreakpointsState": {
         "breakpoints": [
             {
-                "id": 5,
-                "path": "~/GitHub/ScenarioBank/dvlp/v0.3/maplib.R",
-                "line_number": 102,
+                "id": 0,
+                "path": "~/GitHub/ScenarioBank/dvlp/v0.3/app.R",
+                "line_number": 104,
                 "function_steps": "",
-                "function_name": "addscn",
-                "state": 2,
-                "editor_state": 2,
-                "editor_line_number": 102,
+                "function_name": "toplevel",
+                "state": 1,
+                "editor_state": 1,
+                "editor_line_number": 104,
                 "is_pending_debug_completion": false,
                 "needs_updated_steps": false,
-                "type": 0,
+                "type": 1,
+                "is_package_breakpoint": false,
+                "package_name": ""
+            },
+            {
+                "id": 1,
+                "path": "~/GitHub/ScenarioBank/dvlp/v0.3/app.R",
+                "line_number": 114,
+                "function_steps": "",
+                "function_name": "toplevel",
+                "state": 1,
+                "editor_state": 1,
+                "editor_line_number": 114,
+                "is_pending_debug_completion": false,
+                "needs_updated_steps": false,
+                "type": 1,
                 "is_package_breakpoint": false,
                 "package_name": ""
             }

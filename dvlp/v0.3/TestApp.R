@@ -5,7 +5,7 @@ library(shinythemes)  # https://rstudio.github.io/shinythemes/
 library(shinyWidgets) # https://dreamrs.github.io/shinyWidgets/index.html
 
 cfg = list()
-cfg$Frcstsources = c ("A", "B", "C")
+cfg$frcstsources = c ("A", "B", "C")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -22,14 +22,14 @@ ui <- fluidPage(
                       
             titlePanel("בנק"),
                       
-            selectizeInput('selectSrc', 'מקור תחזית', choices = cfg$Frcstsources,
+            selectizeInput('selectSrc', 'מקור תחזית', choices = cfg$frcstsources,
               options = list(
                 placeholder = 'בחר מתוך הרשימה ...',
                 onInitialize = I('function() { this.setValue(""); }')
               )
             ),
                       
-            selectizeInput('selectFrcst', 'תרחיש', choices = character(0), #cfg$Frcstchoices,
+            selectizeInput('selectFrcst', 'תרחיש', choices = character(0), #cfg$frcstchoices,
               options = list(
                 placeholder = 'בחר מתוך הרשימה ...',
                 onInitialize = I('function() { this.setValue(""); }')
@@ -121,8 +121,8 @@ server <- function(input, output, session) {
   #  output$appMap <- renderLeaflet({ basemap$mapview@map })
   #  output$leaf = renderUI({ leafletOutput("appMap", width = "100%", height = cfg$basemap$height) })
     
-  #  if (currentFrcstnum>0) {
-  #    Frcstsummary <<- currentFrcst$tazdata %>%
+  #  if (currentfrcstnum>0) {
+  #    Frcstsummary <<- currentfrcst$tazdata %>%
   #      summary()
   #  } else { Frcstsummary <<- NULL }
   #}
@@ -132,15 +132,15 @@ server <- function(input, output, session) {
   # observe({
   #   if (input$selectSrc!="") {
   #     if (currentsrc!=input$selectSrc) { 
-  #       if (currentFrcstnum>0) { 
+  #       if (currentfrcstnum>0) { 
   #         HideCurrentSc() 
-  #         currentFrcst <<- NULL
-  #         currentFrcstnum <<- 0
+  #         currentfrcst <<- NULL
+  #         currentfrcstnum <<- 0
   #         refreshmap()
   #       }
   #       getsrcFrcst(input$selectSrc) 
   #       updateSelectInput(session, "selectFrcst",
-  #                         choices = cfg$Frcstchoices,
+  #                         choices = cfg$frcstchoices,
   #                         selected = character(0)
   #       )
   #       currentsrc <<- input$selectSrc
@@ -151,20 +151,20 @@ server <- function(input, output, session) {
   # 
   # observe({
   #   if (input$selectFrcst>0) {
-  #     if (currentFrcstnum!=input$selectFrcst) { # scenario changed
-  #       if (currentFrcstnum>0) {  
+  #     if (currentfrcstnum!=input$selectFrcst) { # scenario changed
+  #       if (currentfrcstnum>0) {  
   #         HideCurrentSc() 
   #       } # close current sc
-  #       currentFrcstnum <<- input$selectFrcst
-  #       currentFrcst <<- setFrcst(input$selectFrcst) # set scenario, session
-  #       currentFrcst$opentazdata()
-  #       cat(paste("set Frcst: ", currentFrcst$name, "\n"))
+  #       currentfrcstnum <<- input$selectFrcst
+  #       currentfrcst <<- setFrcst(input$selectFrcst) # set scenario, session
+  #       currentfrcst$opentazdata()
+  #       cat(paste("set Frcst: ", currentfrcst$name, "\n"))
   #       updateSelectInput(session, "selectSz",
   #                         choices = cfg$szchoices0,
   #                         selected = character(0)
   #       )
   #       refreshmap()
-  #       str0 <- paste("current scenario:", currentFrcst$name, sep = " ")
+  #       str0 <- paste("current scenario:", currentfrcst$name, sep = " ")
   #     }
   #   }
   # })
@@ -172,7 +172,7 @@ server <- function(input, output, session) {
   # --------------------------------------
   
   #    output$selectedFrcst = renderPrint({
-  #    #str0 = paste("set scenario:", currentFrcst$name, sep = " ")
+  #    #str0 = paste("set scenario:", currentfrcst$name, sep = " ")
   #    str1 = paste("scenario:", input$selectFrcst, sep = " ")
   #    str2 = paste("super zone:", input$selectSz, sep = " ")
   #    HTML(paste(str0, str1, str2, sep = '<br/>'))
@@ -196,7 +196,7 @@ server <- function(input, output, session) {
   # 
   # # Generate an HTML table view of the data ----
   # output$Frcsttable <- renderTable({
-  #   currentFrcst$tazdata
+  #   currentfrcst$tazdata
   # })
   
   

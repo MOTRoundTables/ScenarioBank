@@ -14,6 +14,7 @@
 	"dict"    : {
 				"taz"       : "taz",
 				"population": "pop",
-				"employment": "emp"
+				"employment": "emp",
+				"motrate"   : "RM"
 				}	
 }

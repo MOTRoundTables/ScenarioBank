@@ -1,0 +1,37 @@
+library(shiny)
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      checkboxInput("moreControls", 
+                    label = "Show advanced controls?",
+                    value = FALSE
+      )
+    ),
+    mainPanel(
+      tabsetPanel(
+        id = "basic",
+        type = "hidden",
+        tabPanelBody("panel1",
+                     numericInput("basicControl", label = "Basic:", 0),
+        )
+      ),
+      tabsetPanel(
+        id = "advanced",
+        type = "hidden",
+        #tabPanelBody("emptyPanel", style = "display: none"),
+        tabPanelBody("panel22",
+                     numericInput("oto", label = "ototo", 1)
+        ),
+        tabPanelBody("panel21",
+                     numericInput("advancedCotrol", label = "Advanced:", 2)
+        )
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+}
+
+shinyApp(ui, server)

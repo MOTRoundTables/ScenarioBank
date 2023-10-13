@@ -100,7 +100,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
 
   # --------- tabPanel "צפייה"
-  
+
   observeEvent(input$selectsrc, {  
     if (setnewsource(input$selectsrc)) {
       updateSelectInput(session, "selectfrcst",
@@ -139,28 +139,46 @@ server <- function(input, output, session) {
     }
   })
 
+  observeEvent(input$tabs1, {
+    cat(paste0(input$tabs1,"\n"))
+    doanalisys()
+  })
+  
   observeEvent(input$doanalisys, {
     #showmessage("pressed button")
-    createSimpleMap(currentfrcst, aScn = currentscn, 
-                    aYr=input$selectyr, aVar = input$selectvar)  
-    refreshmap()
+    doanalisys()
   })  
-  
+
+  doanalisys = function() {
+    req(currentfrcst, currentscn, input$selectyr, input$selectvar)
+    
+    userreq = list()
+    userreq$frcst = currentfrcst
+    userreq$scn   = currentscn
+    userreq$yr    = input$selectyr
+    userreq$var   = input$selectvar
+
+    if (input$tabs1=='map') {
+      createSimpleMap(userreq)  
+    } else if (input$tabs1=='Summary') {
+      frcstsummary <<- currentfrcst$tazdata %>%
+        summary()
+      output$Frcstsummary <- renderPrint({ frcstsummary })
+      
+    } else if (input$tabs1=='chart') {
+      
+    } else if (input$tabs1=='Table') {
+      output$Frcsttable <- renderTable({ currentfrcst$tazdata })
+    }
+
+    refreshmap()
+  }
+
   # -------------------------------------
   
   refreshmap = function() {
-    
     output$appMap <- renderLeaflet({ basemap$mapview@map })
     output$leaf = renderUI({ leafletOutput("appMap", width = "100%", height = cfg$basemap$height) })
-    
-    if (currentfrcstky!="") {
-      Frcstsummary <<- currentfrcst$tazdata %>%
-          summary()
-      output$Frcstsummary <- renderPrint({ Frcstsummary })
-      
-      #output$Frcsttable <- renderTable({ currentfrcst$tazdata })
-      
-    } else { Frcstsummary <<- NULL }
   }
   
   refreshmap()

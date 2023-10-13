@@ -1,6 +1,12 @@
 
 # simple map = 1 scenario,  1 year, 1 var, values 
-createSimpleMap <- function(aFrcst, aScn = NA, aYr=NA, aVar = NA) {  
+createSimpleMap <- function(userreq) {  
+  
+  aFrcst = userreq$frcst
+  aScn = userreq$scn
+  aYr = userreq$yr
+  aVar = userreq$var
+
   #if(is.na(aScn)){
   #  aScn = aFrcst$Frcst$scnlist[1]
   #}

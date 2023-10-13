@@ -1,6 +1,8 @@
 {
 	"general": {
-		"sysdir"   : "https://raw.githubusercontent.com/MOTRoundTables/ScenarioBank/main/",
+		"sysdir0"   : "https://raw.githubusercontent.com/MOTRoundTables/ScenarioBank/main/",
+		"sysdir"   : "../../",
+		"sysdir1"   : "C:/Users/marsz/Documents/GitHub/ScenarioBank/",
 		"geodir"   : "<sysdir>geo/",
 		"frcstdir" : "<sysdir>Scn_lib/",
 		"rsltdir"  : "<sysdir>results/",

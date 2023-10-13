@@ -191,3 +191,18 @@ x = list(df1, df2, df3,df4)
 y = x %>% reduce(left_join, by='team')
 
 
+
+f_add<- function(x,y){ x + y }
+f_subtract<- function(x,y){ x - y }
+f_multi<- function(x,y){ x * y }
+
+operation<- function(FUN, x, y){ FUN(x , y)}
+
+operation(f_add, 9,2)
+#> [1] 11
+operation(f_subtract, 17,5)
+#> [1] 12
+operation(f_multi,6,8)
+#> [1] 48
+#> 
+

@@ -1,0 +1,67 @@
+library("shiny")
+library("shinyWidgets")
+  
+
+ui <- fluidPage(
+  checkboxGroupButtons( # or radioGroupButtons
+    inputId = "id",
+    label = "Choice: ",
+    choices = c("A", "B", "C")
+  ),
+  br(),
+    prettyCheckboxGroup(
+      inputId = "Id033",
+      label = "Choose:", 
+      #choices = c("Click me !", "Me !", "Or me !"),
+      #choices = c(2017, 2025, 2030),
+      inline = TRUE, 
+      #'info' 'primary' 'danger' 'warning'  'success'
+      status = "danger",  
+      fill = FALSE
+    ),
+  actionButton("upd", "הפעל", style='width:100%'),
+  br(),
+  
+    multiInput(
+      inputId = "id", label = "Fruits :",
+      choices = c("Banana", "Blueberry", "Cherry",
+                  "Coconut", "Grapefruit", "Kiwi",
+                  "Lemon", "Lime", "Mango", "Orange",
+                  "Papaya"),
+      selected = "Banana", width = "350px"
+    ),
+    multiInput(
+      inputId = "id", label = "Fruits :",
+      choices = c("Banana", "Blueberry", "Cherry",
+                  "Coconut", "Grapefruit", "Kiwi",
+                  "Lemon", "Lime", "Mango", "Orange",
+                  "Papaya"),
+      selected = "Banana", width = "400px",
+      options = list(
+        enable_search = FALSE,
+        non_selected_header = "Choose between:",
+        selected_header = "You have selected:"
+      )
+    ),
+    verbatimTextOutput(outputId = "res")
+  
+  )
+  
+  server <- function(input, output, session) {
+    output$res <- renderPrint({
+      input$id
+    })
+    
+    observeEvent(input$upd, {
+      cat("pressed button")
+      updatePrettyCheckboxGroup(session, "Id033",
+                        choices = c("Click me !", "Me !", "Or me !")
+                        #choices = c(2017, 2025, 2030),
+                        #selected = character(0) ) 
+      )
+    })     
+    
+}
+  
+  shinyApp(ui = ui, server = server)
+  

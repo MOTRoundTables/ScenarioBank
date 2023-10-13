@@ -4,20 +4,8 @@ createSimpleMap <- function(userreq) {
   
   aFrcst = userreq$frcst
   aScn = userreq$scn
-  aYr = userreq$yr
   dataVar = userreq$var
-
-  #if(is.na(aScn)){
-  #  aScn = aFrcst$Frcst$scnlist[1]
-  #}
-  #if(is.na(aYr)){
-  #  aYr = aFrcst$Frcst$scenarios[[aScn]]$years[1]
-  #}
-  #if(is.na(aVar)){
-  #  aVar =  aFrcst$data$dict$population
-  #}
-
-  #browser()
+  aYr = userreq$yr  # assume 1 yr only
   
   cat(aFrcst$name, aScn, aYr, dataVar)  
     
@@ -39,3 +27,12 @@ createSimpleMap <- function(userreq) {
 
 
 
+#if(is.na(aScn)){
+#  aScn = aFrcst$Frcst$scnlist[1]
+#}
+#if(is.na(aYr)){
+#  aYr = aFrcst$Frcst$scenarios[[aScn]]$years[1]
+#}
+#if(is.na(aVar)){
+#  aVar =  aFrcst$data$dict$population
+#}

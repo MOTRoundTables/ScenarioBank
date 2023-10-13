@@ -13,7 +13,7 @@ ui <- fluidPage(
   waiter::use_waiter(),
   titlePanel("בנק תחזיות"),
   
-  navbarPage(" ", theme = shinytheme("united"),  # lumen
+  navbarPage(" ", theme = shinytheme("united"),  # "lumen"  "united"  "cerulean"
   
     tabPanel("צפייה", fluid = TRUE, #icon = icon("globe-americas"), #tags$style(button_color_css),
              
@@ -21,7 +21,7 @@ ui <- fluidPage(
                     
         sidebarPanel( width = 4,
 
-          titlePanel("בנק"),
+          #titlePanel("בנק"),
           
           selectizeInput('selectsrc', 'מקור תחזית', choices = cfg$frcstsources,
             options = list(
@@ -36,7 +36,9 @@ ui <- fluidPage(
           hr(), 
           selectInput('selectscn', 'תרחיש', "", multiple=FALSE, selectize=FALSE),
 
-          selectInput('selectyr', 'שנה', "", multiple=FALSE, selectize=FALSE),
+          #selectInput('selectyr', 'שנה', "", multiple=FALSE, selectize=FALSE),
+          prettyCheckboxGroup(inputId = "selectyr", label = "שנה", 
+                              status = "danger", fill = FALSE),
 
           hr(), 
           selectInput('selectvar', 'משתנה', "", multiple=FALSE, selectize=FALSE),
@@ -45,7 +47,7 @@ ui <- fluidPage(
                     selected = 1, multiple=FALSE, selectize=FALSE),
 
           hr(),
-          actionButton("doanalisys", "apply", style='width:100%'),
+          actionButton("doanalisys", "הפעל", style='width:100%')
 
           # --------------------------------------          
 
@@ -108,7 +110,7 @@ server <- function(input, output, session) {
                         selected = character(0) )  
       refreshmap()
       updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
-      updateSelectInput(session, "selectyr", choices = "", selected = character(0) )
+      updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
       updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
     }
   })
@@ -124,7 +126,7 @@ server <- function(input, output, session) {
       updateSelectInput(session, "selectvar",
                         choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars() 
                         selected = character(0) )
-      updateSelectInput(session, "selectyr", choices = "", selected = character(0) )
+      updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
       refreshmap()
     }
   })
@@ -132,9 +134,9 @@ server <- function(input, output, session) {
   observeEvent(input$selectscn, {
     if (input$selectscn!="") {
       if (setnewscn(input$selectscn)) {
-        updateSelectInput(session, "selectyr",
-                        choices = currentfrcst$getscnyears(currentscn),
-                        selected = character(0) )
+        updatePrettyCheckboxGroup(session, "selectyr",  # updateSelectInput
+                        choices = as.list(currentfrcst$getscnyears(currentscn)),
+                        inline = TRUE, selected = character(0) )
       }
     }
   })
@@ -155,7 +157,13 @@ server <- function(input, output, session) {
     userreq = list()
     userreq$frcst = currentfrcst
     userreq$scn   = currentscn
-    userreq$yr    = input$selectyr
+    if (length(input$selectyr)==1) {
+      userreq$yr = input$selectyr[1]
+      userreq$yrmode = 1
+    } else {
+      userreq$yr = input$selectyr
+      userreq$yrmode = 2
+    }
     userreq$var   = input$selectvar
 
     if (input$tabs1=='map') {

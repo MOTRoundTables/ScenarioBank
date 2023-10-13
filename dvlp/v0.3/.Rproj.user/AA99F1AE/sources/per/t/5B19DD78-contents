@@ -128,7 +128,6 @@ mymap <- R6Class("mymapclass",
           self$lyrs$status[i] = 1
           return(i)
         },
-        
 
         addlayersfromurl = function(url) {
           lyrs = fromJSON(url) %>% as.data.frame      # View(basemap$lyrs)

@@ -122,7 +122,7 @@ server <- function(input, output, session) {
                         choices = currentfrcst$scnchoices,
                         selected = character(0) )
       updateSelectInput(session, "selectvar",
-                        choices = currentfrcst$getfrcstvars(),
+                        choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars() 
                         selected = character(0) )
       updateSelectInput(session, "selectyr", choices = "", selected = character(0) )
       refreshmap()

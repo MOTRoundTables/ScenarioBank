@@ -17,9 +17,9 @@
 			"desc": "הפרדה מטרופולינית",
 			"years": [ 2050 ] }
 	},
-	"dict"    : {
-				"taz"       : "NEW_TAZ_1046",
-				"population": "pop",
-				"employment": "emp"
-				}
+	"dict": {
+			"NEW_TAZ_1046": {"description": "אזור תנועה", "bank": "taz"        },
+			"pop":          {"description": "אוכלוסייה",  "bank": "population" },
+			"emp":          {"description": "תעסוקה",   "bank": "employment"  }
+	}
 }

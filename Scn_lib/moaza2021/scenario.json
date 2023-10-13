@@ -26,8 +26,8 @@
 			"desc": "אסטרטגיית דיור -הנחות גידול גבוהות",
 			"years": [ 2020, 2025, 2030, 2035, 2040, 2045, 2050 ] }
 	},
-	"dict"    : {
-				"taz"       : "NafaNum",
-				"population": "total"
-				}
+	"dict": {
+			"NafaNum":  {"description": "נפה", "bank": "taz"        },
+			"total":    {"description": "אוכלוסייה",  "bank": "population" }
+	}
 }

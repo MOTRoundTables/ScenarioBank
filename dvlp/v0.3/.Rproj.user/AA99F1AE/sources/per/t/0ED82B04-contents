@@ -20,7 +20,9 @@ frcstclass <- R6Class("Frcstclass",
 
       # vars
       vars = NULL, 
-      dict = NULL, 
+      vardesc = NULL, 
+      varchoices = NULL, 
+      bankvars = NULL, 
 
       # data
       geolyr = NULL,
@@ -44,10 +46,32 @@ frcstclass <- R6Class("Frcstclass",
           self$scnchoices[y$desc] = self$scnlist[i]
         }
         
-        self$vars = names(x$dict)
+       self$vars = names(x$dict)
+       self$vardesc = list()
+       self$bankvars = list()
+       for (i in 1:length(self$vars)) {
+         y = x$dict[[self$vars[i]]]
+         if (!is.null(y$bank)) {
+           self$bankvars[[y$bank]] = self$vars[i]
+         }
+         if (!is.null(y$description)) {
+           self$vardesc = append(self$vardesc, y$description)
+         }
+       }
+
+       self$varchoices = vector(mode = "list") 
+       for (i in 2:length(self$vars)) {
+         self$varchoices[as.character(self$vardesc[i])] = self$vars[i]
+         }
+
       },
       
-
+      loadfrcst = function() {
+        currentfrcst$getgeolyr()
+        currentfrcst$opentazdata()  
+      },
+      
+      
       # - forecast layer -------------------------------------      
       
       getfrcstlyr = function() {
@@ -88,8 +112,9 @@ frcstclass <- R6Class("Frcstclass",
           map_df(as_tibble)
         return(temp)
       },
-      
-      # - forecast data  -------------------------------------      
+
+            
+      # - forecast data functions  --------------------------------
       
       opentazdata = function() {
         fl = paste(self$dir, "/", self$data$file, sep="")        
@@ -97,21 +122,29 @@ frcstclass <- R6Class("Frcstclass",
       },
 
       getfrcstvars = function() {
-        return(self$vars)      
+        v = self$vars[2:length(self$vars)]
+        return(v)
       },
 
-      # - aggregation data  -------------------------------------      
-      
-      getagvars = function() {
-        return(self$data$agvars)
+      getfrcstbankvars = function() {
+        return(names(self$bankvars))
       },
       
+      
+
       # - scenario functions  -------------------------------------      
       
       getscnyears = function(ascn) {
         return(self$data$scenarios[[ascn]]$years)
-      }
+      },
+
+
+      # - aggregation functions  -------------------------------------      
       
+      getagvars = function() {
+        return(self$data$agvars)
+      }
+
   )
 ) # end mymap class
 

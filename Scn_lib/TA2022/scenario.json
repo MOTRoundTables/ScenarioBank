@@ -21,10 +21,10 @@
 			"desc": "תמא 70",
 			"years": [ 2050 ] }
 	},
-	"dict"    : {
-				"taz"       : "taz",
-				"population": "pop",
-				"employment": "emp"
-				}	
+	"dict": {
+			 "taz1318": {"description": "אזור תנועה", "bank": "taz"         },
+			 "pop":     {"description": "אוכלוסייה",  "bank": "population"  },
+			 "emp":     {"description": "תעסוקה",   "bank": "employment"  }
+	}
 }
 

@@ -10,9 +10,9 @@
 			"desc": "תרחיש בסיס",
 			"years": [ 2040 ] }
 	},
-	"dict"    : {
-				"taz"       : "taz",
-				"population": "population",
-				"employment": "empl_tot"
-				}	
+	"dict": {
+			"taz":          {"description": "אזור תנועה", "bank": "taz"        },
+			"population":   {"description": "אוכלוסייה",  "bank": "population" },
+			"empl_tot":     {"description": "תעסוקה",   "bank": "employment" }
+	}		
 }

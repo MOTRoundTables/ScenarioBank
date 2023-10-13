@@ -5,7 +5,7 @@ createSimpleMap <- function(userreq) {
   aFrcst = userreq$frcst
   aScn = userreq$scn
   aYr = userreq$yr
-  aVar = userreq$var
+  dataVar = userreq$var
 
   #if(is.na(aScn)){
   #  aScn = aFrcst$Frcst$scnlist[1]
@@ -19,8 +19,6 @@ createSimpleMap <- function(userreq) {
 
   #browser()
   
-  dataVar =  aFrcst$data$dict[[aVar]]
-
   cat(aFrcst$name, aScn, aYr, dataVar)  
     
   #if (!aFrcst$tazdata %>% as_tibble() %>% pull(dataVar) %>% class() %>% `%in%`(c("numeric","integer") )) {
@@ -28,7 +26,7 @@ createSimpleMap <- function(userreq) {
   #  aFrcst$tazdata <- aFrcst$tazdata %>% mutate(!!dataVar := !!sym(dataVar) %>% parse_number())
   #}
   
-  x_join <- aFrcst$data$dict$taz
+  x_join <- aFrcst$bankvars$taz
   y_join <- aFrcst$data$tazvar
   
   filtered <- aFrcst$tazdata %>% as_tibble() %>% filter(scenario == aScn, year == aYr)

@@ -17,9 +17,9 @@
 			"desc": "פיתוח מואץ",
 			"years": [ 2040, 2050 ] }
 	},
-	"dict"    : {
-				"taz"       : "TAZ",
-				"population": "population",
-				"employment": "workplace"
-				}	
+	"dict": {
+			"TAZ":          {"description": "אזור תנועה", "bank": "taz"        },
+			"population":   {"description": "אוכלוסייה",  "bank": "population" },
+			"workplace":    {"description": "תעסוקה",   "bank": "employment" }
+	}
 }

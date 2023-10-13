@@ -11,9 +11,9 @@
 			"desc": "תרחיש בסיס",
 			"years": [ 2018, 2030, 2040, 2050 ] }
 	},
-	"dict"    : {
-				"taz"       : "taz1318",
-				"population": "pop",
-				"employment": "emp"
-				}
+	"dict": {
+			 "taz1318": {"description": "אזור תנועה",        "bank": "taz"   },
+			 "pop":     {"description": "אוכלוסייה", "bank": "population"    },
+			 "emp":     {"description": "תעסוקה",    "bank": "employment"  }
+	}
 }

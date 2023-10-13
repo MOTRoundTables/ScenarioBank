@@ -117,12 +117,10 @@ setnewsource <- function(asrc) {    #   asrc = "מודל תל אביב"
   if (asrc!="") {
     if (currentsrc!=asrc) {
       if (currentfrcstky!="") {  ## clear Frcst and map
-        #HideCurrentSc()
         currentfrcstky <<- ""
         currentfrcst <<- NULL
         basemap$createmap(cfg$basemap)  # reset to initial map 
         basemap$resetmapview(cfg$basemap)
-        #refreshmap()
       }
       getsrcfrcsts(asrc)  # --> main
       currentsrc <<- asrc
@@ -150,12 +148,11 @@ getsrcfrcsts <- function(asrc) {    #  asrc = "מודל תל אביב"
 setnewfrcst <- function(frcstky) {
   changed = 0
   if (frcstky!="") {
-    if (currentfrcstky!=frcstky) { # scenario changed
+    if (currentfrcstky!=frcstky) { # forecast changed
       currentfrcstky <<- frcstky
       frcstnum <- cfg$frcstnums[[frcstky]]  # getfrcstnum(currentfrcstky)
       currentfrcst <<- cfg$forecasts[[frcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
-      currentfrcst$getgeolyr()
-      currentfrcst$opentazdata()  
+      currentfrcst$loadfrcst()
       basemap$addfrcst(currentfrcst)
       
       cat(paste("set Frcst: ", currentfrcst$name, "\n"))
@@ -182,6 +179,8 @@ setnewscn <- function(aScn) {
 # = end =================================================
 
 # rm(list=ls())
+
+#HideCurrentSc()
 
 ############  basemap$lyrs <<- bind_rows(basemap$lyrs, temp) # view(basemap$lyrs)
 # ky = "metrorings2008"  # to test

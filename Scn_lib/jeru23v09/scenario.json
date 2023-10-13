@@ -20,9 +20,9 @@
 			"desc": "תרחיש הצוות",
 			"years":  [ 2025, 2030, 2035, 2040, 2045, 2050 ] }
 	},
-	"dict"    : {
-				"taz"       : "TAZ",
-				"population": "pop",
-				"employment": "emp_tot"
-				}	
+	"dict": {
+			"TAZ":      {"description": "אזור תנועה", "bank": "taz"        },
+			"pop":      {"description": "אוכלוסייה",  "bank": "population" },
+			"emp_tot":  {"description": "תעסוקה",   "bank": "employment" }
+	}
 }

@@ -1,0 +1,28 @@
+{
+    "id": "87D460FC",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1697185748945.0,
+    "source_on_save": false,
+    "relative_order": 12,
+    "properties": {
+        "id": "9a82d6a5a78e46f99732fc0705a194b3",
+        "name": "cfg",
+        "title": "cfg",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 2219675482152,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697185748945,
+    "read_only": false,
+    "read_only_alternatives": []
+}

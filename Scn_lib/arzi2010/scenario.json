@@ -11,10 +11,10 @@
 			"desc": "תרחיש בסיס",
 			"years": [ 2007, 2030, 2040 ] }
 	},
-	"dict"    : {
-				"taz"       : "taz",
-				"population": "pop",
-				"employment": "emp",
-				"motrate"   : "RM"
-				}	
+	"dict": {
+			"taz" : { "description": "אזור תנועה",  "bank": "taz"        },
+			"pop" : { "description": "אוכלוסייה",   "bank": "population" },
+			"emp" : { "description": "תעסוקה",    "bank": "employment" },
+			"RM"  : {  "description": "רמת מינוע",  "bank": "motrate"    }
+	}	
 }

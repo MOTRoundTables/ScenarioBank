@@ -127,10 +127,9 @@ frcstclass <- R6Class("Frcstclass",
       },
 
       getfrcstbankvars = function() {
-        return(names(self$bankvars))
+        v = unlist(self$bankvars, use.names = FALSE)
+        return(v)  #(v[2:length(v)])
       },
-      
-      
 
       # - scenario functions  -------------------------------------      
       

@@ -53,8 +53,7 @@ ui <- fluidPage(
 
           #updateSelectInput(session, "selectSz",
           #                 choices = cfg$szchoices0,
-          #                 selected = character(0)
-          #)
+          #                 selected = character(0) )
           
           #radioButtons("zonetype", NULL,
           #             choiceNames = list("גבולות מקור", "אזורי על"),
@@ -66,8 +65,7 @@ ui <- fluidPage(
           #  options = list(
           #    placeholder = 'בחר מתוך הרשימה ...',
           #    onInitialize = I('function() { this.setValue(""); }')
-          #  )
-          #)
+          #  ) )
 
         ),
 
@@ -78,9 +76,15 @@ ui <- fluidPage(
               tabPanel("map", br(), 
                        uiOutput("leaf")
               ),
-              tabPanel("Summary", verbatimTextOutput("Frcstsummary") ),
-              tabPanel("chart"),
-              tabPanel("Table", tableOutput("Frcsttable") )
+              tabPanel("Summary", 
+                       uiOutput("Frcstsummary") #verbatimTextOutput("Frcstsummary") 
+              ),
+              tabPanel("chart",
+                       uiOutput("FrcstChart") # plotOutput("FrcstChart")
+              ),
+              tabPanel("Table", 
+                       dataTableOutput("Frcsttable") 
+              )
           )
           
         )
@@ -168,18 +172,23 @@ server <- function(input, output, session) {
 
     if (input$tabs1=='map') {
       createSimpleMap(userreq)  
+      refreshmap()
     } else if (input$tabs1=='Summary') {
-      frcstsummary <<- currentfrcst$tazdata %>%
-        summary()
-      output$Frcstsummary <- renderPrint({ frcstsummary })
+      frcstsummary = createSummaryTable(userreq)  
+      #output$Frcstsummary <- renderPrint({ frcstsummary })
+      output$Frcstsummary <- renderUI({ frcstsummary })
       
     } else if (input$tabs1=='chart') {
+      frcstchart = createChronologicalGraph(userreq)  
+      #output$FrcstChart <- renderPlot({ frcstchart })
+      output$FrcstChart <- renderUI({ frcstchart })
       
     } else if (input$tabs1=='Table') {
-      output$Frcsttable <- renderTable({ currentfrcst$tazdata })
+      atable = subtable(userreq)
+      output$Frcsttable <-  renderDataTable(atable)
+      #output$Frcsttable <-  renderDataTable(currentfrcst$tazdata)
     }
 
-    refreshmap()
   }
 
   # -------------------------------------

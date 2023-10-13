@@ -3,7 +3,7 @@
     "path": "~/GitHub/ScenarioBank/dvlp/v0.3/proc-tbl.R",
     "project_path": "proc-tbl.R",
     "type": "r_source",
-    "hash": "3498164131",
+    "hash": "875803010",
     "contents": "",
     "dirty": false,
     "created": 1696937990631.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "2,38",
+        "cursorPosition": "6,41",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1697002367,
+    "lastKnownWriteTime": 1697213089,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1697002367,
+    "last_content_update": 1697213089978,
     "read_only": false,
     "read_only_alternatives": []
 }

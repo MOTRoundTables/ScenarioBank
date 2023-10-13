@@ -9,10 +9,10 @@ createSimpleMap <- function(userreq) {
   
   cat(aFrcst$name, aScn, aYr, dataVar)  
     
-  #if (!aFrcst$tazdata %>% as_tibble() %>% pull(dataVar) %>% class() %>% `%in%`(c("numeric","integer") )) {
-  #  # print(aFrcst$tazdata%>% as_tibble() %>% pull(dataVar) %>% class())
-  #  aFrcst$tazdata <- aFrcst$tazdata %>% mutate(!!dataVar := !!sym(dataVar) %>% parse_number())
-  #}
+  if (!aFrcst$tazdata %>% as_tibble() %>% pull(dataVar) %>% class() %>% `%in%`(c("numeric","integer") )) {
+    # print(aFrcst$tazdata%>% as_tibble() %>% pull(dataVar) %>% class())
+    aFrcst$tazdata <- aFrcst$tazdata %>% mutate(!!dataVar := !!sym(dataVar) %>% parse_number())
+  }
   
   x_join <- aFrcst$bankvars$taz
   y_join <- aFrcst$data$tazvar

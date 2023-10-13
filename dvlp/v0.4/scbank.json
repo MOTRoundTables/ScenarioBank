@@ -1,0 +1,35 @@
+{
+	"general": {
+		"sysdir"   : "../../",
+		"sysdir0"   : "https://raw.githubusercontent.com/MOTRoundTables/ScenarioBank/main/",
+		"sysdir1"   : "C:/Users/marsz/Documents/GitHub/ScenarioBank/",
+		"geodir"   : "<sysdir>geo/",
+		"frcstdir" : "<sysdir>Scn_lib/",
+		"rsltdir"  : "<sysdir>results/",
+		"initialsz": 1
+	},
+	"basemap": {
+	  "mapname" : "myMap",
+	  "initial_lon" : 35.0,
+	  "initial_lat" : 31.9,
+	  "initial_zm" : 10,
+	  "minZoom" : 0, 
+	  "maxZoom" : 18,
+	  "height" : 700
+	},
+	"forecastslist": [
+		["מודל תל אביב", ["TA2016", "TA2021", "TA2022", "TA_v09"]],
+		["מודל חיפה", ["YN2019"]],
+		["מודל ירושלים", ["JeruV2", "jeruV32", "jeru23v09"]],
+		["מודל באר שבע", ["BS_v09"]],
+		["מודל ארצי", ["arzi2010"]],
+		["תכנית אסטרטגית", ["ash2020", "nathed2022" ]],
+		["המועצה הלאומית לכלכלה", ["moaza2021"]]
+	],
+	"dict" : {
+		"population" : { "name":"אוכלוסייה" },
+		"sector"     : { "name":"מגזר",   "desc": "מגזר עיקרי של אזור"  },
+		"employment" : { "name":"תעסוקה"  },
+		"motrate"    : { "name":"רמת מינוע" }
+	}
+}

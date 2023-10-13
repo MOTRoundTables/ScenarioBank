@@ -1,0 +1,22 @@
+{	"code": "TA_v09",
+	"name"    : "v0.9 מודל תל אביב 2023",
+	"source"  : "מודל תל אביב",
+	"dir"     : "TA_v09",
+	"tazlyr"  : "TLV_1318",
+	"tazvar"  : "TAZ_1318_N",
+	"tazfile" : "TLV_1318.geojson",
+	"file"    : "TA_v09.csv",
+	"scenarios"   : {
+		"BAU": {
+			"desc": "המשך מגמות תואם מועצה",
+			"years":  [ 2025, 2030, 2040, 2050 ] },
+		"IPLAN": {
+			"desc": "אסטרטגיה דיור תואם מועצה",
+			"years":  [ 2025, 2030, 2040, 2050 ] }
+		},
+	"dict": {
+			"TAZ_1318_N": {"description": "אזור תנועה", "bank": "taz"        },
+			"POPULATION": {"description": "אוכלוסייה",  "bank": "population" },
+			"EMPL_TOT":   {"description": "תעסוקה",   "bank": "employment" }
+	}
+}

@@ -1,7 +1,7 @@
 {
 	"general": {
-		"sysdir0"   : "https://raw.githubusercontent.com/MOTRoundTables/ScenarioBank/main/",
 		"sysdir"   : "../../",
+		"sysdir0"   : "https://raw.githubusercontent.com/MOTRoundTables/ScenarioBank/main/",
 		"sysdir1"   : "C:/Users/marsz/Documents/GitHub/ScenarioBank/",
 		"geodir"   : "<sysdir>geo/",
 		"frcstdir" : "<sysdir>Scn_lib/",
@@ -18,7 +18,7 @@
 	  "height" : 700
 	},
 	"forecastslist": [
-		["מודל תל אביב", ["TA2016", "TA2021", "TA2022"]],
+		["מודל תל אביב", ["TA2016", "TA2021", "TA2022", "TA_v09"]],
 		["מודל חיפה", ["YN2019"]],
 		["מודל ירושלים", ["JeruV2", "jeruV32", "jeru23v09"]],
 		["מודל באר שבע", ["BS_v09"]],

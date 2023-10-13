@@ -27,8 +27,9 @@
 		["המועצה הלאומית לכלכלה", ["moaza2021"]]
 	],
 	"dict" : {
-		"population" : { "desc":"אוכלוסייה" },
-		"employment" : { "desc":"תעסוקה"  },
-		"motrate"    : { "desc":"רמת מינוע" }
+		"population" : { "name":"אוכלוסייה" },
+		"sector"     : { "name":"מגזר",   "desc": "מגזר עיקרי של אזור"  },
+		"employment" : { "name":"תעסוקה"  },
+		"motrate"    : { "name":"רמת מינוע" }
 	}
 }

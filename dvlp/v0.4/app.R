@@ -8,33 +8,54 @@ library(waiter) # https://waiter.john-coene.com/#/  #https://shiny.john-coene.co
 source("main.R")
 
 
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
+  tags$html(dir="rtl", lang="he"),
+  includeCSS("app.css"),  
   waiter::use_waiter(),
-  titlePanel("בנק תחזיות"),
-  
-  navbarPage(" ", theme = shinytheme("united"),  # "lumen"  "united"  "cerulean"
-  
-    tabPanel("צפייה", fluid = TRUE, #icon = icon("globe-americas"), #tags$style(button_color_css),
+  #titlePanel("בנק תחזיות"),
+
+  navbarPage("בנק התחזיות", selected = "צפייה",
+             theme = shinytheme("united"),  # "lumen"  "united"  "cerulean"
+
+      tabPanel("השוואה",
+                
+      ), # tabPanel השוואה
+      
+      # ------------------------------------------------------
+       
+      tabPanel("צפייה", fluid = TRUE, #icon = icon("globe-americas"), #tags$style(button_color_css),
+             
+             
+       fluidRow(
+         column(2, offset = 8, selectizeInput('selectfrcst', 'תחזית', choices = character(0), 
+                               options = list(
+                                 placeholder = 'בחר מתוך הרשימה ...',
+                                 onInitialize = I('function() { this.setValue(""); }') ) ),
+         ),
+         column(2, selectizeInput('selectsrc', 'מקור תחזית', choices = cfg$frcstsources,
+                                  options = list(
+                                    placeholder = 'בחר מתוך הרשימה ...',
+                                    onInitialize = I('function() { this.setValue(""); }') ) )
+         )
+       ),
+       
+       
+      # <hr style="margin-top: 0px;margin-bottom: 20px;">
+      tags$hr(style="margin-top: 0px;margin-bottom: 20px;"),
+             
              
       sidebarLayout(position = "right",
                     
-        sidebarPanel( width = 4,
-
+        sidebarPanel( width = 2,
           #titlePanel("בנק"),
-          
-          selectizeInput('selectsrc', 'מקור תחזית', choices = cfg$frcstsources,
-            options = list(
-              placeholder = 'בחר מתוך הרשימה ...',
-              onInitialize = I('function() { this.setValue(""); }') ) ),
-          
-          selectizeInput('selectfrcst', 'תחזית', choices = character(0), 
-            options = list(
-              placeholder = 'בחר מתוך הרשימה ...',
-              onInitialize = I('function() { this.setValue(""); }') ) ),
-          
-          hr(), 
-          selectInput('selectscn', 'תרחיש', "", multiple=FALSE, selectize=FALSE),
+
+          selectInput('selectscn', 'תרחיש', "", multiple=TRUE, selectize=FALSE),
+          # awesomeRadio(inputId = 'selectscn', label = 'תרחיש', choices = c("")
+          #   #,choices = c("A", "B", "C"),
+          #   #selected = "A"
+          # ),          
 
           #selectInput('selectyr', 'שנה', "", multiple=FALSE, selectize=FALSE),
           prettyCheckboxGroup(inputId = "selectyr", label = "שנה", 
@@ -70,34 +91,32 @@ ui <- fluidPage(
         ),
 
     # Show a plot of the generated distribution
-    mainPanel(
+    mainPanel( width = 10,
 
-          tabsetPanel(id = "tabs1", type = "tabs",
-              tabPanel("map", br(), 
-                       uiOutput("leaf")
+          tabsetPanel(id = "tabs1", type = "tabs", selected = "map",
+                      
+              tabPanel("טבלה",   value = 'Table',
+                       dataTableOutput("Frcsttable") 
               ),
-              tabPanel("Summary", 
-                       uiOutput("Frcstsummary") #verbatimTextOutput("Frcstsummary") 
-              ),
-              tabPanel("chart",
+              tabPanel("תרשים", br(),  value = 'chart', 
                        uiOutput("FrcstChart") # plotOutput("FrcstChart")
               ),
-              tabPanel("Table", 
-                       dataTableOutput("Frcsttable") 
+              tabPanel("תקציר",   value = 'Summary',
+                       uiOutput("Frcstsummary") #verbatimTextOutput("Frcstsummary") 
+              ),
+              tabPanel("מפה",  value = 'map', br(), 
+                       uiOutput("leaf"),
+                       
               )
           )
           
         )
       
       ) # sidebarLayout
-    ), # tabPanel צפייה
+    ) # tabPanel צפייה
 
     # ------------------------------------------------------
     
-    tabPanel("השוואה",
-
-     ) # tabPanel השוואה
-               
   ) # navbarPage
 )
 
@@ -114,6 +133,7 @@ server <- function(input, output, session) {
                         selected = character(0) )  
       refreshmap()
       updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
+      #updateAwesomeRadio(session, "selectscn", choices = c(""), selected = NULL )
       updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
       updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
     }
@@ -124,12 +144,13 @@ server <- function(input, output, session) {
     waiter$show()
     on.exit(waiter$hide())    
     if (setnewfrcst(input$selectfrcst)) {
-      updateSelectInput(session, "selectscn",
-                        choices = currentfrcst$scnchoices,
-                        selected = character(0) )
+      updateSelectInput(session, "selectscn", choices = currentfrcst$scnchoices, selected = character(0) )
+      #updateAwesomeRadio(session, "selectscn", choices = currentfrcst$scnchoices, selected = NULL )
+
       updateSelectInput(session, "selectvar",
                         choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars() 
                         selected = character(0) )
+      
       updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
       refreshmap()
     }
@@ -173,6 +194,7 @@ server <- function(input, output, session) {
     if (input$tabs1=='map') {
       createSimpleMap(userreq)  
       refreshmap()
+      
     } else if (input$tabs1=='Summary') {
       frcstsummary = createSummaryTable(userreq)  
       #output$Frcstsummary <- renderPrint({ frcstsummary })
@@ -195,7 +217,8 @@ server <- function(input, output, session) {
   
   refreshmap = function() {
     output$appMap <- renderLeaflet({ basemap$mapview@map })
-    output$leaf = renderUI({ leafletOutput("appMap", width = "100%", height = cfg$basemap$height) })
+    output$leaf = renderUI({ leafletOutput("appMap", 
+                            width = "100%", height = cfg$basemap$height) }) 
   }
   
   refreshmap()

@@ -1,0 +1,25 @@
+
+ .navbar-header {
+	 float:right !important;
+	 text-align: right !important;
+ }
+ .navbar-brand {
+	 font-weight: bold !important;
+	 padding-left: 30px !important;
+	 padding-right: 0px !important;
+ }
+ .navbar-nav {
+	 float:right !important;
+ }
+ .nav{
+	 float: right !important;
+	 direction: ltr !important; /* Reset to default */
+ }
+ .legend {  /* mapview legend */
+   direction: ltr !important; /* Reset to default */
+ }
+ .shiny-options-group{
+   direction: ltr !important; /* Reset to default */
+ }
+
+.svg-container {top: 50px;} /* problem with plotty and tabs */

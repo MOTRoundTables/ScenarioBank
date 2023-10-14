@@ -1,3 +1,5 @@
+# colors :  https://r-graph-gallery.com/38-rcolorbrewers-palettes.html
+#           https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 
 # simple map = 1 scenario,  1 year, 1 var, values 
 createSimpleMap <- function(userreq) {  
@@ -21,8 +23,14 @@ createSimpleMap <- function(userreq) {
   with_geoms <- filtered %>% left_join(aFrcst$geolyr, by = setNames(y_join,x_join)) %>% st_sf()
   
   # update basemap 
+  
+  colors <- rev(RColorBrewer::brewer.pal(12, "RdYlGn")) # RColorBrewer::brewer.pal(11, "RdBu")
+  
   basemap$mapview =
-    mapview(with_geoms,zcol = dataVar)
+    mapview(with_geoms, zcol = dataVar, 
+            layer.name = dataVar,
+            col.regions = colors
+            )
 }
 
 

@@ -15,7 +15,7 @@
 	  "initial_zm" : 10,
 	  "minZoom" : 0, 
 	  "maxZoom" : 18,
-	  "height" : 700
+	  "height" : 750
 	},
 	"forecastslist": [
 		["מודל תל אביב", ["TA2016", "TA2021", "TA2022", "TA_v09"]],

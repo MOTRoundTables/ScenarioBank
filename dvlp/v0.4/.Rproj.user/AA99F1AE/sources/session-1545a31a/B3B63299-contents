@@ -1,0 +1,43 @@
+library(shiny)
+
+# Define UI for dataset viewer app ----
+ui <- fluidPage(
+  
+  # App title ----
+  titlePanel("Shiny Text"),
+  
+  # Sidebar layout with a input and output definitions ----
+  sidebarLayout(
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+      selectInput("variable", "Variable:",
+                  c("Cylinders" = "cyl",
+                    "Transmission" = "am",
+                    "Gears" = "gear")),
+  
+      selectInput("state", "Choose a state:",
+                  list(`East Coast` = list("NY", "NJ", "CT"),
+                       `West Coast` = list("WA", "OR", "CA"),
+                       `Midwest` = list("MN", "WI", "IA"))    ),
+    ),
+    # Main panel for displaying outputs ----
+    mainPanel(
+      textOutput("result"),
+      tableOutput("data")
+    )
+    )
+  )
+
+server = function(input, output) {
+
+    output$data <- renderTable({
+      mtcars[, c("mpg", input$variable), drop = FALSE]
+    }, rownames = TRUE)
+        
+    output$result <- renderText({
+      paste("You chose", input$state)
+    })
+
+  }
+
+shinyApp(ui = ui, server = server)

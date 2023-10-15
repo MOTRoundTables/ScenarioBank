@@ -190,6 +190,7 @@ server <- function(input, output, session) {
       userreq$yrmode = 2
     }
     userreq$var   = input$selectvar
+    userreq$mode = 1  # 1 scenario 1 year
 
     if (input$tabs1=='map') {
       createSimpleMap(userreq)  

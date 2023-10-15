@@ -1,6 +1,12 @@
 # colors :  https://r-graph-gallery.com/38-rcolorbrewers-palettes.html
 #           https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 
+createSimpleMap <- function(userreq) {  
+  if (userreq$mode=1) then  {createSimpleMap(userreq)}
+  else   {createMultiMap(userreq)}
+}
+
+
 # simple map = 1 scenario,  1 year, 1 var, values 
 createSimpleMap <- function(userreq) {  
   

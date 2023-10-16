@@ -71,8 +71,10 @@ ui <- fluidPage(
                     selected = 1, multiple=FALSE, selectize=FALSE),
 
           hr(),
-          actionButton("doanalisys", "הפעל", style='width:100%')
-
+          actionButton("doanalisys", "הפעל", style='width:100%'),
+          hr(),
+          actionButton("clearall", "נקה הכל")
+          
           # --------------------------------------          
 
           #updateSelectInput(session, "selectSz",
@@ -153,7 +155,6 @@ server <- function(input, output, session) {
                         choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars()
                         selected = character(0) )
 
-
       updatePrettyCheckboxGroup(session, "selectyr",
                           choices = as.list(currentfrcst$getscnyears()),
                           inline = TRUE,
@@ -161,7 +162,22 @@ server <- function(input, output, session) {
       refreshmap()
     }
   })
+
+  observeEvent(input$selectscnclr, {
+    updateSelectInput(session, "selectscn", selected = character(0) )
+  })
+  observeEvent(input$selectscnall, {
+    updateSelectInput(session, "selectscn", selected = currentfrcst$scnchoices )
+  })
   
+  observeEvent(input$selectyrclr, {
+    updatePrettyCheckboxGroup(session, "selectyr", selected = character(0) )
+  })
+  observeEvent(input$selectyrall, {
+    updatePrettyCheckboxGroup(session, "selectyr", selected = as.list(currentfrcst$getscnyears()) )
+  })
+  
+    
 #  observeEvent(input$selectscn, {
 #    if (input$selectscn!="") {
 #      if (setnewscn(input$selectscn)) {

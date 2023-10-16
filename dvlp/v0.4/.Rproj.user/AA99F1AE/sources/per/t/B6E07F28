@@ -3,7 +3,7 @@
     "path": "~/GitHub/ScenarioBank/dvlp/v0.4/proc-map.R",
     "project_path": "proc-map.R",
     "type": "r_source",
-    "hash": "1941437485",
+    "hash": "2046024564",
     "contents": "",
     "dirty": false,
     "created": 1696937991878.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "4,20",
+        "cursorPosition": "15,0",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1697371669,
+    "lastKnownWriteTime": 1697453490,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1697371669619,
+    "last_content_update": 1697453490860,
     "read_only": false,
     "read_only_alternatives": []
 }

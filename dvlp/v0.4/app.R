@@ -8,7 +8,6 @@ library(waiter) # https://waiter.john-coene.com/#/  #https://shiny.john-coene.co
 source("main.R")
 
 
-
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   tags$html(dir="rtl", lang="he"),
@@ -64,7 +63,7 @@ ui <- fluidPage(
           hr(), 
           selectInput('selectvar', 'משתנה', "", multiple=FALSE, selectize=FALSE),
 
-          selectInput('selectanalysis', 'עיבוד', choices = analisystype, 
+          selectInput('selectanalysis', 'עיבוד', choices = cfg$analisystype, 
                     selected = 1, multiple=FALSE, selectize=FALSE),
 
           hr(),
@@ -151,20 +150,23 @@ server <- function(input, output, session) {
                         choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars() 
                         selected = character(0) )
       
-      updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
+      updatePrettyCheckboxGroup(session, "selectyr", 
+                          choices = as.list(currentfrcst$getscnyears()),
+                          inline = TRUE,
+                          selected = character(0) )
       refreshmap()
     }
   })
   
-  observeEvent(input$selectscn, {
-    if (input$selectscn!="") {
-      if (setnewscn(input$selectscn)) {
-        updatePrettyCheckboxGroup(session, "selectyr",  # updateSelectInput
-                        choices = as.list(currentfrcst$getscnyears(currentscn)),
-                        inline = TRUE, selected = character(0) )
-      }
-    }
-  })
+#  observeEvent(input$selectscn, {
+#    if (input$selectscn!="") {
+#      if (setnewscn(input$selectscn)) {
+#        updatePrettyCheckboxGroup(session, "selectyr",  # updateSelectInput
+#                        choices = as.list(currentfrcst$getscnyears(currentscn)),
+#                        inline = TRUE, selected = character(0) )
+#      }
+#    }
+#  })
 
   observeEvent(input$tabs1, {
     cat(paste0(input$tabs1,"\n"))
@@ -177,23 +179,29 @@ server <- function(input, output, session) {
   })  
 
   doanalisys = function() {
-    req(currentfrcst, currentscn, input$selectyr, input$selectvar)
+    #req(currentfrcst, currentscn, input$selectyr, input$selectvar)
+    req(currentfrcst, input$selectscn, input$selectyr, input$selectvar)
     
     userreq = list()
     userreq$frcst = currentfrcst
-    userreq$scn   = currentscn
-    if (length(input$selectyr)==1) {
-      userreq$yr = input$selectyr[1]
-      userreq$yrmode = 1
+    userreq$scn = input$selectscn
+    userreq$yr = input$selectyr
+    userreq$var = input$selectvar
+
+    if ((length(input$selectyr)==1)&&(length(input$selectscn)==1)) {
+      userreq$mode = "1"
+      setnewscn(input$selectscn)
+    } else if ((length(input$selectyr)==2)&&(length(input$selectscn)==1)) {
+      userreq$mode = "2Y"
+    } else if ((length(input$selectyr)==1)&&(length(input$selectscn)==2)) {
+      userreq$mode = "2S"
     } else {
-      userreq$yr = input$selectyr
-      userreq$yrmode = 2
-    }
-    userreq$var   = input$selectvar
-    userreq$mode = 1  # 1 scenario 1 year
+      userreq$mode = "3"
+    }  
+
 
     if (input$tabs1=='map') {
-      createSimpleMap(userreq)  
+      createMap(userreq)  
       refreshmap()
       
     } else if (input$tabs1=='Summary') {

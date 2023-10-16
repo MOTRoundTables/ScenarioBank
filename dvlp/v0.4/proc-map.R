@@ -1,19 +1,20 @@
 # colors :  https://r-graph-gallery.com/38-rcolorbrewers-palettes.html
 #           https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 
-createSimpleMap <- function(userreq) {  
-  if (userreq$mode=1) then  {createSimpleMap(userreq)}
-  else   {createMultiMap(userreq)}
+createMap <- function(userreq) {  
+  if (userreq$mode==1) {createSimpleMap(userreq)}
+  else { createMultiMap(userreq) }
 }
 
-
+  
 # simple map = 1 scenario,  1 year, 1 var, values 
 createSimpleMap <- function(userreq) {  
   
   aFrcst = userreq$frcst
-  aScn = userreq$scn
+  aScn = userreq$scn[[1]]
+  aYr = userreq$yr[[1]]  # assume 1 yr only
+  
   dataVar = userreq$var
-  aYr = userreq$yr  # assume 1 yr only
   
   cat(aFrcst$name, aScn, aYr, dataVar)  
     
@@ -39,14 +40,6 @@ createSimpleMap <- function(userreq) {
             )
 }
 
+createMultiMap <- function(userreq) {  
+}
 
-
-#if(is.na(aScn)){
-#  aScn = aFrcst$Frcst$scnlist[1]
-#}
-#if(is.na(aYr)){
-#  aYr = aFrcst$Frcst$scenarios[[aScn]]$years[1]
-#}
-#if(is.na(aVar)){
-#  aVar =  aFrcst$data$dict$population
-#}

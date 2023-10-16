@@ -81,6 +81,8 @@ initapp <- function() {
   #cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
   # cfg$szchoices0 = append (cfg$szchoices0, cfg$szchoices)
   #list("Choice 1" = 1, "Choice 2" = 2)  
+
+  cfg$analisystype = list("ערכים", "צפיפות")
   
   return(cfg)
 }  
@@ -93,9 +95,6 @@ currentsrc <- ""
 currentfrcstky <- ""
 currentfrcst <- NULL
 currentscn <- ""
-
-analisystype = list("ערכים", "צפיפות")
-
 
 # start map
 basemap = mymap$new()

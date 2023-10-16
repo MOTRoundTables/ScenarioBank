@@ -6,27 +6,27 @@ library(data.table)
 
 frcstclass <- R6Class("Frcstclass",
     public = list(
-      num = NULL,
-      ky = NULL,
-      name = NULL,
-      dir = NULL,
+      num = NULL,         # ordinal # of frcst in cfg
+      ky = NULL,          # frcst code
+      name = NULL,        # frcst name
+      dir = NULL,         # frcst directory
       
-      data = NULL, 
+      data = NULL,        # a copy of scenario.json
       
       # scenarios
-      scnlist = NULL, 
-      scnnames = NULL, 
-      scnchoices = NULL, 
+      scnlist = NULL,     # vector of available scn codes
+      scnnames = NULL,    # vector of available scn names
+      scnchoices = NULL,  # list of scn for menu [[name:code]]
 
       # vars
-      vars = NULL, 
-      vardesc = NULL, 
-      varchoices = NULL, 
-      bankvars = NULL, 
+      vars = NULL,        # vector of dict vars
+      vardesc = NULL,     # vector of dict vars descriptions
+      varchoices = NULL,  # list of vars for menu [[name:var]]
+      bankvars = NULL,    # vector of bank vars in dict
 
       # data
-      geolyr = NULL,
-      tazdata = NULL,
+      geolyr = NULL,      # the geojson data
+      tazdata = NULL,     # the frcst csv data
 
       initialize = function(num, frcstky, frcstdir) {
         self$num = num
@@ -66,12 +66,11 @@ frcstclass <- R6Class("Frcstclass",
 
       },
       
-      loadfrcst = function() {
+      loadfrcst = function() {  # loads frcst data: geo + csv
         currentfrcst$getgeolyr()
         currentfrcst$opentazdata()  
       },
-      
-      
+
       # - forecast layer -------------------------------------      
       
       getfrcstlyr = function() {
@@ -133,8 +132,19 @@ frcstclass <- R6Class("Frcstclass",
 
       # - scenario functions  -------------------------------------      
       
-      getscnyears = function(ascn) {
-        return(self$data$scenarios[[ascn]]$years)
+      getscnyears = function(ascn = NULL) { # ascn may be: 1 scenario, null or a vector 
+        if (is.null(ascn)) { ascn = self$scnlist }   # null for all scenarios
+        
+        if (is.character(ascn)) {                    # 1 scn
+          result = self$data$scenarios[[ascn]]$years
+        } else {
+          result = vector()
+          for (i in 1:length(ascn)) {
+            result = append(result, self$data$scenarios[[ascn[i]]]$years)
+          }
+          result = sort(unique(result))
+        }
+        return(result)
       },
 
 

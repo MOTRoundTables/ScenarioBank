@@ -5,11 +5,11 @@
 # for debug
 
 source("main.R")
-#source("dvlp/v0.3/main.R")
+#source("dvlp/v0.4/main.R")
 
 frcstky = "jeru23v09"
-frcstnum <- cfg$frcstnums[[frcstky]]  # getfrcstnum(currentfrcstky)
-afrcst <<- cfg$forecasts[[frcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
+frcstnum <- cfg$frcstnums[[frcstky]] 
+afrcst <<- cfg$forecasts[[frcstnum]] 
 afrcst$name
 afrcst$loadfrcst()
 

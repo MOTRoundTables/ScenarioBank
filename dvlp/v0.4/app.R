@@ -219,7 +219,7 @@ server <- function(input, output, session) {
 
 
     if (input$tabs1=='map') {
-      createMap(userreq)  
+      basemap$mapview = createMap(userreq)  
       refreshmap()
       
     } else if (input$tabs1=='Summary') {

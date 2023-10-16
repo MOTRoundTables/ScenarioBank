@@ -32,13 +32,19 @@ createSimpleMap <- function(userreq) {
   
   colors <- rev(RColorBrewer::brewer.pal(12, "RdYlGn")) # RColorBrewer::brewer.pal(11, "RdBu")
   
-  basemap$mapview =
-    mapview(with_geoms, zcol = dataVar, 
+  x = mapview(with_geoms, zcol = dataVar, 
             layer.name = dataVar,
             col.regions = colors
             )
+
+  return(x)
+              
 }
 
+
 createMultiMap <- function(userreq) {  
+  
+
+  
 }
 

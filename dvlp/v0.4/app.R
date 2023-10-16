@@ -51,15 +51,19 @@ ui <- fluidPage(
           #titlePanel("בנק"),
 
           selectInput('selectscn', 'תרחיש', "", multiple=TRUE, selectize=FALSE),
-          # awesomeRadio(inputId = 'selectscn', label = 'תרחיש', choices = c("")
-          #   #,choices = c("A", "B", "C"),
-          #   #selected = "A"
-          # ),          
+          fluidRow(
+            column(6, actionButton("selectscnclr", "נקה הכל", style='width:80%;padding-top:2px;padding-bottom:2px;margin-bottom:3px') ),
+            column(6, actionButton("selectscnall", "בחר הכל", style='width:80%;padding-top:2px;padding-bottom:2px;margin-bottom:3px') ),
+          ),
 
           #selectInput('selectyr', 'שנה', "", multiple=FALSE, selectize=FALSE),
           prettyCheckboxGroup(inputId = "selectyr", label = "שנה", 
                               status = "danger", fill = FALSE),
-
+          fluidRow(
+            column(6, actionButton("selectyrclr", "נקה הכל", style='width:80%;padding-top:2px;padding-bottom:2px;margin-bottom:3px') ),
+            column(6, actionButton("selectyrall", "בחר הכל", style='width:80%;padding-top:2px;padding-bottom:2px;margin-bottom:3px') ),
+          ),
+          
           hr(), 
           selectInput('selectvar', 'משתנה', "", multiple=FALSE, selectize=FALSE),
 
@@ -132,7 +136,6 @@ server <- function(input, output, session) {
                         selected = character(0) )  
       refreshmap()
       updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
-      #updateAwesomeRadio(session, "selectscn", choices = c(""), selected = NULL )
       updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
       updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
     }
@@ -144,7 +147,6 @@ server <- function(input, output, session) {
     on.exit(waiter$hide())    
     if (setnewfrcst(input$selectfrcst)) {
       updateSelectInput(session, "selectscn", choices = currentfrcst$scnchoices, selected = character(0) )
-      #updateAwesomeRadio(session, "selectscn", choices = currentfrcst$scnchoices, selected = NULL )
 
       updateSelectInput(session, "selectvar",
                         choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars() 
@@ -179,7 +181,6 @@ server <- function(input, output, session) {
   })  
 
   doanalisys = function() {
-    #req(currentfrcst, currentscn, input$selectyr, input$selectvar)
     req(currentfrcst, input$selectscn, input$selectyr, input$selectvar)
     
     userreq = list()
@@ -240,7 +241,13 @@ shinyApp(ui = ui, server = server)
 
 # = end ==============================================
 
-# servet tests
+# shiny status colors: 'info', 'primary', 'danger', 'warning' or 'success'
+# secondary, primary, success, danger, warning, info, light, dark
+
+
+
+
+# server tests
 
 #htmlOutput("selectedFrcst"),        # display selection  
 #br()

@@ -2,6 +2,32 @@
 # Sys.setlocale(locale="hebrew")
 # setwd("C:/Users/marsz/Documents/GitHub/ScenarioBank/dvlp/v0.3")  # for debug
 
+# for debug
+
+source("main.R")
+#source("dvlp/v0.3/main.R")
+
+frcstky = "jeru23v09"
+frcstnum <- cfg$frcstnums[[frcstky]]  # getfrcstnum(currentfrcstky)
+afrcst <<- cfg$forecasts[[frcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
+afrcst$name
+afrcst$loadfrcst()
+
+userreq = list()
+userreq$frcst = afrcst
+userreq$scn = c("BAU")    # "BASE", "BAU", "IPLAN", "JTMT"
+userreq$yr = c(2025)      # 2020, 2025, 2030, 2035, 2040, 2045, 2050
+userreq$var = "pop"       # "pop", "emp_tot":
+userreq$mode = 1          # change to 3 if multiple
+
+x = createMap(userreq)
+x
+# end
+
+
+
+# ============================================
+
 
 currentfrcst$data$tazvar
 view(currentfrcst$geolyr)
@@ -21,8 +47,6 @@ createSimpleMap(aFrcst, aScn = currentscn,
                 aYr=aYr, aVar = aVar) 
 basemap$mapview
 
-#source("main.R")
-source("dvlp/v0.3/main.R")
 
 
 cfg$forecastslist

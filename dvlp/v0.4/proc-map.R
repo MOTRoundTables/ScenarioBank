@@ -9,7 +9,6 @@ createMap <- function(userreq) {
   
 # simple map = 1 scenario,  1 year, 1 var, values 
 createSimpleMap <- function(userreq) {  
-  
   aFrcst = userreq$frcst
   aScn = userreq$scn[[1]]
   aYr = userreq$yr[[1]]  # assume 1 yr only

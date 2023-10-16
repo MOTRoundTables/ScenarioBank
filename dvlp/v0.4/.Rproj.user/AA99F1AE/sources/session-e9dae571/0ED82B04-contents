@@ -70,8 +70,8 @@ frcstclass <- R6Class("Frcstclass",
       # - scenario functions  -------------------------------------      
       
       loadfrcst = function() {  # loads frcst data: geo + csv
-        currentfrcst$getgeolyr()
-        currentfrcst$opentazdata()  
+        self$getgeolyr()
+        self$opentazdata()  
       },
       
       getscnyears = function(ascn = NULL) { # ascn may be: 1 scenario, null or a vector 

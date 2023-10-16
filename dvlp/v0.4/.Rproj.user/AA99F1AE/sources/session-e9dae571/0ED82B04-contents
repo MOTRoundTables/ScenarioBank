@@ -66,11 +66,30 @@ frcstclass <- R6Class("Frcstclass",
 
       },
       
+      
+      # - scenario functions  -------------------------------------      
+      
       loadfrcst = function() {  # loads frcst data: geo + csv
         currentfrcst$getgeolyr()
         currentfrcst$opentazdata()  
       },
-
+      
+      getscnyears = function(ascn = NULL) { # ascn may be: 1 scenario, null or a vector 
+        if (is.null(ascn)) { ascn = self$scnlist }   # null for all scenarios
+        
+        if (length(ascn)==1) {                    # 1 scn
+          result = self$data$scenarios[[ascn[[1]]]]$years
+        } else {
+          result = vector()
+          for (i in 1:length(ascn)) {
+            result = append(result, self$data$scenarios[[ascn[i]]]$years)
+          }
+          result = sort(unique(result))
+        }
+        return(result)
+      },
+      
+      
       # - forecast layer -------------------------------------      
       
       getfrcstlyr = function() {
@@ -129,24 +148,6 @@ frcstclass <- R6Class("Frcstclass",
         v = unlist(self$bankvars, use.names = FALSE)
         return(v)  #(v[2:length(v)])
       },
-
-      # - scenario functions  -------------------------------------      
-      
-      getscnyears = function(ascn = NULL) { # ascn may be: 1 scenario, null or a vector 
-        if (is.null(ascn)) { ascn = self$scnlist }   # null for all scenarios
-        
-        if (is.character(ascn)) {                    # 1 scn
-          result = self$data$scenarios[[ascn]]$years
-        } else {
-          result = vector()
-          for (i in 1:length(ascn)) {
-            result = append(result, self$data$scenarios[[ascn[i]]]$years)
-          }
-          result = sort(unique(result))
-        }
-        return(result)
-      },
-
 
       # - aggregation functions  -------------------------------------      
       

@@ -94,7 +94,7 @@ cfg <- initapp()
 currentsrc <- ""
 currentfrcstky <- ""
 currentfrcst <- NULL
-currentscn <- ""
+#currentscn <- ""
 
 # start map
 basemap = mymap$new()
@@ -161,25 +161,25 @@ setnewfrcst <- function(frcstky) {
   return(changed)
 }
 
-setnewscn <- function(aScn) {
-  changed = 0
-  if (aScn!="") {
-    if (currentscn!=aScn) { # scenario changed
-      currentscn <<- aScn
-      cat(paste("set scn: ", currentscn, "\n"))
-      changed = 1
-    }
-  }    
-  return(changed)
-}
-
-
 
 # = end =================================================
 
 # rm(list=ls())
 
 #HideCurrentSc()
+
+
+#setnewscn <- function(aScn) {
+#  changed = 0
+#  if (aScn!="") {
+#    if (currentscn!=aScn) { # scenario changed
+#      currentscn <<- aScn
+#      cat(paste("set scn: ", currentscn, "\n"))
+#      changed = 1
+#    }
+#  }    
+#  return(changed)
+#}
 
 ############  basemap$lyrs <<- bind_rows(basemap$lyrs, temp) # view(basemap$lyrs)
 # ky = "metrorings2008"  # to test

@@ -146,13 +146,15 @@ server <- function(input, output, session) {
     waiter$show()
     on.exit(waiter$hide())    
     if (setnewfrcst(input$selectfrcst)) {
+      
       updateSelectInput(session, "selectscn", choices = currentfrcst$scnchoices, selected = character(0) )
 
       updateSelectInput(session, "selectvar",
-                        choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars() 
+                        choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars()
                         selected = character(0) )
-      
-      updatePrettyCheckboxGroup(session, "selectyr", 
+
+
+      updatePrettyCheckboxGroup(session, "selectyr",
                           choices = as.list(currentfrcst$getscnyears()),
                           inline = TRUE,
                           selected = character(0) )
@@ -191,7 +193,6 @@ server <- function(input, output, session) {
 
     if ((length(input$selectyr)==1)&&(length(input$selectscn)==1)) {
       userreq$mode = "1"
-      setnewscn(input$selectscn)
     } else if ((length(input$selectyr)==2)&&(length(input$selectscn)==1)) {
       userreq$mode = "2Y"
     } else if ((length(input$selectyr)==1)&&(length(input$selectscn)==2)) {

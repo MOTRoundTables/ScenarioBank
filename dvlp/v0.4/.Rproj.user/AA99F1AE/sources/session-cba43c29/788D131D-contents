@@ -16,3 +16,7 @@ showmodalmessage <- function(ttl, msg) {
   showModal(modalDialog(
     title = ttl, msg ))
 }
+
+notready <- function() {
+  showmessage("פנקציה זו לא מוכנה")
+}

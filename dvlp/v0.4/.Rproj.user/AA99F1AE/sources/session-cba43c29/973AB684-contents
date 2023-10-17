@@ -9,7 +9,7 @@ library(jsonlite)   # https://cran.r-project.org/web/packages/jsonlite/index.htm
 
 # setwd("C:\\Users\\marsz\\OneDrive\\temp\\shiny\\scbank\\v1\\v1\\")  # for debug
 
-#idoenv = "dvlp/v0.3/"
+#idoenv = "dvlp/v0.4/"
 idoenv = ""
 source(paste0(idoenv,"maplib.R"))
 source(paste0(idoenv,"scnlib.R"))
@@ -18,7 +18,6 @@ source(paste0(idoenv,"utillib.R"))
 source(paste0(idoenv,"proc-tbl.R"))
 source(paste0(idoenv,"proc-chrt.R"))
 source(paste0(idoenv,"proc-map.R"))
-
 
 # - initialize
 initapp <- function() {
@@ -89,22 +88,18 @@ initapp <- function() {
 
 # define global vars
 
-cfg <- initapp()
+cfg <- initapp()            # start cfg
+basemap = mymap$new()       # start basemap
+basemap$reset(cfg$basemap)  # reset basemap
 
+# vars for tab  צפייה
 currentsrc <- ""
 currentfrcstky <- ""
 currentfrcst <- NULL
-#currentscn <- ""
 
-# start map
-basemap = mymap$new()
-basemap$resetmap(cfg$basemap)
-#basemap$addlayers(cfg$szlyrs)
-
-# basemap$mapview
-# basemap$map
 
 # - ui functions --------------------------------------------
+
 
 getfrcstnum <- function(frcstky) {    #   asrc = "מודל תל אביב"
 # return(which(cfg$frcstkeys == frcstky))
@@ -164,11 +159,17 @@ setnewfrcst <- function(frcstky) {
 
 # = end =================================================
 
+#basemap$addlayers(cfg$szlyrs)
+
+# basemap$mapview
+# basemap$map
+
+
 # rm(list=ls())
 
 #HideCurrentSc()
 
-
+#currentscn <- ""
 #setnewscn <- function(aScn) {
 #  changed = 0
 #  if (aScn!="") {

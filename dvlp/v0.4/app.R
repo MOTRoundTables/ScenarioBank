@@ -52,8 +52,8 @@ ui <- fluidPage(
 
           selectInput('selectscn', 'תרחיש', "", multiple=TRUE, selectize=FALSE),
           fluidRow(
-            column(6, actionButton("selectscnclr", "נקה הכל", style='width:80%;padding-top:2px;padding-bottom:2px;margin-bottom:3px') ),
-            column(6, actionButton("selectscnall", "בחר הכל", style='width:80%;padding-top:2px;padding-bottom:2px;margin-bottom:3px') ),
+           column(6, actionButton("selectscnclr", "נקה הכל", style='width:80%;padding-top:2px;padding-bottom:2px;margin-bottom:3px') ),
+           column(6, actionButton("selectscnall", "בחר הכל", style='width:80%;padding-top:2px;padding-bottom:2px;margin-bottom:3px') ),
           ),
 
           #selectInput('selectyr', 'שנה', "", multiple=FALSE, selectize=FALSE),
@@ -73,7 +73,8 @@ ui <- fluidPage(
           hr(),
           actionButton("doanalisys", "הפעל", style='width:100%'),
           hr(),
-          actionButton("clearall", "נקה הכל")
+          actionButton("clearall", "נקה הכל"),
+          actionButton("test", "פיתוח")
           
           # --------------------------------------          
 
@@ -176,17 +177,10 @@ server <- function(input, output, session) {
   observeEvent(input$selectyrall, {
     updatePrettyCheckboxGroup(session, "selectyr", selected = as.list(currentfrcst$getscnyears()) )
   })
-  
-    
-#  observeEvent(input$selectscn, {
-#    if (input$selectscn!="") {
-#      if (setnewscn(input$selectscn)) {
-#        updatePrettyCheckboxGroup(session, "selectyr",  # updateSelectInput
-#                        choices = as.list(currentfrcst$getscnyears(currentscn)),
-#                        inline = TRUE, selected = character(0) )
-#      }
-#    }
-#  })
+
+  observeEvent(input$clearall, {
+    notready()
+  })
 
   observeEvent(input$tabs1, {
     cat(paste0(input$tabs1,"\n"))
@@ -217,9 +211,9 @@ server <- function(input, output, session) {
       userreq$mode = "3"
     }  
 
-
     if (input$tabs1=='map') {
-      basemap$mapview = createMap(userreq)  
+      basemap$hidelyr(currentfrcst$data$tazlyr)
+      basemap$add(createMap(userreq))
       refreshmap()
       
     } else if (input$tabs1=='Summary') {
@@ -261,7 +255,15 @@ shinyApp(ui = ui, server = server)
 # shiny status colors: 'info', 'primary', 'danger', 'warning' or 'success'
 # secondary, primary, success, danger, warning, info, light, dark
 
-
+#  observeEvent(input$selectscn, {
+#    if (input$selectscn!="") {
+#      if (setnewscn(input$selectscn)) {
+#        updatePrettyCheckboxGroup(session, "selectyr",  # updateSelectInput
+#                        choices = as.list(currentfrcst$getscnyears(currentscn)),
+#                        inline = TRUE, selected = character(0) )
+#      }
+#    }
+#  })
 
 
 # server tests

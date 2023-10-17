@@ -98,24 +98,23 @@ ui <- fluidPage(
 
     # Show a plot of the generated distribution
     mainPanel( width = 10,
-
+          tags$style(HTML(".tabbable > .nav > li > a  {font-weight: bold;}")),
           tabsetPanel(id = "tabs1", type = "tabs", selected = "map",
-                      
+
               tabPanel("טבלה",   value = 'Table',
-                       dataTableOutput("Frcsttable") 
+                       dataTableOutput("Frcsttable")
               ),
-              tabPanel("תרשים", br(),  value = 'chart', 
+              tabPanel("תרשים", br(),  value = 'chart',
                        uiOutput("FrcstChart") # plotOutput("FrcstChart")
               ),
               tabPanel("תקציר",   value = 'Summary',
-                       uiOutput("Frcstsummary") #verbatimTextOutput("Frcstsummary") 
+                       uiOutput("Frcstsummary") #verbatimTextOutput("Frcstsummary")
               ),
-              tabPanel("מפה",  value = 'map', br(), 
+              tabPanel("מפה",  value = 'map', br(),
                        uiOutput("leaf"),
-                       
+
               )
           )
-          
         )
       
       ) # sidebarLayout

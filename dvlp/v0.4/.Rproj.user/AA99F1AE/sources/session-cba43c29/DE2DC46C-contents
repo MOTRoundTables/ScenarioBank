@@ -1,0 +1,30 @@
+#https://stackoverflow.com/questions/52968447/how-to-set-color-of-tabpanel-title-in-navbarpage-of-a-shiny-app
+
+library(shiny) 
+ui <-shinyUI(bootstrapPage( 
+  "", 
+  
+  navbarPage( 
+    tags$style(HTML(" 
+        .navbar-default .navbar-brand {color: cyan;}
+        .navbar-default .navbar-brand:hover {color: blue;}
+        .navbar { background-color: gray;}
+        .navbar-default .navbar-nav > li > a {color:black;}
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:focus,
+        .navbar-default .navbar-nav > .active > a:hover {color: pink;background-color: purple;}
+        .navbar-default .navbar-nav > li > a:hover {color: black;background-color:yellow;text-decoration:underline;}
+        .navbar-default .navbar-nav > li > a[data-value='t1'] {color: red;background-color: pink;}
+        .navbar-default .navbar-nav > li > a[data-value='t2'] {color: blue;background-color: lightblue;}
+        .navbar-default .navbar-nav > li > a[data-value='t3'] {color: green;background-color: lightgreen;}
+                  ")), 
+    tabPanel("t0",h2("normal tab")), 
+    tabPanel("t1",h2("red tab")), 
+    tabPanel("t2",h2("blue tab")), 
+    tabPanel("t3",h2("green tab")), 
+    tabPanel("t4",h2("normal tab")), 
+    tabPanel("t5",h2("normal tab")) 
+  ) 
+)) 
+server <- function(input, output) {} 
+shinyApp(ui=ui,server=server)

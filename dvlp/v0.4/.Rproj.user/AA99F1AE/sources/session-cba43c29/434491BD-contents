@@ -1,0 +1,23 @@
+library(shiny)
+ui <-shinyUI(fluidPage(
+  h1("Colored Tabs"),
+  tags$style(HTML("
+                  .tabbable > .nav > li > a                  {font-weight: bold; background-color: pink;  color:black}
+                  .tabbable > .nav > li > a[data-value='t1'] {background-color: red;   color:white}
+                  .tabbable > .nav > li > a[data-value='t2'] {background-color: blue;  color:white}
+                  .tabbable > .nav > li > a[data-value='t3'] {background-color: green; color:white}
+                  .tabbable > .nav > li[class=active]    > a {background-color: gold; color:white}
+                  ")),
+  tabsetPanel(
+    tabPanel("t0",h2("normal tab in blue", style ="color : blue"), p("normal tabs are in pink"),
+             p("active tab is in gold" , style ="font-weight:bold"),
+             p("text is is in gold" , style ="font-weight:bold; color:gold")),
+    tabPanel("t1",h2("red tab"), p("active tab is in gold" , style ="font-weight:bold; color:gold")),
+    tabPanel("t2",h2("blue tab"), p("active tab is in gold" , style ="font-weight:bold")), 
+    tabPanel("t3",h2("green tab"), p("active tab is in gold" , style ="font-weight:bold")),
+    tabPanel("t4",h2("normal tab"), p("normal tabs are in pink"), p("active tab is in gold" , style ="font-weight:bold")),
+    tabPanel("t5",h2("normal tab"), p("normal tabs are in pink"), p("active tab is in gold" , style ="font-weight:bold"))
+  )
+))
+server <- function(input, output) {}
+shinyApp(ui=ui,server=server)

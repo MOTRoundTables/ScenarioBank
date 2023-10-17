@@ -18,7 +18,7 @@ mymap <- R6Class("mymapclass",
         #basemap = NULL,
         mapview = NULL,
         lyrs = NULL,     # a dataframe of the layers in the map "lyr" is the layer name
-        loadedlayers = 0,
+        #loadedlayers = 0,
              
         # - creates map with mapview()
         createmap = function(mapproperties) {
@@ -43,27 +43,30 @@ mymap <- R6Class("mymapclass",
             #)
         },
         
-        resetmapview = function(mapproperties) { # set initial view
+        resetview = function(mapproperties) { # set initial view
           self$mapview@map <- self$mapview@map %>% 
             setView(lng = mapproperties$initial_lon, lat = mapproperties$initial_lat, zoom = mapproperties$initial_zm)   
         },
 
-        resetmap = function(mapproperties) {  # start a fresh map
+        reset = function(mapproperties) {  # start a fresh map
           self$createmap(mapproperties)
-          self$resetmapview(mapproperties)
+          self$resetview(mapproperties)
         },
 
-        getnumloadedlayers = function() {
-          print(self$loadedlayers)
+        add = function(amapview) {
+          basemap$mapview = basemap$mapview + amapview
         },
         
-        displaymap = function() {
-          #m <- self$mapview@map
+        display = function() {
           return(self$mapview@map)
         },
-
-        # - layer functions
         
+        # - layer functions
+
+        #getnumloadedlayers = function() {
+        #  print(self$loadedlayers)
+        #},
+
         lyrnum = function(alyr) {  
           i <- which(self$lyrs$lyr == alyr)
           if (length(i)==0) {  # showmessage("bad layer code")
@@ -72,7 +75,7 @@ mymap <- R6Class("mymapclass",
           return(i)
         },
 
-        setlayerscale = function(geolyr) {
+        setlyrscale = function(geolyr) {
           #i = self$lyrnum(geolyr)
           #b = self$lyrsdata[[i]]@bbox  # bbox(basemap$lyrsdata[[i]])
           #b = self$lyrs[[i]]$geolyr@bbox  # bbox(basemap$lyrsdata[[i]])
@@ -108,7 +111,7 @@ mymap <- R6Class("mymapclass",
           #i = self$addlyr(alyr, frcst$geolyr)
           #i = self$setlyr(alyr, frcst$geolyr)
           self$setlyr(alyr, frcst$geolyr)
-          #self$setlayerscale(frcst$geolyr)
+          #self$setlyrscale(frcst$geolyr)
           #return(i)
         },
         

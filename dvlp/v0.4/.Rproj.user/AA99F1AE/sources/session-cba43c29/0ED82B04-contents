@@ -102,7 +102,6 @@ frcstclass <- R6Class("Frcstclass",
           #self$geolyr <- geojson_read(url, what = "sp")   # at this stage only support geojson
           self$geolyr <- geojson_sf(url)
         }
-        #return(self$geolyr)
       },
       
       frcst2lyr = function() {
@@ -135,8 +134,10 @@ frcstclass <- R6Class("Frcstclass",
       # - forecast data functions  --------------------------------
       
       opentazdata = function() {
-        fl = paste(self$dir, "/", self$data$file, sep="")        
-        self$tazdata = fread(fl)  # read_csv(fl)            
+        if (is.null(self$tazdata)) {
+          fl = paste(self$dir, "/", self$data$file, sep="")        
+          self$tazdata = fread(fl)  # read_csv(fl)            
+        }
       },
 
       getfrcstvars = function() {

@@ -61,6 +61,7 @@ createMultiMap <- function(userreq){
       )
       return(x)
     })
-  sync(list_of_maps,ncol = min(3,length(userreq$yr)*length(userreq$scn)))
+  res = sync(list_of_maps,ncol = min(3,length(userreq$yr)*length(userreq$scn)))
+  return(res)
 }
 

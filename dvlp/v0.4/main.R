@@ -96,7 +96,7 @@ basemap$reset(cfg$basemap)  # reset basemap
 currentsrc <- ""
 currentfrcstky <- ""
 currentfrcst <- NULL
-
+#mapobject = 1   # mapview
 
 # - ui functions --------------------------------------------
 
@@ -113,8 +113,7 @@ setnewsource <- function(asrc) {    #   asrc = "מודל תל אביב"
       if (currentfrcstky!="") {  ## clear Frcst and map
         currentfrcstky <<- ""
         currentfrcst <<- NULL
-        basemap$createmap(cfg$basemap)  # reset to initial map 
-        basemap$resetmapview(cfg$basemap)
+        basemap$reset(cfg$basemap)  # reset basemap
       }
       getsrcfrcsts(asrc)  # --> main
       currentsrc <<- asrc

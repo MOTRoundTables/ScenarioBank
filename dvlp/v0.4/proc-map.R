@@ -2,8 +2,9 @@
 #           https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 library(leafsync)
 createMap <- function(userreq) {  
-  if (userreq$mode==1) {createSimpleMap(userreq)}
-  else { createMultiMap(userreq) }
+  if (userreq$mode==1) {x = createSimpleMap(userreq)}
+  else { x = createMultiMap(userreq) }
+  return(x)
 }
 
 

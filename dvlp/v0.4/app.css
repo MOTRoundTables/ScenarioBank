@@ -1,20 +1,22 @@
 
- .navbar-header {
+ .navbar-header { /* כותרת בנק תחזיות */
 	 float:right !important;
 	 text-align: right !important;
- }
- .navbar-brand {
+ }  
+ .navbar-brand {  /* כותרת בנק תחזיות */
 	 font-weight: bold !important;
 	 padding-left: 30px !important;
 	 padding-right: 0px !important;
  }
  .navbar-nav {
-	 float:right !important;
- }
- .nav{
 	 float: right !important;
+ } 
+ .nav-tabs{
+	 width: 20% !important;
 	 direction: ltr !important; /* Reset to default */
+   font-weight: bold;	 
  }
+ 
  .legend {  /* mapview legend */
    direction: ltr !important; /* Reset to default */
  }

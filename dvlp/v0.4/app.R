@@ -43,8 +43,7 @@ ui <- fluidPage(
        
       # <hr style="margin-top: 0px;margin-bottom: 20px;">
       tags$hr(style="margin-top: 0px;margin-bottom: 20px;"),
-             
-             
+
       sidebarLayout(position = "right",
                     
         sidebarPanel( width = 2,
@@ -98,7 +97,7 @@ ui <- fluidPage(
 
     # Show a plot of the generated distribution
     mainPanel( width = 10,
-          tags$style(HTML(".tabbable > .nav > li > a  {font-weight: bold;}")),
+          #tags$style(HTML(".tabbable > .nav > li > a  {font-weight: bold;}")),
           tabsetPanel(id = "tabs1", type = "tabs", selected = "map",
 
               tabPanel("טבלה",   value = 'Table',
@@ -110,14 +109,15 @@ ui <- fluidPage(
               tabPanel("תקציר",   value = 'Summary',
                        uiOutput("Frcstsummary") #verbatimTextOutput("Frcstsummary")
               ),
-              tabPanel("מפה",  value = 'map', br(),
-                       uiOutput("leaf"),
-
+              tabPanel("מפה",  value = 'map', 
+                       div(
+                       uiOutput("leaf")
+                       )
               )
           )
         )
-      
-      ) # sidebarLayout
+
+    ) # sidebarLayout
     ) # tabPanel צפייה
 
     # ------------------------------------------------------
@@ -136,7 +136,7 @@ server <- function(input, output, session) {
       updateSelectInput(session, "selectfrcst",
                         choices = cfg$frcstchoices,
                         selected = character(0) )  
-      refreshmap()
+      refreshmap()  # clear map
       updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
       updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
       updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
@@ -189,7 +189,20 @@ server <- function(input, output, session) {
   observeEvent(input$doanalisys, {
     #showmessage("pressed button")
     doanalisys()
-  })  
+  })
+  
+  refreshmap = function(mapobject=NULL) {
+    if (is.null(mapobject)) {
+      output$appMap <- renderLeaflet({ basemap$mapview@map })
+      output$leaf = renderUI({ leafletOutput("appMap", 
+                                             width = "100%", height = cfg$basemap$height) }) 
+    } else {
+      #output$appMap <- renderLeaflet({ mapobject })
+      output$leaf = renderUI({ mapobject }) 
+      }
+  }
+  
+  refreshmap()
 
   doanalisys = function() {
     req(currentfrcst, input$selectscn, input$selectyr, input$selectvar)
@@ -211,10 +224,12 @@ server <- function(input, output, session) {
     }  
 
     if (input$tabs1=='map') {
-      basemap$hidelyr(currentfrcst$data$tazlyr)
-      basemap$add(createMap(userreq))
-      refreshmap()
-      
+      result = createMap(userreq)
+      if (class(result)[[1]]=="mapview") {
+        basemap$hidelyr(currentfrcst$data$tazlyr)
+        basemap$add(result)
+        refreshmap()
+      } else { refreshmap(result) }
     } else if (input$tabs1=='Summary') {
       frcstsummary = createSummaryTable(userreq)  
       #output$Frcstsummary <- renderPrint({ frcstsummary })
@@ -234,14 +249,6 @@ server <- function(input, output, session) {
   }
 
   # -------------------------------------
-  
-  refreshmap = function() {
-    output$appMap <- renderLeaflet({ basemap$mapview@map })
-    output$leaf = renderUI({ leafletOutput("appMap", 
-                            width = "100%", height = cfg$basemap$height) }) 
-  }
-  
-  refreshmap()
 
 }  # end server
 

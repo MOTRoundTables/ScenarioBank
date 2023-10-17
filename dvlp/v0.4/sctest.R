@@ -9,7 +9,7 @@ source("main.R")
 
 frcstky = "jeru23v09"
 frcstnum <- cfg$frcstnums[[frcstky]] 
-afrcst <<- cfg$forecasts[[frcstnum]] 
+afrcst <- cfg$forecasts[[frcstnum]] 
 afrcst$name
 afrcst$loadfrcst()
 
@@ -22,6 +22,7 @@ userreq$mode = 1          # change to 3 if multiple
 
 x = createMap(userreq)
 x
+class(x)[[1]]  # -> "mapview"
 # end
 
 

@@ -1,10 +1,12 @@
 # source("dvlp/v0.4/main.R")
 source("main.R")
+
 frcstky = "jeru23v09"
 frcstnum <- cfg$frcstnums[[frcstky]]  # getfrcstnum(currentfrcstky)
-afrcst <<- cfg$forecasts[[frcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
+afrcst <- cfg$forecasts[[frcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
 afrcst$name
 afrcst$loadfrcst()
+
 userreq = list()
 userreq$frcst = afrcst
 userreq$scn = c("IPLAN","BAU")    # "BASE", "BAU", "IPLAN", "JTMT"
@@ -12,6 +14,7 @@ userreq$scn = c("IPLAN","BAU")    # "BASE", "BAU", "IPLAN", "JTMT"
 userreq$yr = c(2025)  
 userreq$var = "pop"       # "pop", "emp_tot":
 userreq$mode = 3          # change to 3 if multiple
+
 x = createMultiMap(userreq)
 x
 

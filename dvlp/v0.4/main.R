@@ -147,7 +147,7 @@ setnewfrcst <- function(frcstky) {
       currentfrcstky <<- frcstky
       frcstnum <- cfg$frcstnums[[frcstky]]  # getfrcstnum(currentfrcstky)
       currentfrcst <<- cfg$forecasts[[frcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
-      currentfrcst$loadfrcst()
+      currentfrcst$loadfrcst()  # if called then load data
       basemap$addfrcst(currentfrcst)
       
       tmp <- data.frame(

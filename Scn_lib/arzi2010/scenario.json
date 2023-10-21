@@ -3,7 +3,7 @@
 	"source"  : "מודל ארצי",
 	"dir"     : "arzi2010",
 	"tazlyr"  : "arzi_585",
-	"tazvar"  : "TAZ_585",
+	"tazvar"  : "taz_585",
 	"tazfile" : "arzi_585.geojson",
 	"file"    : "arzi2010_585.csv",
 	"scenarios" : {
@@ -19,12 +19,12 @@
 			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "מועסקים"},
 			"RM":              { "group": "רמת מינוע", "type": "real", "mode": "continous", "bank": "motrate", "description": "רמת מינוע"} },
 	"geodict": {
-			"taz_585":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "taz", "description": "אזור תנועה"},
+			"taz_585":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "geotaz", "description": "אזור תנועה"},
 			"Name":            { "group": "זיהוי", "type": "character", "mode": "discrete", "description": "שם אזור"},
 			"MahozNum":        { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד מחוז"},
 			"Mahoz":           { "group": "זיהוי", "type": "character", "mode": "discrete", "description": "מחוז"},
 			"NafaNum":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד נפה"},
 			"Nafa":            { "group": "זיהוי", "type": "character", "mode": "discrete", "description": "נפה"},
 			"Code":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד סמל יישוב"},
-			"Area":            { "group": "שטח", "type": "real", "mode": "continous", "description": "שטח"} }			
+			"Area":            { "group": "שטח", "type": "real", "mode": "continous", "bank": "area", "description": "שטח"} }			
 }

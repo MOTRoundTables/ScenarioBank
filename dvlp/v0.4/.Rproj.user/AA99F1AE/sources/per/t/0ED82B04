@@ -1,0 +1,26 @@
+{
+    "id": "0ED82B04",
+    "path": "~/GitHub/ScenarioBank/dvlp/v0.4/scnlib.R",
+    "project_path": "scnlib.R",
+    "type": "r_source",
+    "hash": "2608354791",
+    "contents": "",
+    "dirty": false,
+    "created": 1695546270243.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "116,30",
+        "scrollLine": "107"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1697822560,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697822560919,
+    "read_only": false,
+    "read_only_alternatives": []
+}

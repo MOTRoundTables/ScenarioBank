@@ -15,8 +15,8 @@ createSummaryTable <- function(userreq){
 
   aFrcst = userreq$frcst
   aScn = userreq$scn
-  aVar = userreq$var
   aYr = userreq$yr  # assume 1 yr only  
+  aVar = userreq$var[[1]]
 
   cat(aFrcst$name,  aVar)
   

@@ -22,5 +22,20 @@
 			"year":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "year", "description": "שנת יעד"},
 			"NEW_TAZ_1046":    { "group": "זיהוי", "type": "integer", "mode": "continous", "bank": "taz", "description": "אזור תנועה"},
 			"pop":             { "group": "אוכלוסייה", "type": "real", "mode": "continous", "bank": "population", "description": "אוכלוסייה"},
-			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "מועסקים"} }
+			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "מועסקים"} },
+	"geodict": {
+			"OID":             { "group": "לא בשימש", "type": "integer", "mode": "discrete"},
+			"TAZ_1046":        { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "geotaz", "description": "אזור תנועה"},
+			"TAZ_848":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "אזור תנועה מודל ארצי"},
+			"TAZNAME":         { "group": "זיהוי", "type": "character", "mode": "free", "description": "שם אזור תנועה"},
+			"Mahoz":           { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד מחוז"},
+			"Mahoz_Name":      { "group": "זיהוי", "type": "character", "mode": "free", "description": "שם מחוז"},
+			"NAPA":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד נפה"},
+			"NAPA_NAME":       { "group": "זיהוי", "type": "character", "mode": "free", "description": "שם נפה"},
+			"Ezor_al_33":      { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "אזור על "},
+			"SZ":              { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "אזור תכנון"},
+			"SZ_Name":         { "group": "זיהוי", "type": "character", "mode": "free", "description": "שם אזור תכנון"},
+			"RING":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד טבעת "},
+			"Ring_Name":       { "group": "זיהוי", "type": "character", "mode": "free", "description": "שם טבעת"},
+			"Area":            { "group": "שטח", "type": "real", "mode": "continous", "bank": "area", "description": "שטח"} }			
 }

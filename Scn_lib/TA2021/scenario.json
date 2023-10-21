@@ -16,5 +16,10 @@
 			"year":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "year", "description": "שנת יעד"},
 			"taz1318":         { "group": "זיהוי", "type": "integer", "mode": "continous", "bank": "taz", "description": "אזור תנועה"},
 			"pop":             { "group": "אוכלוסייה", "type": "real", "mode": "continous", "bank": "population", "description": "אוכלוסייה"},
-			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "מועסקים"} }
+			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "מועסקים"} },
+	"geodict": {
+			"TAZ_1300":        { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "geotaz", "description": "אזור תנועה"},
+			"TAZ1318":         { "group": "זיהוי", "type": "character", "mode": "boolean", "description": "אזור תנועה מספור ישן"},
+			"TAZ_OLD":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "אזור תנועה ישן"},
+			"Area":            { "group": "שטח", "type": "real", "mode": "continous", "bank": "area", "description": "שטח"} }			
 }

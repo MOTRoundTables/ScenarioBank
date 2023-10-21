@@ -144,5 +144,13 @@
 			"jew_not_haredi_male_80": { "group": "אוכלוסייה", "type": "real", "mode": "continous"},
 			"jew_not_haredi_male Total_": { "group": "אוכלוסייה", "type": "real", "mode": "continous"},
 			"jew_not_haredi Total": { "group": "אוכלוסייה", "type": "real", "mode": "continous"},
-			"total":           { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "סהכ אוכלוסייה"} }
+			"total":           { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "סהכ אוכלוסייה"} },
+	"geodict": {
+			"OID":             { "group": "לא בשימוש", "type": "integer", "mode": "continous"},
+			"NafaCode":        { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "geotaz", "description": "אזור תנועה"},
+			"NafaNam":         { "group": "זיהוי", "type": "character", "mode": "free", "description": "שם נפה"},
+			"ENafaNam":        { "group": "זיהוי", "type": "character", "mode": "free", "description": "שם נפה באנגלית"},
+			"Mahoz":           { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד מחוז"},
+			"NafaLamas":       { "group": "זיהוי", "type": "character", "mode": "free", "description": "קוד נפה למס"},
+			"Area":            { "group": "שטח", "type": "real", "mode": "continous", "bank": "area", "description": "שטח"} }
 }

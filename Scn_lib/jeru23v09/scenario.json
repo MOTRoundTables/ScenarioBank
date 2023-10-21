@@ -58,5 +58,17 @@
 			"UO_Hi_Ed":        { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "תלמידי ישיבה וכוללים"},
 			"pop_emp_employed": { "group": "כח עבודה", "type": "real", "mode": "continous", "description": "מועסקים לפי מקום מגורים באזור תנועה"},
 			"Napa":            { "group": "לא בשימוש", "type": "real", "mode": "continous", "description": "נפה"},
-			"Sector2":         { "group": "אוכלוסייה", "type": "character", "mode": "category", "description": "מגזר", "comment": "המגזר המרכזי שמאכלס את אזור התנועה"} }
+			"Sector2":         { "group": "אוכלוסייה", "type": "character", "mode": "category", "description": "מגזר", "comment": "המגזר המרכזי שמאכלס את אזור התנועה"} },
+	"geodict": {
+			"TAZ_NUM":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "geotaz", "description": "אזור תנועה"},
+			"TAZ_NAME":        { "group": "זיהוי", "type": "character", "mode": "free", "bank": "tazdesc", "description": "שם אזור"},
+			"ISMETRO":         { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "שייך למטרופולין"},
+			"ISYOSH":          { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "שייך לאיוש"},
+			"ISPALE":          { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "שייך לרשות פלסטנית"},
+			"FRCSTYOSH":       { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "אזור יהודי באיוש"},
+			"DISTRICT":        { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "מחוז"},
+			"NAPA":            { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "נפה"},
+			"ISJERU":          { "group": "גיאוגרפיה", "type": "character", "mode": "boolean", "description": "שייך ירושלים"},
+			"RAV_TAZ":         { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "אזור על "},
+			"Area":            { "group": "שטח", "type": "real", "mode": "continous", "bank": "area", "description": "שטח"} }
 }

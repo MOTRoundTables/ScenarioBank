@@ -40,5 +40,11 @@
 			"IntExt":          { "group": "לא בשימוש", "type": "integer", "mode": "category", "description": "לא ברור"},
 			"schoolage":       { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "תלמידים"},
 			"pensioner":       { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "פנסיונרים"},
-			"Students":        { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "סטודנטים"} }
+			"Students":        { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "סטודנטים"} },
+	"geodict": {
+			"TAZ_NUMBER":      { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "geotaz", "description": "אזור תנועה"},
+			"SUPERZONE":       { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "אזור על "},
+			"TABAAT":          { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "טבעת"},
+			"ARZI_1270":       { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "אזור מודל ארצי"},
+			"Area":            { "group": "שטח", "type": "real", "mode": "continous", "bank": "area", "description": "שטח"} }			
 }

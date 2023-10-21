@@ -26,6 +26,14 @@
 			"year":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "year", "description": "שנת יעד"},
 			"taz":             { "group": "זיהוי", "type": "integer", "mode": "continous", "bank": "taz", "description": "אזור תנועה"},
 			"pop":             { "group": "אוכלוסייה", "type": "real", "mode": "continous", "bank": "population", "description": "אוכלוסייה"},
-			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "מועסקים"} }
+			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "מועסקים"} },
+	"geodict": {
+			"TAZV41":          { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "geotaz", "description": "אזור תנועה"},
+			"GE":              { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד גזרה"},
+			"SEMEL":           { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "סמל יישוב"},
+			"NAME_H":          { "group": "זיהוי", "type": "character", "mode": "free", "description": "שם יישוב"},
+			"MUNC_NAME":       { "group": "זיהוי", "type": "character", "mode": "free", "description": "שם רשות"},
+			"TAZ_OLD":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "אזור תנועה ישן"},
+			"Area":            { "group": "שטח", "type": "real", "mode": "continous", "bank": "area", "description": "שטח"} }			
 }
 

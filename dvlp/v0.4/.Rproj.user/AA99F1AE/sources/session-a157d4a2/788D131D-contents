@@ -20,3 +20,5 @@ showmodalmessage <- function(ttl, msg) {
 notready <- function() {
   showmessage("פנקציה זו לא מוכנה")
 }
+
+

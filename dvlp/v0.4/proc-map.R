@@ -13,8 +13,7 @@ createSimpleMap <- function(userreq) {
   aFrcst = userreq$frcst
   aScn = userreq$scn[[1]]
   aYr = userreq$yr[[1]]  # assume 1 yr only
-  
-  dataVar = userreq$var
+  dataVar = userreq$var[[1]]
   
   cat(aFrcst$name, aScn, aYr, dataVar)  
   # if var is not number, parse it as number
@@ -24,7 +23,7 @@ createSimpleMap <- function(userreq) {
   
   x_join <- aFrcst$bankvars$taz
   y_join <- aFrcst$data$tazvar
-  userreq$frcst$loadfrcst()
+  aFrcst$loadfrcst()
   filtered <- aFrcst$tazdata %>% as_tibble() %>% filter(scenario == aScn, year == aYr)
   with_geoms <- filtered %>% left_join(aFrcst$geolyr, by = setNames(y_join,x_join)) %>% st_sf()
   

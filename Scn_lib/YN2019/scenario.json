@@ -18,8 +18,27 @@
 			"years": [ 2040, 2050 ] }
 	},
 	"dict": {
-			"TAZ":          {"description": "אזור תנועה", "bank": "taz"        },
-			"population":   {"description": "אוכלוסייה",  "bank": "population" },
-			"workplace":    {"description": "תעסוקה",   "bank": "employment" }
-	}
+			"scenario":        { "group": "זיהוי", "type": "character", "mode": "category", "bank": "scenario", "description": "תרחיש"},
+			"year":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "year", "description": "שנת יעד"},
+			"TAZ":             { "group": "זיהוי", "type": "integer", "mode": "continous", "bank": "taz", "description": "אזור תנועה"},
+			"car":             { "group": "רמת מינוע", "type": "real", "mode": "continous", "description": "מספר כלי רכב"},
+			"hh":              { "group": "משקי בית", "type": "real", "mode": "continous", "description": "מספר משקי בית"},
+			"population":      { "group": "אוכלוסייה", "type": "real", "mode": "continous", "bank": "population", "description": "אוכלוסייה"},
+			"gil0":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "ילדים עד גיל 8"},
+			"gil1":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה 9-18"},
+			"gil2":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה 19-25"},
+			"gil3":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה 26-35"},
+			"gil4":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה 35-65"},
+			"gil5":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה מעל 65"},
+			"working":         { "group": "כח עבודה", "type": "real", "mode": "continous", "description": "כח עבודה"},
+			"industry":        { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בתעשייה"},
+			"service":         { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בשרותים"},
+			"other":           { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים אחר"},
+			"workplace":       { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "סהע מועסקים"},
+			"LenOrig1":        { "group": "לא בשימוש", "type": "real", "mode": "continous", "description": "לא ברור"},
+			"superZone":       { "group": "לא בשימוש", "type": "integer", "mode": "category", "description": "אזור על"},
+			"IntExt":          { "group": "לא בשימוש", "type": "integer", "mode": "category", "description": "לא ברור"},
+			"schoolage":       { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "תלמידים"},
+			"pensioner":       { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "פנסיונרים"},
+			"Students":        { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "סטודנטים"} }
 }

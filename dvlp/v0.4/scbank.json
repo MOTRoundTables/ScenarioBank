@@ -26,8 +26,23 @@
 		["תכנית אסטרטגית", ["ash2020", "nathed2022" ]],
 		["המועצה הלאומית לכלכלה", ["moaza2021"]]
 	],
+	"vargroups" : {
+		"id" :        { "name": "זיהוי",        "level": 0 },
+		"population": { "name": "אוכלוסייה",     "level": 1 },
+		"households": { "name": "משקי בית",     "level": 2 },
+		"workforce":  { "name": "כח עבודה",     "level": 3 },
+		"income":     { "name": "הכנסה",      "level": 4 },
+		"employment": { "name": "מקומות עבודה",  "level": 5 },
+		"landuse":    { "name": "שימושי קרקע",   "level": 6 },
+		"education":  { "name": "חינוך",       "level": 7 },
+		"motrate":    { "name": "רמת מינוע",    "level": 8 },
+		"drivers":    { "name": "רשיונות נהיגה",  "level": 9 },
+		"parking":    { "name": "חניה",       "level": 10 },
+		"notinuse":   { "name": "לא בשימוש",    "level": 0 }	
+	},
 	"dict" : {
 		"population" : { "name":"אוכלוסייה" },
+		"households" : { "name":"משקי בית" },
 		"sector"     : { "name":"מגזר",   "desc": "מגזר עיקרי של אזור"  },
 		"employment" : { "name":"תעסוקה"  },
 		"motrate"    : { "name":"רמת מינוע" }

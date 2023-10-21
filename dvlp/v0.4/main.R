@@ -51,6 +51,8 @@ initapp <- function() {
     }
   }
 
+  # - process main dict
+
   # -- load & process super-zones dict
   tmp = fromJSON(paste(cfg$general$geodir, "szlyrs.json", sep=""))
   cfg$superzones = tmp$superzones
@@ -148,6 +150,16 @@ setnewfrcst <- function(frcstky) {
       currentfrcst$loadfrcst()
       basemap$addfrcst(currentfrcst)
       
+      tmp <- data.frame(
+        group = unlist(currentfrcst$dispvarsgroup),
+        vars = unlist(currentfrcst$dispvarsdesc),
+        stringsAsFactors = FALSE
+      )
+      tmp2 = bind_rows(cfg$vargroups)
+      tmp <- tmp %>% inner_join(tmp2, by=c('group'='name')) %>% 
+        arrange(level) %>% select(group, vars)
+      currentfrcst$varstree = create_tree(tmp)
+
       cat(paste("set Frcst: ", currentfrcst$name, "\n"))
       changed = 1
     }
@@ -155,6 +167,11 @@ setnewfrcst <- function(frcstky) {
   return(changed)
 }
 
+frcstnewmap <- function(afrcst) {
+  basemap$reset(cfg$basemap)  # reset basemap
+  basemap$addfrcst(afrcst)
+  basemap$hidelyr(afrcst$data$tazlyr)
+}
 
 # = end =================================================
 

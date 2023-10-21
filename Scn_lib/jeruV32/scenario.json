@@ -6,14 +6,26 @@
 	"tazvar"  : "TAZ",
 	"tazfile" : "jer_v32.geojson",
 	"file"    : "jerforecastsv32.csv",
+	"notes"   : "sector in geo. emp type only for 2040",
 	"scenarios" : {
 		"base": {
 			"desc": "תרחיש בסיס",
 			"years": [ 2020, 2025, 2030, 2035, 2040 ] }
 	},
 	"dict": {
-			"Taz_num":      {"description": "אזור תנועה", "bank": "taz"        },
-			"Pop_Forecast": {"description": "אוכלוסייה",  "bank": "population" },
-			"Total_Emp":    {"description": "תעסוקה",   "bank": "employment" }
-	}
+			"scenario":        { "group": "זיהוי", "type": "character", "mode": "category", "bank": "scenario", "description": "תרחיש"},
+			"year":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "year", "description": "שנת יעד"},
+			"Taz_num":         { "group": "זיהוי", "type": "integer", "mode": "continous", "bank": "taz", "description": "אזור תנועה"},
+			"Pop_Forecast":    { "group": "אוכלוסייה", "type": "real", "mode": "continous", "bank": "population", "description": "סהכ אוכלוסייה"},
+			"Total_Aprt":      { "group": "משקי בית", "type": "real", "mode": "continous", "bank": "households", "description": "סהכ יחד"},
+			"Average":         { "group": "משקי בית", "type": "real", "mode": "continous", "description": "גודל מב ממוצע"},
+			"Total_Emp":       { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "סהכ מועסקים"},
+			"Total_Students":  { "group": "חינוך", "type": "real", "mode": "continous", "description": "סהכ תלמידים"},
+			"EmployedEducation": { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בחינוך"},
+			"Yeshiva":         { "group": "חינוך", "type": "real", "mode": "continous", "description": "סהכ תלמידי ישיבות וכוללים"},
+			"Higher_Education": { "group": "חינוך", "type": "real", "mode": "continous", "description": "סטודנטים השכלה גבוהה"},
+			"Industry":        { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בתעשייה"},
+			"Commerce_Hotel":  { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים במלונאות"},
+			"Business":        { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בעסקים"},
+			"Public":          { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בשרותי ציבור"} }
 }

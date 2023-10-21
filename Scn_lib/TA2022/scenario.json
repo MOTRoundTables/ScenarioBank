@@ -22,9 +22,10 @@
 			"years": [ 2050 ] }
 	},
 	"dict": {
-			 "taz1318": {"description": "אזור תנועה", "bank": "taz"         },
-			 "pop":     {"description": "אוכלוסייה",  "bank": "population"  },
-			 "emp":     {"description": "תעסוקה",   "bank": "employment"  }
-	}
+			"scenario":        { "group": "זיהוי", "type": "character", "mode": "category", "bank": "scenario", "description": "תרחיש"},
+			"year":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "year", "description": "שנת יעד"},
+			"taz":             { "group": "זיהוי", "type": "integer", "mode": "continous", "bank": "taz", "description": "אזור תנועה"},
+			"pop":             { "group": "אוכלוסייה", "type": "real", "mode": "continous", "bank": "population", "description": "אוכלוסייה"},
+			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "מועסקים"} }
 }
 

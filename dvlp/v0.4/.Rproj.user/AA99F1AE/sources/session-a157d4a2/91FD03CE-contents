@@ -1,0 +1,31 @@
+
+
+
+
+cfg$vargroupsdf = data.frame(t(sapply(cfg$vargroups,c)))
+
+cfg$vargroupsdf <- do.call(rbind, lapply(cfg$vargroups, stack))
+
+
+d <- unlist(d)
+data.frame(value = d, 
+           vec = gsub(".*\\.", "", names(d)), 
+           var.name =  gsub("\\..*", "", names(d)))
+
+view(cfg$vargroupsdf)
+
+
+tmp <- data.frame(
+  group = unlist(currentfrcst$dispvarsgroup),
+  vars = unlist(currentfrcst$dispvarsdesc),
+  stringsAsFactors = FALSE
+)
+
+
+z = bind_rows(cfg$vargroups)
+view(z)
+  
+
+df2 <- tmp %>% inner_join( z, by=c('group'='name')) %>%
+        arrange(level)
+view(df2)

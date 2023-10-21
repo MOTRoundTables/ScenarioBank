@@ -5,15 +5,31 @@
 	"tazlyr"  : "TAZ_jer_v2",
 	"tazvar"  : "TAZ",
 	"tazfile" : "jertaz_model_v2.geojson",
-	"file"    : "jerforecasts2020.csv",
+	"file"    : "jeruV2.csv",
+	"notes"   : "sector is in GEO.  employment types not complete for all years",
 	"scenarios" : {
 		"base": {
 			"desc": "תרחיש בסיס",
 			"years": [ 2015, 2020, 2025, 2030, 2035, 2040 ] }
 	},
 	"dict": {
-			"Taz_num":      {"description": "אזור תנועה", "bank": "taz"        },
-			"Pop_Forecast": {"description": "אוכלוסייה",  "bank": "population" },
-			"Total_Emp":    {"description": "תעסוקה",   "bank": "employment" }
-	}
+			"scenario":        { "group": "זיהוי", "type": "character", "mode": "category", "bank": "scenario", "description": "תרחיש"},
+			"year":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "year", "description": "שנת יעד"},
+			"taz":             { "group": "זיהוי", "type": "integer", "mode": "continous", "bank": "taz", "description": "אזור תנועה"},
+			"pop":             { "group": "אוכלוסייה", "type": "real", "mode": "continous", "bank": "population", "description": "סהכ אוכלוסייה"},
+			"hh":              { "group": "משקי בית", "type": "real", "mode": "continous", "bank": "households", "description": "סהכ יחד"},
+			"hhsize":          { "group": "משקי בית", "type": "real", "mode": "continous", "description": "גודל מב ממוצע"},
+			"empd":            { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים תלויי אוכלוסיה"},
+			"empi":            { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים לא תלויי אוכלוסיה"},
+			"empe":            { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בחינוך"},
+			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "סהכ מועסקים"},
+			"school":          { "group": "חינוך", "type": "real", "mode": "continous", "description": "סהכ תלמידים"},
+			"yeshiva":         { "group": "חינוך", "type": "real", "mode": "continous", "description": "סהכ תלמידי ישיבות וכוללים"},
+			"college":         { "group": "חינוך", "type": "real", "mode": "continous", "description": "סטודנטים השכלה גבוהה"},
+			"ind":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בתעשייה"},
+			"htl":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים במלונאות"},
+			"bsn":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בעסקים"},
+			"pub":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בשרותי ציבור"},
+			"edu":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בחינוך"},
+			"agr":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בחקלאות"} }
 }

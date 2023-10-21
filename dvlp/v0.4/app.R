@@ -63,8 +63,17 @@ ui <- fluidPage(
             column(6, actionButton("selectyrall", "בחר הכל", style='width:80%;padding-top:2px;padding-bottom:2px;margin-bottom:3px') ),
           ),
           
-          hr(), 
-          selectInput('selectvar', 'משתנה', "", multiple=FALSE, selectize=FALSE),
+          hr(),
+          uiOutput("treevar"),
+          # treeInput(
+          #   inputId = "selectvar",
+          #   label = "משתנה",
+          #   choices = treevar, # character(0),
+          #   #selected = "San Francisco",
+          #   returnValue = "text",
+          #   closeDepth = 0
+          # ),
+          #selectInput('selectvar', 'משתנה', "", multiple=FALSE, selectize=FALSE),
 
           selectInput('selectanalysis', 'עיבוד', choices = cfg$analisystype, 
                     selected = 1, multiple=FALSE, selectize=FALSE),
@@ -139,7 +148,9 @@ server <- function(input, output, session) {
       refreshmap()  # clear map
       updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
       updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
-      updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
+      #updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
+      updateTreeInput(inputId = "selectvar", selected = character(0))
+      
     }
   })
 
@@ -151,15 +162,35 @@ server <- function(input, output, session) {
       
       updateSelectInput(session, "selectscn", choices = currentfrcst$scnchoices, selected = character(0) )
 
-      updateSelectInput(session, "selectvar",
-                        choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars()
-                        selected = character(0) )
-
+      #updateTreeInput(inputId = "selectvar",
+        #choices = currentfrcst$varstree,
+      #  selected = character(0) )
+      # updateSelectInput(session, "selectvar",
+      #                   choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars()
+      #                   selected = character(0) )
+      
       updatePrettyCheckboxGroup(session, "selectyr",
                           choices = as.list(currentfrcst$getscnyears()),
                           inline = TRUE,
                           selected = character(0) )
       refreshmap()
+    }
+  })
+
+  output$treevar <- renderUI({
+    if (input$selectfrcst!="") {
+      if (is.null(currentfrcst)) {
+        NULL
+      } else {
+        treeInput(
+        inputId = "selectvar",
+        label = "משתנים",
+        choices = currentfrcst$varstree, # character(0),
+        #selected = "", San Francisco",
+        returnValue = "text",
+        closeDepth = 0
+        )
+      }    
     }
   })
 
@@ -206,19 +237,29 @@ server <- function(input, output, session) {
 
   doanalisys = function() {
     req(currentfrcst, input$selectscn, input$selectyr, input$selectvar)
-    
+
     userreq = list()
     userreq$frcst = currentfrcst
     userreq$scn = input$selectscn
     userreq$yr = input$selectyr
-    userreq$var = input$selectvar
+    
+    #userreq$var = input$selectvar
+    tmp = unique(input$selectvar[input$selectvar %in% currentfrcst$dispvarsdesc]) # get rid of groups
+    tmp = unlist(lapply(tmp, function(x) currentfrcst$dispvars[which(x==currentfrcst$dispvarsdesc)]))
+    userreq$dict = list()
+    for (i in 1:length(tmp)) {
+      userreq$dict = append(userreq$dict, currentfrcst$data$dict[tmp[i]])
+    }
+    userreq$var = names(userreq$dict)
 
-    if ((length(input$selectyr)==1)&&(length(input$selectscn)==1)) {
+    if ((length(userreq$yr)==1)&&(length(userreq$scn)==1)&&(length(userreq$var)==1)) {
       userreq$mode = "1"
-    } else if ((length(input$selectyr)==2)&&(length(input$selectscn)==1)) {
+    } else if ((length(userreq$yr)==2)&&(length(userreq$scn)==1)&&(length(userreq$var)==1)) {
       userreq$mode = "2Y"
-    } else if ((length(input$selectyr)==1)&&(length(input$selectscn)==2)) {
+    } else if ((length(userreq$yr)==1)&&(length(userreq$scn)==2)&&(length(userreq$var)==1)) {
       userreq$mode = "2S"
+    } else if ((length(userreq$yr)==1)&&(length(userreq$scn)==1)&&(length(userreq$var)==2)) {
+      userreq$mode = "2V"
     } else {
       userreq$mode = "3"
     }  
@@ -226,7 +267,7 @@ server <- function(input, output, session) {
     if (input$tabs1=='map') {
       result = createMap(userreq)
       if (class(result)[[1]]=="mapview") {
-        basemap$hidelyr(currentfrcst$data$tazlyr)
+        frcstnewmap(userreq$frcst)
         basemap$add(result)
         refreshmap()
       } else { refreshmap(result) }

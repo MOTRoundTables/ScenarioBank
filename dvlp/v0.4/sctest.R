@@ -17,7 +17,11 @@ userreq = list()
 userreq$frcst = afrcst
 userreq$scn = c("BAU")    # "BASE", "BAU", "IPLAN", "JTMT"
 userreq$yr = c(2025)      # 2020, 2025, 2030, 2035, 2040, 2045, 2050
-userreq$var = "pop"       # "pop", "emp_tot":
+
+#userreq$var = "pop"       # "pop", "emp_tot":
+userreq$var = list()
+userreq$var = append(userreq$var, afrcst$data$dict["pop"])
+
 userreq$mode = 1          # change to 3 if multiple
 
 x = createMap(userreq)
@@ -28,6 +32,31 @@ class(x)[[1]]  # -> "mapview"
 
 
 # ============================================
+
+t = unique(input$selectvar[input$selectvar %in% currentfrcst$dispvarsdesc])
+
+currentfrcst$dispvars
+t = c("אוכלוסייה" ,"מועסקים")
+
+
+tt = lapply(t, function(x) {
+  currentfrcst$dispvars[which(x==currentfrcst$dispvarsdesc)]
+})
+
+
+tmp <- data.frame(
+  group = unlist(currentfrcst$dispvarsgroup),
+  vars = unlist(currentfrcst$dispvarsdesc),
+  stringsAsFactors = FALSE
+)
+tmp2 = bind_rows(cfg$vargroups)
+tmp3 <- tmp %>% inner_join(tmp2, by=c('group'='name')) %>% arrange(level) %>% select(group, vars)
+
+view(tmp3)
+
+currentfrcst$varstree = create_tree(tmp)
+
+
 
 
 currentfrcst$data$tazvar

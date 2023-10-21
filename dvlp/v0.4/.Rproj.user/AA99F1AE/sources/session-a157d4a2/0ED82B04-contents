@@ -14,16 +14,22 @@ frcstclass <- R6Class("Frcstclass",
       data = NULL,        # a copy of scenario.json
       
       # scenarios
-      scnlist = NULL,     # vector of available scn codes
-      scnnames = NULL,    # vector of available scn names
-      scnchoices = NULL,  # list of scn for menu [[name:code]]
+      scnlist = NULL,       # vector of available scn codes
+      scnnames = NULL,      # vector of available scn names
+      scnchoices = NULL,    # list of scn for menu [[name:code]]
 
       # vars
-      vars = NULL,        # vector of dict vars
-      vardesc = NULL,     # vector of dict vars descriptions
-      varchoices = NULL,  # list of vars for menu [[name:var]]
-      bankvars = NULL,    # vector of bank vars in dict
+      vars = NULL,          # vector of dict vars
+      vardesc = NULL,       # vector of dict vars descriptions
+      bankvars = NULL,      # vector of bank vars in dict
 
+      dispvars = NULL,      # vars 4 menu
+      dispvarsgroup = NULL, # vars 4 menu grps
+      dispvarsdesc = NULL,  # vars 4 menu descs
+      
+      varstree = NULL,    # list of vars for menu [[name:var]]
+      varchoices = NULL,       # list of vars for menu [[name:var]]
+      
       # data
       geolyr = NULL,      # the geojson data
       tazdata = NULL,     # the frcst csv data
@@ -48,20 +54,32 @@ frcstclass <- R6Class("Frcstclass",
         
        self$vars = names(x$dict)
        self$vardesc = list()
+       self$dispvars = list()
+       self$dispvarsgroup = list()
+       self$dispvarsdesc = list()
        self$bankvars = list()
        for (i in 1:length(self$vars)) {
          y = x$dict[[self$vars[i]]]
          if (!is.null(y$bank)) {
            self$bankvars[[y$bank]] = self$vars[i]
          }
-         if (!is.null(y$description)) {
-           self$vardesc = append(self$vardesc, y$description)
+         self$vardesc = append(self$vardesc, ifelse(!is.null(y$description), y$description, self$vars[i]))
+         #if (!is.null(y$description)) { self$vardesc = append(self$vardesc, y$description) }
+
+         if ((y$group!="לא בשימוש")&&(y$group!="זיהוי")) {
+           self$dispvars = append(self$dispvars, self$vars[i])
+           self$dispvarsgroup = append(self$dispvarsgroup, y$group)
+           self$dispvarsdesc = append(self$dispvarsdesc, ifelse(!is.null(y$description), y$description, self$vars[i]))
          }
+
        }
 
        self$varchoices = vector(mode = "list") 
-       for (i in 2:length(self$vars)) {
-         self$varchoices[as.character(self$vardesc[i])] = self$vars[i]
+       #for (i in 2:length(self$vars)) {
+       #   self$varchoices[as.character(self$vardesc[i])] = self$vars[i]
+       #  }
+       for (i in 2:length(self$dispvars)) {
+          self$varchoices[as.character(self$dispvarsdesc[i])] = self$dispvars[i]
          }
 
       },

@@ -11,8 +11,135 @@
 			"years": [ 2040 ] }
 	},
 	"dict": {
-			"taz":          {"description": "אזור תנועה", "bank": "taz"        },
-			"population":   {"description": "אוכלוסייה",  "bank": "population" },
-			"empl_tot":     {"description": "תעסוקה",   "bank": "employment" }
-	}		
+			"scenario":        { "group": "זיהוי", "type": "character", "mode": "category", "bank": "scenario", "description": "תרחיש"},
+			"year":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "year", "description": "שנת יעד"},
+			"taz":             { "group": "זיהוי", "type": "integer", "mode": "continous", "bank": "taz", "description": "אזור תנועה"},
+			"area":            { "group": "לא בשימוש", "type": "real", "mode": "continous", "description": "שטח"},
+			"type":            { "group": "שימושי קרקע", "type": "integer", "mode": "category", "description": "סוג עיקרי של האזור",
+			            "Values": [
+			                {"value": 1, "label": "Metropolitan CBD"},
+			                {"value": 2, "label": "Urban Residential low-density"},
+			                {"value": 3, "label": "Urban Residential high-density"},
+			                {"value": 4, "label": "Major public institutions"},
+			                {"value": 5, "label": "Commercial"},
+			                {"value": 6, "label": "Major Employment centers"},
+			                {"value": 7, "label": "Medium Employment centers"},
+			                {"value": 8, "label": "Mixed Use Areas"},
+			                {"value": 9, "label": "Major Transport facilities"},
+			                {"value": 10, "label": "Sports and Tourism"},
+			                {"value": 11, "label": "Rural Areas"},
+			                {"value": 12, "label": "Open Areas"},
+			                {"value": 13, "label": "Military Areas"},
+			                {"value": 14, "label": "Cemetery"},
+			                {"value": 15, "label": "Small Settlements"}
+			       		     ]
+			},
+			"cultural":        { "group": "שימושי קרקע", "type": "integer", "mode": "category", "description": "שימושי קרקע תרבות",
+			            "Values": [
+			                {"value": 0, "label": "none"},
+			                {"value": 1, "label": "Metropolitan Cultural area"},
+			                {"value": 2, "label": "local Cultural area"}
+			       		     ]
+			},
+			"education":       { "group": "שימושי קרקע", "type": "integer", "mode": "category", "description": "שימושי קרקע חינוך",
+			            "Values": [
+			                {"value": 0, "label": "none"},
+			                {"value": 1, "label": "higher education: College, university"},
+			                {"value": 2, "label": "high school"},
+			                {"value": 3, "label": "elementary schools"}
+			       		     ]
+			},
+			"office":          { "group": "שימושי קרקע", "type": "integer", "mode": "category", "description": "שימושי קרקע משרדים",
+			            "Values": [
+			                {"value": 0, "label": "none"},
+			                {"value": 1, "label": "Major office concentrations"},
+			                {"value": 2, "label": " Other zones with offices use (City center, commercial/industrial)"}
+			       		     ]
+			},
+			"shopping":        { "group": "שימושי קרקע", "type": "integer", "mode": "category", "description": "שימושי קרקע קניות",
+			            "Values": [
+			                {"value": 0, "label": "none"},
+			                {"value": 1, "label": " Shopping mall"},
+			                {"value": 2, "label": " shopping streets"},
+			                {"value": 3, "label": " Market"}
+			       		     ]
+			},
+			"health":          { "group": "שימושי קרקע", "type": "integer", "mode": "category", "description": "שימושי קרקע בריאות",
+			            "Values": [
+			                {"value": 0, "label": "none"},
+			                {"value": 1, "label": "hospitals"}
+			       		     ]
+			},
+			"urban":           { "group": "שימושי קרקע", "type": "integer", "mode": "category", "description": "שימושי קרקע עירוני",
+			            "Values": [
+			                {"value": 0, "label": "none"},
+			                {"value": 1, "label": "Cities over 20,000 inhabits"}
+			       		     ]
+			},
+			"religiosit":      { "group": "שימושי קרקע", "type": "integer", "mode": "category", "description": "שימושי קרקע דתי",
+			            "Values": [
+			                {"value": 0, "label": "none"},
+			                {"value": 1, "label": "Religious Jewish areas"},
+			                {"value": 2, "label": "Religious Islamic areas"}
+			       		     ]
+			},
+			"transporta":      { "group": "שימושי קרקע", "type": "integer", "mode": "category", "description": "שימושי קרקע תחבורה",
+			            "Values": [
+			                {"value": 0, "label": "none"},
+			                {"value": 1, "label": "transportation facilities"}
+			       		     ]
+			},
+			"empl_indu":       { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בתעשייה"},
+			"empl_comm":       { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים במסחר"},
+			"empl_serv":       { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "מועסקים בשרותים"},
+			"empl_tot":        { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "סה\"כ מועסקים"},
+			"students":        { "group": "חינוך", "type": "real", "mode": "continous", "description": "סטודנטים", "comment": "שלומדים באזור"},
+			"population":      { "group": "אוכלוסייה", "type": "real", "mode": "continous", "bank": "population", "description": "אוכלוסייה"},
+			"households":      { "group": "משקי בית", "type": "real", "mode": "continous", "description": "משקי בית"},
+			"parkcost":        { "group": "חניה", "type": "real", "mode": "continous", "description": "עלות חניה"},
+			"parkwalk":        { "group": "חניה", "type": "real", "mode": "continous", "description": "זמן הליכה חניה"},
+			"popdens":         { "group": "לא בשימוש", "type": "real", "mode": "continous", "description": "צפיפות אוכלוסייה", "comment": "1000 person/sq. Km"},
+			"ga21":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 21"},
+			"ga22":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 22"},
+			"ga23":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 23"},
+			"ga24":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 24"},
+			"ga25":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 25"},
+			"ga26":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 26"},
+			"ga11":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 11"},
+			"ga12":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 12"},
+			"ga13":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 13"},
+			"ga14":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 14"},
+			"ga15":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 15"},
+			"ga16":            { "group": "אוכלוסייה", "type": "real", "mode": "continous", "description": "אוכלוסייה בגילאים ", "comment": "Gender-Age group 16"},
+			"workers":         { "group": "כח עבודה", "type": "real", "mode": "continous", "description": "כח עבודה (מיעסקים)"},
+			"workperc":        { "group": "כח עבודה", "type": "real", "mode": "continous", "description": "כח עבודה (מיעסקים) / אוכלוסייה"},
+			"avgHH":           { "group": "משקי בית", "type": "real", "mode": "continous", "description": "גודל מ\"ב ממוצע"},
+			"soceco":          { "group": "הכנסה", "type": "integer", "mode": "discrete", "description": "רמה חברתית כלכלית", "comment": "according to definition of NTA"},
+			"Mlic2":           { "group": "רשיונות נהיגה", "type": "real", "mode": "continous", "description": "מספר רששיונות נהיגה לנפש ", "comment": "Age group 2, males"},
+			"Mlic3":           { "group": "רשיונות נהיגה", "type": "real", "mode": "continous", "description": "מספר רששיונות נהיגה לנפש ", "comment": "Age group 3, males"},
+			"Mlic4":           { "group": "רשיונות נהיגה", "type": "real", "mode": "continous", "description": "מספר רששיונות נהיגה לנפש ", "comment": "Age group 4, males"},
+			"Mlic5":           { "group": "רשיונות נהיגה", "type": "real", "mode": "continous", "description": "מספר רששיונות נהיגה לנפש ", "comment": "Age group 5, males"},
+			"Mlic6":           { "group": "רשיונות נהיגה", "type": "real", "mode": "continous", "description": "מספר רששיונות נהיגה לנפש ", "comment": "Age group 6, males"},
+			"Flic2":           { "group": "רשיונות נהיגה", "type": "real", "mode": "continous", "description": "מספר רששיונות נהיגה לנפש ", "comment": "Age group 2, females"},
+			"Flic3":           { "group": "רשיונות נהיגה", "type": "real", "mode": "continous", "description": "מספר רששיונות נהיגה לנפש ", "comment": "Age group 3, females"},
+			"Flic4":           { "group": "רשיונות נהיגה", "type": "real", "mode": "continous", "description": "מספר רששיונות נהיגה לנפש ", "comment": "Age group 4, females"},
+			"Flic5":           { "group": "רשיונות נהיגה", "type": "real", "mode": "continous", "description": "מספר רששיונות נהיגה לנפש ", "comment": "Age group 5, females"},
+			"Flic6":           { "group": "רשיונות נהיגה", "type": "real", "mode": "continous", "description": "מספר רששיונות נהיגה לנפש ", "comment": "Age group 6, females"},
+			"emp2pop":         { "group": "מקומות עבודה", "type": "real", "mode": "continous", "description": "יחס מועסקים לאוכלוסייה", "comment": "Employment/population ratio"},
+			"parkcap":         { "group": "חניה", "type": "real", "mode": "continous", "description": "קיבולת חניה", "comment": "overall parking capacity"},
+			"parkAM":          { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"parkPM":          { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"parkOP":          { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"INTLSUME":        { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"INTLSUMO":        { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"INTLSUMS":        { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"INTLSUMW":        { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"LSIZESEC":        { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"LSIZEINTS":       { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"LSUMSIZE0":       { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"LSUMSIZES":       { "group": "לא בשימוש", "type": "real", "mode": "continous"},
+			"Hh0car":          { "group": "רמת מיוע", "type": "real", "mode": "continous", "description": "משקי בית עם 0 כ\"ר"},
+			"HH1car":          { "group": "רמת מיוע", "type": "real", "mode": "continous", "description": "משקי בית עם 1 כ\"ר"},
+			"HH2car":          { "group": "רמת מיוע", "type": "real", "mode": "continous", "description": "משקי בית עם 2 כ\"ר"},
+			"HH3car":          { "group": "רמת מיוע", "type": "real", "mode": "continous", "description": "משקי בית עם 2+ כ\"ר"} }
 }

@@ -1,0 +1,32 @@
+library(shiny)
+
+x = NULL
+
+ui <- fluidPage(
+  shinybrowser::detect(),  # https://github.com/daattali/shinybrowser
+  "Window size:",
+  textOutput("size")
+)
+
+server <- function(input, output, session) {
+  output$size <- renderText({
+    paste(
+      shinybrowser::get_width(),
+      "x",
+      shinybrowser::get_height()
+    )
+  })
+  
+  observe({
+    x  = shinybrowser::get_all_info()
+    str(shinybrowser::get_all_info())
+    
+    cfg=list()
+    cfg$width = shinybrowser::get_width()
+    cfg$height = shinybrowser::get_height()
+  })
+  
+}
+
+shinyApp(ui, server)
+

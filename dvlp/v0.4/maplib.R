@@ -75,6 +75,13 @@ mymap <- R6Class("mymapclass",
           return(i)
         },
 
+        setview = function(b) {
+          #b = unlist(b) # b[[1]]
+          self$mapview@map <- self$mapview@map %>% 
+            fitBounds(b[1], b[2], b[3], b[4])
+        },
+        
+        
         setlyrscale = function(geolyr) {
           #i = self$lyrnum(geolyr)
           #b = self$lyrsdata[[i]]@bbox  # bbox(basemap$lyrsdata[[i]])

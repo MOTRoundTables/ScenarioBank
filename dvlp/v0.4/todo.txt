@@ -1,0 +1,22 @@
+fix get scenario years by scenario (valid years)
+
+add groups - agrregates
+
+add views !
+
+allways use cfg frcst - not currentfrcst - do not duplicate frcsts !
+
+
+make discrete discrete
+
+addchart ! (like dashboard)
+
+define group geography ?
+
+
+PONERLO EN EL WEB !!!!
+
+
+done:
+add geo dict to dict - add source = geo 
+add map height by resolution

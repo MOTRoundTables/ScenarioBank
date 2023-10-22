@@ -3,13 +3,15 @@
 library(shiny)
 library(shinythemes)  # https://rstudio.github.io/shinythemes/
 library(shinyWidgets) # https://dreamrs.github.io/shinyWidgets/index.html
-library(waiter) # https://waiter.john-coene.com/#/  #https://shiny.john-coene.com/waiter/
+#library(shinybrowser) # https://github.com/daattali/shinybrowser
+library(waiter)       # https://waiter.john-coene.com/#/  #https://shiny.john-coene.com/waiter/
 
 source("main.R")
 
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
+  shinybrowser::detect(),  # https://github.com/daattali/shinybrowser
   tags$html(dir="rtl", lang="he"),
   includeCSS("app.css"),  
   waiter::use_waiter(),
@@ -28,7 +30,12 @@ ui <- fluidPage(
              
              
        fluidRow(
-         column(2, offset = 8, selectizeInput('selectfrcst', 'תחזית', choices = character(0), 
+         column(1, selectizeInput('selectview', 'חלון', choices = cfg$views$name,
+                                  options = list(
+                                    placeholder = 'בחר מתוך הרשימה ...',
+                                    onInitialize = I('function() { this.setValue(""); }') ) )
+         ),
+         column(2, offset = 7, selectizeInput('selectfrcst', 'תחזית', choices = character(0), 
                                options = list(
                                  placeholder = 'בחר מתוך הרשימה ...',
                                  onInitialize = I('function() { this.setValue(""); }') ) ),
@@ -38,6 +45,7 @@ ui <- fluidPage(
                                     placeholder = 'בחר מתוך הרשימה ...',
                                     onInitialize = I('function() { this.setValue(""); }') ) )
          )
+         
        ),
        
        
@@ -137,9 +145,27 @@ ui <- fluidPage(
 # --------------------------------------------------
 
 server <- function(input, output, session) {
+  
+  observe({
+    #addbrowserinfo(shinybrowser::get_all_info())
+    cat("geth\n")
+    w = shinybrowser::get_width()
+    h = shinybrowser::get_height()
+    addbrowserinfo(w, h)
+    refreshmap()
+  })
 
   # --------- tabPanel "צפייה"
 
+  observeEvent(input$selectview, { 
+    if (input$selectview!="")  {
+      basemap$setview(unlist(cfg$views[cfg$views$name == input$selectview, ]$bounds))
+      refreshmap()
+    }
+  })
+  
+    
+  
   observeEvent(input$selectsrc, {  
     if (setnewsource(input$selectsrc)) {
       updateSelectInput(session, "selectfrcst",
@@ -161,9 +187,9 @@ server <- function(input, output, session) {
     if (setnewfrcst(input$selectfrcst)) {
       
       updateSelectInput(session, "selectscn", choices = currentfrcst$scnchoices, selected = character(0) )
-
+      
       #updateTreeInput(inputId = "selectvar",
-        #choices = currentfrcst$varstree,
+      #  choices = currentfrcst$varstree,
       #  selected = character(0) )
       # updateSelectInput(session, "selectvar",
       #                   choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars()
@@ -180,15 +206,15 @@ server <- function(input, output, session) {
   output$treevar <- renderUI({
     if (input$selectfrcst!="") {
       if (is.null(currentfrcst)) {
-        NULL
+          NULL
       } else {
         treeInput(
-        inputId = "selectvar",
-        label = "משתנים",
-        choices = currentfrcst$varstree, # character(0),
-        #selected = "", San Francisco",
-        returnValue = "text",
-        closeDepth = 0
+          inputId = "selectvar",
+          label = "משתנים",
+          choices = currentfrcst$varstree, # character(0),
+          #selected = "", San Francisco",
+          returnValue = "text",
+          closeDepth = 0
         )
       }    
     }
@@ -226,14 +252,13 @@ server <- function(input, output, session) {
     if (is.null(mapobject)) {
       output$appMap <- renderLeaflet({ basemap$mapview@map })
       output$leaf = renderUI({ leafletOutput("appMap", 
-                                             width = "100%", height = cfg$basemap$height) }) 
+                                             width = "100%", height = cfg$height*0.8) }) 
+                                             #width = "100%", height = cfg$basemap$height) }) 
     } else {
       #output$appMap <- renderLeaflet({ mapobject })
       output$leaf = renderUI({ mapobject }) 
       }
   }
-  
-  refreshmap()
 
   doanalisys = function() {
     req(currentfrcst, input$selectscn, input$selectyr, input$selectvar)
@@ -244,11 +269,13 @@ server <- function(input, output, session) {
     userreq$yr = input$selectyr
     
     #userreq$var = input$selectvar
-    tmp = unique(input$selectvar[input$selectvar %in% currentfrcst$dispvarsdesc]) # get rid of groups
-    tmp = unlist(lapply(tmp, function(x) currentfrcst$dispvars[which(x==currentfrcst$dispvarsdesc)]))
+    tmp = unique(input$selectvar[input$selectvar %in% currentfrcst$dispvarsdesc])   # get rid of groups (treeinput)
+    tmp = unlist(lapply(tmp, function(x) currentfrcst$dispvars[which(x==currentfrcst$dispvarsdesc)])) # (treeinput)
     userreq$dict = list()
     for (i in 1:length(tmp)) {
-      userreq$dict = append(userreq$dict, currentfrcst$data$dict[tmp[i]])
+      x = currentfrcst$data$dict[tmp[i]]
+      if (!is.null(x[[1]])) { userreq$dict = append(userreq$dict, x) }
+      else { userreq$dict = append(userreq$dict, currentfrcst$data$geodict[tmp[i]]) }
     }
     userreq$var = names(userreq$dict)
 
@@ -290,6 +317,9 @@ server <- function(input, output, session) {
   }
 
   # -------------------------------------
+  
+  # other settings  
+  
 
 }  # end server
 

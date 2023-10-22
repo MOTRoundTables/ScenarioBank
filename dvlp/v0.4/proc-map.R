@@ -15,11 +15,12 @@ createSimpleMap <- function(userreq) {
   aYr = userreq$yr[[1]]  # assume 1 yr only
   dataVar = userreq$var[[1]]
   
-  cat(aFrcst$name, aScn, aYr, dataVar)  
-  # if var is not number, parse it as number
-  if (!aFrcst$tazdata %>% as_tibble() %>% pull(dataVar) %>% class() %>% `%in%`(c("numeric","integer") )) {
-    aFrcst$tazdata <- aFrcst$tazdata %>% mutate(!!dataVar := !!sym(dataVar) %>% parse_number())
-  }
+  cat(aFrcst$name, aScn, aYr, dataVar)
+  
+  # # if var is not number, parse it as number
+  # if (!aFrcst$tazdata %>% as_tibble() %>% pull(dataVar) %>% class() %>% `%in%`(c("numeric","integer") )) {
+  #   aFrcst$tazdata <- aFrcst$tazdata %>% mutate(!!dataVar := !!sym(dataVar) %>% parse_number())
+  # }
   
   x_join <- aFrcst$bankvars$taz
   y_join <- aFrcst$data$tazvar
@@ -31,8 +32,10 @@ createSimpleMap <- function(userreq) {
   
   colors <- rev(RColorBrewer::brewer.pal(12, "RdYlGn")) # RColorBrewer::brewer.pal(11, "RdBu")
   
+  desc = userreq$dict[[dataVar]]$description
+  
   x = mapview(with_geoms, zcol = dataVar, 
-              layer.name = dataVar,
+              layer.name = desc,
               col.regions = colors
   )
   

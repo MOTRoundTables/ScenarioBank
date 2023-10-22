@@ -84,7 +84,9 @@ initapp <- function() {
   #list("Choice 1" = 1, "Choice 2" = 2)  
 
   cfg$analisystype = list("ערכים", "צפיפות")
-  
+
+  cfg$views = fromJSON(paste0(idoenv,"views.json"))
+
   return(cfg)
 }  
 
@@ -97,6 +99,7 @@ basemap$reset(cfg$basemap)  # reset basemap
 # vars for tab  צפייה
 currentsrc <- ""
 currentfrcstky <- ""
+currentfrcstnum <- 0
 currentfrcst <- NULL
 #mapobject = 1   # mapview
 
@@ -145,20 +148,22 @@ setnewfrcst <- function(frcstky) {
   if (frcstky!="") {
     if (currentfrcstky!=frcstky) { # forecast changed
       currentfrcstky <<- frcstky
-      frcstnum <- cfg$frcstnums[[frcstky]]  # getfrcstnum(currentfrcstky)
-      currentfrcst <<- cfg$forecasts[[frcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
+      currentfrcstnum <<- cfg$frcstnums[[frcstky]]  # getfrcstnum(currentfrcstky)
+      currentfrcst <<- cfg$forecasts[[currentfrcstnum]]   #  setFrcst(aFrcst) # set scenario  --> main 
       currentfrcst$loadfrcst()  # if called then load data
       basemap$addfrcst(currentfrcst)
-      
-      tmp <- data.frame(
-        group = unlist(currentfrcst$dispvarsgroup),
-        vars = unlist(currentfrcst$dispvarsdesc),
-        stringsAsFactors = FALSE
-      )
-      tmp2 = bind_rows(cfg$vargroups)
-      tmp <- tmp %>% inner_join(tmp2, by=c('group'='name')) %>% 
-        arrange(level) %>% select(group, vars)
-      currentfrcst$varstree = create_tree(tmp)
+
+      if (is.null(currentfrcst$varstree)) {
+        tmp <- data.frame(
+          group = unlist(currentfrcst$dispvarsgroup),
+          vars = unlist(currentfrcst$dispvarsdesc),
+          stringsAsFactors = FALSE
+        )
+        tmp2 = bind_rows(cfg$vargroups)
+        tmp <- tmp %>% inner_join(tmp2, by=c('group'='name')) %>% 
+          arrange(level) %>% select(group, vars)
+        currentfrcst$varstree = create_tree(tmp)
+      }
 
       cat(paste("set Frcst: ", currentfrcst$name, "\n"))
       changed = 1
@@ -167,11 +172,26 @@ setnewfrcst <- function(frcstky) {
   return(changed)
 }
 
+# getcurrentfrcstyears <- function() {
+#   return(cfg$forecasts[[currentfrcstnum]]$getscnyears() ) 
+# }
+# 
+# getcurrentfrcstscnchoices <- function() {
+#   return(cfg$forecasts[[currentfrcstnum]]$scnchoices ) 
+#}
+
 frcstnewmap <- function(afrcst) {
   basemap$reset(cfg$basemap)  # reset basemap
   basemap$addfrcst(afrcst)
   basemap$hidelyr(afrcst$data$tazlyr)
 }
+
+addbrowserinfo <- function (w,h) {
+  cfg$width <<- w
+  cfg$height <<- h
+}
+  
+
 
 # = end =================================================
 

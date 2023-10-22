@@ -26,6 +26,7 @@ frcstclass <- R6Class("Frcstclass",
       dispvars = NULL,      # vars 4 menu
       dispvarsgroup = NULL, # vars 4 menu grps
       dispvarsdesc = NULL,  # vars 4 menu descs
+      dispvarssrc = NULL,   # vars 4 menu source (data/geo)
       
       varstree = NULL,    # list of vars for menu [[name:var]]
       varchoices = NULL,       # list of vars for menu [[name:var]]
@@ -41,7 +42,6 @@ frcstclass <- R6Class("Frcstclass",
         x = fromJSON(paste0(frcstdir, frcstky, "/scenario.json"))
         self$name = x$name
         self$dir = paste0(frcstdir, x$dir, "/")
-        self$data = x
         
         self$scnlist = names(x$scenarios)
         self$scnnames = list()
@@ -52,37 +52,61 @@ frcstclass <- R6Class("Frcstclass",
           self$scnchoices[y$desc] = self$scnlist[i]
         }
         
-       self$vars = names(x$dict)
-       self$vardesc = list()
-       self$dispvars = list()
-       self$dispvarsgroup = list()
-       self$dispvarsdesc = list()
-       self$bankvars = list()
-       for (i in 1:length(self$vars)) {
-         y = x$dict[[self$vars[i]]]
-         if (!is.null(y$bank)) {
-           self$bankvars[[y$bank]] = self$vars[i]
-         }
-         self$vardesc = append(self$vardesc, ifelse(!is.null(y$description), y$description, self$vars[i]))
-         #if (!is.null(y$description)) { self$vardesc = append(self$vardesc, y$description) }
+        # - prepare data vars (dict)
+        self$vars = names(x$dict)   # list of ALL vars
+        self$vardesc = list()       # list of ALL var descriptions
+        self$dispvars = list()      # list of menu vars
+        self$dispvarsgroup = list() # list of menu groups
+        self$dispvarsdesc = list()  # list of menu var descriptions
+        self$dispvarssrc = list()   # list of menu var sources
+        self$bankvars = list()      # list of bank vars in scenario (bank=scenario pair)
+        for (i in 1:length(self$vars)) {
+          x$dict[[self$vars[i]]]$source = "data"
+          y = x$dict[[self$vars[i]]]
+          if (!is.null(y$bank)) {
+            self$bankvars[[y$bank]] = self$vars[i]
+          }
+          self$vardesc = append(self$vardesc, ifelse(!is.null(y$description), y$description, self$vars[i]))
+          #if (!is.null(y$description)) { self$vardesc = append(self$vardesc, y$description) }
 
-         if ((y$group!="לא בשימוש")&&(y$group!="זיהוי")) {
-           self$dispvars = append(self$dispvars, self$vars[i])
-           self$dispvarsgroup = append(self$dispvarsgroup, y$group)
-           self$dispvarsdesc = append(self$dispvarsdesc, ifelse(!is.null(y$description), y$description, self$vars[i]))
-         }
+          if ((y$group!="לא בשימוש")&&(y$group!="זיהוי")) {
+            self$dispvars = append(self$dispvars, self$vars[i])
+            self$dispvarsgroup = append(self$dispvarsgroup, y$group)
+            self$dispvarsdesc = append(self$dispvarsdesc, ifelse(!is.null(y$description), y$description, self$vars[i]))
+            self$dispvarssrc =  append(self$dispvarssrc, "data")
+          }
+        }
+        
+        # - add geo vars (geo dict)
+        tmp = names(x$geodict)  
+        self$vars = append(self$vars, tmp)   # list of ALL vars
+        for (i in 1:length(tmp)) {
+          x$geodict[[tmp[i]]]$source = "geo"
+          y = x$geodict[[tmp[i]]]
+          if (!is.null(y$bank)) {
+            self$bankvars[[y$bank]] = tmp[i]
+          }
+          self$vardesc = append(self$vardesc, ifelse(!is.null(y$description), y$description, tmp[i]))
 
-       }
+          if ((y$group!="לא בשימוש")&&(y$group!="זיהוי")) {
+            self$dispvars = append(self$dispvars, tmp[i])
+            self$dispvarsgroup = append(self$dispvarsgroup, y$group)
+            self$dispvarsdesc = append(self$dispvarsdesc, ifelse(!is.null(y$description), y$description, tmp[i]))
+            self$dispvarssrc =  append(self$dispvarssrc, "geo")
+          }
+        }
+        
 
-       self$varchoices = vector(mode = "list") 
-       #for (i in 2:length(self$vars)) {
-       #   self$varchoices[as.character(self$vardesc[i])] = self$vars[i]
-       #  }
-       for (i in 2:length(self$dispvars)) {
+        self$varchoices = vector(mode = "list") 
+        #for (i in 2:length(self$vars)) {
+        #   self$varchoices[as.character(self$vardesc[i])] = self$vars[i]
+        #  }
+        for (i in 2:length(self$dispvars)) {
           self$varchoices[as.character(self$dispvarsdesc[i])] = self$dispvars[i]
-         }
+        }
 
-      },
+        self$data = x  # save scenario json data
+      },  # - end initialize
       
       
       # - scenario functions  -------------------------------------      

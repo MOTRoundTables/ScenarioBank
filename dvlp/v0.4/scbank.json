@@ -40,7 +40,7 @@
 		"parking":    { "name": "חניה",       "level": 10 },
 		"notinuse":   { "name": "לא בשימוש",    "level": 0 }	
 	},
-	"dict" : {
+	"bankdict" : {
 		"population" : { "name":"אוכלוסייה" },
 		"households" : { "name":"משקי בית" },
 		"sector"     : { "name":"מגזר",   "desc": "מגזר עיקרי של אזור"  },

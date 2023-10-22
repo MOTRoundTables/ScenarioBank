@@ -14,13 +14,13 @@ afrcst$name
 afrcst$loadfrcst()
 
 userreq = list()
-userreq$frcst = afrcst
+userreq$frcst = afrcst   ### BUT FOR APPLICATION BETTER USE CFG!
 userreq$scn = c("BAU")    # "BASE", "BAU", "IPLAN", "JTMT"
 userreq$yr = c(2025)      # 2020, 2025, 2030, 2035, 2040, 2045, 2050
 
-#userreq$var = "pop"       # "pop", "emp_tot":
-userreq$var = list()
-userreq$var = append(userreq$var, afrcst$data$dict["pop"])
+userreq$var = c("pop")       # "pop", "emp_tot":
+userreq$dict = list()
+userreq$dict = append(userreq$dict, afrcst$data$dict["pop"])
 
 userreq$mode = 1          # change to 3 if multiple
 

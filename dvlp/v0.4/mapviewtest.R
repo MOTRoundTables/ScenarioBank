@@ -26,6 +26,51 @@ basemap$mapview
 
 basemap$hidelyr(temp$lyr)
 
+View(cfg$views)
+x = cfg$views
+
+basemap$mapview@map 
+basemap$mapview@map %>%setView(35.211714, 32.888926, 8)
+
+basemap$mapview@map %>%fitBounds(34.733743, 31.988063, 34.875333,  32.197471)
+
+
+basemap$mapview@map %>%fitBounds(31.988063, 34.733743, 32.197471, 34.875333)
+
+
+basemap$mapview@map
+b1 = c(34.816826, 31.601893)
+b2 = c(34.816826, 31.601893)
+b = c(b1, b2)
+b
+
+b = c(31.601893, 34.816826, 31.601893, 34.816826 )
+b
+fitBounds(b)
+
+basemap$mapview@map %>%  fitBounds(35.024613, 32.384443, 35.024613, 32.384443)
+
+fitBounds(basemap$mapview@map, 32.384443, 35.024613, 32.384443, 35.024613)
+#fitBounds(basemap$mapview@map, 40.712, -74.227, 40.774, -74.125)
+
+basemap$mapview@map %>% clearBounds() 
+
+basemap$mapview@map %>% fitBounds(-72, 40, -70, 43)
+
+
+m <- leaflet() %>% addTiles() %>% setView(-71.0382679, 42.3489054, zoom = 18)
+m  # the RStudio 'headquarter'
+m %>% fitBounds(-72, 40, -70, 43)
+m %>% clearBounds()  # world view
+
+m %>% clearBounds()  # world view
+
+
+basemap$mapview@map
+
+fitBounds(map, lng1, lat1, lng2, lat2, options = list())
+?fitbounds
+
 
 
 alyr = currentfrcst$getfrcstlyr()

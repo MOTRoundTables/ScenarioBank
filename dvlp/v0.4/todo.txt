@@ -1,11 +1,11 @@
-fix get scenario years by scenario (valid years)
+clear all button
+
+(if erro on years - clear map ? - yae I think)
 
 add groups - agrregates
 
-add views !
 
-allways use cfg frcst - not currentfrcst - do not duplicate frcsts !
-
+rerurn for geresh ....
 
 make discrete discrete
 
@@ -20,3 +20,6 @@ PONERLO EN EL WEB !!!!
 done:
 add geo dict to dict - add source = geo 
 add map height by resolution
+fix get scenario years by scenario (valid years)
+add views !
+allways use cfg frcst - not currentfrcst - do not duplicate frcsts !  - R^ is BY REF !

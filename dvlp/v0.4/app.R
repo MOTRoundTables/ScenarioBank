@@ -157,14 +157,13 @@ server <- function(input, output, session) {
 
   # --------- tabPanel "צפייה"
 
-  observeEvent(input$selectview, { 
+  observeEvent(input$selectview, {   # zoom to views
     if (input$selectview!="")  {
       basemap$setview(unlist(cfg$views[cfg$views$name == input$selectview, ]$bounds))
       refreshmap()
     }
   })
-  
-    
+
   
   observeEvent(input$selectsrc, {  
     if (setnewsource(input$selectsrc)) {
@@ -269,16 +268,28 @@ server <- function(input, output, session) {
     userreq$yr = input$selectyr
     
     #userreq$var = input$selectvar
-    tmp = unique(input$selectvar[input$selectvar %in% currentfrcst$dispvarsdesc])   # get rid of groups (treeinput)
-    tmp = unlist(lapply(tmp, function(x) currentfrcst$dispvars[which(x==currentfrcst$dispvarsdesc)])) # (treeinput)
+    tmp = unique(input$selectvar[input$selectvar %in% userreq$frcst$dispvarsdesc])   # get rid of groups (treeinput)
+    tmp = unlist(lapply(tmp, function(x) currentfrcst$dispvars[which(x==userreq$frcst$dispvarsdesc)])) # (treeinput)
     userreq$dict = list()
     for (i in 1:length(tmp)) {
-      x = currentfrcst$data$dict[tmp[i]]
+      x = userreq$frcst$data$dict[tmp[i]]
       if (!is.null(x[[1]])) { userreq$dict = append(userreq$dict, x) }
-      else { userreq$dict = append(userreq$dict, currentfrcst$data$geodict[tmp[i]]) }
+      else { userreq$dict = append(userreq$dict, userreq$frcst$data$geodict[tmp[i]]) }
     }
     userreq$var = names(userreq$dict)
 
+    # check if all required scenarios apply to requested years
+    yearsok = 1
+    for (i in 1:length(userreq$scn)) {
+      scnyrs = userreq$frcst$data$scenarios[[userreq$scn]]$years
+      if (!all(scnyrs %in% userreq$yr)) {yearsok=NULL}
+    }
+    if (is.null(yearsok)) { 
+      sendSweetAlert(session = session,title = "Error...",
+        text = "חלק מהתרחישים לא קיימים בשנים המבוקשות", type = "error" )
+    }
+    req(yearsok)
+    
     if ((length(userreq$yr)==1)&&(length(userreq$scn)==1)&&(length(userreq$var)==1)) {
       userreq$mode = "1"
     } else if ((length(userreq$yr)==2)&&(length(userreq$scn)==1)&&(length(userreq$var)==1)) {

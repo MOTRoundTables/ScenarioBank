@@ -3,7 +3,7 @@
     "path": "~/GitHub/ScenarioBank/dvlp/v0.4/scnlib.R",
     "project_path": "scnlib.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "3553250969",
     "contents": "",
     "dirty": true,
     "created": 1695546270243.0,
@@ -12,8 +12,8 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "109,6",
-        "scrollLine": "75"
+        "cursorPosition": "118,17",
+        "scrollLine": "0"
     },
     "folds": "",
     "lastKnownWriteTime": 1697999854,

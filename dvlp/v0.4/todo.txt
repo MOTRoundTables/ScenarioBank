@@ -1,20 +1,32 @@
-clear all button
+clear all button  NO FUCIONA
+check years NO FUNCIONA
+
+rerurn for geresh ....
+
+
 
 (if erro on years - clear map ? - yae I think)
 
 add groups - agrregates
 
+filter zones (by tabaat)
 
-rerurn for geresh ....
+var 2 button (hide)
 
 make discrete discrete
 
-addchart ! (like dashboard)
+NO TABS I think-> v0.5
+
+addchart ! (like dashboard) Add 2 charts  1 is itpalgut
 
 define group geography ?
 
 
 PONERLO EN EL WEB !!!!
+
+
+
+
 
 
 done:

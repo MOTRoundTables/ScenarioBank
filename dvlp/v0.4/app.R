@@ -146,7 +146,7 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   
-  observe({
+  observe({  # update map height
     #addbrowserinfo(shinybrowser::get_all_info())
     cat("geth\n")
     w = shinybrowser::get_width()
@@ -165,16 +165,35 @@ server <- function(input, output, session) {
   })
 
   
+  clearselections <- function(lvl) {
+    if (lvl>1) {  # lvl =2
+      updateSelectInput(session, "selectsrc", choices = "", selected = character(0) )
+    }
+    if (lvl>0) {  # lvl =1 
+       updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
+       updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
+       updateTreeInput(inputId = "selectvar", selected = character(0))
+       #updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
+     }
+  }
+
+  observeEvent(input$clearall, {
+    clearselections(2)  # clear scn,years,vars
+    refreshmap()  # clear map
+  })
+
   observeEvent(input$selectsrc, {  
     if (setnewsource(input$selectsrc)) {
       updateSelectInput(session, "selectfrcst",
                         choices = cfg$frcstchoices,
                         selected = character(0) )  
+      clearselections(1)  # clear scn,years,vars
       refreshmap()  # clear map
-      updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
-      updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
-      #updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
-      updateTreeInput(inputId = "selectvar", selected = character(0))
+
+      #updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
+      # updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
+      # #updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
+      # updateTreeInput(inputId = "selectvar", selected = character(0))
       
     }
   })
@@ -186,6 +205,10 @@ server <- function(input, output, session) {
     if (setnewfrcst(input$selectfrcst)) {
       
       updateSelectInput(session, "selectscn", choices = currentfrcst$scnchoices, selected = character(0) )
+      updatePrettyCheckboxGroup(session, "selectyr",
+                          choices = as.list(currentfrcst$getscnyears()),
+                          inline = TRUE,
+                          selected = character(0) )
       
       #updateTreeInput(inputId = "selectvar",
       #  choices = currentfrcst$varstree,
@@ -194,10 +217,6 @@ server <- function(input, output, session) {
       #                   choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars()
       #                   selected = character(0) )
       
-      updatePrettyCheckboxGroup(session, "selectyr",
-                          choices = as.list(currentfrcst$getscnyears()),
-                          inline = TRUE,
-                          selected = character(0) )
       refreshmap()
     }
   })
@@ -214,27 +233,23 @@ server <- function(input, output, session) {
           #selected = "", San Francisco",
           returnValue = "text",
           closeDepth = 0
-        )
-      }    
+        ) 
+      }
     }
   })
 
-  observeEvent(input$selectscnclr, {
+  observeEvent(input$selectscnclr, {   # clear scn choices
     updateSelectInput(session, "selectscn", selected = character(0) )
   })
-  observeEvent(input$selectscnall, {
+  observeEvent(input$selectscnall, {   # select all scn 
     updateSelectInput(session, "selectscn", selected = currentfrcst$scnchoices )
   })
   
-  observeEvent(input$selectyrclr, {
+  observeEvent(input$selectyrclr, {    # clear yr choices
     updatePrettyCheckboxGroup(session, "selectyr", selected = character(0) )
   })
-  observeEvent(input$selectyrall, {
+  observeEvent(input$selectyrall, {    # slect all  yr 
     updatePrettyCheckboxGroup(session, "selectyr", selected = as.list(currentfrcst$getscnyears()) )
-  })
-
-  observeEvent(input$clearall, {
-    notready()
   })
 
   observeEvent(input$tabs1, {
@@ -282,7 +297,7 @@ server <- function(input, output, session) {
     yearsok = 1
     for (i in 1:length(userreq$scn)) {
       scnyrs = userreq$frcst$data$scenarios[[userreq$scn]]$years
-      if (!all(scnyrs %in% userreq$yr)) {yearsok=NULL}
+      if (!all(userreq$yr %in% scnyrs)) {yearsok=NULL}
     }
     if (is.null(yearsok)) { 
       sendSweetAlert(session = session,title = "Error...",

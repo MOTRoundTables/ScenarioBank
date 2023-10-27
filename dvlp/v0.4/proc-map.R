@@ -22,9 +22,13 @@ createSimpleMap <- function(userreq) {
   #   aFrcst$tazdata <- aFrcst$tazdata %>% mutate(!!dataVar := !!sym(dataVar) %>% parse_number())
   # }
   
-  x_join <- aFrcst$bankvars$taz
-  y_join <- aFrcst$data$tazvar
-  aFrcst$loadfrcst()
+  #x_join <- aFrcst$bankvars$taz
+  #y_join <- aFrcst$data$tazvar
+  #aFrcst$loadfrcst()
+  
+  x_join <- aFrcst$tazfilevar
+  y_join <- aFrcst$geodef$zvar
+  
   filtered <- aFrcst$tazdata %>% as_tibble() %>% filter(scenario == aScn, year == aYr)
   with_geoms <- filtered %>% left_join(aFrcst$geolyr, by = setNames(y_join,x_join)) %>% st_sf()
   

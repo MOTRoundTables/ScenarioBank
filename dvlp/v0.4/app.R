@@ -8,7 +8,6 @@ library(waiter)       # https://waiter.john-coene.com/#/  #https://shiny.john-co
 
 source("main.R")
 
-
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   shinybrowser::detect(),  # https://github.com/daattali/shinybrowser
@@ -21,14 +20,13 @@ ui <- fluidPage(
              theme = shinytheme("united"),  # "lumen"  "united"  "cerulean"
 
       tabPanel("השוואה",
-                
+
       ), # tabPanel השוואה
       
       # ------------------------------------------------------
        
       tabPanel("צפייה", fluid = TRUE, #icon = icon("globe-americas"), #tags$style(button_color_css),
-             
-             
+
        fluidRow(
          column(1, selectizeInput('selectview', 'חלון', choices = cfg$views$name,
                                   options = list(
@@ -73,16 +71,14 @@ ui <- fluidPage(
           
           hr(),
           uiOutput("treevar"),
-          # treeInput(
-          #   inputId = "selectvar",
-          #   label = "משתנה",
-          #   choices = treevar, # character(0),
-          #   #selected = "San Francisco",
-          #   returnValue = "text",
-          #   closeDepth = 0
-          # ),
           #selectInput('selectvar', 'משתנה', "", multiple=FALSE, selectize=FALSE),
 
+          # ----------------------------------------------
+
+          selectInput('selectSz', 'רמת תצוגה', "", multiple=FALSE, selectize=FALSE),
+          
+          # ----------------------------------------------
+          
           selectInput('selectanalysis', 'עיבוד', choices = cfg$analisystype, 
                     selected = 1, multiple=FALSE, selectize=FALSE),
 
@@ -92,24 +88,6 @@ ui <- fluidPage(
           actionButton("clearall", "נקה הכל"),
           actionButton("test", "פיתוח")
           
-          # --------------------------------------          
-
-          #updateSelectInput(session, "selectSz",
-          #                 choices = cfg$szchoices0,
-          #                 selected = character(0) )
-          
-          #radioButtons("zonetype", NULL,
-          #             choiceNames = list("גבולות מקור", "אזורי על"),
-          #             choiceValues = list(1, 2),
-          #             inline = TRUE ),
-
-          #selectizeInput(
-          #  'selectSz', 'אזורי על', choices = cfg$szchoices, 
-          #  options = list(
-          #    placeholder = 'בחר מתוך הרשימה ...',
-          #    onInitialize = I('function() { this.setValue(""); }')
-          #  ) )
-
         ),
 
     # Show a plot of the generated distribution
@@ -164,41 +142,45 @@ server <- function(input, output, session) {
     }
   })
 
-  
   clearselections <- function(lvl) {
-    if (lvl>1) {  # lvl =2
-      updateSelectInput(session, "selectsrc", choices = "", selected = character(0) )
+    if (lvl>2) {  # lvl =3
+      clearcurrentscn()
+      currentsrc <<- ""
+      updateSelectInput(session, "selectsrc", selected = character(0) )  # reset sources
+      updateSelectInput(session, "selectfrcst", choices = "", selected = character(0) )  # reset sources
     }
-    if (lvl>0) {  # lvl =1 
+    if (lvl>1) {  # lvl =2
        updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
-       updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
+       updatePrettyCheckboxGroup(session, "selectyr", selected = character(0), 
+                                 choices = "" )  # does not clear nut it will do
        updateTreeInput(inputId = "selectvar", selected = character(0))
        #updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
-     }
+    }
+    if (lvl>0) {  # lvl =1 
+      updatePrettyCheckboxGroup(session, "selectyr", selected = character(0), 
+                                choices = "" )  # does not clear nut it will do
+      updateTreeInput(inputId = "selectvar", selected = character(0))
+      #updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
+    }
+    
   }
 
-  observeEvent(input$clearall, {
-    clearselections(2)  # clear scn,years,vars
+  observeEvent(input$clearall, {            # reset: clear all user selections
+    clearselections(9)  # clear scn,years,vars
     refreshmap()  # clear map
   })
 
-  observeEvent(input$selectsrc, {  
+  observeEvent(input$selectsrc, {           # change source -> resets map
     if (setnewsource(input$selectsrc)) {
       updateSelectInput(session, "selectfrcst",
                         choices = cfg$frcstchoices,
                         selected = character(0) )  
-      clearselections(1)  # clear scn,years,vars
+      clearselections(2)  # clear scn,years,vars
       refreshmap()  # clear map
-
-      #updateSelectInput(session, "selectscn", choices = "", selected = character(0) )
-      # updatePrettyCheckboxGroup(session, "selectyr", choices = NULL, selected = character(0) )
-      # #updateSelectInput(session, "selectvar", choices = "", selected = character(0) )
-      # updateTreeInput(inputId = "selectvar", selected = character(0))
-      
     }
   })
 
-  observeEvent(input$selectfrcst, { 
+  observeEvent(input$selectfrcst, {         # change frcsrt -> add taz 2 map
     waiter <- waiter::Waiter$new( html = spin_3(), color = transparent(.5)) 
     waiter$show()
     on.exit(waiter$hide())    
@@ -209,13 +191,10 @@ server <- function(input, output, session) {
                           choices = as.list(currentfrcst$getscnyears()),
                           inline = TRUE,
                           selected = character(0) )
-      
-      #updateTreeInput(inputId = "selectvar",
-      #  choices = currentfrcst$varstree,
-      #  selected = character(0) )
-      # updateSelectInput(session, "selectvar",
-      #                   choices = currentfrcst$varchoices,  # currentfrcst$getfrcstvars()
-      #                   selected = character(0) )
+
+      updateSelectInput(session, "selectSz",
+                        choices = currentfrcst$geochoices,
+                        selected = currentfrcst$geochoices[1] )
       
       refreshmap()
     }
@@ -252,6 +231,24 @@ server <- function(input, output, session) {
     updatePrettyCheckboxGroup(session, "selectyr", selected = as.list(currentfrcst$getscnyears()) )
   })
 
+  observeEvent(input$selectSz, {    # change resolution
+    if (input$selectSz!="") {
+      if (currentfrcst$aglvl!=input$selectSz) {
+        if (input$selectSz!="taz") {
+          geodef = cfg$superzones[[input$selectSz]]
+        } else { geodef=NULL }
+        currentfrcst$setaglvl(input$selectSz, geodef)
+        basemap$reset(cfg$basemap)  # reset basemap
+        basemap$addfrcst(currentfrcst)
+        #clearselections(1)  # clear years,vars
+        updatePrettyCheckboxGroup(session, "selectyr", selected = character(0) )  # does not clear nut it will do
+        updateTreeInput(inputId = "selectvar", selected = character(0))
+        refreshmap()
+      }
+    }  
+  })
+  
+
   observeEvent(input$tabs1, {
     cat(paste0(input$tabs1,"\n"))
     doanalisys()
@@ -281,7 +278,7 @@ server <- function(input, output, session) {
     userreq$frcst = currentfrcst
     userreq$scn = input$selectscn
     userreq$yr = input$selectyr
-    
+
     #userreq$var = input$selectvar
     tmp = unique(input$selectvar[input$selectvar %in% userreq$frcst$dispvarsdesc])   # get rid of groups (treeinput)
     tmp = unlist(lapply(tmp, function(x) currentfrcst$dispvars[which(x==userreq$frcst$dispvarsdesc)])) # (treeinput)
@@ -354,6 +351,20 @@ shinyApp(ui = ui, server = server)
 
 
 # = end ==============================================
+
+# selectizeInput(
+#   'selectSz', 'רמת תצוגה', choices = cfg$szchoices,
+#   options = list(
+#     placeholder = 'בחר מתוך הרשימה ...',
+#     onInitialize = I('function() { this.setValue(""); }')
+#   ) ),
+
+
+# radioButtons("zonetype", NULL,
+#              choiceNames = list("גבולות מקור", "אזורי על"),
+#              choiceValues = list(1, 2),
+#              inline = TRUE ),
+
 
 # shiny status colors: 'info', 'primary', 'danger', 'warning' or 'success'
 # secondary, primary, success, danger, warning, info, light, dark

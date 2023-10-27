@@ -27,6 +27,36 @@ initapp <- function() {
   cfg$general$frcstdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$frcstdir, fixed=TRUE)
   cfg$general$rsltdir = gsub("<sysdir>", cfg$general$sysdir, cfg$general$rsltdir, fixed=TRUE)
 
+  # -- load & process super-zones dict
+  tmp = fromJSON(paste(cfg$general$geodir, "szlyrs.json", sep=""))
+  cfg$superzones = tmp$superzones
+  
+  cfg$szkeys = names(cfg$superzones)                  # vector of SZ keys    
+  n = length(cfg$szkeys)
+  cfg$szlist = vector(mode = "list", length = n)      # for menu
+  cfg$szchoices = vector(mode = "list")               # for menu 
+  cfg$szlyrs = vector(mode = "list", length = n)      # for menu
+  for (i in 1:n) {
+    ky = cfg$szkeys[i]
+    cfg$superzones[[ky]]$name = cfg$superzones[[ky]]$ename # alyr$hname  # set Eng or Heb
+    cfg$superzones[[ky]]$url = gsub("<geodir>", cfg$general$geodir, cfg$superzones[[ky]]$url, fixed=TRUE)
+    
+    cfg$szlist[i] = cfg$superzones[[ky]]$lyr  #name
+    cfg$sznames[i] = cfg$superzones[[ky]]$hname  # set Heb for menu
+    cfg$szchoices[as.character(cfg$sznames[i])] = i
+    cfg$szlyrs[i] = cfg$superzones[ky]
+  }
+  
+  #cfg$szlyrs = cfg$szlyrs %>% 
+  #  map_df(as_tibble)
+  #cfg$szlyrs['name'] <- ""
+  #cfg$szlyrs['status'] <- 0                        # lyrs %>% add_column(status = 0)  # NA
+  
+  #cfg$szchoices0 = vector(mode = "list")  
+  #cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
+  # cfg$szchoices0 = append (cfg$szchoices0, cfg$szchoices)
+  #list("Choice 1" = 1, "Choice 2" = 2)  
+  
   # -- load forecasts dictionaries and create a list of frcst objects
   n = length(cfg$forecastslist)
   cfg$frcstsources = list()
@@ -53,36 +83,6 @@ initapp <- function() {
 
   # - process main dict
 
-  # -- load & process super-zones dict
-  tmp = fromJSON(paste(cfg$general$geodir, "szlyrs.json", sep=""))
-  cfg$superzones = tmp$superzones
-
-  cfg$szkeys = names(cfg$superzones)                  # vector of SZ keys    
-  n = length(cfg$szkeys)
-  cfg$szlist = vector(mode = "list", length = n)      # for menu
-  cfg$szchoices = vector(mode = "list")               # for menu 
-  cfg$szlyrs = vector(mode = "list", length = n)      # for menu
-  for (i in 1:n) {
-    ky = cfg$szkeys[i]
-    cfg$superzones[[ky]]$name = cfg$superzones[[ky]]$ename # alyr$hname  # set Eng or Heb
-    cfg$superzones[[ky]]$url = gsub("<geodir>", cfg$general$geodir, cfg$superzones[[ky]]$url, fixed=TRUE)
-    
-    cfg$szlist[i] = cfg$superzones[[ky]]$lyr  #name
-    cfg$sznames[i] = cfg$superzones[[ky]]$hname  # set Heb for menu
-    cfg$szchoices[as.character(cfg$sznames[i])] = i
-    cfg$szlyrs[i] = cfg$superzones[ky]
-  }
-
-  cfg$szlyrs = cfg$szlyrs %>% 
-    map_df(as_tibble)
-  #cfg$szlyrs['name'] <- ""
-  cfg$szlyrs['status'] <- 0                        # lyrs %>% add_column(status = 0)  # NA
-  
-  #cfg$szchoices0 = vector(mode = "list")  
-  #cfg$szchoices0[cfg$messages$orgzns] = as.integer(0)
-  # cfg$szchoices0 = append (cfg$szchoices0, cfg$szchoices)
-  #list("Choice 1" = 1, "Choice 2" = 2)  
-
   cfg$analisystype = list("ערכים", "צפיפות")
 
   cfg$views = fromJSON(paste0(idoenv,"views.json"))
@@ -105,7 +105,6 @@ currentfrcst <- NULL
 
 # - ui functions --------------------------------------------
 
-
 getfrcstnum <- function(frcstky) {    #   asrc = "מודל תל אביב"
 # return(which(cfg$frcstkeys == frcstky))
   return(cfg$frcstnums$frcstky)
@@ -115,11 +114,7 @@ setnewsource <- function(asrc) {    #   asrc = "מודל תל אביב"
   changed = 0
   if (asrc!="") {
     if (currentsrc!=asrc) {
-      if (currentfrcstky!="") {  ## clear Frcst and map
-        currentfrcstky <<- ""
-        currentfrcst <<- NULL
-        basemap$reset(cfg$basemap)  # reset basemap
-      }
+      clearcurrentscn()
       getsrcfrcsts(asrc)  # --> main
       currentsrc <<- asrc
       cat(paste("new SRC: ", currentsrc, "\n")) # debug
@@ -127,6 +122,14 @@ setnewsource <- function(asrc) {    #   asrc = "מודל תל אביב"
     }
   }
   return(changed)
+}
+
+clearcurrentscn <- function() {
+  if (currentfrcstky!="") {  ## clear Frcst and map
+    currentfrcstky <<- ""
+    currentfrcst <<- NULL
+    basemap$reset(cfg$basemap)  # reset basemap
+  }
 }
   
 # returns a list of forecasts for a selected source
@@ -163,6 +166,17 @@ setnewfrcst <- function(frcstky) {
         tmp <- tmp %>% inner_join(tmp2, by=c('group'='name')) %>% 
           arrange(level) %>% select(group, vars)
         currentfrcst$varstree = create_tree(tmp)
+      }
+
+      if (is.null(currentfrcst$geochoices)) {
+        currentfrcst$geochoices = list()
+        currentfrcst$geochoices["אזורי תנועה"] = "taz"
+        if (!is.null(currentfrcst$aglvls)){
+          for (i in 1:nrow(currentfrcst$aglvls)) {  # ag is a dataframe ...
+            aglyr = currentfrcst$aglvls$lyr[i]
+            currentfrcst$geochoices[as.character(cfg$superzones[[aglyr]]$hname)] = aglyr
+          }
+        }
       }
 
       cat(paste("set Frcst: ", currentfrcst$name, "\n"))

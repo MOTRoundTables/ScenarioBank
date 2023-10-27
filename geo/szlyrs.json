@@ -4,7 +4,7 @@
 			"lyr" : "NapotMoaza_2021",
 			"hname" : "נפות",
 			"ename" : "Napot",
-			"zvar" : "NafaNum",
+			"zvar" : "nafanum",
 			"zname" : "Nafa",
 			"file": "NapotMoaza_2021.geojson",
 			"group": "שכבות אחרות",

@@ -29,6 +29,29 @@ x
 class(x)[[1]]  # -> "mapview"
 # end
 
+# ----------------------------------------------
+
+fll = paste(currentfrcst$dir, "/", "ag_TA2016_napot.csv", sep="")   
+adata = fread(fll)
+View(adata)
+
+x = cfg$szlyrs  # tibble
+
+x = cfg$superzones  # json
+
+ag = "napot"
+
+y = cfg$superzones[[ag]]$hname
+
+x = currentfrcst$data$ag
+length(x)
+
+
+
+
+
+
+
 
 
 # ============================================

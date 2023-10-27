@@ -6,18 +6,30 @@ library(data.table)
 
 frcstclass <- R6Class("Frcstclass",
     public = list(
-      num = NULL,         # ordinal # of frcst in cfg
-      ky = NULL,          # frcst code
-      name = NULL,        # frcst name
-      dir = NULL,         # frcst directory
+      num = NULL,           # ordinal # of frcst in cfg
+      ky = NULL,            # frcst code
+      name = NULL,          # frcst name
+      dir = NULL,           # frcst directory
       
-      data = NULL,        # a copy of scenario.json
-      
+      data = NULL,          # a copy of scenario.json
+
       # scenarios
       scnlist = NULL,       # vector of available scn codes
       scnnames = NULL,      # vector of available scn names
       scnchoices = NULL,    # list of scn for menu [[name:code]]
 
+      # data
+      geolyr = NULL,        # the geojson data
+      geodef = NULL,        # taz lyr def
+      #geofile = NULL,
+      
+      tazdata = NULL,       # the frcst csv data
+      tazfile = NULL,       # data file name
+      tazfilevar = NULL,    # var name holding taz in data file
+      
+      aglvls = NULL,        # aggreagate levels     
+      aglvl = NULL,         # current aggreagate level
+      
       # vars
       vars = NULL,          # vector of dict vars
       vardesc = NULL,       # vector of dict vars descriptions
@@ -28,12 +40,11 @@ frcstclass <- R6Class("Frcstclass",
       dispvarsdesc = NULL,  # vars 4 menu descs
       dispvarssrc = NULL,   # vars 4 menu source (data/geo)
       
-      varstree = NULL,    # list of vars for menu [[name:var]]
-      varchoices = NULL,       # list of vars for menu [[name:var]]
-      
-      # data
-      geolyr = NULL,      # the geojson data
-      tazdata = NULL,     # the frcst csv data
+      varstree = NULL,      # list of vars for menu [[name:var]]
+      varchoices = NULL,    # list of vars for menu [[name:var]]
+
+      geochoices = NULL,    # list of ag for menu
+
 
       initialize = function(num, frcstky, frcstdir) {
         self$num = num
@@ -95,17 +106,21 @@ frcstclass <- R6Class("Frcstclass",
             self$dispvarssrc =  append(self$dispvarssrc, "geo")
           }
         }
-        
 
         self$varchoices = vector(mode = "list") 
-        #for (i in 2:length(self$vars)) {
-        #   self$varchoices[as.character(self$vardesc[i])] = self$vars[i]
-        #  }
         for (i in 2:length(self$dispvars)) {
           self$varchoices[as.character(self$dispvarsdesc[i])] = self$dispvars[i]
         }
 
+        # - geo/ag zones
+        self$tazfile = x$file
+        self$tazfilevar = self$bankvars$taz
+        self$aglvl = "taz"   # starts with taz
+        if (!is.null(x$ag)) { self$aglvls = x$ag }  # add aggregate options
+
+        # - keep scenario.json
         self$data = x  # save scenario json data
+        self$geodef = self$frcst2lyr()        
       },  # - end initialize
       
       
@@ -139,22 +154,25 @@ frcstclass <- R6Class("Frcstclass",
       },
 
       getgeolyr = function() {
-        if (is.null(self$geolyr)) {
-          url = paste(self$dir, self$data$tazfile, sep="")
+        #if (is.null(self$geolyr)) {
+          #url = paste(self$geodef$dir, self$geodef$file, sep="")
           #self$geolyr <- geojson_read(url, what = "sp")   # at this stage only support geojson
-          self$geolyr <- geojson_sf(url)
-        }
+          self$geolyr <- geojson_sf(self$geodef$url)
+        #}
       },
       
       frcst2lyr = function() {
         if (is.null(self$data$tazname)) { self$data$tazname = self$data$tazlyr }  # can define optional tazname
 
         frcstlyr <- list(
-          lyr = self$getfrcstlyr(),        # the code of the layer
+          lyr = self$data$tazlyr,     # self$getfrcstlyr(),        # the code of the layer
           name = self$data$tazname,  
+          file = self$data$tazfile,
+          #dir  = self$dir,
+          url  = paste0(self$dir, self$data$tazfile),
+          
           zvar = self$data$tazvar, 
           zname = "NA", 
-          #file = self$data$tazfile,
           group = "forecasts",  # "שכבות תחזיות",
           pane = "other", 
           color = "#FF0000",
@@ -166,20 +184,20 @@ frcstclass <- R6Class("Frcstclass",
           status = 0
         )
         
-        temp = list(frcstlyr)
-        temp = temp %>% 
-          map_df(as_tibble)
-        return(temp)
+        #temp = list(frcstlyr)
+        #temp = temp %>% 
+        #  map_df(as_tibble)
+        #return(temp)
       },
 
             
       # - forecast data functions  --------------------------------
       
       opentazdata = function() {
-        if (is.null(self$tazdata)) {
-          fl = paste(self$dir, "/", self$data$file, sep="")        
+        #if (is.null(self$tazdata)) {
+          fl = paste(self$dir, "/", self$tazfile, sep="")        
           self$tazdata = fread(fl)  # read_csv(fl)            
-        }
+        #}
       },
 
       getfrcstvars = function() {
@@ -193,9 +211,19 @@ frcstclass <- R6Class("Frcstclass",
       },
 
       # - aggregation functions  -------------------------------------      
-      
-      getagvars = function() {
-        return(self$data$agvars)
+
+      setaglvl = function(aglvl, geodef) {
+        self$aglvl = aglvl   
+        if (self$aglvl=="taz") {
+          self$geodef = self$frcst2lyr()  #self$data$tazfile        
+          self$tazfile = self$data$file
+          self$tazfilevar <- self$bankvars$taz
+        } else {
+          self$geodef = geodef
+          self$tazfile = paste0("ag_", self$ky, "_", aglvl,".csv")
+          self$tazfilevar <- geodef$zvar
+        }
+        self$loadfrcst()
       }
 
   )

@@ -1,19 +1,22 @@
-clear all button  NO FUCIONA
-check years NO FUNCIONA
 
-rerurn for geresh ....
+rerurn all scn for geresh ....
 
-
-
-(if erro on years - clear map ? - yae I think)
+(if error on years - clear map ? - yae I think)
 
 add groups - agrregates
 
+add geography ? 
 filter zones (by tabaat)
+add sqrMr- 
 
-var 2 button (hide)
 
-make discrete discrete
+move var to button (hide)
+
+make discrete discrete for maps
+make value labels discrete ....
+
+ADD EXPRESSIONS !! 
+
 
 NO TABS I think-> v0.5
 
@@ -24,10 +27,16 @@ define group geography ?
 
 PONERLO EN EL WEB !!!!
 
+add mpre views (2 levels ?)
 
+display Stru
 
+add xvar (like density pop/emp ...)
 
+clear all button - clear years not perfect (maybe render input)
 
+comp scenario ...
+comp YR
 
 done:
 add geo dict to dict - add source = geo 
@@ -35,3 +44,5 @@ add map height by resolution
 fix get scenario years by scenario (valid years)
 add views !
 allways use cfg frcst - not currentfrcst - do not duplicate frcsts !  - R^ is BY REF !
+clear all button 
+check years fixed

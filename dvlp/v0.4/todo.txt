@@ -1,5 +1,6 @@
 
-rerurn all scn for geresh ....
+reset vars for aggregate
+
 
 (if error on years - clear map ? - yae I think)
 

@@ -1,9 +1,9 @@
 {	"code": "TA_v09",
-	"name"    : "v0.9 מודל תל אביב 2023",
+	"name"    : "v09 מודל תל אביב 2023",
 	"source"  : "מודל תל אביב",
 	"dir"     : "TA_v09",
 	"tazlyr"  : "TLV_1318",
-	"tazvar"  : "TAZ_1318_N",
+	"tazvar"  : "taz_1318_n",
 	"tazfile" : "TLV_1318.geojson",
 	"file"    : "TA_v09.csv",
 	"scenarios"   : {
@@ -15,8 +15,8 @@
 			"years":  [ 2025, 2030, 2040, 2050 ] }
 		},
 	"ag" : [ 
+		{ "lyr": "TATZ28",       "var":"tz28"     },  
 		{ "lyr": "TASectors95",  "var":"sectorzn" },  
-		{ "lyr": "TATZ28",       "var":"TZ28"     },  
 		{ "lyr": "napot",        "var":"nafanum"  }
 		],
 	"dict": {

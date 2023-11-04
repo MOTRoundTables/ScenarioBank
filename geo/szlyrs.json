@@ -15,8 +15,16 @@
 			"fillOpacity": 0,
 			"initialstatus": 2,
 			"popupcontent": "'שכבת נפות<br>'+'מספר נפה:' + feature.properties.NafaNum + ' <br> שם נפה:'+feature.properties.Nafa",
-			"type" : "a"
+			"type" : "a",
+			"dict": {
+					"nafanum":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד נפה"},
+					"nafa":            { "group": "גיאוגרפיה", "type": "character", "mode": "free", "description": "שם נפה"},
+					"mahoz":           { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "קוד מחוז"},
+					"enafa":           { "group": "גיאוגרפיה", "type": "character", "mode": "free", "description": "שם נפה באנגלית"},
+					"nafalamas":       { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "קוד נפה למ\"ס"},
+					"Area":            { "group": "שטח", "type": "real", "mode": "continuous", "description": "שטח"} }			
 		},
+
 		"largecity" : {  
 			"lyr" : "largecity",
 			"hname" : "ערים",
@@ -34,6 +42,7 @@
 			"popupcontent": "'שכבת נפות<br>'+'מספר נפה:' + feature.properties.NafaNum + ' <br> שם נפה:'+feature.properties.Nafa",
 			"type" : "a"
 		},
+
 		"MetroSec2008" : {
 			"lyr" : "metrorings2008",
 			"hname" : "גזרות מטרופולין",
@@ -50,6 +59,157 @@
 			"initialstatus": 2,
 			"popupcontent": "'שכבת נפות<br>'+'מספר נפה:' + feature.properties.NafaNum + ' <br> שם נפה:'+feature.properties.Nafa",
 			"type" : "a"
-        }
-    }
-}	
+        },
+		
+		"TASectors95" : {
+			"lyr" : "TASectors95",
+			"hname" : "גזרות מטרופולין תל אביב",
+			"ename" : "TA Metropolitan sectors",
+			"zvar" : "sectorzn",
+			"zname" : "secname",
+			"file": "TASectors95.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>TASectors95.geojson",
+			"pane": "front",
+			"color": "#00008B",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר גזרה:' + feature.properties.NafaNum + ' <br> שם:'+feature.properties.Nafa",
+			"type" : "a",
+			"dict": {
+					"sectorzn":        { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד גזרה"},
+					"ring":            { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "קוד טבעת"},
+					"mahoz":           { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "קוד מחוז"},
+					"secname":         { "group": "גיאוגרפיה", "type": "character", "mode": "free", "description": "תיאור גזרה"},
+					"Area":            { "group": "שטח", "type": "real", "mode": "continous", "description": "שטח"} }
+			
+        },
+
+		"TATZ28" : {
+			"lyr" : "TATZ28",
+			"hname" : "אזורי על  מטרופולין תל אביב",
+			"ename" : "TA Metropolitan Rings",
+			"zvar" : "tz28",
+			"zname" : "super zone",
+			"file": "TATZ28.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>TATZ28.geojson",
+			"pane": "front",
+			"color": "#00008B",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר גזרה:' + feature.properties.NafaNum + ' <br> שם:'+feature.properties.Nafa",
+			"type" : "a",
+			"dict": {
+					"tz28":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד אזור על"},
+					"Mahoz":           { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "קוד מחוז"},
+					"Napa":            { "group": "לא בשימוש", "type": "integer", "mode": "discrete", "description": "קוד נפה"},
+					"Ring":            { "group": "לא בשימוש", "type": "integer", "mode": "discrete", "description": "קוד טבעת"},
+					"tzname":          { "group": "זיהוי", "type": "character", "mode": "free", "description": "שם אזור על"},
+					"Area":            { "group": "שטח", "type": "real", "mode": "continous", "description": "שטח"} }
+        },
+		
+		"jersupertaz" : {
+			"lyr" : "jersupertaz",
+			"hname" : "אזורי על  מטרופולין ירושלים ואיוש",
+			"ename" : "Jer & Yosh superzones",
+			"zvar" : "supertaz",
+			"zname" : "super zone",
+			"file": "jersupertaz.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>jersupertaz.geojson",
+			"pane": "front",
+			"color": "#00008B",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר גזרה:' + feature.properties.NafaNum + ' <br> שם:'+feature.properties.Nafa",
+			"type" : "a",
+			"dict": {
+					"supertaz":        { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד אזור על"},
+					"isjeru":          { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "האם בירושלים"},
+					"ismetro":         { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "האם במטרופולין"},
+					"isyosh":          { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "האם באיו\"ש"},
+					"mahoz":           { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "קוד מחוז"},
+					"nafanum":         { "group": "לא בשימוש", "type": "integer", "mode": "discrete", "description": "קוד נפה"},
+					"Area":            { "group": "שטח", "type": "real", "mode": "continous", "description": "שטח"} }
+        },
+
+		"jerravtaz" : {
+			"lyr" : "jerravtaz",
+			"hname" : "אזורי על  מטרופולין ירושלים ואיוש",
+			"ename" : "Jer & Yosh superzones",
+			"zvar" : "ravtaz",
+			"zname" : "super zone",
+			"file": "jerravtaz.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>jersupertaz.geojson",
+			"pane": "front",
+			"color": "#00008B",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר גזרה:' + feature.properties.NafaNum + ' <br> שם:'+feature.properties.Nafa",
+			"type" : "a",
+			"dict": {
+					"ravtaz":          { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד רב אזור"},
+					"isjeru":          { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "האם בירושלים"},
+					"ismetro":         { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "האם במטרופולין"},
+					"isyosh":          { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "האם באיו\"ש"},
+					"ispale":          { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "האם אזור פלסטיני"},
+					"mahoz":           { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "קוד מחוז"},
+					"nafanum":         { "group": "לא בשימוש", "type": "integer", "mode": "discrete", "description": "קוד נפה"},
+					"Area":            { "group": "שטח", "type": "real", "mode": "continous", "description": "שטח"} }
+		},
+		
+		"haifaSuperZones" : {
+			"lyr" : "haifaSuperZones",
+			"hname" : "אזורי על מודל חיפה",
+			"ename" : "Haifa superzones",
+			"zvar" : "ravtaz",
+			"zname" : "super zone",
+			"file": "haifaSuperZones.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>haifaSuperZones.geojson",
+			"pane": "front",
+			"color": "#00008B",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר גזרה:' + feature.properties.NafaNum + ' <br> שם:'+feature.properties.Nafa",
+			"type" : "a",
+			"dict": {
+					"superzone":       { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד אזור על"},
+					"ismetro":         { "group": "גיאוגרפיה", "type": "integer", "mode": "boolean", "description": "האם במטרופולין"},
+					"nafanum":         { "group": "לא בשימוש", "type": "integer", "mode": "discrete", "description": "קוד נפה"},
+					"Area":            { "group": "שטח", "type": "real", "mode": "continous", "description": "שטח"} }
+		},
+
+		"BS_szmodel" : {
+			"lyr" : "BS_szmodel",
+			"hname" : "אזורי על מודל באר שבע",
+			"ename" : "BS superzones",
+			"zvar" : "szmodel",
+			"zname" : "super zone",
+			"file": "BS_szmodel.geojson",
+			"group": "שכבות אחרות",
+			"url": "<geodir>BS_szmodel.geojson",
+			"pane": "front",
+			"color": "#00008B",
+			"weight": 5,
+			"fillOpacity": 0,
+			"initialstatus": 2,
+			"popupcontent": "'שכבת נפות<br>'+'מספר גזרה:' + feature.properties.NafaNum + ' <br> שם:'+feature.properties.Nafa",
+			"type" : "a",
+			"dict": {
+					"szmodel":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "קוד אזור על"},
+					"szmodelnam":      { "group": "זיהוי", "type": "integer", "mode": "boolean", "description": "שם אזור על"},
+					"nafanum":         { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "קוד נפה"},
+					"Area":            { "group": "שטח", "type": "real", "mode": "continous", "description": "שטח"} }
+		}
+	
+	
+	}
+}

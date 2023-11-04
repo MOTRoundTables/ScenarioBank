@@ -6,7 +6,7 @@ rerurn all scn for geresh ....
 add groups - agrregates
 
 add geography ? 
-filter zones (by tabaat)
+filter zones (by tabaat) filter by property (jewish only)
 add sqrMr- 
 
 
@@ -22,8 +22,7 @@ NO TABS I think-> v0.5
 
 addchart ! (like dashboard) Add 2 charts  1 is itpalgut
 
-define group geography ?
-
+add largecity aggregate
 
 PONERLO EN EL WEB !!!!
 
@@ -38,6 +37,12 @@ clear all button - clear years not perfect (maybe render input)
 comp scenario ...
 comp YR
 
+
+
+
+
+
+
 done:
 add geo dict to dict - add source = geo 
 add map height by resolution
@@ -46,3 +51,4 @@ add views !
 allways use cfg frcst - not currentfrcst - do not duplicate frcsts !  - R^ is BY REF !
 clear all button 
 check years fixed
+define group geography ?

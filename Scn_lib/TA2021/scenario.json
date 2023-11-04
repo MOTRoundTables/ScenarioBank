@@ -2,8 +2,8 @@
 	"name"    : "תל אביב מתת 2021",
 	"source"  : "מודל תל אביב",
 	"dir"     : "TA2021",
-	"tazlyr"  : "TAZ_newnumber",
-	"tazvar"  : "TAZ_1300",
+	"tazlyr"  : "TAZ_new_numbering",
+	"tazvar"  : "taz_1300",
 	"tazfile" : "TAZ_new_numbering.geojson",
 	"file"    : "matat21_lvl1.csv",
 	"scenarios" : {
@@ -11,15 +11,23 @@
 			"desc": "תרחיש בסיס",
 			"years": [ 2018, 2030, 2040, 2050 ] }
 	},
+	"ag" : [ 
+		{ "lyr": "TASectors95",  "var":"sectorzn" },  
+		{ "lyr": "TATZ28",       "var":"TZ28"     },  
+		{ "lyr": "napot",        "var":"nafanum"  }
+		],
 	"dict": {
 			"scenario":        { "group": "זיהוי", "type": "character", "mode": "category", "bank": "scenario", "description": "תרחיש"},
 			"year":            { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "year", "description": "שנת יעד"},
-			"taz1318":         { "group": "זיהוי", "type": "integer", "mode": "continous", "bank": "taz", "description": "אזור תנועה"},
-			"pop":             { "group": "אוכלוסייה", "type": "real", "mode": "continous", "bank": "population", "description": "אוכלוסייה"},
-			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continous", "bank": "employment", "description": "מועסקים"} },
+			"taz1318":         { "group": "זיהוי", "type": "integer", "mode": "continuous", "bank": "taz", "description": "אזור תנועה"},
+			"pop":             { "group": "אוכלוסייה", "type": "real", "mode": "continuous", "bank": "population", "description": "אוכלוסייה"},
+			"emp":             { "group": "מקומות עבודה", "type": "real", "mode": "continuous", "bank": "employment", "description": "מועסקים"} },
 	"geodict": {
-			"TAZ_1300":        { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "geotaz", "description": "אזור תנועה"},
-			"TAZ1318":         { "group": "זיהוי", "type": "character", "mode": "boolean", "description": "אזור תנועה מספור ישן"},
-			"TAZ_OLD":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "אזור תנועה ישן"},
-			"Area":            { "group": "שטח", "type": "real", "mode": "continous", "bank": "area", "description": "שטח"} }			
+			"taz_1300":        { "group": "זיהוי", "type": "integer", "mode": "discrete", "bank": "geotaz", "description": "אזור תנועה"},
+			"taz1318":         { "group": "זיהוי", "type": "character", "mode": "boolean", "description": "אזור תנועה מספור ישן"},
+			"taz_old":         { "group": "זיהוי", "type": "integer", "mode": "discrete", "description": "אזור תנועה ישן"},
+			"nafanum":         { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "נפות"},
+			"sectorzn":        { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "גזרה מטרופולינית"},
+			"tz28":            { "group": "גיאוגרפיה", "type": "integer", "mode": "discrete", "description": "אזורי על"},
+			"Area":            { "group": "שטח", "type": "real", "mode": "continuous", "bank": "area", "description": "שטח"} }
 }

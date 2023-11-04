@@ -1,0 +1,19 @@
+
+0 header
+"scenario",C,1,6,0,6,0
+"year",I,2,11,0,11,0
+"Taz_num",I,3,11,0,11,0
+"Pop_Forecast",R,4,15,0,15,4
+"Total_Aprt",R,5,15,0,15,4
+"Average",R,6,15,0,15,4
+"Total_Emp",R,7,15,0,15,4
+"Total_Students",R,8,15,0,15,4
+"EmployedEducation",R,9,15,0,15,4
+"Yeshiva",R,10,15,0,15,4
+"Higher_Education",R,11,15,0,15,4
+"Industry",R,12,15,0,15,4
+"Commerce_Hotel",R,13,15,0,15,4
+"Business",R,14,15,0,15,4
+"Public",R,15,15,0,15,4
+"Education",R,16,15,0,15,4
+"Agriculture",R,17,15,0,15,4

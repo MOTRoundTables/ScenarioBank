@@ -1,0 +1,17 @@
+
+0 header
+"scenario",C,1,6,0,6,0
+"year",I,2,11,0,11,0
+"nafanum",S,3,6,0,6,0
+"Pop_Forecast",R,4,18,0,18,4
+"Total_Aprt",R,5,18,0,18,4
+"Average",R,6,18,0,18,4
+"Total_Emp",R,7,18,0,18,4
+"Total_Students",R,8,18,0,18,4
+"EmployedEducation",R,9,18,0,18,4
+"Yeshiva",R,10,18,0,18,4
+"Total Higher_Education",R,11,18,0,18,4
+"Industry",R,12,18,0,18,4
+"Commerce_Hotel",R,13,18,0,18,4
+"Business",R,14,18,0,18,4
+"Public",R,15,18,0,18,4
